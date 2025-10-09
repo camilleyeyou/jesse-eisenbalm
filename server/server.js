@@ -9,9 +9,12 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'https://jesse-eisenbalm.vercel.app',
+    'https://jesse-eisenbalm-kh0wbt3vd-camilleyeyous-projects.vercel.app',
     /vercel\.app$/
   ],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
 
