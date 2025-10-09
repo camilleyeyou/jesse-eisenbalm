@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingCart, Menu, X, Star, Check, CreditCard, Award, Leaf, Heart, Shield } from 'lucide-react';
+import { ShoppingCart, Menu, X, ChevronRight } from 'lucide-react';
 
 export default function EisenbalmShop() {
   const [cart, setCart] = useState([]);
@@ -11,17 +11,17 @@ export default function EisenbalmShop() {
   const products = [
     {
       id: 1,
-      name: "Jesse A. Eisenbalm — Original",
+      name: "JESSE A. EISENBALM",
+      subtitle: "The Original",
       price: 8.99,
       images: [
-        "/images/products/eisenbalm-1.png",
-        "/images/products/eisenbalm-2.png",
-        "/images/products/eisenbalm-3.png"
+        "/public/images/products/eisenbalm-1.png",
+        "/public/images/products/eisenbalm-2.png",
+        "/public/images/products/eisenbalm-3.png"
       ],
-      description: "Organic beeswax formula. The only business lip balm that keeps you human.",
-      features: ["100% Organic Beeswax", "All-Day Moisture", "Unscented"],
-      rating: 4.9,
-      reviews: 127
+      description: "Organic beeswax formula. A tangible ritual for the human experience.",
+      features: ["Organic Beeswax", "All-Day Hydration", "Human-First Formula"],
+      volume: "4.5g / 0.15 oz"
     }
   ];
 
@@ -85,35 +85,31 @@ export default function EisenbalmShop() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-indigo-600 to-blue-500 rounded-lg flex items-center justify-center shadow-md">
-                <span className="text-white font-bold text-xl">JE</span>
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent">
+      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="flex justify-between items-center h-20">
+            <div className="flex items-center space-x-12">
+              <div className="text-2xl font-light tracking-widest">
                 JESSE A. EISENBALM
-              </span>
-            </div>
-            
-            <div className="hidden md:flex space-x-8">
-              <a href="#products" className="text-gray-700 hover:text-indigo-600 transition font-medium">Products</a>
-              <a href="#about" className="text-gray-700 hover:text-indigo-600 transition font-medium">About</a>
-              <a href="#testimonials" className="text-gray-700 hover:text-indigo-600 transition font-medium">Reviews</a>
-              <a href="#contact" className="text-gray-700 hover:text-indigo-600 transition font-medium">Contact</a>
+              </div>
+              
+              <div className="hidden md:flex space-x-8">
+                <a href="#product" className="text-sm tracking-wide text-gray-600 hover:text-black transition">PRODUCT</a>
+                <a href="#philosophy" className="text-sm tracking-wide text-gray-600 hover:text-black transition">PHILOSOPHY</a>
+                <a href="#contact" className="text-sm tracking-wide text-gray-600 hover:text-black transition">CONTACT</a>
+              </div>
             </div>
 
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-6">
               <button
                 onClick={() => setIsCartOpen(!isCartOpen)}
-                className="relative p-2 text-gray-700 hover:text-indigo-600 transition"
+                className="relative text-gray-600 hover:text-black transition"
               >
-                <ShoppingCart size={24} />
+                <ShoppingCart size={22} strokeWidth={1.5} />
                 {cartItemCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+                  <span className="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {cartItemCount}
                   </span>
                 )}
@@ -123,25 +119,24 @@ export default function EisenbalmShop() {
                 className="md:hidden"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
-                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
               </button>
             </div>
           </div>
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-white border-t">
-            <div className="px-4 py-2 space-y-2">
-              <a href="#products" className="block py-2 text-gray-700 hover:text-indigo-600">Products</a>
-              <a href="#about" className="block py-2 text-gray-700 hover:text-indigo-600">About</a>
-              <a href="#testimonials" className="block py-2 text-gray-700 hover:text-indigo-600">Reviews</a>
-              <a href="#contact" className="block py-2 text-gray-700 hover:text-indigo-600">Contact</a>
+          <div className="md:hidden bg-white border-t border-gray-200">
+            <div className="px-6 py-4 space-y-4">
+              <a href="#product" className="block text-sm tracking-wide text-gray-600 hover:text-black">PRODUCT</a>
+              <a href="#philosophy" className="block text-sm tracking-wide text-gray-600 hover:text-black">PHILOSOPHY</a>
+              <a href="#contact" className="block text-sm tracking-wide text-gray-600 hover:text-black">CONTACT</a>
             </div>
           </div>
         )}
       </nav>
 
-      {/* Hero Section with Video Background */}
+      {/* Hero Section */}
       <section className="relative h-screen overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 w-full h-full">
           <video
@@ -153,121 +148,56 @@ export default function EisenbalmShop() {
           >
             <source src="/videos/hero-background.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-black/80"></div>
+          <div className="absolute inset-0 bg-black/60"></div>
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto text-center px-4">
-          <div className="mb-6">
-            <span className="inline-block bg-white/10 backdrop-blur-sm text-white px-6 py-2 rounded-full text-sm font-medium border border-white/20 mb-8">
-              The Only Business Lip Balm That Keeps You Human in an AI World
-            </span>
-          </div>
-          
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 text-white leading-tight">
-            Are These My<br />Real Lips?
+        <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
+          <h1 className="text-7xl md:text-9xl font-light text-white mb-8 tracking-tight leading-none">
+            ARE THESE<br />MY REAL LIPS?
           </h1>
           
-          <p className="text-xl md:text-3xl text-white/90 mb-4 font-light tracking-wide">
-            Stop. Breathe. Balm.
+          <p className="text-xl md:text-2xl text-white/90 mb-4 font-light tracking-widest">
+            STOP. BREATHE. BALM.
           </p>
           
-          <p className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto">
-            A tangible, human-only ritual in an AI-everywhere world. Organic beeswax. Real moments. No algorithm can do it for you.
+          <p className="text-base md:text-lg text-white/80 mb-12 max-w-xl mx-auto font-light leading-relaxed">
+            A tangible, human-only ritual in an AI-everywhere world.
           </p>
           
-          <div className="flex flex-wrap justify-center gap-4">
-            <a href="#products" className="bg-white text-gray-900 px-10 py-4 rounded-full font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition">
-              Stay Human — $8.99
-            </a>
-            <a href="#about" className="bg-transparent text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 backdrop-blur-sm transition border-2 border-white">
-              Learn the Ritual
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#product" className="bg-white text-black px-12 py-4 text-sm tracking-widest hover:bg-gray-100 transition inline-flex items-center justify-center group">
+              DISCOVER
+              <ChevronRight size={16} className="ml-2 group-hover:translate-x-1 transition" />
             </a>
           </div>
         </div>
-
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/50 rounded-full mt-2"></div>
-          </div>
-        </div>
       </section>
 
-      {/* Trust Badges */}
-      <section className="py-8 px-4 bg-white border-b">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { icon: Leaf, text: "100% Organic" },
-              { icon: Shield, text: "Dermatologist Tested" },
-              { icon: Heart, text: "Cruelty-Free" },
-              { icon: Award, text: "Premium Quality" }
-            ].map((badge, i) => (
-              <div key={i} className="flex flex-col items-center text-center">
-                <badge.icon className="w-8 h-8 text-indigo-600 mb-2" />
-                <p className="text-sm font-semibold text-gray-700">{badge.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="py-16 px-4 bg-white">
+      {/* Product Section */}
+      <section id="product" className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">In an AI-Saturated World, Business Balm Is the Only Salve</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">A small, physical cue to stay human while everything—from job applications to meetings—feels automated.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { title: "Organic Beeswax", desc: "Clean, minimalist formula. Real ingredients for real lips. Sustainably sourced and ethically produced." },
-              { title: "Human-Only Ritual", desc: "Stop. Breathe. Apply. No algorithm can do this for you. A moment of mindfulness in your busy day." },
-              { title: "Premium Yet Accessible", desc: "Just $8.99. Your moment of presence and control without breaking the bank." }
-            ].map((feature, i) => (
-              <div key={i} className="text-center p-8 rounded-2xl bg-gradient-to-br from-slate-50 to-indigo-50 hover:shadow-xl transition-all duration-300 border border-indigo-100">
-                <Check className="w-14 h-14 mx-auto mb-4 text-indigo-600" />
-                <h3 className="text-xl font-bold mb-3 text-gray-800">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Products */}
-      <section id="products" className="py-20 px-4 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800">The Business Balm</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Your confidence cue before calls, interviews, and meetings. Absurdist modern luxury that matches the times we're living in.</p>
-          </div>
-          <div className="flex justify-center">
-            <div className="w-full max-w-md">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
             {products.map((product) => {
               const currentImage = selectedImage[product.id] || product.images[0];
               return (
-                <div
-                  key={product.id}
-                  className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition duration-300"
-                >
-                  <div className="relative h-96 overflow-hidden bg-gradient-to-br from-slate-100 to-indigo-100">
-                    <img
-                      src={currentImage}
-                      alt={product.name}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold text-gray-800">
-                      Premium
+                <React.Fragment key={product.id}>
+                  {/* Product Images */}
+                  <div className="order-2 md:order-1">
+                    <div className="relative aspect-square bg-gray-50 mb-4 overflow-hidden">
+                      <img
+                        src={currentImage}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     
-                    {/* Image Thumbnails */}
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                    <div className="flex space-x-3">
                       {product.images.map((img, idx) => (
                         <button
                           key={idx}
                           onClick={() => setSelectedImage({...selectedImage, [product.id]: img})}
-                          className={`w-12 h-12 rounded-lg overflow-hidden border-2 transition ${
-                            currentImage === img ? 'border-white shadow-lg scale-110' : 'border-white/50'
+                          className={`w-20 h-20 bg-gray-50 overflow-hidden border-2 transition ${
+                            currentImage === img ? 'border-black' : 'border-transparent'
                           }`}
                         >
                           <img src={img} alt={`View ${idx + 1}`} className="w-full h-full object-cover" />
@@ -275,166 +205,106 @@ export default function EisenbalmShop() {
                       ))}
                     </div>
                   </div>
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-xl font-bold text-gray-800">{product.name}</h3>
-                      <div className="flex items-center space-x-1">
-                        <Star size={16} className="fill-yellow-400 text-yellow-400" />
-                        <span className="text-sm text-gray-600 font-semibold">{product.rating}</span>
-                        <span className="text-xs text-gray-500">({product.reviews})</span>
+
+                  {/* Product Info */}
+                  <div className="order-1 md:order-2">
+                    <div className="mb-8">
+                      <p className="text-xs tracking-widest text-gray-500 mb-2">LIP CARE</p>
+                      <h2 className="text-4xl font-light mb-2 tracking-tight">{product.name}</h2>
+                      <p className="text-xl text-gray-600 font-light mb-6">{product.subtitle}</p>
+                      <p className="text-sm text-gray-500 mb-2">{product.volume}</p>
+                      <p className="text-3xl font-light mb-8">${product.price}</p>
+                    </div>
+
+                    <div className="mb-8">
+                      <p className="text-base leading-relaxed text-gray-700 mb-6">
+                        {product.description}
+                      </p>
+                      
+                      <div className="space-y-2 mb-8">
+                        {product.features.map((feature, idx) => (
+                          <div key={idx} className="flex items-center text-sm text-gray-600">
+                            <span className="w-1 h-1 bg-black rounded-full mr-3"></span>
+                            {feature}
+                          </div>
+                        ))}
                       </div>
                     </div>
-                    <p className="text-gray-600 mb-4 leading-relaxed">{product.description}</p>
-                    
-                    <div className="mb-4 space-y-2">
-                      {product.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center text-sm text-gray-700">
-                          <Check size={14} className="text-green-600 mr-2" />
-                          <span>{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    <div className="mb-4 p-3 bg-slate-50 rounded-lg border border-slate-200">
-                      <p className="text-sm font-medium text-gray-700 italic text-center">"Are these my real lips?"</p>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <span className="text-3xl font-bold text-gray-900">${product.price}</span>
-                        <p className="text-xs text-gray-500">Free shipping over $25</p>
-                      </div>
-                      <button
-                        onClick={() => addToCart(product)}
-                        className="bg-gray-900 text-white px-6 py-3 rounded-full font-bold hover:bg-gray-800 hover:shadow-xl transform hover:scale-105 transition"
-                      >
-                        Stay Human
-                      </button>
-                    </div>
+
+                    <button
+                      onClick={() => addToCart(product)}
+                      className="w-full bg-black text-white py-4 text-sm tracking-widest hover:bg-gray-900 transition"
+                    >
+                      ADD TO CART
+                    </button>
+
+                    <p className="text-xs text-center text-gray-500 mt-4 italic">
+                      "Are these my real lips?"
+                    </p>
                   </div>
-                </div>
+                </React.Fragment>
               );
             })}
-            </div>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 px-4 relative overflow-hidden">
+      {/* Philosophy Section */}
+      <section id="philosophy" className="py-24 px-6 relative overflow-hidden">
         <div className="absolute inset-0">
           <img 
             src="/images/backgrounds/about-bg.jpg" 
             alt="Background" 
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gray-900/80"></div>
+          <div className="absolute inset-0 bg-black/70"></div>
         </div>
         
-        <div className="relative z-10 max-w-6xl mx-auto text-white">
+        <div className="relative z-10 max-w-5xl mx-auto text-white">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">A Tangible Ritual in an AI-Everywhere World</h2>
-            <p className="text-xl text-gray-300 italic mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xs tracking-widest text-white/70 mb-4">PHILOSOPHY</p>
+            <h2 className="text-5xl md:text-6xl font-light mb-8 tracking-tight">The Human Ritual</h2>
+            <p className="text-xl text-white/80 italic max-w-3xl mx-auto leading-relaxed font-light">
               "I need a small, physical cue to stay human while everything—from job applications to meetings—feels automated."
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/15 transition">
-              <h3 className="text-2xl font-bold mb-6 text-white">The Ritual</h3>
-              <div className="space-y-5 text-gray-200 text-lg">
-                <p className="flex items-start">
-                  <span className="text-4xl mr-4 mt-1">🛑</span> 
-                  <span><strong className="text-white">Stop.</strong> Pause your scroll. Close the tab. Step away from the screen. This moment is yours.</span>
-                </p>
-                <p className="flex items-start">
-                  <span className="text-4xl mr-4 mt-1">🫁</span> 
-                  <span><strong className="text-white">Breathe.</strong> Take a real breath. Deep and slow. Feel your chest rise. Be present in your body.</span>
-                </p>
-                <p className="flex items-start">
-                  <span className="text-4xl mr-4 mt-1">💄</span> 
-                  <span><strong className="text-white">Balm.</strong> Apply mindfully. Feel the texture. Notice the scent. No algorithm can do this for you.</span>
-                </p>
-              </div>
+          <div className="grid md:grid-cols-3 gap-12 mb-16">
+            <div className="text-center">
+              <div className="text-6xl mb-4">🛑</div>
+              <h3 className="text-xl font-light mb-3 tracking-wide">STOP</h3>
+              <p className="text-sm text-white/70 leading-relaxed">
+                Pause your scroll. Close the tab. Step away from the screen. This moment is yours.
+              </p>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/15 transition">
-              <h3 className="text-2xl font-bold mb-6 text-white">Why It Matters</h3>
-              <p className="text-gray-200 text-lg leading-relaxed mb-4">
-                For young professionals navigating an AI-saturated job market, Jesse A. Eisenbalm offers a moment of presence and control. It's absurdist modern luxury that's wry, kind, weird, and human-first.
+            <div className="text-center">
+              <div className="text-6xl mb-4">🫁</div>
+              <h3 className="text-xl font-light mb-3 tracking-wide">BREATHE</h3>
+              <p className="text-sm text-white/70 leading-relaxed">
+                Take a real breath. Deep and slow. Feel your chest rise. Be present in your body.
               </p>
-              <p className="text-gray-200 text-lg leading-relaxed mb-4">
-                In a world where chatbots write our emails, algorithms screen our resumes, and AI generates our content, this simple act of self-care becomes a rebellion. A declaration of humanity.
-              </p>
-              <p className="text-gray-200 text-lg leading-relaxed">
-                Clean organic beeswax. Minimalist ingredients. Maximum humanity. Because in a world of generated everything, real lips deserve real care.
+            </div>
+            
+            <div className="text-center">
+              <div className="text-6xl mb-4">💄</div>
+              <h3 className="text-xl font-light mb-3 tracking-wide">BALM</h3>
+              <p className="text-sm text-white/70 leading-relaxed">
+                Apply mindfully. Feel the texture. Notice the scent. No algorithm can do this for you.
               </p>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 text-center">
-              <div className="text-4xl font-bold text-white mb-2">100%</div>
-              <div className="text-gray-300">Organic Ingredients</div>
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-lg leading-relaxed text-white/80 mb-8 font-light">
+              For young professionals navigating an AI-saturated job market, Jesse A. Eisenbalm offers a moment of presence and control. Clean organic beeswax. Minimalist ingredients. Maximum humanity.
+            </p>
+            
+            <div className="border-t border-white/20 pt-8">
+              <p className="text-2xl font-light italic text-white/90 leading-relaxed">
+                "The only business lip balm that keeps you human in an AI world."
+              </p>
             </div>
-            <div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 text-center">
-              <div className="text-4xl font-bold text-white mb-2">0</div>
-              <div className="text-gray-300">AI-Generated Formulas</div>
-            </div>
-            <div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 text-center">
-              <div className="text-4xl font-bold text-white mb-2">127</div>
-              <div className="text-gray-300">Happy Humans</div>
-            </div>
-          </div>
-
-          <div className="text-center">
-            <blockquote className="text-2xl md:text-3xl font-light italic text-gray-300 mb-8 leading-relaxed">
-              "The only business lip balm that keeps you human in an AI world."
-            </blockquote>
-            <a href="#products" className="inline-block bg-white text-gray-900 px-8 py-3 rounded-full font-bold hover:shadow-2xl transform hover:scale-105 transition">
-              Join the Movement
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section id="testimonials" className="py-20 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">What Humans Are Saying</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { 
-                name: "Sarah K.", 
-                role: "Product Manager", 
-                text: "Before every Zoom call, I apply this balm. It's my 5-second humanity check. My lips feel amazing and I feel grounded.",
-                rating: 5
-              },
-              { 
-                name: "Marcus T.", 
-                role: "Software Engineer", 
-                text: "I was skeptical about the 'human vs AI' angle, but honestly? This ritual works. It's my daily reminder that I'm not a machine.",
-                rating: 5
-              },
-              { 
-                name: "Jamie L.", 
-                role: "UX Designer", 
-                text: "The formula is incredible - no weird ingredients, just pure beeswax goodness. And the packaging? Chef's kiss. Very me.",
-                rating: 5
-              }
-            ].map((review, i) => (
-              <div key={i} className="bg-gradient-to-br from-slate-50 to-indigo-50 p-6 rounded-2xl border border-indigo-100 hover:shadow-lg transition">
-                <div className="flex mb-3">
-                  {[...Array(review.rating)].map((_, idx) => (
-                    <Star key={idx} size={16} className="fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-gray-700 mb-4 italic leading-relaxed">"{review.text}"</p>
-                <div className="border-t pt-4">
-                  <p className="font-bold text-gray-800">{review.name}</p>
-                  <p className="text-sm text-gray-600">{review.role}</p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -442,43 +312,42 @@ export default function EisenbalmShop() {
       {/* Cart Sidebar */}
       {isCartOpen && (
         <div className="fixed inset-0 z-50 overflow-hidden">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsCartOpen(false)}></div>
+          <div className="absolute inset-0 bg-black/30" onClick={() => setIsCartOpen(false)}></div>
           <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b p-6 z-10">
+            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 z-10">
               <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-800">Your Cart</h2>
-                <button onClick={() => setIsCartOpen(false)} className="hover:bg-gray-100 p-2 rounded-full transition">
-                  <X size={24} />
+                <h2 className="text-xl font-light tracking-wide">SHOPPING CART</h2>
+                <button onClick={() => setIsCartOpen(false)} className="hover:text-gray-600 transition">
+                  <X size={20} strokeWidth={1.5} />
                 </button>
               </div>
             </div>
 
             {cart.length === 0 ? (
-              <div className="p-8 text-center">
-                <ShoppingCart size={64} className="mx-auto text-gray-300 mb-4" />
-                <p className="text-gray-500 text-lg">Your cart is empty</p>
-                <p className="text-gray-400 text-sm mt-2">Add some humanity to your cart!</p>
+              <div className="p-12 text-center">
+                <ShoppingCart size={48} strokeWidth={1} className="mx-auto text-gray-300 mb-4" />
+                <p className="text-gray-500">Your cart is empty</p>
               </div>
             ) : (
               <>
-                <div className="p-6 space-y-4">
+                <div className="p-6 space-y-6">
                   {cart.map((item) => (
-                    <div key={item.id} className="flex items-center space-x-4 bg-gray-50 p-4 rounded-xl hover:bg-gray-100 transition">
-                      <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-lg" />
+                    <div key={item.id} className="flex space-x-4 pb-6 border-b border-gray-200">
+                      <img src={item.image} alt={item.name} className="w-24 h-24 object-cover bg-gray-50" />
                       <div className="flex-1">
-                        <h3 className="font-semibold text-gray-800">{item.name}</h3>
-                        <p className="text-indigo-600 font-bold">${item.price}</p>
-                        <div className="flex items-center space-x-3 mt-2">
+                        <h3 className="font-light text-sm mb-1">{item.name}</h3>
+                        <p className="text-sm text-gray-600 mb-3">${item.price}</p>
+                        <div className="flex items-center space-x-3">
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="w-8 h-8 bg-white border border-gray-300 rounded-full hover:bg-gray-200 transition font-bold"
+                            className="w-8 h-8 border border-gray-300 hover:border-black transition text-sm"
                           >
                             -
                           </button>
-                          <span className="font-semibold text-lg">{item.quantity}</span>
+                          <span className="text-sm w-8 text-center">{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="w-8 h-8 bg-white border border-gray-300 rounded-full hover:bg-gray-200 transition font-bold"
+                            className="w-8 h-8 border border-gray-300 hover:border-black transition text-sm"
                           >
                             +
                           </button>
@@ -486,38 +355,37 @@ export default function EisenbalmShop() {
                       </div>
                       <button
                         onClick={() => removeFromCart(item.id)}
-                        className="text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded-full transition"
+                        className="text-gray-400 hover:text-black transition"
                       >
-                        <X size={20} />
+                        <X size={18} strokeWidth={1.5} />
                       </button>
                     </div>
                   ))}
                 </div>
 
-                <div className="sticky bottom-0 bg-white border-t p-6">
-                  <div className="space-y-3 mb-4">
-                    <div className="flex justify-between text-gray-600">
-                      <span>Subtotal:</span>
+                <div className="sticky bottom-0 bg-white border-t border-gray-200 p-6">
+                  <div className="space-y-3 mb-6">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">Subtotal</span>
                       <span>${cartTotal.toFixed(2)}</span>
                     </div>
-                    <div className="flex justify-between text-gray-600">
-                      <span>Shipping:</span>
-                      <span className="text-green-600 font-semibold">Free</span>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">Shipping</span>
+                      <span className="text-green-600">Free</span>
                     </div>
-                    <div className="border-t pt-3 flex justify-between text-xl font-bold">
-                      <span>Total:</span>
-                      <span className="text-indigo-600">${cartTotal.toFixed(2)}</span>
+                    <div className="border-t pt-3 flex justify-between font-light text-lg">
+                      <span>Total</span>
+                      <span>${cartTotal.toFixed(2)}</span>
                     </div>
                   </div>
                   <button 
                     onClick={handleCheckout}
                     disabled={isProcessing}
-                    className="w-full bg-gray-900 text-white py-4 rounded-full font-bold hover:bg-gray-800 hover:shadow-xl transform hover:scale-[1.02] transition flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-black text-white py-4 text-sm tracking-widest hover:bg-gray-900 transition disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    <CreditCard size={20} />
-                    <span>{isProcessing ? 'Processing...' : 'Checkout Securely'}</span>
+                    {isProcessing ? 'PROCESSING...' : 'CHECKOUT'}
                   </button>
-                  <p className="text-xs text-gray-500 text-center mt-3">🔒 Secure payment powered by Stripe</p>
+                  <p className="text-xs text-center text-gray-500 mt-3">Secure payment</p>
                 </div>
               </>
             )}
@@ -526,36 +394,35 @@ export default function EisenbalmShop() {
       )}
 
       {/* Footer */}
-      <footer id="contact" className="bg-gray-900 text-white py-12 px-4">
+      <footer id="contact" className="bg-black text-white py-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div className="md:col-span-2">
-              <span className="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-blue-400 bg-clip-text text-transparent">
-                JESSE A. EISENBALM
-              </span>
-              <p className="text-gray-400 mt-4 leading-relaxed">
+          <div className="grid md:grid-cols-3 gap-12 mb-12">
+            <div>
+              <h3 className="text-sm tracking-widest mb-6">CONTACT</h3>
+              <p className="text-sm text-gray-400 leading-relaxed">
+                For inquiries, please reach out through our social channels.
+              </p>
+            </div>
+            
+            <div>
+              <h3 className="text-sm tracking-widest mb-6">FOLLOW</h3>
+              <div className="space-y-2">
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white transition">LinkedIn</a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white transition">Instagram</a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white transition">Twitter</a>
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="text-sm tracking-widest mb-6">PHILOSOPHY</h3>
+              <p className="text-sm text-gray-400 leading-relaxed">
                 Premium natural lip care for humans. Stay present, stay human, stay moisturized.
               </p>
             </div>
-            <div>
-              <h4 className="font-bold mb-4">Quick Links</h4>
-              <div className="space-y-2">
-                <a href="#products" className="block text-gray-400 hover:text-white transition">Products</a>
-                <a href="#about" className="block text-gray-400 hover:text-white transition">About</a>
-                <a href="#testimonials" className="block text-gray-400 hover:text-white transition">Reviews</a>
-              </div>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">Connect</h4>
-              <div className="space-y-2">
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="block text-gray-400 hover:text-white transition">LinkedIn</a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="block text-gray-400 hover:text-white transition">Instagram</a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="block text-gray-400 hover:text-white transition">Twitter</a>
-              </div>
-            </div>
           </div>
+          
           <div className="border-t border-gray-800 pt-8 text-center">
-            <p className="text-gray-500 text-sm">© 2025 JESSE A. EISENBALM. All rights reserved. · Human-First, Always.</p>
+            <p className="text-xs text-gray-500 tracking-widest">© 2025 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
           </div>
         </div>
       </footer>
