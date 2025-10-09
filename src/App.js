@@ -60,7 +60,7 @@ export default function EisenbalmShop() {
     setIsProcessing(true);
     
     try {
-      const response = await fetch('http://localhost:4242/create-checkout-session', {
+      const response = await fetch('https://jesse-eisenbalm-server-pp4fmqh8d-camilleyeyous-projects.vercel.app/create-checkout-session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
