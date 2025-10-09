@@ -4,26 +4,23 @@ const cors = require('cors');
 
 const app = express();
 
-// CORS Configuration
+// Simple and robust CORS configuration
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://jesse-eisenbalm.vercel.app',
-    'https://jesse-eisenbalm-kh0wbt3vd-camilleyeyous-projects.vercel.app',
-    /vercel\.app$/
-  ],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    
+    // Allow localhost and all vercel.app domains
+    if (origin.includes('localhost') || origin.includes('vercel.app')) {
+      return callback(null, true);
+    }
+    
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-
-// Handle preflight for all routes
-app.use((req, res, next) => {
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-  next();
-});
 
 // Middleware
 app.use(express.json());
@@ -48,8 +45,13 @@ app.post('/create-checkout-session', async (req, res) => {
     // Generate a fake session ID
     const fakeSessionId = 'mock_session_' + Date.now();
     
+    // Get the base URL (production or localhost)
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : 'http://localhost:4242';
+    
     // Simulate Stripe checkout URL
-    const mockCheckoutUrl = `http://localhost:4242/mock-checkout?session=${fakeSessionId}&total=${total.toFixed(2)}`;
+    const mockCheckoutUrl = `${baseUrl}/mock-checkout?session=${fakeSessionId}&total=${total.toFixed(2)}`;
     
     res.json({ url: mockCheckoutUrl });
   } catch (error) {
@@ -61,6 +63,9 @@ app.post('/create-checkout-session', async (req, res) => {
 // Mock Stripe Checkout Page
 app.get('/mock-checkout', (req, res) => {
   const { session, total } = req.query;
+  
+  // Determine the frontend URL
+  const frontendUrl = process.env.CLIENT_URL || 'https://jesse-eisenbalm.vercel.app';
   
   res.send(`
     <!DOCTYPE html>
@@ -142,6 +147,10 @@ app.get('/mock-checkout', (req, res) => {
         .pay-button:hover {
           transform: translateY(-2px);
         }
+        .pay-button:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
         .test-info {
           background: #fff5f5;
           border: 2px solid #feb2b2;
@@ -204,7 +213,7 @@ app.get('/mock-checkout', (req, res) => {
             required
           />
           
-          <button type="submit" class="pay-button">
+          <button type="submit" class="pay-button" id="payButton">
             💳 Pay $${total}
           </button>
         </form>
@@ -224,14 +233,12 @@ app.get('/mock-checkout', (req, res) => {
         function handlePayment(event) {
           event.preventDefault();
           
-          // Simulate payment processing
-          const button = event.target.querySelector('button');
+          const button = document.getElementById('payButton');
           button.innerHTML = '⏳ Processing...';
           button.disabled = true;
           
           setTimeout(() => {
-            // Redirect to success page
-            window.location.href = 'https://jesse-eisenbalm.vercel.app/success?session_id=${session}';
+            window.location.href = '${frontendUrl}/success?session_id=${session}';
           }, 2000);
         }
       </script>
