@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ShoppingCart, Menu, X, ChevronRight } from 'lucide-react';
 
 export default function EisenbalmShop() {
@@ -7,6 +7,49 @@ export default function EisenbalmShop() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [selectedImage, setSelectedImage] = useState({});
+  const [scrollY, setScrollY] = useState(0);
+  const [email, setEmail] = useState('');
+  const [newsletterStatus, setNewsletterStatus] = useState('');
+
+  // Smooth scroll handling
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+      
+      // Update scroll progress
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (window.scrollY / windowHeight) * 100;
+      const progressBar = document.getElementById('scroll-progress');
+      if (progressBar) {
+        progressBar.style.width = `${scrolled}%`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Scroll reveal animation
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-reveal').forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const products = [
     {
@@ -15,9 +58,9 @@ export default function EisenbalmShop() {
       subtitle: "The Original",
       price: 8.99,
       images: [
-        "/public/images/products/eisenbalm-1.png",
-        "/public/images/products/eisenbalm-2.png",
-        "/public/images/products/eisenbalm-3.png"
+        "/images/products/eisenbalm-1.png",
+        "/images/products/eisenbalm-2.png",
+        "/images/products/eisenbalm-3.png"
       ],
       description: "Organic beeswax formula. A tangible ritual for the human experience.",
       features: ["Organic Beeswax", "All-Day Hydration", "Human-First Formula"],
@@ -84,53 +127,303 @@ export default function EisenbalmShop() {
     }
   };
 
+  const handleNewsletterSubmit = (e) => {
+    e.preventDefault();
+    if (email) {
+      setNewsletterStatus('success');
+      setEmail('');
+      setTimeout(() => setNewsletterStatus(''), 3000);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <div className="min-h-screen bg-white scroll-snap-container" style={{
+      '--je-spacing-unit': '16px',
+      '--je-spacing': 'calc(var(--je-spacing-unit) * 1)',
+      '--je-spacing-half': 'calc(var(--je-spacing) / 2)',
+      '--je-primary-rgb': '0, 0, 0',
+      '--je-secondary-rgb': '255, 255, 255',
+      '--je-muted-rgb': '128, 128, 128',
+      '--je-transition-speed': '0.25s',
+      '--je-transition-ease': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      scrollBehavior: 'smooth'
+    }}>
+      {/* Scroll Progress Indicator */}
+      <div id="scroll-progress" className="scroll-progress"></div>
+      
+      <style>{`
+        html {
+          scroll-behavior: smooth;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+          html {
+            scroll-behavior: auto;
+          }
+          * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
+        }
+        
+        .luxury-hover {
+          transition: all var(--je-transition-speed) var(--je-transition-ease);
+        }
+        
+        .luxury-hover:hover {
+          transform: translateY(-2px);
+        }
+        
+        .luxury-focus:focus-visible {
+          outline: 2px solid rgba(var(--je-primary-rgb), 1);
+          outline-offset: 2px;
+        }
+        
+        .luxury-button {
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .luxury-button::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+          transition: left 0.5s;
+        }
+        
+        .luxury-button:hover::before {
+          left: 100%;
+        }
+        
+        .fade-in {
+          animation: fadeIn 0.6s var(--je-transition-ease) forwards;
+        }
+        
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .scroll-reveal {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 0.8s var(--je-transition-ease), transform 0.8s var(--je-transition-ease);
+        }
+        
+        .scroll-reveal.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        /* Parallax Effects */
+        .parallax-slow {
+          transition: transform 0.3s ease-out;
+          will-change: transform;
+        }
+        
+        .parallax-medium {
+          transition: transform 0.3s ease-out;
+          will-change: transform;
+        }
+        
+        .parallax-fast {
+          transition: transform 0.3s ease-out;
+        }
+        
+        /* Scroll Snap */
+        .scroll-snap-container {
+          scroll-snap-type: y proximity;
+          scroll-padding-top: 80px;
+        }
+        
+        .scroll-snap-section {
+          scroll-snap-align: start;
+          scroll-snap-stop: normal;
+        }
+        
+        /* Smooth momentum scrolling */
+        * {
+          -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Scale on scroll effect */
+        .scale-on-scroll {
+          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        /* Opacity on scroll */
+        .opacity-on-scroll {
+          transition: opacity 0.6s ease-out;
+        }
+        
+        /* Text split animation */
+        .text-split {
+          display: inline-block;
+          overflow: hidden;
+        }
+        
+        .text-split span {
+          display: inline-block;
+          opacity: 0;
+          transform: translateY(100%);
+          animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        @keyframes slideUp {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        /* Stagger animation */
+        .text-split span:nth-child(1) { animation-delay: 0.05s; }
+        .text-split span:nth-child(2) { animation-delay: 0.1s; }
+        .text-split span:nth-child(3) { animation-delay: 0.15s; }
+        .text-split span:nth-child(4) { animation-delay: 0.2s; }
+        .text-split span:nth-child(5) { animation-delay: 0.25s; }
+        .text-split span:nth-child(6) { animation-delay: 0.3s; }
+        
+        /* Image reveal on scroll */
+        .image-reveal {
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .image-reveal::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: #000;
+          transform: scaleX(1);
+          transform-origin: left;
+          transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+        
+        .image-reveal.visible::after {
+          transform: scaleX(0);
+          transform-origin: right;
+        }
+        
+        /* Horizontal scroll section */
+        .horizontal-scroll {
+          display: flex;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        
+        .horizontal-scroll::-webkit-scrollbar {
+          display: none;
+        }
+        
+        .horizontal-scroll-item {
+          flex: 0 0 80vw;
+          scroll-snap-align: center;
+          margin-right: 2rem;
+        }
+        
+        /* Clip path reveal */
+        .clip-reveal {
+          clip-path: inset(0 100% 0 0);
+          transition: clip-path 1s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+        
+        .clip-reveal.visible {
+          clip-path: inset(0 0 0 0);
+        }
+        
+        /* Magnetic hover effect */
+        .magnetic {
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        /* Progress indicator */
+        .scroll-progress {
+          position: fixed;
+          top: 0;
+          left: 0;
+          height: 2px;
+          background: linear-gradient(90deg, #000 0%, #666 100%);
+          z-index: 9999;
+          transform-origin: left;
+        }
+      `}</style>
+      {/* Navigation - Enhanced */}
+      <nav className="bg-white border-b border-gray-100 sticky top-0 z-50 backdrop-blur-md bg-white/95">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-12">
-              <div className="text-2xl font-light tracking-widest">
+              <div className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
                 JESSE A. EISENBALM
               </div>
               
               <div className="hidden md:flex space-x-8">
-                <a href="#product" className="text-sm tracking-wide text-gray-600 hover:text-black transition">PRODUCT</a>
-                <a href="#philosophy" className="text-sm tracking-wide text-gray-600 hover:text-black transition">PHILOSOPHY</a>
-                <a href="#contact" className="text-sm tracking-wide text-gray-600 hover:text-black transition">CONTACT</a>
+                <a href="#product" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
+                  PRODUCT
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#philosophy" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
+                  PHILOSOPHY
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#journal" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
+                  JOURNAL
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#contact" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
+                  CONTACT
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
+                </a>
               </div>
             </div>
 
             <div className="flex items-center space-x-6">
               <button
                 onClick={() => setIsCartOpen(!isCartOpen)}
-                className="relative text-gray-600 hover:text-black transition"
+                className="relative text-gray-600 hover:text-black transition-all duration-300 luxury-focus"
               >
-                <ShoppingCart size={22} strokeWidth={1.5} />
+                <ShoppingCart size={20} strokeWidth={1.5} />
                 {cartItemCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  <span className="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-light">
                     {cartItemCount}
                   </span>
                 )}
               </button>
               
               <button
-                className="md:hidden"
+                className="md:hidden luxury-focus"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
-                {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+                {isMobileMenuOpen ? <X size={20} strokeWidth={1.5} /> : <Menu size={20} strokeWidth={1.5} />}
               </button>
             </div>
           </div>
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200">
-            <div className="px-6 py-4 space-y-4">
-              <a href="#product" className="block text-sm tracking-wide text-gray-600 hover:text-black">PRODUCT</a>
-              <a href="#philosophy" className="block text-sm tracking-wide text-gray-600 hover:text-black">PHILOSOPHY</a>
-              <a href="#contact" className="block text-sm tracking-wide text-gray-600 hover:text-black">CONTACT</a>
+          <div className="md:hidden bg-white border-t border-gray-100 fade-in">
+            <div className="px-6 py-6 space-y-6">
+              <a href="#product" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">PRODUCT</a>
+              <a href="#philosophy" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">PHILOSOPHY</a>
+              <a href="#journal" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">JOURNAL</a>
+              <a href="#contact" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">CONTACT</a>
             </div>
           </div>
         )}
@@ -164,30 +457,340 @@ export default function EisenbalmShop() {
             A tangible, human-only ritual in an AI-everywhere world.
           </p>
           
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="#product" className="bg-white text-black px-12 py-4 text-sm tracking-widest hover:bg-gray-100 transition inline-flex items-center justify-center group">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 fade-in">
+            <a href="#product" className="luxury-button bg-white text-black px-12 py-4 text-sm tracking-[0.2em] hover:bg-gray-50 transition-all inline-flex items-center justify-center group border border-white/20">
               DISCOVER
-              <ChevronRight size={16} className="ml-2 group-hover:translate-x-1 transition" />
+              <ChevronRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" strokeWidth={1.5} />
             </a>
           </div>
         </div>
       </section>
 
+      {/* Features Grid Section */}
+      <section className="py-24 px-6 bg-gray-50 scroll-snap-section scroll-reveal">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">WHY CHOOSE US</p>
+            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Crafted for the Human Experience</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Every detail matters when you're creating moments of presence in an automated world</p>
+          </div>
+          
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              { 
+                icon: "🌿", 
+                title: "100% Organic Ingredients", 
+                desc: "Pure organic beeswax sourced from sustainable apiaries, combined with vitamin E and natural oils. No synthetic additives, no compromises."
+              },
+              { 
+                icon: "🧪", 
+                title: "Scientifically Proven", 
+                desc: "Dermatologist tested and clinically approved. Our formula provides 8-hour moisture retention backed by independent lab testing."
+              },
+              { 
+                icon: "🌍", 
+                title: "Ethically Made", 
+                desc: "Carbon-neutral production with fair trade practices. Every tube supports sustainable beekeeping communities worldwide."
+              },
+              { 
+                icon: "✨", 
+                title: "Luxury Experience", 
+                desc: "Minimalist packaging designed in collaboration with leading product designers. Premium feel without the pretense."
+              }
+            ].map((feature, idx) => (
+              <div 
+                key={idx} 
+                className="text-center p-8 bg-white hover:shadow-lg transition-all duration-500 luxury-hover clip-reveal scroll-reveal"
+                style={{ transitionDelay: `${idx * 0.1}s` }}
+              >
+                <div className="text-5xl mb-4">{feature.icon}</div>
+                <h3 className="text-lg font-light mb-3 tracking-wide">{feature.title}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Journal/Blog Section */}
+      <section id="journal" className="py-24 px-6 bg-white scroll-snap-section scroll-reveal">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-end mb-16">
+            <div>
+              <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">JOURNAL</p>
+              <h2 className="text-4xl md:text-5xl font-light tracking-tight">The Human Manifesto</h2>
+              <p className="text-lg text-gray-600 mt-4 max-w-xl">Thoughts on staying human in an increasingly automated world</p>
+            </div>
+            <button onClick={() => window.location.href='#journal'} className="text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors luxury-focus hidden md:block bg-transparent border-0 cursor-pointer">
+              VIEW ALL →
+            </button>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-12">
+            {[
+              {
+                image: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=800&h=600&fit=crop",
+                category: "PHILOSOPHY",
+                title: "Why Rituals Matter in a Digital Age",
+                date: "October 8, 2025",
+                excerpt: "In an era of automation and AI-generated everything, small acts of self-care become revolutionary. We explore why intentional, human-only rituals are more important than ever for maintaining our sense of self in a world that's increasingly asking us to behave like machines."
+              },
+              {
+                image: "https://images.unsplash.com/photo-1505944357793-6e5c99554a5e?w=800&h=600&fit=crop",
+                category: "INGREDIENTS",
+                title: "The Science Behind Organic Beeswax",
+                date: "September 22, 2025",
+                excerpt: "Not all lip balms are created equal. We break down the molecular structure of organic beeswax and why it outperforms petroleum-based alternatives. Plus: exclusive insights from our sustainability partners on ethical beekeeping practices."
+              },
+              {
+                image: "https://images.unsplash.com/photo-1487260211189-670c54da558d?w=800&h=600&fit=crop",
+                category: "CULTURE",
+                title: "The AI Interview Series: On Being Human",
+                date: "August 15, 2025",
+                excerpt: "We asked leading AI models about humanity, consciousness, and lip balm. The responses were surprisingly philosophical, occasionally absurd, and always thought-provoking. A conversation about the boundaries between human and artificial intelligence."
+              }
+            ].map((post, idx) => (
+              <article 
+                key={idx} 
+                className="group cursor-pointer clip-reveal scroll-reveal"
+                style={{ transitionDelay: `${idx * 0.15}s` }}
+              >
+                <div className="relative aspect-[4/3] mb-6 overflow-hidden bg-gray-100 image-reveal scroll-reveal">
+                  <img 
+                    src={post.image} 
+                    alt={post.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <p className="text-xs tracking-[0.2em] text-gray-500 mb-3">{post.category}</p>
+                <h3 className="text-xl font-light mb-3 group-hover:text-gray-600 transition-colors leading-tight">{post.title}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed mb-4">{post.excerpt}</p>
+                <p className="text-xs tracking-wide text-gray-400">{post.date}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-24 px-6 bg-black text-white scroll-snap-section scroll-reveal">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-xs tracking-[0.2em] text-gray-400 mb-4">TESTIMONIALS</p>
+            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Voices of Humanity</h2>
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">Real reviews from real humans navigating the modern world</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-12">
+            {[
+              {
+                text: "This isn't just lip balm. It's a daily reminder to stay present. Before every Zoom meeting, I take those 5 seconds to stop, breathe, and apply. It's become my grounding ritual in an otherwise chaotic workday. The formula is incredible too—lasts through coffee, calls, and everything.",
+                author: "Sarah Chen",
+                role: "Product Designer, Google",
+                location: "San Francisco, CA"
+              },
+              {
+                text: "I bought it for the absurdist AI marketing angle. I stayed because it's genuinely the best lip balm I've ever used. The packaging alone makes it worth it—minimalist, premium, and it actually feels special to use. My entire team asked where I got it.",
+                author: "Marcus Rodriguez",
+                role: "Startup Founder, YC W24",
+                location: "New York, NY"
+              },
+              {
+                text: "As someone who creates content about wellness and mindfulness, I'm constantly pitched products. This is one of the few I actually use daily and recommend genuinely. The 'stop, breathe, balm' ritual has become part of my morning routine. It's small but meaningful.",
+                author: "Jamie Park",
+                role: "Wellness Creator, 250K followers",
+                location: "Los Angeles, CA"
+              }
+            ].map((testimonial, idx) => (
+              <div 
+                key={idx} 
+                className="clip-reveal scroll-reveal"
+                style={{ transitionDelay: `${idx * 0.1}s` }}
+              >
+                <div className="mb-6">
+                  <div className="flex text-yellow-400 mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className="text-xl">★</span>
+                    ))}
+                  </div>
+                  <p className="text-lg font-light leading-relaxed mb-6 italic">"{testimonial.text}"</p>
+                </div>
+                <div className="border-t border-gray-800 pt-4">
+                  <p className="font-light text-white">{testimonial.author}</p>
+                  <p className="text-sm text-gray-400 mt-1">{testimonial.role}</p>
+                  <p className="text-xs text-gray-500 mt-1">{testimonial.location}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="py-24 px-6 bg-gradient-to-br from-gray-50 to-white scroll-snap-section scroll-reveal">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="mb-8">
+            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">STAY HUMAN</p>
+            <h2 className="text-4xl md:text-6xl font-light mb-6 tracking-tight">Join the Movement</h2>
+            <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto mb-4">
+              Get exclusive access to new products, human-first philosophy essays, and the occasional absurdist thought experiment.
+            </p>
+            <p className="text-base text-gray-500">
+              Weekly newsletter. No spam. No AI-generated content. Just thoughtful words written by actual humans about staying human in a digital world.
+            </p>
+          </div>
+          
+          <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto mb-6">
+            <div className="flex gap-3 flex-col sm:flex-row">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email address"
+                required
+                className="flex-1 px-6 py-4 border border-gray-300 focus:border-black focus:outline-none transition-colors text-sm tracking-wide luxury-focus"
+              />
+              <button
+                type="submit"
+                className="luxury-button bg-black text-white px-8 py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-all luxury-focus whitespace-nowrap"
+              >
+                SUBSCRIBE
+              </button>
+            </div>
+            {newsletterStatus === 'success' && (
+              <p className="text-sm text-green-600 mt-4 fade-in">✓ Welcome to the movement. Check your inbox for confirmation.</p>
+            )}
+          </form>
+          
+          <p className="text-xs text-gray-500 leading-relaxed">
+            Join 12,847 professionals who start their week with our human-first insights.<br/>
+            By subscribing, you agree to receive marketing emails. Unsubscribe anytime with one click.
+          </p>
+        </div>
+      </section>
+
+      {/* Instagram Feed Section */}
+      <section className="py-24 px-6 bg-white scroll-snap-section scroll-reveal">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">@JESSEEISENBALM</p>
+            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Follow the Ritual</h2>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              "https://images.unsplash.com/photo-1556228852-80c3e0482a9e?w=400&h=400&fit=crop",
+              "https://images.unsplash.com/photo-1631214540345-563b34ac5530?w=400&h=400&fit=crop",
+              "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop",
+              "https://images.unsplash.com/photo-1598662957477-e5fcc1ed8f06?w=400&h=400&fit=crop",
+              "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=400&h=400&fit=crop",
+              "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400&h=400&fit=crop",
+              "https://images.unsplash.com/photo-1505944357793-6e5c99554a5e?w=400&h=400&fit=crop",
+              "https://images.unsplash.com/photo-1487260211189-670c54da558d?w=400&h=400&fit=crop"
+            ].map((img, idx) => (
+              <div 
+                key={idx} 
+                className="aspect-square overflow-hidden bg-gray-100 group cursor-pointer image-reveal scroll-reveal"
+                style={{ transitionDelay: `${idx * 0.05}s` }}
+              >
+                <img 
+                  src={img} 
+                  alt={`Instagram post ${idx + 1}`}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <a 
+              href="https://instagram.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="luxury-button inline-block border-2 border-black text-black px-8 py-3 text-sm tracking-[0.2em] hover:bg-black hover:text-white transition-all luxury-focus"
+            >
+              FOLLOW US
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-24 px-6 bg-gray-50 scroll-snap-section scroll-reveal">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">QUESTIONS</p>
+            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Frequently Asked</h2>
+            <p className="text-lg text-gray-600">Everything you need to know about the human-first lip balm</p>
+          </div>
+          
+          <div className="space-y-6">
+            {[
+              {
+                q: "What makes Jesse A. Eisenbalm different from other lip balms?",
+                a: "Beyond the 100% organic beeswax formula, this is about creating a mindful moment in your day. It's a tangible ritual that no algorithm can replicate—a small act of humanity in an automated world. The formula itself is dermatologist-tested and provides 8-hour moisture retention, but the real difference is the intentionality behind each application. Stop. Breathe. Balm."
+              },
+              {
+                q: "Is this really about AI, or is it just clever marketing?",
+                a: "Both. The AI positioning is absurdist commentary on modern work culture—a response to job applications being screened by bots, meetings scheduled by algorithms, and content generated by AI. But the product itself is very real, very organic, and works incredibly well. We're serious about the formula and playful about the philosophy."
+              },
+              {
+                q: "How long does one tube last with daily use?",
+                a: "With the recommended ritual (2-3 applications daily), one tube lasts approximately 3-4 months. We suggest using it before important meetings, after lunch, and before bed. Each tube contains 4.5g / 0.15 oz of product. Many customers buy 3 tubes at a time—one for home, one for work, and one for travel."
+              },
+              {
+                q: "Do you ship internationally? What about shipping costs?",
+                a: "Currently shipping to US, Canada, UK, and EU with free standard shipping on all orders. International shipping takes 7-14 business days. Worldwide shipping to additional countries coming Q1 2026. All orders are carbon-neutral through our partnership with sustainable logistics providers."
+              },
+              {
+                q: "What if I'm not satisfied with my purchase?",
+                a: "30-day money-back guarantee, no questions asked. If the ritual doesn't resonate with you, or if you're not satisfied with the product for any reason, email us and we'll refund you completely. We'll even cover return shipping. No algorithms, no automated responses—just human customer service."
+              },
+              {
+                q: "What are the ingredients? Any allergens?",
+                a: "100% organic beeswax, vitamin E (tocopherol), organic coconut oil, organic jojoba oil, and natural vanilla extract. That's it. No petroleum, no parabens, no synthetic fragrances. Allergen notice: Contains tree nuts (coconut). Not suitable for those with bee product allergies. Vegan alternative coming soon."
+              }
+            ].map((faq, idx) => (
+              <details 
+                key={idx} 
+                className="group bg-white p-6 clip-reveal scroll-reveal border border-gray-200 hover:border-gray-300 transition-all"
+                style={{ transitionDelay: `${idx * 0.05}s` }}
+              >
+                <summary className="flex justify-between items-center cursor-pointer list-none">
+                  <span className="text-lg font-light pr-8">{faq.q}</span>
+                  <span className="text-2xl font-light transform group-open:rotate-45 transition-transform flex-shrink-0">+</span>
+                </summary>
+                <p className="mt-4 text-gray-600 leading-relaxed text-sm">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+          
+          <div className="mt-12 text-center">
+            <p className="text-sm text-gray-600 mb-4">Still have questions?</p>
+            <button onClick={() => window.location.href='#contact'} className="text-sm tracking-[0.15em] text-black hover:text-gray-600 transition-colors luxury-focus bg-transparent border-0 cursor-pointer font-medium">
+              CONTACT US →
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Product Section */}
-      <section id="product" className="py-24 px-6 bg-white">
+      <section id="product" className="py-24 px-6 bg-white scroll-reveal scroll-snap-section">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {products.map((product) => {
               const currentImage = selectedImage[product.id] || product.images[0];
               return (
                 <React.Fragment key={product.id}>
-                  {/* Product Images */}
-                  <div className="order-2 md:order-1">
-                    <div className="relative aspect-square bg-gray-50 mb-4 overflow-hidden">
+                  {/* Product Images - With Reveal Effect */}
+                  <div className="order-2 md:order-1 scale-on-scroll" style={{
+                    transform: `scale(${0.95 + Math.min(scrollY * 0.0001, 0.05)})`
+                  }}>
+                    <div className="relative aspect-square bg-gray-50 mb-4 overflow-hidden image-reveal scroll-reveal">
                       <img
                         src={currentImage}
                         alt={product.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                       />
                     </div>
                     
@@ -196,9 +799,12 @@ export default function EisenbalmShop() {
                         <button
                           key={idx}
                           onClick={() => setSelectedImage({...selectedImage, [product.id]: img})}
-                          className={`w-20 h-20 bg-gray-50 overflow-hidden border-2 transition ${
-                            currentImage === img ? 'border-black' : 'border-transparent'
+                          className={`w-20 h-20 bg-gray-50 overflow-hidden border-2 transition-all duration-300 clip-reveal scroll-reveal ${
+                            currentImage === img ? 'border-black scale-95' : 'border-transparent hover:border-gray-300'
                           }`}
+                          style={{
+                            transitionDelay: `${idx * 0.1}s`
+                          }}
                         >
                           <img src={img} alt={`View ${idx + 1}`} className="w-full h-full object-cover" />
                         </button>
@@ -233,12 +839,12 @@ export default function EisenbalmShop() {
 
                     <button
                       onClick={() => addToCart(product)}
-                      className="w-full bg-black text-white py-4 text-sm tracking-widest hover:bg-gray-900 transition"
+                      className="luxury-button w-full bg-black text-white py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-all luxury-focus"
                     >
                       ADD TO CART
                     </button>
 
-                    <p className="text-xs text-center text-gray-500 mt-4 italic">
+                    <p className="text-xs text-center text-gray-400 mt-4 italic tracking-wide">
                       "Are these my real lips?"
                     </p>
                   </div>
@@ -249,15 +855,28 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <section id="philosophy" className="py-24 px-6 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <img 
-            src="/images/backgrounds/about-bg.jpg" 
-            alt="Background" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/70"></div>
+      {/* Philosophy Section - Fixed */}
+      <section id="philosophy" className="py-24 px-6 relative overflow-hidden scroll-snap-section min-h-screen flex items-center">
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 parallax-slow"
+            style={{
+              transform: `translateY(${scrollY * 0.2}px)`,
+              willChange: 'transform'
+            }}
+          >
+            <img 
+              src="/images/backgrounds/about-bg.jpg" 
+              alt="Background" 
+              className="w-full h-full object-cover"
+              style={{
+                transform: `scale(${1.1 + Math.min(scrollY * 0.00005, 0.1)})`,
+                transformOrigin: 'center center'
+              }}
+            />
+          </div>
+          {/* Dark overlay - always visible */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>
         </div>
         
         <div className="relative z-10 max-w-5xl mx-auto text-white">
