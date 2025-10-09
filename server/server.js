@@ -4,7 +4,7 @@ const cors = require('cors');
 
 const app = express();
 
-// Middleware
+// CORS Configuration
 app.use(cors({
   origin: [
     'http://localhost:3000',
@@ -16,6 +16,16 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Handle preflight for all routes
+app.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  next();
+});
+
+// Middleware
 app.use(express.json());
 
 // Test route
@@ -221,7 +231,7 @@ app.get('/mock-checkout', (req, res) => {
           
           setTimeout(() => {
             // Redirect to success page
-            window.location.href = 'http://localhost:3000/success?session_id=${session}';
+            window.location.href = 'https://jesse-eisenbalm.vercel.app/success?session_id=${session}';
           }, 2000);
         }
       </script>
