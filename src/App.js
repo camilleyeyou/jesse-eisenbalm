@@ -96,9 +96,9 @@ export default function EisenbalmShop() {
       subtitle: "The Original",
       price: 8.99,
       images: [
-        "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&h=800&fit=crop",
-        "https://images.unsplash.com/photo-1631214540345-563b34ac5530?w=800&h=800&fit=crop",
-        "https://images.unsplash.com/photo-1556228852-80c3e0482a9e?w=800&h=800&fit=crop"
+       "/images/products/eisenbalm-1.png",
+       "/images/products/eisenbalm-2.png",
+       "/images/products/eisenbalm-3.png"
       ],
       description: "Organic beeswax formula. A tangible ritual for the human experience.",
       features: ["Organic Beeswax", "All-Day Hydration", "Human-First Formula"],
@@ -455,14 +455,14 @@ export default function EisenbalmShop() {
           <div className="grid md:grid-cols-3 gap-12">
             {[
               {
-                image: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=800&h=600&fit=crop",
+                image: "/images/grid/image-1.png",
                 category: "PHILOSOPHY",
                 title: "Why Rituals Matter in a Digital Age",
                 date: "October 8, 2025",
                 excerpt: "In an era of automation and AI-generated everything, small acts of self-care become revolutionary. We explore why intentional, human-only rituals are more important than ever for maintaining our sense of self in a world that's increasingly asking us to behave like machines."
               },
               {
-                image: "https://images.unsplash.com/photo-1505944357793-6e5c99554a5e?w=800&h=600&fit=crop",
+                image: "/images/grid/image-20.png",
                 category: "INGREDIENTS",
                 title: "The Science Behind Organic Beeswax",
                 date: "September 22, 2025",
@@ -605,14 +605,14 @@ export default function EisenbalmShop() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              "https://images.unsplash.com/photo-1556228852-80c3e0482a9e?w=400&h=400&fit=crop",
-              "https://images.unsplash.com/photo-1631214540345-563b34ac5530?w=400&h=400&fit=crop",
-              "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop",
-              "https://images.unsplash.com/photo-1598662957477-e5fcc1ed8f06?w=400&h=400&fit=crop",
-              "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=400&h=400&fit=crop",
-              "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400&h=400&fit=crop",
-              "https://images.unsplash.com/photo-1505944357793-6e5c99554a5e?w=400&h=400&fit=crop",
-              "https://images.unsplash.com/photo-1487260211189-670c54da558d?w=400&h=400&fit=crop"
+              "/images/grid/image-1.png",
+              "/images/grid/image-2.png",
+              "/images/grid/image-3.png",
+              "/images/grid/image-4.png",
+              "/images/grid/image-5.png",
+              "/images/grid/image-6.png",
+              "/images/grid/image-7.png",
+              "/images/grid/image-8.png"
             ].map((img, idx) => (
               <div
                 key={idx}
