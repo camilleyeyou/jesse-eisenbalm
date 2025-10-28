@@ -138,13 +138,25 @@ export default function EisenbalmShop() {
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleCheckout = async () => {
+    if (cart.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
+    
     setIsProcessing(true);
     try {
-      const response = await fetch('https://jesse-eisenbalm-server-pp4fmqh8d-camilleyeyous-projects.vercel.app/create-checkout-session', {
+      const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'https://jesse-eisenbalm-server.vercel.app';
+      
+      const response = await fetch(`${SERVER_URL}/create-checkout-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ items: cart }),
       });
+      
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+      }
+      
       const data = await response.json();
       if (data.url) {
         window.location.href = data.url;
@@ -157,7 +169,7 @@ export default function EisenbalmShop() {
     } finally {
       setIsProcessing(false);
     }
-  };
+};
 
   const handleNewsletterSubmit = (e) => {
     e.preventDefault();
