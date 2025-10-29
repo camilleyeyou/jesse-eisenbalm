@@ -9,9 +9,14 @@ const app = express();
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin) return callback(null, true);
-    if (origin.includes('localhost') || origin.includes('vercel.app')) {
+    
+    // Allow localhost, vercel.app, and your custom domain
+    if (origin.includes('localhost') || 
+        origin.includes('vercel.app') || 
+        origin.includes('jesseaeisenbalm.com')) {
       return callback(null, true);
     }
+    
     callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
