@@ -11,6 +11,28 @@ export default function EisenbalmShop() {
   const [email, setEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState('');
 
+  const parseExcerpt = (text) => {
+  if (!text) return text;
+  
+  const parts = text.split(/(\[[^\]]+\])/g);
+  
+  return parts.map((part, index) => {
+    const match = part.match(/\[([^\]]+)\]/);
+    if (match) {
+      return (
+        <a 
+          key={index}
+          href="#product" 
+          className="inline-block text-sm tracking-[0.15em] bg-black text-white hover:bg-gray-800 px-3 py-1 transition-all duration-300 luxury-focus relative group"
+        >
+          {match[1].toUpperCase()}
+        </a>
+      );
+    }
+    return <span key={index}>{part}</span>;
+  });
+};
+
   // Add a "js-reveal" flag to <html> so we only hide elements when JS is active (prevents Chrome race).
   useEffect(() => {
     const html = document.documentElement;
@@ -100,8 +122,8 @@ export default function EisenbalmShop() {
        "/images/products/eisenbalm-2.png",
        "/images/products/eisenbalm-3.png"
       ],
-      description: "Organic beeswax formula. A tangible ritual for the human experience.",
-      features: ["Organic Beeswax", "All-Day Hydration", "Human-First Formula"],
+      description: "Limited Edition. Release 001. Hand numbered.",
+      features: ["Beeswax formula", "All-Day Hydration", "Daily Ritual", "Reminder of your humanity", "And mortality"],
       volume: "4.5g / 0.15 oz"
     }
   ];
@@ -408,306 +430,14 @@ export default function EisenbalmShop() {
           </p>
 
           <p className="text-base md:text-lg text-white/80 mb-12 max-w-xl mx-auto font-light leading-relaxed">
-            A tangible, human-only ritual in an AI-everywhere world.
+            A human-only ritual for an AI everywhere world. All proceeds go to charity. 
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 fade-in">
             <a href="#product" className="luxury-button bg-white text-black px-12 py-4 text-sm tracking-[0.2em] hover:bg-gray-50 transition-all inline-flex items-center justify-center group border border-white/20">
-              DISCOVER
+              Release 001. BUY NOW
               <ChevronRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" strokeWidth={1.5} />
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Grid Section */}
-      <section className="py-24 px-6 bg-gray-50 scroll-snap-section scroll-reveal">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">WHY CHOOSE US</p>
-            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Crafted for the Human Experience</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Every detail matters when you're creating moments of presence in an automated world</p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { icon: "🌿", title: "100% Organic Ingredients", desc: "Pure organic beeswax sourced from sustainable apiaries, combined with vitamin E and natural oils. No synthetic additives, no compromises." },
-              { icon: "🧪", title: "Scientifically Proven", desc: "Dermatologist tested and clinically approved. Our formula provides 8-hour moisture retention backed by independent lab testing." },
-              { icon: "🌍", title: "Ethically Made", desc: "Carbon-neutral production with fair trade practices. Every tube supports sustainable beekeeping communities worldwide." },
-              { icon: "✨", title: "Luxury Experience", desc: "Minimalist packaging designed in collaboration with leading product designers. Premium feel without the pretense." }
-            ].map((feature, idx) => (
-              <div
-                key={idx}
-                className="text-center p-8 bg-white hover:shadow-lg transition-all duration-500 luxury-hover clip-reveal scroll-reveal"
-                style={{ transitionDelay: `${idx * 0.1}s` }}
-              >
-                <div className="text-5xl mb-4">{feature.icon}</div>
-                <h3 className="text-lg font-light mb-3 tracking-wide">{feature.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Journal/Blog Section */}
-      <section id="journal" className="py-24 px-6 bg-white scroll-snap-section scroll-reveal">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-end mb-16">
-            <div>
-              <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">JOURNAL</p>
-              <h2 className="text-4xl md:text-5xl font-light tracking-tight">The Human Manifesto</h2>
-              <p className="text-lg text-gray-600 mt-4 max-w-xl">Thoughts on staying human in an increasingly automated world</p>
-            </div>
-            <button onClick={() => window.location.href='#journal'} className="text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors luxury-focus hidden md:block bg-transparent border-0 cursor-pointer">
-              VIEW ALL →
-            </button>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-12">
-            {[
-              {
-                image: "/images/grid/image-1.png",
-                category: "PHILOSOPHY",
-                title: "Why Rituals Matter in a Digital Age",
-                date: "October 8, 2025",
-                excerpt: "In an era of automation and AI-generated everything, small acts of self-care become revolutionary. We explore why intentional, human-only rituals are more important than ever for maintaining our sense of self in a world that's increasingly asking us to behave like machines."
-              },
-              {
-                image: "/images/grid/image-20.png",
-                category: "INGREDIENTS",
-                title: "The Science Behind Organic Beeswax",
-                date: "September 22, 2025",
-                excerpt: "Not all lip balms are created equal. We break down the molecular structure of organic beeswax and why it outperforms petroleum-based alternatives. Plus: exclusive insights from our sustainability partners on ethical beekeeping practices."
-              },
-              {
-                image: "https://images.unsplash.com/photo-1487260211189-670c54da558d?w=800&h=600&fit=crop",
-                category: "CULTURE",
-                title: "The AI Interview Series: On Being Human",
-                date: "August 15, 2025",
-                excerpt: "We asked leading AI models about humanity, consciousness, and lip balm. The responses were surprisingly philosophical, occasionally absurd, and always thought-provoking. A conversation about the boundaries between human and artificial intelligence."
-              }
-            ].map((post, idx) => (
-              <article
-                key={idx}
-                className="group cursor-pointer clip-reveal scroll-reveal"
-                style={{ transitionDelay: `${idx * 0.15}s` }}
-              >
-                <div className="relative aspect-[4/3] mb-6 overflow-hidden bg-gray-100 image-reveal scroll-reveal">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <p className="text-xs tracking-[0.2em] text-gray-500 mb-3">{post.category}</p>
-                <h3 className="text-xl font-light mb-3 group-hover:text-gray-600 transition-colors leading-tight">{post.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed mb-4">{post.excerpt}</p>
-                <p className="text-xs tracking-wide text-gray-400">{post.date}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-24 px-6 bg-black text-white scroll-snap-section scroll-reveal">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.2em] text-gray-400 mb-4">TESTIMONIALS</p>
-            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Voices of Humanity</h2>
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto">Real reviews from real humans navigating the modern world</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-12">
-            {[
-              {
-                text: "This isn't just lip balm. It's a daily reminder to stay present. Before every Zoom meeting, I take those 5 seconds to stop, breathe, and apply. It's become my grounding ritual in an otherwise chaotic workday. The formula is incredible too—lasts through coffee, calls, and everything.",
-                author: "Sarah Chen",
-                role: "Product Designer, Google",
-                location: "San Francisco, CA"
-              },
-              {
-                text: "I bought it for the absurdist AI marketing angle. I stayed because it's genuinely the best lip balm I've ever used. The packaging alone makes it worth it—minimalist, premium, and it actually feels special to use. My entire team asked where I got it.",
-                author: "Marcus Rodriguez",
-                role: "Startup Founder, YC W24",
-                location: "New York, NY"
-              },
-              {
-                text: "As someone who creates content about wellness and mindfulness, I'm constantly pitched products. This is one of the few I actually use daily and recommend genuinely. The 'stop, breathe, balm' ritual has become part of my morning routine. It's small but meaningful.",
-                author: "Jamie Park",
-                role: "Wellness Creator, 250K followers",
-                location: "Los Angeles, CA"
-              }
-            ].map((testimonial, idx) => (
-              <div
-                key={idx}
-                className="clip-reveal scroll-reveal"
-                style={{ transitionDelay: `${idx * 0.1}s` }}
-              >
-                <div className="mb-6">
-                  <div className="flex text-yellow-400 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-xl">★</span>
-                    ))}
-                  </div>
-                  <p className="text-lg font-light leading-relaxed mb-6 italic">"{testimonial.text}"</p>
-                </div>
-                <div className="border-t border-gray-800 pt-4">
-                  <p className="font-light text-white">{testimonial.author}</p>
-                  <p className="text-sm text-gray-400 mt-1">{testimonial.role}</p>
-                  <p className="text-xs text-gray-500 mt-1">{testimonial.location}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter Section */}
-      <section className="py-24 px-6 bg-gradient-to-br from-gray-50 to-white scroll-snap-section scroll-reveal">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="mb-8">
-            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">STAY HUMAN</p>
-            <h2 className="text-4xl md:text-6xl font-light mb-6 tracking-tight">Join the Movement</h2>
-            <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto mb-4">
-              Get exclusive access to new products, human-first philosophy essays, and the occasional absurdist thought experiment.
-            </p>
-            <p className="text-base text-gray-500">
-              Weekly newsletter. No spam. No AI-generated content. Just thoughtful words written by actual humans about staying human in a digital world.
-            </p>
-          </div>
-
-          <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto mb-6">
-            <div className="flex gap-3 flex-col sm:flex-row">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email address"
-                required
-                className="flex-1 px-6 py-4 border border-gray-300 focus:border-black focus:outline-none transition-colors text-sm tracking-wide luxury-focus"
-              />
-              <button
-                type="submit"
-                className="luxury-button bg-black text-white px-8 py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-all luxury-focus whitespace-nowrap"
-              >
-                SUBSCRIBE
-              </button>
-            </div>
-            {newsletterStatus === 'success' && (
-              <p className="text-sm text-green-600 mt-4 fade-in">✓ Welcome to the movement. Check your inbox for confirmation.</p>
-            )}
-          </form>
-
-          <p className="text-xs text-gray-500 leading-relaxed">
-            Join 12,847 professionals who start their week with our human-first insights.<br/>
-            By subscribing, you agree to receive marketing emails. Unsubscribe anytime with one click.
-          </p>
-        </div>
-      </section>
-
-      {/* Instagram Feed Section */}
-      <section className="py-24 px-6 bg-white scroll-snap-section scroll-reveal">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">@JESSEEISENBALM</p>
-            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Follow the Ritual</h2>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              "/images/grid/image-1.png",
-              "/images/grid/image-2.png",
-              "/images/grid/image-3.png",
-              "/images/grid/image-4.png",
-              "/images/grid/image-5.png",
-              "/images/grid/image-6.png",
-              "/images/grid/image-7.png",
-              "/images/grid/image-8.png"
-            ].map((img, idx) => (
-              <div
-                key={idx}
-                className="aspect-square overflow-hidden bg-gray-100 group cursor-pointer image-reveal scroll-reveal"
-                style={{ transitionDelay: `${idx * 0.05}s` }}
-              >
-                <img
-                  src={img}
-                  alt={`Instagram post ${idx + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="luxury-button inline-block border-2 border-black text-black px-8 py-3 text-sm tracking-[0.2em] hover:bg-black hover:text-white transition-all luxury-focus"
-            >
-              FOLLOW US
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-24 px-6 bg-gray-50 scroll-snap-section scroll-reveal">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">QUESTIONS</p>
-            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Frequently Asked</h2>
-            <p className="text-lg text-gray-600">Everything you need to know about the human-first lip balm</p>
-          </div>
-
-          <div className="space-y-6">
-            {[
-              {
-                q: "What makes Jesse A. Eisenbalm different from other lip balms?",
-                a: "Beyond the 100% organic beeswax formula, this is about creating a mindful moment in your day. It's a tangible ritual that no algorithm can replicate—a small act of humanity in an automated world. The formula itself is dermatologist-tested and provides 8-hour moisture retention, but the real difference is the intentionality behind each application. Stop. Breathe. Balm."
-              },
-              {
-                q: "Is this really about AI, or is it just clever marketing?",
-                a: "Both. The AI positioning is absurdist commentary on modern work culture—a response to job applications being screened by bots, meetings scheduled by algorithms, and content generated by AI. But the product itself is very real, very organic, and works incredibly well. We're serious about the formula and playful about the philosophy."
-              },
-              {
-                q: "How long does one tube last with daily use?",
-                a: "With the recommended ritual (2-3 applications daily), one tube lasts approximately 3-4 months. We suggest using it before important meetings, after lunch, and before bed. Each tube contains 4.5g / 0.15 oz of product. Many customers buy 3 tubes at a time—one for home, one for work, and one for travel."
-              },
-              {
-                q: "Do you ship internationally? What about shipping costs?",
-                a: "Currently shipping to US, Canada, UK, and EU with free standard shipping on all orders. International shipping takes 7-14 business days. Worldwide shipping to additional countries coming Q1 2026. All orders are carbon-neutral through our partnership with sustainable logistics providers."
-              },
-              {
-                q: "What if I'm not satisfied with my purchase?",
-                a: "30-day money-back guarantee, no questions asked. If the ritual doesn't resonate with you, or if you're not satisfied with the product for any reason, email us and we'll refund you completely. We'll even cover return shipping. No algorithms, no automated responses—just human customer service."
-              },
-              {
-                q: "What are the ingredients? Any allergens?",
-                a: "100% organic beeswax, vitamin E (tocopherol), organic coconut oil, organic jojoba oil, and natural vanilla extract. That's it. No petroleum, no parabens, no synthetic fragrances. Allergen notice: Contains tree nuts (coconut). Not suitable for those with bee product allergies. Vegan alternative coming soon."
-              }
-            ].map((faq, idx) => (
-              <details
-                key={idx}
-                className="group bg-white p-6 clip-reveal scroll-reveal border border-gray-200 hover:border-gray-300 transition-all"
-                style={{ transitionDelay: `${idx * 0.05}s` }}
-              >
-                <summary className="flex justify-between items-center cursor-pointer list-none">
-                  <span className="text-lg font-light pr-8">{faq.q}</span>
-                  <span className="text-2xl font-light transform group-open:rotate-45 transition-transform flex-shrink-0">+</span>
-                </summary>
-                <p className="mt-4 text-gray-600 leading-relaxed text-sm">{faq.a}</p>
-              </details>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <p className="text-sm text-gray-600 mb-4">Still have questions?</p>
-            <button onClick={() => window.location.href='#contact'} className="text-sm tracking-[0.15em] text-black hover:text-gray-600 transition-colors luxury-focus bg-transparent border-0 cursor-pointer font-medium">
-              CONTACT US →
-            </button>
           </div>
         </div>
       </section>
@@ -786,6 +516,255 @@ export default function EisenbalmShop() {
                 </React.Fragment>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+       {/* Journal/Blog Section */}
+        <section id="journal" className="py-24 px-6 bg-white scroll-snap-section scroll-reveal">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex justify-between items-end mb-16">
+              <div>
+                <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">JOURNAL</p>
+                <h2 className="text-4xl md:text-5xl font-light tracking-tight">The Human Manifesto</h2>
+                <p className="text-lg text-gray-600 mt-4 max-w-xl">Thoughts on staying human in an increasingly automated world</p>
+              </div>
+              <button onClick={() => window.location.href='#journal'} className="text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors luxury-focus hidden md:block bg-transparent border-0 cursor-pointer">
+                
+              </button>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-12">
+              {[
+                {
+                  image: "/images/grid/image-1.png",
+                  category: "PHILOSOPHY",
+                  title: "Why Rituals Matter in a Digital Age",
+                  excerpt: "In an era of automation and AI-generated everything, small acts of self-care become revolutionary. We explore why intentional, human-only rituals are more important than ever for maintaining our sense of self in a world that's increasingly asking us to behave like machines."
+                },
+                {
+                  image: "/images/grid/image-20.png",
+                  category: "INGREDIENTS OF LIFE",
+                  title: "Time to die",
+                  excerpt: "Let's face it, you're going to die some day. Lip Balm is the modern memento mori that walks you back home with smooth, moisturized lips."
+                },
+                {
+                  image: "https://images.unsplash.com/photo-1487260211189-670c54da558d?w=800&h=600&fit=crop",
+                  category: "CULTURE",
+                  title: "Time to Buy.",             
+                  excerpt: "You've read enough quippy AI copy. Let's get to the buying already. Push that button. Or this one [buy now]."
+                }
+              ].map((post, idx) => (
+                <article
+                  key={idx}
+                  className="group cursor-pointer clip-reveal scroll-reveal"
+                  style={{ transitionDelay: `${idx * 0.15}s` }}
+                >
+                  <div className="relative aspect-[4/3] mb-6 overflow-hidden bg-gray-100 image-reveal scroll-reveal">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <p className="text-xs tracking-[0.2em] text-gray-500 mb-3">{post.category}</p>
+                  <h3 className="text-xl font-light mb-3 group-hover:text-gray-600 transition-colors leading-tight">{post.title}</h3>
+                  {/* Changed this line to use parseExcerpt */}
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                    {parseExcerpt(post.excerpt)}
+                  </p>
+                  <p className="text-xs tracking-wide text-gray-400">{post.date}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials Section */}
+      <section className="py-24 px-6 bg-black text-white scroll-snap-section scroll-reveal">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-xs tracking-[0.2em] text-gray-400 mb-4">TESTIMONIALS</p>
+            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Generated Voices of Humanity</h2>
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">Real generated reviews from personas navigating the complexity of the modern world.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-12">
+            {[
+              {
+                text: "This isn't just lip balm. It's a daily reminder to stay present. Before every Zoom meeting, I take those 5 seconds to stop, breathe, and apply. It's become my grounding ritual in an otherwise chaotic workday. The formula is incredible too—lasts through coffee, calls, and everything.",
+                author: "Sarah Chen",
+                role: "Product Designer, Google",
+                location: "San Francisco, CA"
+              },
+              {
+                text: "I bought it for the absurdist AI marketing angle. I stayed because it's genuinely the best lip balm I've ever used. The packaging alone makes it worth it—minimalist, premium, and it actually feels special to use. My entire team asked where I got it.",
+                author: "Marcus Rodriguez",
+                role: "Startup Founder, YC W24",
+                location: "New York, NY"
+              },
+              {
+                text: "As someone who creates content about wellness and mindfulness, I'm constantly pitched products. This is one of the few I actually use daily and recommend genuinely. The 'stop, breathe, balm' ritual has become part of my morning routine. It's small but meaningful.",
+                author: "Jamie Park",
+                role: "Wellness Creator, 250K followers",
+                location: "Los Angeles, CA"
+              }
+            ].map((testimonial, idx) => (
+              <div
+                key={idx}
+                className="clip-reveal scroll-reveal"
+                style={{ transitionDelay: `${idx * 0.1}s` }}
+              >
+                <div className="mb-6">
+                  <div className="flex text-yellow-400 mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className="text-xl">★</span>
+                    ))}
+                  </div>
+                  <p className="text-lg font-light leading-relaxed mb-6 italic">"{testimonial.text}"</p>
+                </div>
+                <div className="border-t border-gray-800 pt-4">
+                  <p className="font-light text-white">{testimonial.author}</p>
+                  <p className="text-sm text-gray-400 mt-1">{testimonial.role}</p>
+                  <p className="text-xs text-gray-500 mt-1">{testimonial.location}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+       {/* Newsletter Section */}
+      <section className="py-24 px-6 bg-gradient-to-br from-gray-50 to-white scroll-snap-section scroll-reveal">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="mb-8">
+            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">STAY HUMAN</p>
+            <h2 className="text-4xl md:text-6xl font-light mb-6 tracking-tight">Join the Movement</h2>
+            <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto mb-4">
+               Get exclusive access to new products, human-first philosophy essays, and the occasional absurdist thought experiment.
+            </p>
+            <p className="text-base text-gray-500">
+              We probably won’t send any email but having yours makes us more valuable to the PE company that will buy anything AI related. But if you want to be anonymous, that’s cool too. The lip balm is transparent; no one will know you’ve got it on. But you’ll know. .
+            </p>
+          </div>
+
+          <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto mb-6">
+            <div className="flex gap-3 flex-col sm:flex-row">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email address"
+                required
+                className="flex-1 px-6 py-4 border border-gray-300 focus:border-black focus:outline-none transition-colors text-sm tracking-wide luxury-focus"
+              />
+              <button
+                type="submit"
+                className="luxury-button bg-black text-white px-8 py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-all luxury-focus whitespace-nowrap"
+              >
+                SUBSCRIBE
+              </button>
+            </div>
+            {newsletterStatus === 'success' && (
+              <p className="text-sm text-green-600 mt-4 fade-in">✓ Welcome to the movement. Check your inbox for confirmation.</p>
+            )}
+          </form>
+
+          <p className="text-xs text-gray-500 leading-relaxed">
+            Join 12,847 professionals who start their week with our human-first insights.<br/>
+            By subscribing, you agree to receive marketing emails. Unsubscribe anytime with one click.
+          </p>
+        </div>
+      </section>
+
+
+      {/* Features Grid Section */}
+      <section className="py-24 px-6 bg-gray-50 scroll-snap-section scroll-reveal">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">WHY CHOOSE US</p>
+            <h3 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Crafted for the human Experience.</h3>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Every detail matters when you're creating moments of presence in an automated world </p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              { icon: "🌿", title: "Pure Beeswax", desc: "Good stuff to soothe your lips and moisturize your mind." },
+              { icon: "⏰", title: "Time Tested", desc: "The only balm to keep moisture in and slop out ." },
+              { icon: "📍", title: "Ethically Made", desc: "No art was plagiarized to make this product. (Except the marketing materials, those have a little plagiarism in them.)" },
+              { icon: "✨", title: "Limited Edition", desc: "Individually numbered exclusively online offer." }
+            ].map((feature, idx) => (
+              <div
+                key={idx}
+                className="text-center p-8 bg-white hover:shadow-lg transition-all duration-500 luxury-hover clip-reveal scroll-reveal"
+                style={{ transitionDelay: `${idx * 0.1}s` }}
+              >
+                <div className="text-5xl mb-4">{feature.icon}</div>
+                <h3 className="text-lg font-light mb-3 tracking-wide">{feature.title}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+
+      {/* FAQ Section */}
+      <section className="py-24 px-6 bg-gray-50 scroll-snap-section scroll-reveal">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">QUESTIONS</p>
+            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Frequently Asked</h2>
+            <p className="text-lg text-gray-600">Everything you need to know about the human-first lip balm</p>
+          </div>
+
+          <div className="space-y-6">
+            {[
+              {
+                q: "What makes Jesse A. Eisenbalm different from other lip balms?",
+                a: "Beyond the 100% organic beeswax formula, this is about creating a mindful moment in your day. It's a tangible ritual that no algorithm can replicate—a small act of humanity in an automated world. The formula itself is dermatologist-tested and provides 8-hour moisture retention, but the real difference is the intentionality behind each application. Stop. Breathe. Balm."
+              },
+              {
+                q: "Is this really about AI, or is it just clever marketing?",
+                a: "Both. The AI positioning is absurdist commentary on modern work culture—a response to job applications being screened by bots, meetings scheduled by algorithms, and content generated by AI. But the product itself is very real, very organic, and works incredibly well. We're serious about the formula and playful about the philosophy."
+              },
+              {
+                q: "How long does one tube last with daily use?",
+                a: "With the recommended ritual (2-3 applications daily), one tube lasts approximately 3-4 months. We suggest using it before important meetings, after lunch, and before bed. Each tube contains 4.5g / 0.15 oz of product. Many customers buy 3 tubes at a time—one for home, one for work, and one for travel."
+              },
+              {
+                q: "Do you ship internationally? What about shipping costs?",
+                a: "Currently shipping to US, Canada, UK, and EU with free standard shipping on all orders. International shipping takes 7-14 business days. Worldwide shipping to additional countries coming Q1 2026. All orders are carbon-neutral through our partnership with sustainable logistics providers."
+              },
+              {
+                q: "What if I'm not satisfied with my purchase?",
+                a: "30-day money-back guarantee, no questions asked. If the ritual doesn't resonate with you, or if you're not satisfied with the product for any reason, email us and we'll refund you completely. We'll even cover return shipping. No algorithms, no automated responses—just human customer service."
+              },
+              {
+                q: "What are the ingredients? Any allergens?",
+                a: "100% organic beeswax, vitamin E (tocopherol), organic coconut oil, organic jojoba oil, and natural vanilla extract. That's it. No petroleum, no parabens, no synthetic fragrances. Allergen notice: Contains tree nuts (coconut). Not suitable for those with bee product allergies. Vegan alternative coming soon."
+              }
+            ].map((faq, idx) => (
+              <details
+                key={idx}
+                className="group bg-white p-6 clip-reveal scroll-reveal border border-gray-200 hover:border-gray-300 transition-all"
+                style={{ transitionDelay: `${idx * 0.05}s` }}
+              >
+                <summary className="flex justify-between items-center cursor-pointer list-none">
+                  <span className="text-lg font-light pr-8">{faq.q}</span>
+                  <span className="text-2xl font-light transform group-open:rotate-45 transition-transform flex-shrink-0">+</span>
+                </summary>
+                <p className="mt-4 text-gray-600 leading-relaxed text-sm">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <p className="text-sm text-gray-600 mb-4">Still have questions?</p>
+            <button onClick={() => window.location.href='#contact'} className="text-sm tracking-[0.15em] text-black hover:text-gray-600 transition-colors luxury-focus bg-transparent border-0 cursor-pointer font-medium">
+              CONTACT US →
+            </button>
           </div>
         </div>
       </section>
