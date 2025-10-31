@@ -928,16 +928,14 @@ export default function EisenbalmShop() {
             <div>
               <h3 className="text-sm tracking-widest mb-6">CONTACT</h3>
               <p className="text-sm text-gray-400 leading-relaxed">
-                For inquiries, please reach out through our social channels.
+                For inquiries, please reach out through our linkedin page.
               </p>
             </div>
 
             <div>
               <h3 className="text-sm tracking-widest mb-6">FOLLOW</h3>
               <div className="space-y-2">
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white transition">LinkedIn</a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white transition">Instagram</a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white transition">Twitter</a>
+                <a href="https://www.linkedin.com/company/108396769/" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white transition">LinkedIn</a>
               </div>
             </div>
 
