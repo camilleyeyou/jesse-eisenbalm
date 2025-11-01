@@ -637,6 +637,53 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
+       {/* Instagram Feed Section */}
+      <section className="py-24 px-6 bg-white scroll-snap-section scroll-reveal">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4"></p>
+            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Follow the Ritual</h2>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              "/images/grid/image-1.png",
+              "/images/grid/image-2.png",
+              "/images/grid/image-3.png",
+              "/images/grid/image-4.png",
+              "/images/grid/image-5.png",
+              "/images/grid/image-6.png",
+              "/images/grid/image-7.png",
+              "/images/grid/image-8.png"
+            ].map((img, idx) => (
+              <div
+                key={idx}
+                className="aspect-square overflow-hidden bg-gray-100 group cursor-pointer image-reveal scroll-reveal"
+                style={{ transitionDelay: `${idx * 0.05}s` }}
+              >
+                <img
+                  src={img}
+                  alt={`Instagram post ${idx + 1}`}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <a
+              href="https://www.linkedin.com/company/108396769/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="luxury-button inline-block border-2 border-black text-black px-8 py-3 text-sm tracking-[0.2em] hover:bg-black hover:text-white transition-all luxury-focus"
+            >
+              FOLLOW US
+            </a>
+          </div>
+        </div>
+      </section>
+
+
        {/* Newsletter Section */}
       <section className="py-24 px-6 bg-gradient-to-br from-gray-50 to-white scroll-snap-section scroll-reveal">
         <div className="max-w-4xl mx-auto text-center">
