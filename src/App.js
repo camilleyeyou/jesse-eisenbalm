@@ -637,6 +637,50 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
+      {/* Newsletter Section */}
+      <section className="py-24 px-6 bg-gradient-to-br from-gray-50 to-white scroll-snap-section scroll-reveal">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="mb-8">
+            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">STAY HUMAN</p>
+            <h2 className="text-4xl md:text-6xl font-light mb-6 tracking-tight">Join the Movement</h2>
+            <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto mb-4">
+               Get exclusive access to new products, human-first philosophy essays, and the occasional absurdist thought experiment.
+            </p>
+            <p className="text-base text-gray-500">
+              We probably won’t send any email but having yours makes us more valuable to the PE company that will buy anything AI related. But if you want to be anonymous, that’s cool too. The lip balm is transparent; no one will know you’ve got it on. But you’ll know. .
+            </p>
+          </div>
+
+          <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto mb-6">
+            <div className="flex gap-3 flex-col sm:flex-row">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email address"
+                required
+                className="flex-1 px-6 py-4 border border-gray-300 focus:border-black focus:outline-none transition-colors text-sm tracking-wide luxury-focus"
+              />
+              <button
+                type="submit"
+                className="luxury-button bg-black text-white px-8 py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-all luxury-focus whitespace-nowrap"
+              >
+                SUBSCRIBE
+              </button>
+            </div>
+            {newsletterStatus === 'success' && (
+              <p className="text-sm text-green-600 mt-4 fade-in">✓ Welcome to the movement. Check your inbox for confirmation.</p>
+            )}
+          </form>
+
+          <p className="text-xs text-gray-500 leading-relaxed">
+            Join 12,847 professionals who start their week with our human-first insights.<br/>
+            By subscribing, you agree to receive marketing emails. Unsubscribe anytime with one click.
+          </p>
+        </div>
+      </section>
+
+
        {/* Instagram Feed Section */}
       <section className="py-24 px-6 bg-white scroll-snap-section scroll-reveal">
         <div className="max-w-7xl mx-auto">
@@ -684,49 +728,7 @@ export default function EisenbalmShop() {
       </section>
 
 
-       {/* Newsletter Section */}
-      <section className="py-24 px-6 bg-gradient-to-br from-gray-50 to-white scroll-snap-section scroll-reveal">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="mb-8">
-            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">STAY HUMAN</p>
-            <h2 className="text-4xl md:text-6xl font-light mb-6 tracking-tight">Join the Movement</h2>
-            <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto mb-4">
-               Get exclusive access to new products, human-first philosophy essays, and the occasional absurdist thought experiment.
-            </p>
-            <p className="text-base text-gray-500">
-              We probably won’t send any email but having yours makes us more valuable to the PE company that will buy anything AI related. But if you want to be anonymous, that’s cool too. The lip balm is transparent; no one will know you’ve got it on. But you’ll know. .
-            </p>
-          </div>
-
-          <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto mb-6">
-            <div className="flex gap-3 flex-col sm:flex-row">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email address"
-                required
-                className="flex-1 px-6 py-4 border border-gray-300 focus:border-black focus:outline-none transition-colors text-sm tracking-wide luxury-focus"
-              />
-              <button
-                type="submit"
-                className="luxury-button bg-black text-white px-8 py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-all luxury-focus whitespace-nowrap"
-              >
-                SUBSCRIBE
-              </button>
-            </div>
-            {newsletterStatus === 'success' && (
-              <p className="text-sm text-green-600 mt-4 fade-in">✓ Welcome to the movement. Check your inbox for confirmation.</p>
-            )}
-          </form>
-
-          <p className="text-xs text-gray-500 leading-relaxed">
-            Join 12,847 professionals who start their week with our human-first insights.<br/>
-            By subscribing, you agree to receive marketing emails. Unsubscribe anytime with one click.
-          </p>
-        </div>
-      </section>
-
+       
 
       {/* Features Grid Section */}
       <section className="py-24 px-6 bg-gray-50 scroll-snap-section scroll-reveal">
