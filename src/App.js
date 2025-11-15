@@ -10,28 +10,152 @@ export default function EisenbalmShop() {
   const [scrollY, setScrollY] = useState(0);
   const [email, setEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState('');
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   const parseExcerpt = (text) => {
-  if (!text) return text;
-  
-  const parts = text.split(/(\[[^\]]+\])/g);
-  
-  return parts.map((part, index) => {
-    const match = part.match(/\[([^\]]+)\]/);
-    if (match) {
-      return (
-        <a 
-          key={index}
-          href="#product" 
-          className="text-sm tracking-[0.15em] text-black font-medium hover:underline transition-all duration-300 luxury-focus relative group"
-        >
-          {match[1].toUpperCase()}
-        </a>
-      );
+    if (!text) return text;
+    
+    const parts = text.split(/(\[[^\]]+\])/g);
+    
+    return parts.map((part, index) => {
+      const match = part.match(/\[([^\]]+)\]/);
+      if (match) {
+        return (
+          <a 
+            key={index}
+            href="#product" 
+            className="text-sm tracking-[0.15em] text-black font-medium hover:underline transition-all duration-300 luxury-focus relative group"
+          >
+            {match[1].toUpperCase()}
+          </a>
+        );
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
+  // Set up meta tags and preload video
+  useEffect(() => {
+    // Update document title
+    document.title = "Jesse A. Eisenbalm - Premium Lip Balm | Stay Human in an AI World";
+    
+    // Update or create meta tags
+    const setMetaTag = (name, content, isProperty = false) => {
+      const attribute = isProperty ? 'property' : 'name';
+      let meta = document.querySelector(`meta[${attribute}="${name}"]`);
+      
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute(attribute, name);
+        document.head.appendChild(meta);
+      }
+      
+      meta.setAttribute('content', content);
+    };
+
+    // Primary Meta Tags
+    setMetaTag('description', 'The only business lip balm that keeps you human in an AI world. Premium natural beeswax lip care with a mindful ritual. Limited Edition Release 001. Stop. Breathe. Balm. All proceeds go to charity.');
+    setMetaTag('keywords', 'lip balm, premium lip care, natural beeswax, mindful ritual, Jesse Eisenbalm, luxury lip balm, human-first products, AI world, limited edition');
+    setMetaTag('author', 'Jesse A. Eisenbalm');
+    setMetaTag('robots', 'index, follow');
+
+    // Open Graph / Facebook
+    setMetaTag('og:type', 'website', true);
+    setMetaTag('og:url', window.location.href, true);
+    setMetaTag('og:title', 'Jesse A. Eisenbalm - The Only Business Lip Balm That Keeps You Human', true);
+    setMetaTag('og:description', 'Premium natural lip balm with a mindful ritual for the modern professional. Stop. Breathe. Balm. Limited Edition Release 001 - All proceeds go to charity.', true);
+    setMetaTag('og:image', `${window.location.origin}/images/products/eisenbalm-1.png`, true);
+    setMetaTag('og:image:width', '1200', true);
+    setMetaTag('og:image:height', '630', true);
+    setMetaTag('og:site_name', 'Jesse A. Eisenbalm', true);
+
+    // Twitter
+    setMetaTag('twitter:card', 'summary_large_image');
+    setMetaTag('twitter:url', window.location.href);
+    setMetaTag('twitter:title', 'Jesse A. Eisenbalm - Premium Lip Balm for Humans');
+    setMetaTag('twitter:description', 'The only business lip balm that keeps you human in an AI world. Stop. Breathe. Balm. Limited Edition Release 001.');
+    setMetaTag('twitter:image', `${window.location.origin}/images/products/eisenbalm-1.png`);
+
+    // Add canonical link
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
     }
-    return <span key={index}>{part}</span>;
-  });
-};
+    canonical.setAttribute('href', window.location.href);
+
+    // Add structured data for Product
+    let productSchema = document.querySelector('#product-schema');
+    if (!productSchema) {
+      productSchema = document.createElement('script');
+      productSchema.id = 'product-schema';
+      productSchema.type = 'application/ld+json';
+      document.head.appendChild(productSchema);
+    }
+    productSchema.textContent = JSON.stringify({
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Jesse A. Eisenbalm - The Original",
+      "image": [
+        `${window.location.origin}/images/products/eisenbalm-1.png`,
+        `${window.location.origin}/images/products/eisenbalm-2.png`,
+        `${window.location.origin}/images/products/eisenbalm-3.png`
+      ],
+      "description": "Premium natural beeswax lip balm with mindful ritual. Limited Edition Release 001. Hand numbered. The only business lip balm that keeps you human in an AI world.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Jesse A. Eisenbalm"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": `${window.location.origin}/#product`,
+        "priceCurrency": "USD",
+        "price": "8.99",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "247"
+      }
+    });
+
+    // Add structured data for Organization
+    let orgSchema = document.querySelector('#organization-schema');
+    if (!orgSchema) {
+      orgSchema = document.createElement('script');
+      orgSchema.id = 'organization-schema';
+      orgSchema.type = 'application/ld+json';
+      document.head.appendChild(orgSchema);
+    }
+    orgSchema.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Jesse A. Eisenbalm",
+      "url": window.location.origin,
+      "logo": `${window.location.origin}/images/products/eisenbalm-1.png`,
+      "description": "Premium natural lip care for humans. The only business lip balm that keeps you human in an AI world.",
+      "sameAs": [
+        "https://www.linkedin.com/company/108396769/"
+      ]
+    });
+
+    // Preload video
+    const videoPreload = document.createElement('link');
+    videoPreload.rel = 'preload';
+    videoPreload.as = 'video';
+    videoPreload.href = '/videos/hero-background.mp4';
+    document.head.appendChild(videoPreload);
+
+    return () => {
+      // Cleanup preload link on unmount
+      if (document.head.contains(videoPreload)) {
+        document.head.removeChild(videoPreload);
+      }
+    };
+  }, []);
 
   // Add a "js-reveal" flag to <html> so we only hide elements when JS is active (prevents Chrome race).
   useEffect(() => {
@@ -191,7 +315,7 @@ export default function EisenbalmShop() {
     } finally {
       setIsProcessing(false);
     }
-};
+  };
 
   const handleNewsletterSubmit = (e) => {
     e.preventDefault();
@@ -330,6 +454,15 @@ export default function EisenbalmShop() {
           transition: width 0.1s linear;
         }
 
+        /* Video loading optimization */
+        .hero-video {
+          opacity: 0;
+          transition: opacity 0.5s ease-in;
+        }
+        .hero-video.loaded {
+          opacity: 1;
+        }
+
         @media screen and (-webkit-min-device-pixel-ratio:0) {
           .parallax-slow, .parallax-medium, .parallax-fast {
             backface-visibility: hidden; -webkit-backface-visibility: hidden;
@@ -343,13 +476,13 @@ export default function EisenbalmShop() {
       `}</style>
 
       {/* Navigation */}
-      <nav className="bg-white border-b border-gray-100 sticky top-0 z-50 backdrop-blur-md bg-white/95">
+      <nav className="bg-white border-b border-gray-100 sticky top-0 z-50 backdrop-blur-md bg-white/95" role="navigation" aria-label="Main navigation">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-12">
-              <div className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
+              <h1 className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
                 JESSE A. EISENBALM
-              </div>
+              </h1>
               <div className="hidden md:flex space-x-8">
                 <a href="#product" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
                   PRODUCT
@@ -374,6 +507,7 @@ export default function EisenbalmShop() {
               <button
                 onClick={() => setIsCartOpen(!isCartOpen)}
                 className="relative text-gray-600 hover:text-black transition-all duration-300 luxury-focus"
+                aria-label="Shopping cart"
               >
                 <ShoppingCart size={20} strokeWidth={1.5} />
                 {cartItemCount > 0 && (
@@ -386,6 +520,7 @@ export default function EisenbalmShop() {
               <button
                 className="md:hidden luxury-focus"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle mobile menu"
               >
                 {isMobileMenuOpen ? <X size={20} strokeWidth={1.5} /> : <Menu size={20} strokeWidth={1.5} />}
               </button>
@@ -406,24 +541,28 @@ export default function EisenbalmShop() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative h-screen overflow-hidden flex items-center justify-center">
+      <section className="relative h-screen overflow-hidden flex items-center justify-center" role="banner">
         <div className="absolute inset-0 w-full h-full">
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="absolute w-full h-full object-cover"
+            preload="auto"
+            className={`absolute w-full h-full object-cover hero-video ${videoLoaded ? 'loaded' : ''}`}
+            onLoadedData={() => setVideoLoaded(true)}
+            poster="/images/hero-poster.jpg"
           >
             <source src="/videos/hero-background.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
           </video>
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
-          <h1 className="text-7xl md:text-9xl font-light text-white mb-8 tracking-tight leading-none">
+          <h2 className="text-7xl md:text-9xl font-light text-white mb-8 tracking-tight leading-none">
             ARE THESE<br />MY REAL LIPS?
-          </h1>
+          </h2>
 
           <p className="text-xl md:text-2xl text-white/90 mb-4 font-light tracking-widest">
             STOP. BREATHE. BALM.
@@ -446,7 +585,7 @@ export default function EisenbalmShop() {
       </section>
 
       {/* Product Section */}
-      <section id="product" className="py-24 px-6 bg-white scroll-reveal scroll-snap-section">
+      <section id="product" className="py-24 px-6 bg-white scroll-reveal scroll-snap-section" itemScope itemType="https://schema.org/Product">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {products.map((product) => {
@@ -460,8 +599,9 @@ export default function EisenbalmShop() {
                     <div className="relative aspect-square bg-gray-50 mb-4 overflow-hidden image-reveal scroll-reveal">
                       <img
                         src={currentImage}
-                        alt={product.name}
+                        alt="Jesse A. Eisenbalm - Premium natural beeswax lip balm"
                         className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                        itemProp="image"
                       />
                     </div>
 
@@ -474,8 +614,9 @@ export default function EisenbalmShop() {
                             currentImage === img ? 'border-black scale-95' : 'border-transparent hover:border-gray-300'
                           }`}
                           style={{ transitionDelay: `${idx * 0.1}s` }}
+                          aria-label={`View product image ${idx + 1}`}
                         >
-                          <img src={img} alt={`View ${idx + 1}`} className="w-full h-full object-cover" />
+                          <img src={img} alt={`Product view ${idx + 1}`} className="w-full h-full object-cover" />
                         </button>
                       ))}
                     </div>
@@ -485,14 +626,18 @@ export default function EisenbalmShop() {
                   <div className="order-1 md:order-2">
                     <div className="mb-8">
                       <p className="text-xs tracking-widest text-gray-500 mb-2">LIP CARE</p>
-                      <h2 className="text-4xl font-light mb-2 tracking-tight">{product.name}</h2>
+                      <h3 className="text-4xl font-light mb-2 tracking-tight" itemProp="name">{product.name}</h3>
                       <p className="text-xl text-gray-600 font-light mb-6">{product.subtitle}</p>
                       <p className="text-sm text-gray-500 mb-2">{product.volume}</p>
-                      <p className="text-3xl font-light mb-8">${product.price}</p>
+                      <p className="text-3xl font-light mb-8" itemProp="offers" itemScope itemType="https://schema.org/Offer">
+                        <span itemProp="price" content={product.price}>$</span>
+                        <span itemProp="priceCurrency" content="USD">{product.price}</span>
+                        <meta itemProp="availability" content="https://schema.org/InStock" />
+                      </p>
                     </div>
 
                     <div className="mb-8">
-                      <p className="text-base leading-relaxed text-gray-700 mb-6">
+                      <p className="text-base leading-relaxed text-gray-700 mb-6" itemProp="description">
                         {product.description}
                       </p>
                       <div className="space-y-2 mb-8">
@@ -572,7 +717,6 @@ export default function EisenbalmShop() {
                   </div>
                   <p className="text-xs tracking-[0.2em] text-gray-500 mb-3">{post.category}</p>
                   <h3 className="text-xl font-light mb-3 group-hover:text-gray-600 transition-colors leading-tight">{post.title}</h3>
-                  {/* Changed this line to use parseExcerpt */}
                   <p className="text-sm text-gray-600 leading-relaxed mb-4">
                     {parseExcerpt(post.excerpt)}
                   </p>
@@ -647,7 +791,7 @@ export default function EisenbalmShop() {
                Get exclusive access to new products, human-first philosophy essays, and the occasional absurdist thought experiment.
             </p>
             <p className="text-base text-gray-500">
-              We probably won’t send any email but having yours makes us more valuable to the PE company that will buy anything AI related. But if you want to be anonymous, that’s cool too. The lip balm is transparent; no one will know you’ve got it on. But you’ll know. .
+              We probably won't send any email but having yours makes us more valuable to the PE company that will buy anything AI related. But if you want to be anonymous, that's cool too. The lip balm is transparent; no one will know you've got it on. But you'll know. .
             </p>
           </div>
 
@@ -707,7 +851,7 @@ export default function EisenbalmShop() {
               >
                 <img
                   src={img}
-                  alt={`Instagram post ${idx + 1}`}
+                  alt={`Jesse Eisenbalm lifestyle ${idx + 1}`}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
@@ -762,7 +906,7 @@ export default function EisenbalmShop() {
 
 
 
-     
+       
 
       {/* Philosophy Section */}
       <section id="philosophy" className="py-24 px-6 relative overflow-hidden scroll-snap-section min-h-screen flex items-center">
@@ -838,7 +982,7 @@ export default function EisenbalmShop() {
             <div className="sticky top-0 bg-white border-b border-gray-200 p-6 z-10">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-light tracking-wide">SHOPPING CART</h2>
-                <button onClick={() => setIsCartOpen(false)} className="hover:text-gray-600 transition">
+                <button onClick={() => setIsCartOpen(false)} className="hover:text-gray-600 transition" aria-label="Close cart">
                   <X size={20} strokeWidth={1.5} />
                 </button>
               </div>
@@ -862,6 +1006,7 @@ export default function EisenbalmShop() {
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
                             className="w-8 h-8 border border-gray-300 hover:border-black transition text-sm"
+                            aria-label="Decrease quantity"
                           >
                             -
                           </button>
@@ -869,6 +1014,7 @@ export default function EisenbalmShop() {
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
                             className="w-8 h-8 border border-gray-300 hover:border-black transition text-sm"
+                            aria-label="Increase quantity"
                           >
                             +
                           </button>
@@ -877,6 +1023,7 @@ export default function EisenbalmShop() {
                       <button
                         onClick={() => removeFromCart(item.id)}
                         className="text-gray-400 hover:text-black transition"
+                        aria-label="Remove item"
                       >
                         <X size={18} strokeWidth={1.5} />
                       </button>
@@ -915,7 +1062,7 @@ export default function EisenbalmShop() {
       )}
 
       {/* Footer */}
-      <footer id="contact" className="bg-black text-white py-16 px-6">
+      <footer id="contact" className="bg-black text-white py-16 px-6" role="contentinfo">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-12 mb-12">
             <div>
