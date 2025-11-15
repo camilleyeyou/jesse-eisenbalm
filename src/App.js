@@ -146,7 +146,7 @@ export default function EisenbalmShop() {
     const videoPreload = document.createElement('link');
     videoPreload.rel = 'preload';
     videoPreload.as = 'video';
-    videoPreload.href = '/videos/hero-background.mp4';
+    videoPreload.href = 'https://cdn.jsdelivr.net/gh/camilleyeyou/jesse-eisenbalm@main/public/videos/hero-background.mp4';
     document.head.appendChild(videoPreload);
 
     return () => {
@@ -551,9 +551,9 @@ export default function EisenbalmShop() {
             preload="auto"
             className={`absolute w-full h-full object-cover hero-video ${videoLoaded ? 'loaded' : ''}`}
             onLoadedData={() => setVideoLoaded(true)}
-            poster="/images/hero-poster.jpg"
+            poster="https://cdn.jsdelivr.net/gh/camilleyeyou/jesse-eisenbalm@main/public/images/hero-poster.jpg"
           >
-            <source src="/videos/hero-background.mp4" type="video/mp4" />
+            <source src="https://cdn.jsdelivr.net/gh/camilleyeyou/jesse-eisenbalm@main/public/videos/hero-background.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           <div className="absolute inset-0 bg-black/60"></div>
