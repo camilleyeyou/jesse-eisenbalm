@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingCart, Menu, X, ChevronRight } from 'lucide-react';
+import { ShoppingCart, Menu, X, ChevronRight, CheckCircle } from 'lucide-react';
 
 export default function EisenbalmShop() {
   const [cart, setCart] = useState([]);
@@ -11,6 +11,9 @@ export default function EisenbalmShop() {
   const [email, setEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState('');
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [orderDetails, setOrderDetails] = useState(null);
+  const [isVerifying, setIsVerifying] = useState(false);
 
   const parseExcerpt = (text) => {
     if (!text) return text;
@@ -32,6 +35,43 @@ export default function EisenbalmShop() {
       }
       return <span key={index}>{part}</span>;
     });
+  };
+
+  // Check for successful payment on page load
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session_id');
+    
+    if (sessionId) {
+      verifyPayment(sessionId);
+      // Clean up URL without page reload
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
+
+  const verifyPayment = async (sessionId) => {
+    setIsVerifying(true);
+    try {
+      const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'https://jesse-eisenbalm-server.vercel.app';
+      
+      const response = await fetch(`${SERVER_URL}/verify-session/${sessionId}`);
+      
+      if (!response.ok) {
+        throw new Error('Failed to verify payment');
+      }
+      
+      const data = await response.json();
+      
+      if (data.status === 'paid') {
+        setOrderDetails(data);
+        setShowSuccessModal(true);
+        setCart([]); // Clear cart after successful payment
+      }
+    } catch (error) {
+      console.error('Error verifying payment:', error);
+    } finally {
+      setIsVerifying(false);
+    }
   };
 
   // Set up meta tags and preload video
@@ -473,7 +513,135 @@ export default function EisenbalmShop() {
 
         /* Ensure all text is visible by default */
         p, h1, h2, h3, h4, h5, h6, span, a, button, div { opacity: 1; visibility: visible; }
+
+        /* Success Modal Styles */
+        .success-modal-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.5);
+          backdrop-filter: blur(4px);
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 1rem;
+          animation: fadeIn 0.3s ease;
+        }
+
+        .success-modal {
+          background: white;
+          max-width: 500px;
+          width: 100%;
+          border-radius: 0;
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+          animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .success-checkmark {
+          width: 80px;
+          height: 80px;
+          margin: 0 auto 1.5rem;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #10b981;
+          animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+        }
+
+        @keyframes scaleIn {
+          from {
+            transform: scale(0);
+            opacity: 0;
+          }
+          to {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        .success-checkmark svg {
+          animation: drawCheck 0.5s ease 0.5s both;
+        }
+
+        @keyframes drawCheck {
+          from {
+            stroke-dashoffset: 100;
+          }
+          to {
+            stroke-dashoffset: 0;
+          }
+        }
       `}</style>
+
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="success-modal-overlay" onClick={() => setShowSuccessModal(false)}>
+          <div className="success-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="p-8 text-center">
+              <div className="success-checkmark">
+                <CheckCircle size={48} className="text-white" strokeWidth={2} />
+              </div>
+              
+              <h2 className="text-3xl font-light mb-4 tracking-tight">Payment Successful!</h2>
+              
+              <p className="text-lg text-gray-600 mb-2">
+                Thank you for your order{orderDetails?.customerName ? `, ${orderDetails.customerName}` : ''}.
+              </p>
+              
+              {orderDetails && (
+                <div className="mt-6 p-6 bg-gray-50 text-left">
+                  <div className="space-y-3 text-sm">
+                    {orderDetails.customerEmail && (
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Email:</span>
+                        <span className="font-light">{orderDetails.customerEmail}</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Total:</span>
+                      <span className="font-light text-lg">
+                        ${orderDetails.amountTotal?.toFixed(2)} {orderDetails.currency?.toUpperCase()}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <p className="text-sm text-gray-500 mt-6 mb-8 leading-relaxed">
+                A confirmation email has been sent to your inbox.<br/>
+                Your order will be shipped within 2-3 business days.
+              </p>
+
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={() => setShowSuccessModal(false)}
+                  className="luxury-button w-full bg-black text-white py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-all"
+                >
+                  CONTINUE SHOPPING
+                </button>
+                <button
+                  onClick={() => window.location.href = '#contact'}
+                  className="w-full py-4 text-sm tracking-[0.2em] text-gray-600 hover:text-black transition-all"
+                >
+                  CONTACT US
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Navigation */}
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-50 backdrop-blur-md bg-white/95" role="navigation" aria-label="Main navigation">
@@ -584,6 +752,7 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
+      {/* Rest of your sections remain the same... */}
       {/* Product Section */}
       <section id="product" className="py-24 px-6 bg-white scroll-reveal scroll-snap-section" itemScope itemType="https://schema.org/Product">
         <div className="max-w-7xl mx-auto">
