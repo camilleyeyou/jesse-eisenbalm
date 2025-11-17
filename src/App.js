@@ -14,6 +14,9 @@ export default function EisenbalmShop() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [orderDetails, setOrderDetails] = useState(null);
   const [isVerifying, setIsVerifying] = useState(false);
+  const [isPageReady, setIsPageReady] = useState(false); // NEW STATE
+
+  // ... (keep all your existing functions like parseExcerpt, verifyPayment, etc.)
 
   const parseExcerpt = (text) => {
     if (!text) return text;
@@ -378,6 +381,22 @@ export default function EisenbalmShop() {
       '--je-transition-ease': 'cubic-bezier(0.4, 0, 0.2, 1)',
       scrollBehavior: 'smooth'
     }}>
+      
+      {/* LOADING SCREEN - NEW */}
+      {!isPageReady && (
+        <div className="fixed inset-0 bg-black z-[10000] flex items-center justify-center">
+          <div className="text-center">
+            <div className="text-white text-2xl font-light tracking-[0.3em] mb-6">
+              JESSE A. EISENBALM
+            </div>
+            <div className="w-64 h-0.5 bg-gray-800 rounded-full overflow-hidden mx-auto">
+              <div className="h-full bg-white transition-all duration-1000 animate-pulse" style={{ width: '60%' }}></div>
+            </div>
+            <p className="text-gray-500 text-xs tracking-widest mt-6">LOADING EXPERIENCE</p>
+          </div>
+        </div>
+      )}
+
       {/* Scroll Progress Indicator */}
       <div id="scroll-progress" className="scroll-progress"></div>
 
@@ -719,6 +738,10 @@ export default function EisenbalmShop() {
             preload="auto"
             className={`absolute w-full h-full object-cover hero-video ${videoLoaded ? 'loaded' : ''}`}
             onLoadedData={() => setVideoLoaded(true)}
+            onCanPlayThrough={() => {
+              setVideoLoaded(true);
+              setIsPageReady(true);
+            }}
             poster="https://cdn.jsdelivr.net/gh/camilleyeyou/jesse-eisenbalm@main/public/images/hero-poster.jpg"
           >
             <source src="https://cdn.jsdelivr.net/gh/camilleyeyou/jesse-eisenbalm@main/public/videos/hero-background.mp4" type="video/mp4" />
@@ -752,8 +775,11 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
-      {/* Rest of your sections remain the same... */}
-      {/* Product Section */}
+      {/* Rest of your sections... (keep all the existing sections unchanged) */}
+      
+      {/* I'll include the rest below to maintain the complete file structure */}
+
+{/* Product Section */}
       <section id="product" className="py-24 px-6 bg-white scroll-reveal scroll-snap-section" itemScope itemType="https://schema.org/Product">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -1237,17 +1263,19 @@ export default function EisenbalmShop() {
             <div>
               <h3 className="text-sm tracking-widest mb-6">CONTACT</h3>
               <p className="text-sm text-gray-400 leading-relaxed">
-                For inquiries, please reach out through our linkedin page.
+                For inquiries, please reach out through our linkedin page or email us.
               </p>
             </div>
 
             <div>
-              <h3 className="text-sm tracking-widest mb-6">FOLLOW</h3>
+              <h3 className="text-sm tracking-widest mb-6">FOLLOW OR TALK TO US</h3>
               <div className="space-y-2">
                 <a href="https://www.linkedin.com/company/108396769/" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white transition">LinkedIn</a>
+                <a href="mailto:contact@jesseaeisenbalm.com?subject=Inquiry&body=Hello, I would like to..." className="block text-sm text-gray-400 hover:text-white transition">Email Us</a>
               </div>
             </div>
 
+            
             <div>
               <h3 className="text-sm tracking-widest mb-6">PHILOSOPHY</h3>
               <p className="text-sm text-gray-400 leading-relaxed">
