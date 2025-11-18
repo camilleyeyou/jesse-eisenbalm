@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ShoppingCart, Menu, X, ChevronRight, CheckCircle } from 'lucide-react';
 
 export default function EisenbalmShop() {
@@ -13,10 +13,9 @@ export default function EisenbalmShop() {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [orderDetails, setOrderDetails] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [isVerifying, setIsVerifying] = useState(false);
-  const [isPageReady, setIsPageReady] = useState(false); // NEW STATE
-
-  // ... (keep all your existing functions like parseExcerpt, verifyPayment, etc.)
+  const [isPageReady, setIsPageReady] = useState(false);
 
   const parseExcerpt = (text) => {
     if (!text) return text;
@@ -40,19 +39,8 @@ export default function EisenbalmShop() {
     });
   };
 
-  // Check for successful payment on page load
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const sessionId = urlParams.get('session_id');
-    
-    if (sessionId) {
-      verifyPayment(sessionId);
-      // Clean up URL without page reload
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-  }, []);
-
-  const verifyPayment = async (sessionId) => {
+  // FIXED: Define verifyPayment BEFORE the useEffect that uses it
+  const verifyPayment = useCallback(async (sessionId) => {
     setIsVerifying(true);
     try {
       const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'https://jesse-eisenbalm-server.vercel.app';
@@ -68,21 +56,31 @@ export default function EisenbalmShop() {
       if (data.status === 'paid') {
         setOrderDetails(data);
         setShowSuccessModal(true);
-        setCart([]); // Clear cart after successful payment
+        setCart([]);
       }
     } catch (error) {
       console.error('Error verifying payment:', error);
     } finally {
       setIsVerifying(false);
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Check for successful payment on page load
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session_id');
+    
+    if (sessionId) {
+      verifyPayment(sessionId);
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, [verifyPayment]);
 
   // Set up meta tags and preload video
   useEffect(() => {
-    // Update document title
     document.title = "Jesse A. Eisenbalm - Premium Lip Balm | Stay Human in an AI World";
     
-    // Update or create meta tags
     const setMetaTag = (name, content, isProperty = false) => {
       const attribute = isProperty ? 'property' : 'name';
       let meta = document.querySelector(`meta[${attribute}="${name}"]`);
@@ -96,13 +94,11 @@ export default function EisenbalmShop() {
       meta.setAttribute('content', content);
     };
 
-    // Primary Meta Tags
     setMetaTag('description', 'The only business lip balm that keeps you human in an AI world. Premium natural beeswax lip care with a mindful ritual. Limited Edition Release 001. Stop. Breathe. Balm. All proceeds go to charity.');
     setMetaTag('keywords', 'lip balm, premium lip care, natural beeswax, mindful ritual, Jesse Eisenbalm, luxury lip balm, human-first products, AI world, limited edition');
     setMetaTag('author', 'Jesse A. Eisenbalm');
     setMetaTag('robots', 'index, follow');
 
-    // Open Graph / Facebook
     setMetaTag('og:type', 'website', true);
     setMetaTag('og:url', window.location.href, true);
     setMetaTag('og:title', 'Jesse A. Eisenbalm - The Only Business Lip Balm That Keeps You Human', true);
@@ -112,14 +108,12 @@ export default function EisenbalmShop() {
     setMetaTag('og:image:height', '630', true);
     setMetaTag('og:site_name', 'Jesse A. Eisenbalm', true);
 
-    // Twitter
     setMetaTag('twitter:card', 'summary_large_image');
     setMetaTag('twitter:url', window.location.href);
     setMetaTag('twitter:title', 'Jesse A. Eisenbalm - Premium Lip Balm for Humans');
     setMetaTag('twitter:description', 'The only business lip balm that keeps you human in an AI world. Stop. Breathe. Balm. Limited Edition Release 001.');
     setMetaTag('twitter:image', `${window.location.origin}/images/products/eisenbalm-1.png`);
 
-    // Add canonical link
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
       canonical = document.createElement('link');
@@ -128,7 +122,6 @@ export default function EisenbalmShop() {
     }
     canonical.setAttribute('href', window.location.href);
 
-    // Add structured data for Product
     let productSchema = document.querySelector('#product-schema');
     if (!productSchema) {
       productSchema = document.createElement('script');
@@ -165,7 +158,6 @@ export default function EisenbalmShop() {
       }
     });
 
-    // Add structured data for Organization
     let orgSchema = document.querySelector('#organization-schema');
     if (!orgSchema) {
       orgSchema = document.createElement('script');
@@ -185,7 +177,6 @@ export default function EisenbalmShop() {
       ]
     });
 
-    // Preload video
     const videoPreload = document.createElement('link');
     videoPreload.rel = 'preload';
     videoPreload.as = 'video';
@@ -193,21 +184,18 @@ export default function EisenbalmShop() {
     document.head.appendChild(videoPreload);
 
     return () => {
-      // Cleanup preload link on unmount
       if (document.head.contains(videoPreload)) {
         document.head.removeChild(videoPreload);
       }
     };
   }, []);
 
-  // Add a "js-reveal" flag to <html> so we only hide elements when JS is active (prevents Chrome race).
   useEffect(() => {
     const html = document.documentElement;
     html.classList.add('js-reveal');
     return () => html.classList.remove('js-reveal');
   }, []);
 
-  // Smooth scroll handling + progress bar
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -217,13 +205,11 @@ export default function EisenbalmShop() {
       if (progressBar) progressBar.style.width = `${scrolled}%`;
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // initialize progress on mount
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // ---- NEW: rAF-based scroll reveal (Chrome-proof) ----
   useEffect(() => {
-    // 1) Mark containers vs. leaves so we never hide parents
     const all = Array.from(document.querySelectorAll('.scroll-reveal'));
     all.forEach((el) => {
       const isSection = el.tagName === 'SECTION' || el.classList.contains('scroll-snap-section');
@@ -231,13 +217,12 @@ export default function EisenbalmShop() {
       if (isSection || hasChildReveals) {
         el.classList.add('skip-reveal');
       } else {
-        el.classList.add('reveal-target'); // only leaves animate/hide
+        el.classList.add('reveal-target');
       }
     });
 
-    // 2) rAF loop to reveal when in viewport
     let ticking = false;
-    const threshold = 0.15; // 15% of viewport height
+    const threshold = 0.15;
     const check = () => {
       ticking = false;
       const vh = window.innerHeight || document.documentElement.clientHeight;
@@ -260,10 +245,8 @@ export default function EisenbalmShop() {
     };
     window.addEventListener('scroll', onScrollOrResize, { passive: true });
     window.addEventListener('resize', onScrollOrResize);
-    // Run once on mount
     requestAnimationFrame(check);
 
-    // 3) Safety: after 2s, force-show any stuck items
     const safety = setTimeout(() => {
       document.querySelectorAll('.reveal-target:not(.visible)').forEach((el) => {
         el.classList.add('visible');
@@ -276,7 +259,6 @@ export default function EisenbalmShop() {
       clearTimeout(safety);
     };
   }, []);
-  // ---- END rAF reveal ----
 
   const products = [
     {
@@ -290,7 +272,7 @@ export default function EisenbalmShop() {
        "/images/products/eisenbalm-3.png"
       ],
       description: "Limited Edition. Release 001. Hand numbered.",
-      features: ["Beeswax formula", "All-Day Hydration", "Daily Ritual", "Reminder of your humanity", "And mortality"],
+      features: ["Beeswax formula", "All-day hydration", "Daily ritual", "Reminder of your humanity", "And mortality"],
       volume: "4.5g / 0.15 oz"
     }
   ];
@@ -382,7 +364,6 @@ export default function EisenbalmShop() {
       scrollBehavior: 'smooth'
     }}>
       
-      {/* LOADING SCREEN - NEW */}
       {!isPageReady && (
         <div className="fixed inset-0 bg-black z-[10000] flex items-center justify-center">
           <div className="text-center">
@@ -397,7 +378,6 @@ export default function EisenbalmShop() {
         </div>
       )}
 
-      {/* Scroll Progress Indicator */}
       <div id="scroll-progress" className="scroll-progress"></div>
 
       <style>{`
@@ -430,13 +410,11 @@ export default function EisenbalmShop() {
           to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Default: visible (no-JS). Hidden state only when .js-reveal is on <html> */
         .scroll-reveal {
           opacity: 1;
           transform: none;
           transition: opacity 0.8s var(--je-transition-ease), transform 0.8s var(--je-transition-ease);
         }
-        /* Only HIDE leaf targets; never hide containers */
         .js-reveal .reveal-target {
           opacity: 0;
           transform: translateY(30px);
@@ -445,7 +423,6 @@ export default function EisenbalmShop() {
           opacity: 1 !important;
           transform: translateY(0) !important;
         }
-        /* Containers explicitly don't get hidden */
         .skip-reveal { opacity: 1 !important; transform: none !important; }
 
         .parallax-slow, .parallax-medium, .parallax-fast {
@@ -513,7 +490,6 @@ export default function EisenbalmShop() {
           transition: width 0.1s linear;
         }
 
-        /* Video loading optimization */
         .hero-video {
           opacity: 0;
           transition: opacity 0.5s ease-in;
@@ -530,10 +506,8 @@ export default function EisenbalmShop() {
           .scroll-reveal { -webkit-font-smoothing: antialiased; }
         }
 
-        /* Ensure all text is visible by default */
         p, h1, h2, h3, h4, h5, h6, span, a, button, div { opacity: 1; visibility: visible; }
 
-        /* Success Modal Styles */
         .success-modal-overlay {
           position: fixed;
           inset: 0;
@@ -604,7 +578,6 @@ export default function EisenbalmShop() {
         }
       `}</style>
 
-      {/* Success Modal */}
       {showSuccessModal && (
         <div className="success-modal-overlay" onClick={() => setShowSuccessModal(false)}>
           <div className="success-modal" onClick={(e) => e.stopPropagation()}>
@@ -662,7 +635,6 @@ export default function EisenbalmShop() {
         </div>
       )}
 
-      {/* Navigation */}
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-50 backdrop-blur-md bg-white/95" role="navigation" aria-label="Main navigation">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-center h-20">
@@ -685,6 +657,10 @@ export default function EisenbalmShop() {
                 </a>
                 <a href="#contact" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
                   CONTACT
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="/privacy-policy" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
+                  PRIVACY
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
                 </a>
               </div>
@@ -718,16 +694,16 @@ export default function EisenbalmShop() {
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 fade-in">
             <div className="px-6 py-6 space-y-6">
-              <a href="#product" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">PRODUCT</a>
-              <a href="#philosophy" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">PHILOSOPHY</a>
-              <a href="#journal" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">JOURNAL</a>
-              <a href="#contact" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">CONTACT</a>
+              <a href="#product" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>PRODUCT</a>
+              <a href="#philosophy" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>PHILOSOPHY</a>
+              <a href="#journal" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>JOURNAL</a>
+              <a href="#contact" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>CONTACT</a>
+              <a href="/privacy-policy" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">PRIVACY</a>
             </div>
           </div>
         )}
       </nav>
 
-      {/* Hero Section */}
       <section className="relative h-screen overflow-hidden flex items-center justify-center" role="banner">
         <div className="absolute inset-0 w-full h-full">
           <video
@@ -760,7 +736,7 @@ export default function EisenbalmShop() {
           </p>
 
           <p className="text-base md:text-lg text-white/80 mb-12 max-w-xl mx-auto font-light leading-relaxed">
-            A human-only ritual for an AI everywhere world. <br />
+            A human-only ritual for an AI-everywhere world. <br />
             Limited Edition.<br /> 
             Release 001. <br /> 
             All proceeds go to charity. 
@@ -775,11 +751,6 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
-      {/* Rest of your sections... (keep all the existing sections unchanged) */}
-      
-      {/* I'll include the rest below to maintain the complete file structure */}
-
-{/* Product Section */}
       <section id="product" className="py-24 px-6 bg-white scroll-reveal scroll-snap-section" itemScope itemType="https://schema.org/Product">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -787,7 +758,6 @@ export default function EisenbalmShop() {
               const currentImage = selectedImage[product.id] || product.images[0];
               return (
                 <React.Fragment key={product.id}>
-                  {/* Product Images */}
                   <div className="order-2 md:order-1 scale-on-scroll" style={{
                     transform: `scale(${0.95 + Math.min(scrollY * 0.0001, 0.05)})`
                   }}>
@@ -817,7 +787,6 @@ export default function EisenbalmShop() {
                     </div>
                   </div>
 
-                  {/* Product Info */}
                   <div className="order-1 md:order-2">
                     <div className="mb-8">
                       <p className="text-xs tracking-widest text-gray-500 mb-2">LIP CARE</p>
@@ -863,66 +832,64 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
-       {/* Journal/Blog Section */}
-        <section id="journal" className="py-24 px-6 bg-white scroll-snap-section scroll-reveal">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex justify-between items-end mb-16">
-              <div>
-                <p className="text-xs tracking-[0.2em] text-gray-500 mb-4"></p>
-                <h2 className="text-4xl md:text-5xl font-light tracking-tight">The Human Manifesto</h2>
-                <p className="text-lg text-gray-600 mt-4 max-w-xl">Thoughts on staying human in an increasingly automated world</p>
-              </div>
-              <button onClick={() => window.location.href='#journal'} className="text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors luxury-focus hidden md:block bg-transparent border-0 cursor-pointer">
-                
-              </button>
+      <section id="journal" className="py-24 px-6 bg-white scroll-snap-section scroll-reveal">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-end mb-16">
+            <div>
+              <p className="text-xs tracking-[0.2em] text-gray-500 mb-4"></p>
+              <h2 className="text-4xl md:text-5xl font-light tracking-tight">PRINCIPLES</h2>
+              <p className="text-lg text-gray-600 mt-4 max-w-xl">Thoughts on staying human in an increasingly automated world</p>
             </div>
-
-            <div className="grid md:grid-cols-3 gap-12">
-              {[
-                {
-                  image: "/images/grid/image-1.png",
-                  category: "PHILOSOPHY",
-                  title: "Why Rituals Matter in a Digital Age",
-                  excerpt: "In an era of automation and AI-generated everything, small acts of self-care become revolutionary. We explore why intentional, human-only rituals are more important than ever for maintaining our sense of self in a world that's increasingly asking us to behave like machines."
-                },
-                {
-                  image: "/images/grid/image-20.png",
-                  category: "INGREDIENTS OF LIFE",
-                  title: "Time to die",
-                  excerpt: "Let's face it, you're going to die some day. Lip Balm is the modern memento mori that walks you back home with smooth, moisturized lips."
-                },
-                {
-                  image: "https://images.unsplash.com/photo-1487260211189-670c54da558d?w=800&h=600&fit=crop",
-                  category: "CULTURE",
-                  title: "Time to Buy.",             
-                  excerpt: "You've read enough quippy AI copy. Let's get to the buying already. Push that button. Or this one [buy now]."
-                }
-              ].map((post, idx) => (
-                <article
-                  key={idx}
-                  className="group cursor-pointer clip-reveal scroll-reveal"
-                  style={{ transitionDelay: `${idx * 0.15}s` }}
-                >
-                  <div className="relative aspect-[4/3] mb-6 overflow-hidden bg-gray-100 image-reveal scroll-reveal">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                  <p className="text-xs tracking-[0.2em] text-gray-500 mb-3">{post.category}</p>
-                  <h3 className="text-xl font-light mb-3 group-hover:text-gray-600 transition-colors leading-tight">{post.title}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                    {parseExcerpt(post.excerpt)}
-                  </p>
-                  <p className="text-xs tracking-wide text-gray-400">{post.date}</p>
-                </article>
-              ))}
-            </div>
+            <button onClick={() => window.location.href='#journal'} className="text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors luxury-focus hidden md:block bg-transparent border-0 cursor-pointer">
+              
+            </button>
           </div>
-        </section>
 
-        {/* Testimonials Section */}
+          <div className="grid md:grid-cols-3 gap-12">
+            {[
+              {
+                image: "/images/grid/image-1.png",
+                category: "PHILOSOPHY",
+                title: "Why Rituals Matter in a Digital Age",
+                excerpt: "In an era of automation and AI-generated everything, small acts of self-care become revolutionary. We explore why intentional, human-only rituals are more important than ever for maintaining our sense of self in a world that's increasingly asking us to behave like machines."
+              },
+              {
+                image: "/images/grid/image-20.png",
+                category: "INGREDIENTS OF LIFE",
+                title: "Time to die",
+                excerpt: "Let's face it, you're going to die some day. Lip Balm is the modern memento mori that walks you back home with smooth, moisturized lips."
+              },
+              {
+                image: "https://images.unsplash.com/photo-1487260211189-670c54da558d?w=800&h=600&fit=crop",
+                category: "CULTURE",
+                title: "Time to Buy.",             
+                excerpt: "You've read enough quippy AI copy. Let's get to the buying already. Push that button. Or this one [buy now]."
+              }
+            ].map((post, idx) => (
+              <article
+                key={idx}
+                className="group cursor-pointer clip-reveal scroll-reveal"
+                style={{ transitionDelay: `${idx * 0.15}s` }}
+              >
+                <div className="relative aspect-[4/3] mb-6 overflow-hidden bg-gray-100 image-reveal scroll-reveal">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <p className="text-xs tracking-[0.2em] text-gray-500 mb-3">{post.category}</p>
+                <h3 className="text-xl font-light mb-3 group-hover:text-gray-600 transition-colors leading-tight">{post.title}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                  {parseExcerpt(post.excerpt)}
+                </p>
+                <p className="text-xs tracking-wide text-gray-400">{post.date}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-6 bg-black text-white scroll-snap-section scroll-reveal">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -976,7 +943,6 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
-      {/* Newsletter Section */}
       <section className="py-24 px-6 bg-gradient-to-br from-gray-50 to-white scroll-snap-section scroll-reveal">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8">
@@ -986,7 +952,7 @@ export default function EisenbalmShop() {
                Get exclusive access to new products, human-first philosophy essays, and the occasional absurdist thought experiment.
             </p>
             <p className="text-base text-gray-500">
-              We probably won't send any email but having yours makes us more valuable to the PE company that will buy anything AI related. But if you want to be anonymous, that's cool too. The lip balm is transparent; no one will know you've got it on. But you'll know. .
+              But if you want to be anonymous, that's cool too. The lip balm is transparent; no one will know you've got it on. But you'll know. .
             </p>
           </div>
 
@@ -1013,14 +979,11 @@ export default function EisenbalmShop() {
           </form>
 
           <p className="text-xs text-gray-500 leading-relaxed">
-            Join 12,847 professionals who start their week with our human-first insights.<br/>
             By subscribing, you agree to receive marketing emails. Unsubscribe anytime with one click.
           </p>
         </div>
       </section>
 
-
-       {/* Instagram Feed Section */}
       <section className="py-24 px-6 bg-white scroll-snap-section scroll-reveal">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -1066,10 +1029,6 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
-
-       
-
-      {/* Features Grid Section */}
       <section className="py-24 px-6 bg-gray-50 scroll-snap-section scroll-reveal">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -1099,11 +1058,6 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
-
-
-       
-
-      {/* Philosophy Section */}
       <section id="philosophy" className="py-24 px-6 relative overflow-hidden scroll-snap-section min-h-screen flex items-center">
         <div className="absolute inset-0 z-0">
           <div
@@ -1169,7 +1123,6 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
-      {/* Cart Sidebar */}
       {isCartOpen && (
         <div className="fixed inset-0 z-50 overflow-hidden">
           <div className="absolute inset-0 bg-black/30" onClick={() => setIsCartOpen(false)}></div>
@@ -1256,7 +1209,6 @@ export default function EisenbalmShop() {
         </div>
       )}
 
-      {/* Footer */}
       <footer id="contact" className="bg-black text-white py-16 px-6" role="contentinfo">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-12 mb-12">
@@ -1275,7 +1227,6 @@ export default function EisenbalmShop() {
               </div>
             </div>
 
-            
             <div>
               <h3 className="text-sm tracking-widest mb-6">PHILOSOPHY</h3>
               <p className="text-sm text-gray-400 leading-relaxed">
@@ -1284,8 +1235,16 @@ export default function EisenbalmShop() {
             </div>
           </div>
 
-          <div className="border-t border-gray-800 pt-8 text-center">
+          <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-xs text-gray-500 tracking-widest">© 2025 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
+            <div className="flex gap-6">
+              <a 
+                href="/privacy-policy" 
+                className="text-xs text-gray-500 hover:text-white transition tracking-widest"
+              >
+                PRIVACY POLICY
+              </a>
+            </div>
           </div>
         </div>
       </footer>
