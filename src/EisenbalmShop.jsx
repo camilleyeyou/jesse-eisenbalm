@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { ShoppingCart, Menu, X, ChevronRight, CheckCircle } from 'lucide-react';
 
 export default function EisenbalmShop() {
@@ -628,26 +629,29 @@ export default function EisenbalmShop() {
                 >
                   CONTACT US
                 </button>
-
-                
               </div>
             </div>
           </div>
         </div>
       )}
 
+      {/* Navigation */}
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-50 backdrop-blur-md bg-white/95" role="navigation" aria-label="Main navigation">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-12">
-              <h1 className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
+              <Link to="/" className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
                 JESSE A. EISENBALM
-              </h1>
+              </Link>
               <div className="hidden md:flex space-x-8">
                 <a href="#product" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
                   PRODUCT
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
                 </a>
+                <Link to="/about" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
+                  ABOUT
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
+                </Link>
                 <a href="#philosophy" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
                   PHILOSOPHY
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
@@ -660,15 +664,10 @@ export default function EisenbalmShop() {
                   CONTACT
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <a href="/privacy-policy" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
+                <Link to="/privacy-policy" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
                   PRIVACY
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
-                </a>
-
-                <a href="/about" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
-                  ABOUT
-                 <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -697,20 +696,22 @@ export default function EisenbalmShop() {
           </div>
         </div>
 
+        {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 fade-in">
             <div className="px-6 py-6 space-y-6">
               <a href="#product" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>PRODUCT</a>
+              <Link to="/about" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>ABOUT</Link>
               <a href="#philosophy" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>PHILOSOPHY</a>
               <a href="#journal" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>JOURNAL</a>
               <a href="#contact" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>CONTACT</a>
-              <a href="/privacy-policy" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">PRIVACY</a>
-              <a href="/about" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>ABOUT</a>
+              <Link to="/privacy-policy" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>PRIVACY</Link>
             </div>
           </div>
         )}
       </nav>
 
+      {/* Hero Section */}
       <section className="relative h-screen overflow-hidden flex items-center justify-center" role="banner">
         <div className="absolute inset-0 w-full h-full">
           <video
@@ -758,6 +759,7 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
+      {/* Product Section */}
       <section id="product" className="py-24 px-6 bg-white scroll-reveal scroll-snap-section" itemScope itemType="https://schema.org/Product">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -839,6 +841,7 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
+      {/* Journal/Principles Section */}
       <section id="journal" className="py-24 px-6 bg-white scroll-snap-section scroll-reveal">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-end mb-16">
@@ -847,9 +850,6 @@ export default function EisenbalmShop() {
               <h2 className="text-4xl md:text-5xl font-light tracking-tight">PRINCIPLES</h2>
               <p className="text-lg text-gray-600 mt-4 max-w-xl">Thoughts on staying human in an increasingly automated world</p>
             </div>
-            <button onClick={() => window.location.href='#journal'} className="text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors luxury-focus hidden md:block bg-transparent border-0 cursor-pointer">
-              
-            </button>
           </div>
 
           <div className="grid md:grid-cols-3 gap-12">
@@ -897,6 +897,7 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
       <section className="py-24 px-6 bg-black text-white scroll-snap-section scroll-reveal">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -950,6 +951,7 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
+      {/* Newsletter Section */}
       <section className="py-24 px-6 bg-gradient-to-br from-gray-50 to-white scroll-snap-section scroll-reveal">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8">
@@ -959,7 +961,7 @@ export default function EisenbalmShop() {
                Get exclusive access to new products, human-first philosophy essays, and the occasional absurdist thought experiment.
             </p>
             <p className="text-base text-gray-500">
-              But if you want to be anonymous, that's cool too. The lip balm is transparent; no one will know you've got it on. But you'll know. .
+              But if you want to be anonymous, that's cool too. The lip balm is transparent; no one will know you've got it on. But you'll know.
             </p>
           </div>
 
@@ -991,6 +993,7 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
+      {/* Instagram Grid Section */}
       <section className="py-24 px-6 bg-white scroll-snap-section scroll-reveal">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -1036,18 +1039,19 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
+      {/* Features Section */}
       <section className="py-24 px-6 bg-gray-50 scroll-snap-section scroll-reveal">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">WHY CHOOSE US</p>
-            <h3 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Crafted for the human Experience.</h3>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Every detail matters when you're creating moments of presence in an automated world </p>
+            <h3 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Crafted for the Human Experience.</h3>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Every detail matters when you're creating moments of presence in an automated world</p>
           </div>
 
           <div className="grid md:grid-cols-4 gap-8">
             {[
               { icon: "🌿", title: "Pure Beeswax", desc: "Good stuff to soothe your lips and moisturize your mind." },
-              { icon: "⏰", title: "Time Tested", desc: "The only balm to keep moisture in and slop out ." },
+              { icon: "⏰", title: "Time Tested", desc: "The only balm to keep moisture in and slop out." },
               { icon: "📍", title: "Ethically Made", desc: "No art was plagiarized to make this product. (Except the marketing materials, those have a little plagiarism in them.)" },
               { icon: "✨", title: "Limited Edition", desc: "Individually numbered exclusively online offer." }
             ].map((feature, idx) => (
@@ -1065,6 +1069,7 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
+      {/* Philosophy Section */}
       <section id="philosophy" className="py-24 px-6 relative overflow-hidden scroll-snap-section min-h-screen flex items-center">
         <div className="absolute inset-0 z-0">
           <div
@@ -1088,8 +1093,6 @@ export default function EisenbalmShop() {
           <div className="text-center mb-16">
             <p className="text-xs tracking-widest text-white/70 mb-4">PHILOSOPHY</p>
             <h2 className="text-5xl md:text-6xl font-light mb-8 tracking-tight">The Human Ritual</h2>
-            <p className="text-xl text-white/80 italic max-w-3xl mx-auto leading-relaxed font-light">
-            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-12 mb-16">
@@ -1119,8 +1122,6 @@ export default function EisenbalmShop() {
           </div>
 
           <div className="max-w-3xl mx-auto text-center">
-            <p className="text-lg leading-relaxed text-white/80 mb-8 font-light">
-            </p>
             <div className="border-t border-white/20 pt-8">
               <p className="text-2xl font-light italic text-white/90 leading-relaxed">
                 "The only business lip balm that keeps you human in an AI world."
@@ -1130,6 +1131,7 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
+      {/* Cart Sidebar */}
       {isCartOpen && (
         <div className="fixed inset-0 z-50 overflow-hidden">
           <div className="absolute inset-0 bg-black/30" onClick={() => setIsCartOpen(false)}></div>
@@ -1216,13 +1218,14 @@ export default function EisenbalmShop() {
         </div>
       )}
 
+      {/* Footer */}
       <footer id="contact" className="bg-black text-white py-16 px-6" role="contentinfo">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-12 mb-12">
             <div>
               <h3 className="text-sm tracking-widest mb-6">CONTACT</h3>
               <p className="text-sm text-gray-400 leading-relaxed">
-                For inquiries, please reach out through our linkedin page or email us.
+                For inquiries, please reach out through our LinkedIn page or email us.
               </p>
             </div>
 
@@ -1245,12 +1248,12 @@ export default function EisenbalmShop() {
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-xs text-gray-500 tracking-widest">© 2025 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
             <div className="flex gap-6">
-              <a 
-                href="/privacy-policy" 
-                className="text-xs text-gray-500 hover:text-white transition tracking-widest"
-              >
+              <Link to="/about" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
+                ABOUT
+              </Link>
+              <Link to="/privacy-policy" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
                 PRIVACY POLICY
-              </a>
+              </Link>
             </div>
           </div>
         </div>
