@@ -39,7 +39,6 @@ export default function EisenbalmShop() {
     });
   };
 
-  // FIXED: Define verifyPayment BEFORE the useEffect that uses it
   const verifyPayment = useCallback(async (sessionId) => {
     setIsVerifying(true);
     try {
@@ -629,6 +628,8 @@ export default function EisenbalmShop() {
                 >
                   CONTACT US
                 </button>
+
+                
               </div>
             </div>
           </div>
@@ -662,6 +663,11 @@ export default function EisenbalmShop() {
                 <a href="/privacy-policy" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
                   PRIVACY
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
+                </a>
+
+                <a href="/about" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
+                  ABOUT
+                 <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
                 </a>
               </div>
             </div>
@@ -699,6 +705,7 @@ export default function EisenbalmShop() {
               <a href="#journal" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>JOURNAL</a>
               <a href="#contact" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>CONTACT</a>
               <a href="/privacy-policy" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">PRIVACY</a>
+              <a href="/about" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>ABOUT</a>
             </div>
           </div>
         )}
