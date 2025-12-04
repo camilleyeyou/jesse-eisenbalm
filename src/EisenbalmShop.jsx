@@ -57,9 +57,11 @@ export default function EisenbalmShop() {
         setOrderDetails(data);
         setShowSuccessModal(true);
         setCart([]);
+        setIsPageReady(true); // Dismiss loading screen when payment is verified
       }
     } catch (error) {
       console.error('Error verifying payment:', error);
+      setIsPageReady(true); // Also dismiss on error so user isn't stuck
     } finally {
       setIsVerifying(false);
     }
@@ -513,7 +515,7 @@ export default function EisenbalmShop() {
           inset: 0;
           background: rgba(0, 0, 0, 0.5);
           backdrop-filter: blur(4px);
-          z-index: 9999;
+          z-index: 10001;
           display: flex;
           align-items: center;
           justify-content: center;
