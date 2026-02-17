@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { ShoppingCart, Menu, X, ChevronRight, CheckCircle } from 'lucide-react';
 
 export default function EisenbalmShop() {
@@ -16,7 +17,10 @@ export default function EisenbalmShop() {
   const [orderDetails, setOrderDetails] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [isVerifying, setIsVerifying] = useState(false);
-  const [isPageReady, setIsPageReady] = useState(false);
+  const [isPageReady, setIsPageReady] = useState(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return !urlParams.get('session_id');
+  });
 
   const parseExcerpt = (text) => {
     if (!text) return text;
@@ -79,106 +83,8 @@ export default function EisenbalmShop() {
     }
   }, [verifyPayment]);
 
-  // Set up meta tags and preload video
+  // Preload video
   useEffect(() => {
-    document.title = "Jesse A. Eisenbalm - Premium Lip Balm | Stay Human in an AI World";
-    
-    const setMetaTag = (name, content, isProperty = false) => {
-      const attribute = isProperty ? 'property' : 'name';
-      let meta = document.querySelector(`meta[${attribute}="${name}"]`);
-      
-      if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute(attribute, name);
-        document.head.appendChild(meta);
-      }
-      
-      meta.setAttribute('content', content);
-    };
-
-    setMetaTag('description', 'The only business lip balm that keeps you human in an AI world. Premium natural beeswax lip care with a mindful ritual. Limited Edition Release 001. Stop. Breathe. Balm. All proceeds go to charity.');
-    setMetaTag('keywords', 'lip balm, premium lip care, natural beeswax, mindful ritual, Jesse Eisenbalm, luxury lip balm, human-first products, AI world, limited edition');
-    setMetaTag('author', 'Jesse A. Eisenbalm');
-    setMetaTag('robots', 'index, follow');
-
-    setMetaTag('og:type', 'website', true);
-    setMetaTag('og:url', window.location.href, true);
-    setMetaTag('og:title', 'Jesse A. Eisenbalm - The Only Business Lip Balm That Keeps You Human', true);
-    setMetaTag('og:description', 'Premium natural lip balm with a mindful ritual for the modern professional. Stop. Breathe. Balm. Limited Edition Release 001 - All proceeds go to charity.', true);
-    setMetaTag('og:image', `${window.location.origin}/images/products/eisenbalm-1.png`, true);
-    setMetaTag('og:image:width', '1200', true);
-    setMetaTag('og:image:height', '630', true);
-    setMetaTag('og:site_name', 'Jesse A. Eisenbalm', true);
-
-    setMetaTag('twitter:card', 'summary_large_image');
-    setMetaTag('twitter:url', window.location.href);
-    setMetaTag('twitter:title', 'Jesse A. Eisenbalm - Premium Lip Balm for Humans');
-    setMetaTag('twitter:description', 'The only business lip balm that keeps you human in an AI world. Stop. Breathe. Balm. Limited Edition Release 001.');
-    setMetaTag('twitter:image', `${window.location.origin}/images/products/eisenbalm-1.png`);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', window.location.href);
-
-    let productSchema = document.querySelector('#product-schema');
-    if (!productSchema) {
-      productSchema = document.createElement('script');
-      productSchema.id = 'product-schema';
-      productSchema.type = 'application/ld+json';
-      document.head.appendChild(productSchema);
-    }
-    productSchema.textContent = JSON.stringify({
-      "@context": "https://schema.org/",
-      "@type": "Product",
-      "name": "Jesse A. Eisenbalm - The Original",
-      "image": [
-        `${window.location.origin}/images/products/eisenbalm-1.png`,
-        `${window.location.origin}/images/products/eisenbalm-2.png`,
-        `${window.location.origin}/images/products/eisenbalm-3.png`
-      ],
-      "description": "Premium natural beeswax lip balm with mindful ritual. Limited Edition Release 001. Hand numbered. The only business lip balm that keeps you human in an AI world.",
-      "brand": {
-        "@type": "Brand",
-        "name": "Jesse A. Eisenbalm"
-      },
-      "offers": {
-        "@type": "Offer",
-        "url": `${window.location.origin}/#product`,
-        "priceCurrency": "USD",
-        "price": "8.99",
-        "availability": "https://schema.org/InStock",
-        "itemCondition": "https://schema.org/NewCondition"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5",
-        "reviewCount": "247"
-      }
-    });
-
-    let orgSchema = document.querySelector('#organization-schema');
-    if (!orgSchema) {
-      orgSchema = document.createElement('script');
-      orgSchema.id = 'organization-schema';
-      orgSchema.type = 'application/ld+json';
-      document.head.appendChild(orgSchema);
-    }
-    orgSchema.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Jesse A. Eisenbalm",
-      "url": window.location.origin,
-      "logo": `${window.location.origin}/images/products/eisenbalm-1.png`,
-      "description": "Premium natural lip care for humans. The only business lip balm that keeps you human in an AI world.",
-      "sameAs": [
-        "https://www.linkedin.com/company/108396769/"
-      ]
-    });
-
     const videoPreload = document.createElement('link');
     videoPreload.rel = 'preload';
     videoPreload.as = 'video';
@@ -365,7 +271,66 @@ export default function EisenbalmShop() {
       '--je-transition-ease': 'cubic-bezier(0.4, 0, 0.2, 1)',
       scrollBehavior: 'smooth'
     }}>
-      
+
+      <Helmet>
+        <title>Jesse A. Eisenbalm | Natural Beeswax Lip Balm | Stay Human</title>
+        <meta name="description" content="Premium natural beeswax lip balm. Hand-numbered, limited edition. The only business lip balm that keeps you human in an AI world. $8.99. All proceeds to charity." />
+        <meta name="keywords" content="beeswax lip balm, premium lip balm, natural lip care, mindful skincare, Jesse Eisenbalm, luxury lip balm, limited edition, human ritual" />
+        <meta name="author" content="Jesse A. Eisenbalm" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://jesseaeisenbalm.com/" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://jesseaeisenbalm.com/" />
+        <meta property="og:title" content="Jesse A. Eisenbalm - The Only Business Lip Balm That Keeps You Human" />
+        <meta property="og:description" content="Premium natural beeswax lip balm with a mindful ritual. Limited Edition Release 001. $8.99. Stop. Breathe. Balm. All proceeds go to charity." />
+        <meta property="og:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="Jesse A. Eisenbalm" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Jesse A. Eisenbalm - Premium Lip Balm for Humans" />
+        <meta name="twitter:description" content="The only business lip balm that keeps you human in an AI world. Limited Edition. $8.99. Stop. Breathe. Balm." />
+        <meta name="twitter:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.png" />
+
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org/",
+          "@type": "Product",
+          "name": "Jesse A. Eisenbalm - The Original",
+          "image": [
+            "https://jesseaeisenbalm.com/images/products/eisenbalm-1.png",
+            "https://jesseaeisenbalm.com/images/products/eisenbalm-2.png",
+            "https://jesseaeisenbalm.com/images/products/eisenbalm-3.png"
+          ],
+          "description": "Premium natural beeswax lip balm with mindful ritual. Limited Edition Release 001. Hand numbered. The only business lip balm that keeps you human in an AI world. 4.5g / 0.15 oz.",
+          "brand": { "@type": "Brand", "name": "Jesse A. Eisenbalm" },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://jesseaeisenbalm.com/#product",
+            "priceCurrency": "USD",
+            "price": "8.99",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "reviewCount": "247"
+          }
+        })}</script>
+
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Jesse A. Eisenbalm",
+          "url": "https://jesseaeisenbalm.com",
+          "logo": "https://jesseaeisenbalm.com/images/products/eisenbalm-1.png",
+          "description": "Premium natural lip care for humans. The only business lip balm that keeps you human in an AI world. Stop. Breathe. Balm.",
+          "sameAs": ["https://www.linkedin.com/company/108396769/"]
+        })}</script>
+      </Helmet>
+
       {!isPageReady && (
         <div className="fixed inset-0 bg-black z-[10000] flex items-center justify-center">
           <div className="text-center">
@@ -666,6 +631,10 @@ export default function EisenbalmShop() {
                   CONTACT
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
                 </a>
+                <Link to="/faq" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
+                  FAQ
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
+                </Link>
                 <Link to="/privacy-policy" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
                   PRIVACY
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
@@ -707,6 +676,7 @@ export default function EisenbalmShop() {
               <a href="#philosophy" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>PHILOSOPHY</a>
               <a href="#journal" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>JOURNAL</a>
               <a href="#contact" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>CONTACT</a>
+              <Link to="/faq" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>FAQ</Link>
               <Link to="/privacy-policy" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>PRIVACY</Link>
             </div>
           </div>
@@ -737,9 +707,9 @@ export default function EisenbalmShop() {
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
-          <h2 className="text-7xl md:text-9xl font-light text-white mb-8 tracking-tight leading-none">
+          <h1 className="text-7xl md:text-9xl font-light text-white mb-8 tracking-tight leading-none">
             ARE THESE<br />MY REAL LIPS?
-          </h2>
+          </h1>
 
           <p className="text-xl md:text-2xl text-white/90 mb-4 font-light tracking-widest">
             STOP. BREATHE. BALM.
@@ -775,7 +745,7 @@ export default function EisenbalmShop() {
                     <div className="relative aspect-square bg-gray-50 mb-4 overflow-hidden image-reveal scroll-reveal">
                       <img
                         src={currentImage}
-                        alt="Jesse A. Eisenbalm - Premium natural beeswax lip balm"
+                        alt="Jesse A. Eisenbalm premium beeswax lip balm tube - Limited Edition Release 001"
                         className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                         itemProp="image"
                       />
@@ -792,7 +762,7 @@ export default function EisenbalmShop() {
                           style={{ transitionDelay: `${idx * 0.1}s` }}
                           aria-label={`View product image ${idx + 1}`}
                         >
-                          <img src={img} alt={`Product view ${idx + 1}`} className="w-full h-full object-cover" />
+                          <img src={img} alt={`Jesse A. Eisenbalm lip balm - angle ${idx + 1} of 3`} className="w-full h-full object-cover" />
                         </button>
                       ))}
                     </div>
@@ -1005,14 +975,14 @@ export default function EisenbalmShop() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              "/images/grid/image-1.png",
-              "/images/grid/image-2.png",
-              "/images/grid/image-3.png",
-              "/images/grid/image-4.png",
-              "/images/grid/image-5.png",
-              "/images/grid/image-6.png",
-              "/images/grid/image-7.png",
-              "/images/grid/image-8.png"
+              { src: "/images/grid/image-1.png", alt: "Jesse A. Eisenbalm lip balm in minimalist setting" },
+              { src: "/images/grid/image-2.png", alt: "Premium beeswax lip balm close-up texture" },
+              { src: "/images/grid/image-3.png", alt: "Applying Jesse A. Eisenbalm as daily ritual" },
+              { src: "/images/grid/image-4.png", alt: "Limited edition lip balm packaging detail" },
+              { src: "/images/grid/image-5.png", alt: "Natural beeswax lip balm product shot" },
+              { src: "/images/grid/image-6.png", alt: "Jesse A. Eisenbalm lifestyle product photo" },
+              { src: "/images/grid/image-7.png", alt: "Hand-numbered lip balm tube detail" },
+              { src: "/images/grid/image-8.png", alt: "Stop Breathe Balm mindfulness moment" }
             ].map((img, idx) => (
               <div
                 key={idx}
@@ -1020,8 +990,8 @@ export default function EisenbalmShop() {
                 style={{ transitionDelay: `${idx * 0.05}s` }}
               >
                 <img
-                  src={img}
-                  alt={`Jesse Eisenbalm lifestyle ${idx + 1}`}
+                  src={img.src}
+                  alt={img.alt}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
@@ -1080,7 +1050,7 @@ export default function EisenbalmShop() {
           >
             <img
               src="/images/backgrounds/about-bg.jpg"
-              alt="Background"
+              alt="Jesse A. Eisenbalm philosophy - Stay human in an AI world"
               className="w-full h-full object-cover"
               style={{
                 transform: `scale(${1.1 + Math.min(scrollY * 0.00005, 0.1)})`,
@@ -1248,10 +1218,13 @@ export default function EisenbalmShop() {
           </div>
 
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-gray-500 tracking-widest">© 2025 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
+            <p className="text-xs text-gray-500 tracking-widest">© 2026 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
             <div className="flex gap-6">
               <Link to="/about" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
                 ABOUT
+              </Link>
+              <Link to="/faq" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
+                FAQ
               </Link>
               <Link to="/privacy-policy" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
                 PRIVACY POLICY

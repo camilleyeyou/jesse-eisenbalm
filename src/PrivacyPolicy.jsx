@@ -1,29 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Menu, X, ArrowLeft } from 'lucide-react';
 
 export default function PrivacyPolicy() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
-  useEffect(() => {
-    document.title = "Privacy Policy - Jesse A. Eisenbalm | Your Privacy Matters";
-    
-    const setMetaTag = (name, content, isProperty = false) => {
-      const attribute = isProperty ? 'property' : 'name';
-      let meta = document.querySelector(`meta[${attribute}="${name}"]`);
-      if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute(attribute, name);
-        document.head.appendChild(meta);
-      }
-      meta.setAttribute('content', content);
-    };
-
-    setMetaTag('description', 'Privacy Policy for Jesse A. Eisenbalm - Learn how we protect your data and respect your privacy.');
-    setMetaTag('og:title', 'Privacy Policy - Jesse A. Eisenbalm', true);
-    setMetaTag('og:description', 'Your privacy matters. Learn how we collect, use, and protect your information.', true);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -235,7 +218,22 @@ export default function PrivacyPolicy() {
       '--je-transition-ease': 'cubic-bezier(0.4, 0, 0.2, 1)',
       scrollBehavior: 'smooth'
     }}>
-      
+
+      <Helmet>
+        <title>Privacy Policy - Jesse A. Eisenbalm | Your Privacy Matters</title>
+        <meta name="description" content="Privacy Policy for Jesse A. Eisenbalm. Learn how we protect your data and respect your privacy when you shop for premium lip balm." />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://jesseaeisenbalm.com/privacy-policy" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://jesseaeisenbalm.com/privacy-policy" />
+        <meta property="og:title" content="Privacy Policy - Jesse A. Eisenbalm" />
+        <meta property="og:description" content="Your privacy matters. Learn how we collect, use, and protect your information." />
+        <meta property="og:site_name" content="Jesse A. Eisenbalm" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Privacy Policy - Jesse A. Eisenbalm" />
+        <meta name="twitter:description" content="Your privacy matters. Learn how we collect, use, and protect your information." />
+      </Helmet>
+
       <div id="scroll-progress" className="scroll-progress"></div>
 
       <style>{`
@@ -340,6 +338,10 @@ export default function PrivacyPolicy() {
                   CONTACT
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
                 </Link>
+                <Link to="/faq" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 relative group">
+                  FAQ
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
+                </Link>
                 <span className="text-sm tracking-[0.15em] text-black relative">
                   PRIVACY
                   <span className="absolute bottom-0 left-0 w-full h-px bg-black"></span>
@@ -365,6 +367,7 @@ export default function PrivacyPolicy() {
               <Link to="/#philosophy" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">PHILOSOPHY</Link>
               <Link to="/#journal" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">JOURNAL</Link>
               <Link to="/#contact" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">CONTACT</Link>
+              <Link to="/faq" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">FAQ</Link>
               <span className="block text-sm tracking-[0.15em] text-black">PRIVACY</span>
             </div>
           </div>
@@ -483,13 +486,16 @@ export default function PrivacyPolicy() {
           </div>
 
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-gray-500 tracking-widest">© 2025 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
+            <p className="text-xs text-gray-500 tracking-widest">© 2026 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
             <div className="flex gap-6">
               <Link to="/" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
                 HOME
               </Link>
               <Link to="/about" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
                 ABOUT
+              </Link>
+              <Link to="/faq" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
+                FAQ
               </Link>
             </div>
           </div>

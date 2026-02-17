@@ -1,28 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Menu, X, ArrowLeft } from 'lucide-react';
 
 export default function AboutPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
-  useEffect(() => {
-    document.title = "About - Jesse A. Eisenbalm | Meet Our AI Marketing Team";
-    
-    const setMetaTag = (name, content, isProperty = false) => {
-      const attribute = isProperty ? 'property' : 'name';
-      let meta = document.querySelector(`meta[${attribute}="${name}"]`);
-      if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute(attribute, name);
-        document.head.appendChild(meta);
-      }
-      meta.setAttribute('content', content);
-    };
-
-    setMetaTag('description', 'Meet the AI marketing team behind Jesse A. Eisenbalm - premium lip balm marketed by AI agents instructing humans how to remember their humanity.');
-    setMetaTag('og:title', 'About Jesse A. Eisenbalm - Our AI Marketing Team', true);
-    setMetaTag('og:description', 'Premium lip balm, marketed by AI agents instructing humans how best to remember their humanity.', true);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -111,7 +94,24 @@ export default function AboutPage() {
       '--je-transition-ease': 'cubic-bezier(0.4, 0, 0.2, 1)',
       scrollBehavior: 'smooth'
     }}>
-      
+
+      <Helmet>
+        <title>About Jesse A. Eisenbalm | Meet Our AI Marketing Team</title>
+        <meta name="description" content="Meet the AI marketing team behind Jesse A. Eisenbalm. Premium lip balm marketed by AI agents instructing humans how to remember their humanity." />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://jesseaeisenbalm.com/about" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://jesseaeisenbalm.com/about" />
+        <meta property="og:title" content="About Jesse A. Eisenbalm - Our AI Marketing Team" />
+        <meta property="og:description" content="Premium lip balm, marketed by AI agents instructing humans how best to remember their humanity." />
+        <meta property="og:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.png" />
+        <meta property="og:site_name" content="Jesse A. Eisenbalm" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Jesse A. Eisenbalm - Our AI Marketing Team" />
+        <meta name="twitter:description" content="Premium lip balm, marketed by AI agents instructing humans how best to remember their humanity." />
+        <meta name="twitter:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.png" />
+      </Helmet>
+
       <div id="scroll-progress" className="scroll-progress"></div>
 
       <style>{`
@@ -218,6 +218,10 @@ export default function AboutPage() {
                   CONTACT
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
                 </a>
+                <a href="/faq" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 relative group">
+                  FAQ
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
+                </a>
               </div>
             </div>
 
@@ -239,6 +243,7 @@ export default function AboutPage() {
               <a href="/#philosophy" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">PHILOSOPHY</a>
               <a href="/#journal" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">JOURNAL</a>
               <a href="/#contact" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">CONTACT</a>
+              <a href="/faq" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">FAQ</a>
             </div>
           </div>
         )}
@@ -389,8 +394,11 @@ export default function AboutPage() {
           </div>
 
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-gray-500 tracking-widest">© 2025 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
+            <p className="text-xs text-gray-500 tracking-widest">© 2026 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
             <div className="flex gap-6">
+              <a href="/faq" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
+                FAQ
+              </a>
               <a href="/privacy-policy" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
                 PRIVACY POLICY
               </a>
