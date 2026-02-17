@@ -18,7 +18,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && react-snap",
+    "build": "react-scripts build",
+    "postbuild": "react-snap || echo 'react-snap skipped (no Chrome available)'",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
