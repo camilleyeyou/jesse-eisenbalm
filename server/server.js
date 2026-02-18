@@ -2,6 +2,33 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { createClient } = require('@supabase/supabase-js');
+
+// Supabase client (server-side, uses service role key)
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY
+);
+
+// API key auth middleware for blog write routes
+function requireApiKey(req, res, next) {
+  const key = req.headers['x-api-key'];
+  if (!key || key !== process.env.BLOG_API_KEY) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  next();
+}
+
+// Generate URL-safe slug from title
+function generateSlug(title) {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_]+/g, '-')
+    .replace(/--+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
 
 const app = express();
 
@@ -21,7 +48,7 @@ app.use(cors({
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-api-key']
 }));
 
 app.use(express.json());
@@ -102,6 +129,92 @@ app.get('/verify-session/:sessionId', async (req, res) => {
     });
   } catch (error) {
     console.error('❌ Error verifying session:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// --- Blog API ---
+
+// GET /api/posts — list all published posts (public)
+app.get('/api/posts', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('posts')
+      .select('id, title, slug, excerpt, author, cover_image, tags, created_at')
+      .eq('published', true)
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    res.json({ posts: data });
+  } catch (error) {
+    console.error('❌ Error fetching posts:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// GET /api/posts/:slug — single published post (public)
+app.get('/api/posts/:slug', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('posts')
+      .select('*')
+      .eq('slug', req.params.slug)
+      .eq('published', true)
+      .single();
+
+    if (error) {
+      if (error.code === 'PGRST116') return res.status(404).json({ error: 'Post not found' });
+      throw error;
+    }
+    res.json({ post: data });
+  } catch (error) {
+    console.error('❌ Error fetching post:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// POST /api/posts — create a post (API key required)
+app.post('/api/posts', requireApiKey, async (req, res) => {
+  try {
+    const {
+      title,
+      content,
+      excerpt,
+      author = 'Jesse A. Eisenbalm',
+      cover_image,
+      tags,
+      published = false,
+    } = req.body;
+
+    if (!title) return res.status(400).json({ error: 'title is required' });
+
+    // Generate unique slug
+    let slug = generateSlug(title);
+    const { data: existing } = await supabase
+      .from('posts')
+      .select('slug')
+      .like('slug', `${slug}%`);
+
+    if (existing?.length) {
+      const slugs = existing.map(r => r.slug);
+      if (slugs.includes(slug)) {
+        let i = 1;
+        while (slugs.includes(`${slug}-${i}`)) i++;
+        slug = `${slug}-${i}`;
+      }
+    }
+
+    const { data, error } = await supabase
+      .from('posts')
+      .insert([{ title, slug, content, excerpt, author, cover_image, tags, published }])
+      .select()
+      .single();
+
+    if (error) throw error;
+    console.log('✅ Blog post created:', data.slug);
+    res.status(201).json({ post: data });
+  } catch (error) {
+    console.error('❌ Error creating post:', error);
     res.status(500).json({ error: error.message });
   }
 });

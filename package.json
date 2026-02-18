@@ -42,7 +42,7 @@
     ]
   },
   "reactSnap": {
-    "include": ["/", "/about", "/privacy-policy", "/faq"],
+    "include": ["/", "/about", "/privacy-policy", "/faq", "/blog"],
     "skipThirdPartyRequests": true
   },
   "devDependencies": {
