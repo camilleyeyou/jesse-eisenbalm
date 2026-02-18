@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const multer = require('multer');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { createClient } = require('@supabase/supabase-js');
 
@@ -230,9 +231,48 @@ app.post('/api/posts', requireApiKey, async (req, res) => {
 
 // --- Admin UI API (password-protected, for browser admin page) ---
 
+// Multer — memory storage for image uploads (max 10MB, images only)
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 10 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith('image/')) cb(null, true);
+    else cb(new Error('Only image files are allowed'));
+  },
+});
+
 // POST /api/admin/auth — verify admin password (no secrets in response)
 app.post('/api/admin/auth', requireAdminPassword, (req, res) => {
   res.json({ ok: true });
+});
+
+// POST /api/admin/upload — upload cover image to Supabase Storage
+app.post('/api/admin/upload', requireAdminPassword, upload.single('file'), async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).json({ error: 'No file provided' });
+
+    const ext = req.file.mimetype.split('/')[1].replace('jpeg', 'jpg');
+    const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+
+    const { data, error } = await supabase.storage
+      .from('post-images')
+      .upload(filename, req.file.buffer, {
+        contentType: req.file.mimetype,
+        upsert: false,
+      });
+
+    if (error) throw error;
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('post-images')
+      .getPublicUrl(data.path);
+
+    console.log('✅ Image uploaded:', publicUrl);
+    res.json({ url: publicUrl });
+  } catch (error) {
+    console.error('❌ Error uploading image:', error);
+    res.status(500).json({ error: error.message });
+  }
 });
 
 // POST /api/admin/posts — create post via browser admin UI

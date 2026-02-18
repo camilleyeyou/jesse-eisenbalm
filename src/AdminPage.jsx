@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, Eye, EyeOff, Upload, X } from 'lucide-react';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'https://jesse-eisenbalm-server.vercel.app';
 
@@ -34,6 +34,9 @@ export default function AdminPage() {
   });
 
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState('');
+  const [imageUploading, setImageUploading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState('');
@@ -78,6 +81,20 @@ export default function AdminPage() {
     setForm(f => ({ ...f, [name]: type === 'checkbox' ? checked : value }));
   }
 
+  function handleImageChange(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    setImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
+    setForm(f => ({ ...f, cover_image: '' }));
+  }
+
+  function clearImage() {
+    setImageFile(null);
+    setImagePreview('');
+    setForm(f => ({ ...f, cover_image: '' }));
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
@@ -91,6 +108,26 @@ export default function AdminPage() {
 
     setSubmitting(true);
     try {
+      // Upload image first if one was selected
+      let cover_image = form.cover_image || undefined;
+      if (imageFile) {
+        setImageUploading(true);
+        const formData = new FormData();
+        formData.append('file', imageFile);
+        const uploadRes = await fetch(`${SERVER_URL}/api/admin/upload`, {
+          method: 'POST',
+          headers: { 'x-admin-password': password },
+          body: formData,
+        });
+        setImageUploading(false);
+        if (!uploadRes.ok) {
+          const uploadData = await uploadRes.json();
+          throw new Error(uploadData.error || 'Image upload failed');
+        }
+        const uploadData = await uploadRes.json();
+        cover_image = uploadData.url;
+      }
+
       const res = await fetch(`${SERVER_URL}/api/admin/posts`, {
         method: 'POST',
         headers: {
@@ -103,7 +140,7 @@ export default function AdminPage() {
           excerpt: form.excerpt.trim() || undefined,
           content: form.content,
           author: form.author.trim() || 'Jesse A. Eisenbalm',
-          cover_image: form.cover_image.trim() || undefined,
+          cover_image: cover_image || undefined,
           tags,
           published: form.published,
         }),
@@ -130,7 +167,10 @@ export default function AdminPage() {
         published: false,
       });
       setSlugManuallyEdited(false);
+      setImageFile(null);
+      setImagePreview('');
     } catch (err) {
+      setImageUploading(false);
       setError(err.message);
     } finally {
       setSubmitting(false);
@@ -303,29 +343,51 @@ export default function AdminPage() {
               <p className="text-xs text-gray-400 mt-1.5">HTML is supported. Use &lt;p&gt;, &lt;h2&gt;, &lt;ul&gt;, &lt;blockquote&gt;, etc.</p>
             </div>
 
-            {/* Author + Cover Image */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="admin-label">Author</label>
-                <input
-                  type="text"
-                  className="admin-input"
-                  name="author"
-                  value={form.author}
-                  onChange={handleChange}
-                />
-              </div>
-              <div>
-                <label className="admin-label">Cover Image URL</label>
-                <input
-                  type="url"
-                  className="admin-input"
-                  name="cover_image"
-                  value={form.cover_image}
-                  onChange={handleChange}
-                  placeholder="https://..."
-                />
-              </div>
+            {/* Author */}
+            <div>
+              <label className="admin-label">Author</label>
+              <input
+                type="text"
+                className="admin-input"
+                name="author"
+                value={form.author}
+                onChange={handleChange}
+              />
+            </div>
+
+            {/* Cover Image Upload */}
+            <div>
+              <label className="admin-label">Cover Image</label>
+              {imagePreview ? (
+                <div className="relative">
+                  <img
+                    src={imagePreview}
+                    alt="Cover preview"
+                    className="w-full h-48 object-cover border border-gray-200"
+                  />
+                  <button
+                    type="button"
+                    onClick={clearImage}
+                    className="absolute top-2 right-2 bg-white border border-gray-200 p-1 hover:bg-gray-50 transition-colors"
+                    aria-label="Remove image"
+                  >
+                    <X size={14} />
+                  </button>
+                </div>
+              ) : (
+                <label className="flex flex-col items-center justify-center w-full h-32 border border-dashed border-gray-300 cursor-pointer hover:border-gray-500 transition-colors bg-gray-50 hover:bg-white">
+                  <Upload size={20} className="text-gray-400 mb-2" />
+                  <span className="text-xs text-gray-500">Click to upload image</span>
+                  <span className="text-xs text-gray-400 mt-0.5">JPG, PNG, WebP — max 10MB</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="hidden"
+                  />
+                </label>
+              )}
+              {imageUploading && <p className="text-xs text-gray-500 mt-1.5">Uploading image...</p>}
             </div>
 
             {/* Tags */}
@@ -359,8 +421,8 @@ export default function AdminPage() {
             </div>
 
             <div className="pt-2">
-              <button type="submit" className="admin-btn" disabled={submitting}>
-                {submitting ? 'PUBLISHING...' : 'CREATE POST'}
+              <button type="submit" className="admin-btn" disabled={submitting || imageUploading}>
+                {imageUploading ? 'UPLOADING IMAGE...' : submitting ? 'CREATING POST...' : 'CREATE POST'}
               </button>
             </div>
           </form>
