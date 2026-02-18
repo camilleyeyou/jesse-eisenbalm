@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ArrowLeft, Eye, EyeOff, Upload, X } from 'lucide-react';
+import { ArrowLeft, Eye, EyeOff, Upload, X, CheckCircle, AlertCircle, XCircle } from 'lucide-react';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'https://jesse-eisenbalm-server.vercel.app';
 
@@ -13,6 +13,75 @@ function generateSlug(title) {
     .replace(/[\s_]+/g, '-')
     .replace(/--+/g, '-')
     .replace(/^-+|-+$/g, '');
+}
+
+function analyzeSEO(form, focusKeyphrase) {
+  const kw = focusKeyphrase.toLowerCase().trim();
+  const kwRe = kw ? new RegExp(kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi') : null;
+
+  const contentText = form.content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const words = contentText.split(/\s+/).filter(Boolean);
+  const wordCount = words.length;
+
+  const firstParaMatch = form.content.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+  const firstPara = firstParaMatch ? firstParaMatch[1].replace(/<[^>]+>/g, '').toLowerCase() : '';
+
+  const kwCount = kwRe ? (contentText.match(kwRe) || []).length : 0;
+  const density = wordCount > 0 && kwCount > 0 ? (kwCount / wordCount) * 100 : 0;
+
+  const allHrefs = form.content.match(/href=["']([^"']+)["']/gi) || [];
+  const internalLinks = allHrefs.filter(h => /jesseaeisenbalm\.com|href=["']\/(?!")/i.test(h)).length;
+  const externalLinks = allHrefs.filter(h => /href=["']https?:\/\//i.test(h) && !/jesseaeisenbalm\.com/i.test(h)).length;
+
+  const images = form.content.match(/<img[^>]+>/gi) || [];
+  const imagesWithAlt = images.filter(img => /alt=["'][^"']+["']/i.test(img)).length;
+
+  const h2Count = (form.content.match(/<h2[^>]*>/gi) || []).length;
+  const h2WithKw = kwRe ? (form.content.match(/<h2[^>]*>([\s\S]*?)<\/h2>/gi) || []).filter(h => kwRe.test(h.replace(/<[^>]+>/g, ''))).length : 0;
+
+  return {
+    keyphraseSet: !!kw,
+    keyphraseInTitle: !!kw && form.title.toLowerCase().includes(kw),
+    keyphraseInSlug: !!kw && form.slug.toLowerCase().includes(kw.replace(/\s+/g, '-')),
+    keyphraseInExcerpt: !!kw && form.excerpt.toLowerCase().includes(kw),
+    keyphraseInIntro: !!kw && firstPara.includes(kw),
+    keyphraseInH2: !!kw && h2WithKw > 0,
+    densityOk: density >= 0.5 && density <= 3,
+    densityOver: density > 3,
+    density: density.toFixed(1),
+    kwCount,
+    wordCount,
+    wordCountOk: wordCount >= 300,
+    wordCountGood: wordCount >= 900,
+    hasH2: h2Count >= 1,
+    hasInternalLink: internalLinks >= 1,
+    hasExternalLink: externalLinks >= 1,
+    internalLinks,
+    externalLinks,
+    allImagesHaveAlt: images.length === 0 || imagesWithAlt === images.length,
+    imageCount: images.length,
+    titleLengthOk: form.title.length >= 50 && form.title.length <= 60,
+    excerptLengthOk: form.excerpt.length >= 150 && form.excerpt.length <= 160,
+  };
+}
+
+function SeoCheck({ status, label, hint }) {
+  const icons = {
+    good:    <CheckCircle size={14} className="text-green-500 shrink-0" />,
+    warning: <AlertCircle size={14} className="text-amber-500 shrink-0" />,
+    bad:     <XCircle    size={14} className="text-red-400 shrink-0" />,
+    neutral: <AlertCircle size={14} className="text-gray-300 shrink-0" />,
+  };
+  const colors = { good: 'text-gray-700', warning: 'text-gray-700', bad: 'text-gray-700', neutral: 'text-gray-400' };
+  return (
+    <div className="flex items-start gap-2 py-1.5 border-b border-gray-50 last:border-0">
+      {icons[status]}
+      <div>
+        <span className={`text-xs ${colors[status]}`}>{label}</span>
+        {hint && <p className="text-xs text-gray-400 mt-0.5">{hint}</p>}
+      </div>
+    </div>
+  );
 }
 
 export default function AdminPage() {
@@ -33,6 +102,7 @@ export default function AdminPage() {
     published: false,
   });
 
+  const [focusKeyphrase, setFocusKeyphrase] = useState('');
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState('');
@@ -167,6 +237,7 @@ export default function AdminPage() {
         published: false,
       });
       setSlugManuallyEdited(false);
+      setFocusKeyphrase('');
       setImageFile(null);
       setImagePreview('');
     } catch (err) {
@@ -278,6 +349,19 @@ export default function AdminPage() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Focus Keyphrase */}
+            <div className="border border-gray-200 p-4 bg-gray-50">
+              <label className="admin-label">Focus Keyphrase</label>
+              <input
+                type="text"
+                className="admin-input bg-white"
+                value={focusKeyphrase}
+                onChange={e => setFocusKeyphrase(e.target.value)}
+                placeholder="e.g. beeswax lip balm benefits"
+              />
+              <p className="text-xs text-gray-400 mt-1.5">The primary keyword this post targets. Used to score SEO quality below.</p>
+            </div>
+
             {/* Title */}
             <div>
               <div className="flex justify-between items-baseline mb-1.5">
@@ -340,8 +424,124 @@ export default function AdminPage() {
                 onChange={handleChange}
                 placeholder="<p>Write your post content here...</p>"
               />
-              <p className="text-xs text-gray-400 mt-1.5">HTML is supported. Use &lt;p&gt;, &lt;h2&gt;, &lt;ul&gt;, &lt;blockquote&gt;, etc.</p>
+              <p className="text-xs text-gray-400 mt-1.5">
+                HTML is supported. Use &lt;p&gt;, &lt;h2&gt;, &lt;h3&gt;, &lt;ul&gt;, &lt;blockquote&gt;, &lt;a href="..."&gt;, &lt;img alt="..."&gt;.
+              </p>
             </div>
+
+            {/* SEO Analysis Panel */}
+            {(() => {
+              const s = analyzeSEO(form, focusKeyphrase);
+              const checks = [
+                s.keyphraseInTitle, s.keyphraseInSlug, s.keyphraseInExcerpt,
+                s.keyphraseInIntro, s.keyphraseInH2, s.densityOk,
+                s.wordCountOk, s.hasH2, s.hasInternalLink, s.hasExternalLink,
+                s.allImagesHaveAlt, s.titleLengthOk, s.excerptLengthOk,
+              ];
+              const passed = checks.filter(Boolean).length;
+              const total = checks.length;
+              const pct = Math.round((passed / total) * 100);
+              const barColor = pct >= 80 ? 'bg-green-500' : pct >= 50 ? 'bg-amber-400' : 'bg-red-400';
+              return (
+                <div className="border border-gray-200">
+                  <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
+                    <span className="text-xs tracking-[0.12em] uppercase text-gray-500">SEO Analysis</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-24 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                        <div className={`h-full rounded-full transition-all ${barColor}`} style={{ width: `${pct}%` }} />
+                      </div>
+                      <span className={`text-xs font-medium tabular-nums ${pct >= 80 ? 'text-green-600' : pct >= 50 ? 'text-amber-600' : 'text-red-500'}`}>
+                        {passed}/{total}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="px-4 py-2">
+                    {/* Keyphrase */}
+                    <p className="text-xs tracking-widest text-gray-400 uppercase mt-2 mb-1">Keyphrase</p>
+                    <SeoCheck
+                      status={!s.keyphraseSet ? 'neutral' : s.keyphraseInTitle ? 'good' : 'bad'}
+                      label="Keyphrase in title"
+                      hint={!s.keyphraseSet ? 'Set a focus keyphrase above' : !s.keyphraseInTitle ? `Add "${focusKeyphrase}" to the title` : null}
+                    />
+                    <SeoCheck
+                      status={!s.keyphraseSet ? 'neutral' : s.keyphraseInSlug ? 'good' : 'warning'}
+                      label="Keyphrase in URL slug"
+                      hint={!s.keyphraseInSlug && s.keyphraseSet ? 'The slug should include your keyphrase' : null}
+                    />
+                    <SeoCheck
+                      status={!s.keyphraseSet ? 'neutral' : s.keyphraseInExcerpt ? 'good' : 'bad'}
+                      label="Keyphrase in meta description (excerpt)"
+                      hint={!s.keyphraseInExcerpt && s.keyphraseSet ? 'Include the keyphrase in the excerpt' : null}
+                    />
+                    <SeoCheck
+                      status={!s.keyphraseSet ? 'neutral' : s.keyphraseInIntro ? 'good' : 'warning'}
+                      label="Keyphrase in first paragraph"
+                      hint={!s.keyphraseInIntro && s.keyphraseSet ? 'Mention the keyphrase in the opening paragraph' : null}
+                    />
+                    <SeoCheck
+                      status={!s.keyphraseSet ? 'neutral' : s.keyphraseInH2 ? 'good' : 'warning'}
+                      label="Keyphrase in a subheading (H2/H3)"
+                      hint={!s.keyphraseInH2 && s.keyphraseSet ? 'Use the keyphrase in at least one <h2> or <h3>' : null}
+                    />
+                    <SeoCheck
+                      status={!s.keyphraseSet || s.kwCount === 0 ? 'neutral' : s.densityOver ? 'bad' : s.densityOk ? 'good' : 'warning'}
+                      label={`Keyphrase density: ${s.density}% (${s.kwCount} uses in ${s.wordCount} words)`}
+                      hint={s.densityOver ? 'Over 3% — reduce keyword stuffing' : !s.densityOk && s.keyphraseSet && s.wordCount > 100 ? 'Aim for 0.5–3% density' : null}
+                    />
+
+                    {/* Content */}
+                    <p className="text-xs tracking-widest text-gray-400 uppercase mt-3 mb-1">Content</p>
+                    <SeoCheck
+                      status={s.wordCountGood ? 'good' : s.wordCountOk ? 'warning' : 'bad'}
+                      label={`Word count: ${s.wordCount} words`}
+                      hint={!s.wordCountGood ? (s.wordCountOk ? 'Good — aim for 900+ for best rankings' : 'Minimum 300 words required') : null}
+                    />
+                    <SeoCheck
+                      status={s.hasH2 ? 'good' : 'bad'}
+                      label="Uses H2 subheadings"
+                      hint={!s.hasH2 ? 'Add <h2>Section Title</h2> to break up content' : null}
+                    />
+                    <SeoCheck
+                      status={s.titleLengthOk ? 'good' : form.title.length === 0 ? 'neutral' : 'warning'}
+                      label={`Title length: ${form.title.length} chars (target 50–60)`}
+                    />
+                    <SeoCheck
+                      status={s.excerptLengthOk ? 'good' : form.excerpt.length === 0 ? 'neutral' : form.excerpt.length > 160 ? 'bad' : 'warning'}
+                      label={`Meta description: ${form.excerpt.length} chars (target 150–160)`}
+                    />
+
+                    {/* Links */}
+                    <p className="text-xs tracking-widest text-gray-400 uppercase mt-3 mb-1">Links</p>
+                    <SeoCheck
+                      status={s.hasInternalLink ? 'good' : 'bad'}
+                      label={`Internal links: ${s.internalLinks}`}
+                      hint={!s.hasInternalLink ? 'Add at least 1 link to jesseaeisenbalm.com — e.g. <a href="/">shop the balm</a>' : null}
+                    />
+                    <SeoCheck
+                      status={s.hasExternalLink ? 'good' : 'warning'}
+                      label={`External links: ${s.externalLinks}`}
+                      hint={!s.hasExternalLink ? 'Link to at least 1 credible external source (study, article, etc.)' : null}
+                    />
+
+                    {/* Images */}
+                    <p className="text-xs tracking-widest text-gray-400 uppercase mt-3 mb-1">Images</p>
+                    <SeoCheck
+                      status={s.imageCount === 0 ? 'neutral' : s.allImagesHaveAlt ? 'good' : 'bad'}
+                      label={s.imageCount === 0 ? 'No inline images (cover image above is fine)' : `${s.imageCount} image(s) — ${s.allImagesHaveAlt ? 'all have alt text' : 'some missing alt text'}`}
+                      hint={s.imageCount > 0 && !s.allImagesHaveAlt ? 'Add alt="" to every <img> tag for accessibility + SEO' : null}
+                    />
+                  </div>
+
+                  <div className="px-4 py-3 border-t border-gray-100 bg-gray-50">
+                    <p className="text-xs text-gray-400">
+                      <strong className="text-gray-600">Yoast SEO standard:</strong> Green on all keyphrase + links checks before publishing.
+                      Internal links keep readers on-site; external links signal credibility to Google.
+                    </p>
+                  </div>
+                </div>
+              );
+            })()}
 
             {/* Author */}
             <div>
