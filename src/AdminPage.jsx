@@ -20,6 +20,7 @@ export default function AdminPage() {
   const [authenticated, setAuthenticated] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [authError, setAuthError] = useState('');
+  const [authLoading, setAuthLoading] = useState(false);
 
   const [form, setForm] = useState({
     title: '',
@@ -37,13 +38,24 @@ export default function AdminPage() {
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState('');
 
-  function handlePasswordSubmit(e) {
+  async function handlePasswordSubmit(e) {
     e.preventDefault();
-    if (password === process.env.REACT_APP_ADMIN_PASSWORD) {
-      setAuthenticated(true);
-      setAuthError('');
-    } else {
-      setAuthError('Incorrect password.');
+    setAuthError('');
+    setAuthLoading(true);
+    try {
+      const res = await fetch(`${SERVER_URL}/api/admin/auth`, {
+        method: 'POST',
+        headers: { 'x-admin-password': password },
+      });
+      if (res.ok) {
+        setAuthenticated(true);
+      } else {
+        setAuthError('Incorrect password.');
+      }
+    } catch {
+      setAuthError('Could not reach server. Try again.');
+    } finally {
+      setAuthLoading(false);
     }
   }
 
@@ -79,11 +91,11 @@ export default function AdminPage() {
 
     setSubmitting(true);
     try {
-      const res = await fetch(`${SERVER_URL}/api/posts`, {
+      const res = await fetch(`${SERVER_URL}/api/admin/posts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': process.env.REACT_APP_BLOG_API_KEY || '',
+          'x-admin-password': password,
         },
         body: JSON.stringify({
           title: form.title.trim(),
@@ -96,6 +108,12 @@ export default function AdminPage() {
           published: form.published,
         }),
       });
+
+      if (res.status === 401) {
+        setAuthenticated(false);
+        setAuthError('Session expired. Please log in again.');
+        return;
+      }
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to create post');
@@ -188,7 +206,9 @@ export default function AdminPage() {
               </button>
             </div>
             {authError && <p className="text-red-600 text-xs mb-4">{authError}</p>}
-            <button type="submit" className="admin-btn w-full">ENTER</button>
+            <button type="submit" className="admin-btn w-full" disabled={authLoading}>
+              {authLoading ? 'VERIFYING...' : 'ENTER'}
+            </button>
           </form>
         </div>
       ) : (

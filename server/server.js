@@ -10,10 +10,19 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-// API key auth middleware for blog write routes
+// API key auth middleware for automation routes
 function requireApiKey(req, res, next) {
   const key = req.headers['x-api-key'];
   if (!key || key !== process.env.BLOG_API_KEY) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  next();
+}
+
+// Admin password middleware for browser admin UI routes
+function requireAdminPassword(req, res, next) {
+  const password = req.headers['x-admin-password'];
+  if (!password || password !== process.env.ADMIN_PASSWORD) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
   next();
@@ -215,6 +224,60 @@ app.post('/api/posts', requireApiKey, async (req, res) => {
     res.status(201).json({ post: data });
   } catch (error) {
     console.error('❌ Error creating post:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// --- Admin UI API (password-protected, for browser admin page) ---
+
+// POST /api/admin/auth — verify admin password (no secrets in response)
+app.post('/api/admin/auth', requireAdminPassword, (req, res) => {
+  res.json({ ok: true });
+});
+
+// POST /api/admin/posts — create post via browser admin UI
+app.post('/api/admin/posts', requireAdminPassword, async (req, res) => {
+  try {
+    const {
+      title,
+      content,
+      excerpt,
+      author = 'Jesse A. Eisenbalm',
+      cover_image,
+      tags,
+      published = false,
+    } = req.body;
+
+    if (!title) return res.status(400).json({ error: 'title is required' });
+
+    let slug = req.body.slug ? req.body.slug.trim() : generateSlug(title);
+    if (!slug) slug = generateSlug(title);
+
+    const { data: existing } = await supabase
+      .from('posts')
+      .select('slug')
+      .like('slug', `${slug}%`);
+
+    if (existing?.length) {
+      const slugs = existing.map(r => r.slug);
+      if (slugs.includes(slug)) {
+        let i = 1;
+        while (slugs.includes(`${slug}-${i}`)) i++;
+        slug = `${slug}-${i}`;
+      }
+    }
+
+    const { data, error } = await supabase
+      .from('posts')
+      .insert([{ title, slug, content, excerpt, author, cover_image, tags, published }])
+      .select()
+      .single();
+
+    if (error) throw error;
+    console.log('✅ Blog post created via admin UI:', data.slug);
+    res.status(201).json({ post: data });
+  } catch (error) {
+    console.error('❌ Error creating post (admin):', error);
     res.status(500).json({ error: error.message });
   }
 });
