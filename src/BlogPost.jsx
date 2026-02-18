@@ -65,15 +65,26 @@ export default function BlogPost() {
             "headline": post.title,
             "description": post.excerpt || '',
             "image": post.cover_image || 'https://jesseaeisenbalm.com/images/products/eisenbalm-1.png',
-            "author": { "@type": "Person", "name": post.author },
+            "author": { "@type": "Person", "name": post.author, "url": "https://jesseaeisenbalm.com/about" },
             "publisher": {
               "@type": "Organization",
               "name": "Jesse A. Eisenbalm",
-              "url": "https://jesseaeisenbalm.com"
+              "url": "https://jesseaeisenbalm.com",
+              "logo": { "@type": "ImageObject", "url": "https://jesseaeisenbalm.com/images/products/eisenbalm-1.png" }
             },
             "datePublished": post.created_at,
-            "dateModified": post.updated_at,
-            "mainEntityOfPage": `https://jesseaeisenbalm.com/blog/${post.slug}`
+            "dateModified": post.updated_at || post.created_at,
+            "mainEntityOfPage": `https://jesseaeisenbalm.com/blog/${post.slug}`,
+            "wordCount": post.content ? post.content.replace(/<[^>]+>/g, '').split(/\s+/).filter(Boolean).length : undefined
+          })}</script>
+          <script type="application/ld+json">{JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jesseaeisenbalm.com/" },
+              { "@type": "ListItem", "position": 2, "name": "Journal", "item": "https://jesseaeisenbalm.com/blog" },
+              { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://jesseaeisenbalm.com/blog/${post.slug}` }
+            ]
           })}</script>
         </>}
         {notFound && <meta name="robots" content="noindex" />}

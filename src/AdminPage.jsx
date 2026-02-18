@@ -240,14 +240,20 @@ export default function AdminPage() {
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Title */}
             <div>
-              <label className="admin-label">Title *</label>
+              <div className="flex justify-between items-baseline mb-1.5">
+                <label className="admin-label" style={{margin:0}}>Title *</label>
+                <span className={`text-xs tabular-nums ${form.title.length > 60 ? 'text-amber-500' : form.title.length > 0 ? 'text-gray-400' : 'text-gray-300'}`}>
+                  {form.title.length}/60
+                </span>
+              </div>
               <input
                 type="text"
                 className="admin-input"
                 value={form.title}
                 onChange={handleTitleChange}
-                placeholder="Post title"
+                placeholder="Post title (aim for 50–60 characters)"
               />
+              <p className="text-xs text-gray-400 mt-1.5">SEO title target: 50–60 characters. Appears in Google search results.</p>
             </div>
 
             {/* Slug */}
@@ -260,20 +266,28 @@ export default function AdminPage() {
                 onChange={handleSlugChange}
                 placeholder="auto-generated-from-title"
               />
-              <p className="text-xs text-gray-400 mt-1.5">Leave blank or edit. Auto-generated from title.</p>
+              <p className="text-xs text-gray-400 mt-1.5">Auto-generated from title. Edit if needed — this becomes the URL: /blog/<span className="font-mono">{form.slug || 'your-slug'}</span></p>
             </div>
 
             {/* Excerpt */}
             <div>
-              <label className="admin-label">Excerpt</label>
+              <div className="flex justify-between items-baseline mb-1.5">
+                <label className="admin-label" style={{margin:0}}>Excerpt * <span className="text-red-400">(SEO meta description)</span></label>
+                <span className={`text-xs tabular-nums ${form.excerpt.length > 160 ? 'text-red-500' : form.excerpt.length >= 150 ? 'text-green-600' : form.excerpt.length > 0 ? 'text-amber-500' : 'text-gray-300'}`}>
+                  {form.excerpt.length}/160
+                </span>
+              </div>
               <input
                 type="text"
                 className="admin-input"
                 name="excerpt"
                 value={form.excerpt}
                 onChange={handleChange}
-                placeholder="Short summary shown in post listings"
+                placeholder="Compelling 150–160 character summary for Google search results"
               />
+              <p className="text-xs text-gray-400 mt-1.5">
+                This is your Google meta description. {form.excerpt.length < 150 && form.excerpt.length > 0 && <span className="text-amber-500">Too short — aim for 150–160 chars. </span>}{form.excerpt.length > 160 && <span className="text-red-500">Too long — Google will truncate. </span>}{form.excerpt.length >= 150 && form.excerpt.length <= 160 && <span className="text-green-600">Perfect length. </span>}Also shown in post listing cards.
+              </p>
             </div>
 
             {/* Content */}

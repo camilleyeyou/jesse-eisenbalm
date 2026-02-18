@@ -282,6 +282,58 @@ app.post('/api/admin/posts', requireAdminPassword, async (req, res) => {
   }
 });
 
+// --- Dynamic Sitemap ---
+
+// GET /api/sitemap — full XML sitemap: static pages + all published blog posts
+app.get('/api/sitemap', async (req, res) => {
+  try {
+    const { data: posts } = await supabase
+      .from('posts')
+      .select('slug, updated_at, created_at')
+      .eq('published', true)
+      .order('created_at', { ascending: false });
+
+    const base = 'https://jesseaeisenbalm.com';
+    const today = new Date().toISOString().split('T')[0];
+
+    const staticPages = [
+      { loc: `${base}/`,               lastmod: today, changefreq: 'weekly',  priority: '1.0' },
+      { loc: `${base}/about`,          lastmod: today, changefreq: 'monthly', priority: '0.8' },
+      { loc: `${base}/blog`,           lastmod: today, changefreq: 'daily',   priority: '0.9' },
+      { loc: `${base}/faq`,            lastmod: today, changefreq: 'monthly', priority: '0.8' },
+      { loc: `${base}/privacy-policy`, lastmod: today, changefreq: 'yearly',  priority: '0.3' },
+    ];
+
+    const postPages = (posts || []).map(p => ({
+      loc: `${base}/blog/${p.slug}`,
+      lastmod: (p.updated_at || p.created_at).split('T')[0],
+      changefreq: 'monthly',
+      priority: '0.7',
+    }));
+
+    const allPages = [...staticPages, ...postPages];
+
+    const urlTags = allPages.map(p => `
+  <url>
+    <loc>${p.loc}</loc>
+    <lastmod>${p.lastmod}</lastmod>
+    <changefreq>${p.changefreq}</changefreq>
+    <priority>${p.priority}</priority>
+  </url>`).join('');
+
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urlTags}
+</urlset>`;
+
+    res.set('Content-Type', 'application/xml');
+    res.set('Cache-Control', 'public, max-age=3600');
+    res.send(xml);
+  } catch (error) {
+    console.error('❌ Error generating sitemap:', error);
+    res.status(500).send('Error generating sitemap');
+  }
+});
+
 const PORT = process.env.PORT || 4242;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
