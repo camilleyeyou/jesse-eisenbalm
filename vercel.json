@@ -3,6 +3,10 @@
     {
       "source": "/sitemap.xml",
       "destination": "https://jesse-eisenbalm-server.vercel.app/api/sitemap"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
