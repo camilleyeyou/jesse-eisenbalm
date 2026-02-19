@@ -57,7 +57,7 @@ app.use(cors({
     callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'x-api-key', 'x-admin-password']
 }));
 
@@ -318,6 +318,65 @@ app.post('/api/admin/posts', requireAdminPassword, async (req, res) => {
     res.status(201).json({ post: data });
   } catch (error) {
     console.error('❌ Error creating post (admin):', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// GET /api/admin/posts — list ALL posts including drafts (admin only)
+app.get('/api/admin/posts', requireAdminPassword, async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('posts')
+      .select('id, title, slug, excerpt, author, cover_image, tags, published, created_at, updated_at')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    res.json({ posts: data });
+  } catch (error) {
+    console.error('❌ Error fetching admin posts:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// PATCH /api/admin/posts/:id — update published status (and optionally other fields)
+app.patch('/api/admin/posts/:id', requireAdminPassword, async (req, res) => {
+  try {
+    const { published } = req.body;
+    if (typeof published !== 'boolean') {
+      return res.status(400).json({ error: 'published (boolean) is required' });
+    }
+
+    const { data, error } = await supabase
+      .from('posts')
+      .update({ published, updated_at: new Date().toISOString() })
+      .eq('id', req.params.id)
+      .select('id, title, slug, published, updated_at')
+      .single();
+
+    if (error) {
+      if (error.code === 'PGRST116') return res.status(404).json({ error: 'Post not found' });
+      throw error;
+    }
+    console.log(`✅ Post ${data.slug} → published: ${data.published}`);
+    res.json({ post: data });
+  } catch (error) {
+    console.error('❌ Error updating post:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// DELETE /api/admin/posts/:id — permanently delete a post (admin only)
+app.delete('/api/admin/posts/:id', requireAdminPassword, async (req, res) => {
+  try {
+    const { error } = await supabase
+      .from('posts')
+      .delete()
+      .eq('id', req.params.id);
+
+    if (error) throw error;
+    res.json({ ok: true });
+  } catch (error) {
+    console.error('❌ Error deleting post:', error);
     res.status(500).json({ error: error.message });
   }
 });

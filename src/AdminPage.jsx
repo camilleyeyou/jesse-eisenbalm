@@ -91,6 +91,16 @@ export default function AdminPage() {
   const [authError, setAuthError] = useState('');
   const [authLoading, setAuthLoading] = useState(false);
 
+  // Tab: 'new' | 'manage'
+  const [activeTab, setActiveTab] = useState('new');
+
+  // Manage Posts state
+  const [allPosts, setAllPosts] = useState([]);
+  const [postsLoading, setPostsLoading] = useState(false);
+  const [postsError, setPostsError] = useState('');
+  const [togglingId, setTogglingId] = useState(null);
+  const [deletingId, setDeletingId] = useState(null);
+
   const [form, setForm] = useState({
     title: '',
     slug: '',
@@ -129,6 +139,64 @@ export default function AdminPage() {
       setAuthError('Could not reach server. Try again.');
     } finally {
       setAuthLoading(false);
+    }
+  }
+
+  async function fetchAllPosts() {
+    setPostsLoading(true);
+    setPostsError('');
+    try {
+      const res = await fetch(`${SERVER_URL}/api/admin/posts`, {
+        headers: { 'x-admin-password': password },
+      });
+      if (res.status === 401) { setAuthenticated(false); return; }
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to fetch posts');
+      setAllPosts(data.posts);
+    } catch (err) {
+      setPostsError(err.message);
+    } finally {
+      setPostsLoading(false);
+    }
+  }
+
+  async function togglePublished(post) {
+    setTogglingId(post.id);
+    try {
+      const res = await fetch(`${SERVER_URL}/api/admin/posts/${post.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', 'x-admin-password': password },
+        body: JSON.stringify({ published: !post.published }),
+      });
+      if (res.status === 401) { setAuthenticated(false); return; }
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Update failed');
+      setAllPosts(prev => prev.map(p => p.id === post.id ? { ...p, published: data.post.published } : p));
+    } catch (err) {
+      setPostsError(err.message);
+    } finally {
+      setTogglingId(null);
+    }
+  }
+
+  async function deletePost(post) {
+    if (!window.confirm(`Delete "${post.title}"? This cannot be undone.`)) return;
+    setDeletingId(post.id);
+    try {
+      const res = await fetch(`${SERVER_URL}/api/admin/posts/${post.id}`, {
+        method: 'DELETE',
+        headers: { 'x-admin-password': password },
+      });
+      if (res.status === 401) { setAuthenticated(false); return; }
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || 'Delete failed');
+      }
+      setAllPosts(prev => prev.filter(p => p.id !== post.id));
+    } catch (err) {
+      setPostsError(err.message);
+    } finally {
+      setDeletingId(null);
     }
   }
 
@@ -325,6 +393,124 @@ export default function AdminPage() {
       ) : (
         <div className="max-w-3xl mx-auto px-6 py-16">
           <p className="text-xs tracking-[0.3em] text-gray-400 mb-2">ADMIN</p>
+
+          {/* Tab nav */}
+          <div className="flex gap-0 mb-12 border-b border-gray-200">
+            <button
+              onClick={() => setActiveTab('new')}
+              className={`text-xs tracking-[0.15em] uppercase px-6 py-3 border-b-2 transition-colors ${activeTab === 'new' ? 'border-black text-black' : 'border-transparent text-gray-400 hover:text-black'}`}
+            >
+              New Post
+            </button>
+            <button
+              onClick={() => { setActiveTab('manage'); fetchAllPosts(); }}
+              className={`text-xs tracking-[0.15em] uppercase px-6 py-3 border-b-2 transition-colors ${activeTab === 'manage' ? 'border-black text-black' : 'border-transparent text-gray-400 hover:text-black'}`}
+            >
+              Manage Posts
+            </button>
+          </div>
+
+          {/* ── MANAGE POSTS TAB ── */}
+          {activeTab === 'manage' && (
+            <div>
+              <div className="flex items-center justify-between mb-8">
+                <h1 className="text-3xl font-light tracking-tight">All Posts</h1>
+                <button
+                  onClick={fetchAllPosts}
+                  className="text-xs tracking-[0.12em] text-gray-400 hover:text-black transition-colors uppercase"
+                >
+                  Refresh
+                </button>
+              </div>
+
+              {postsError && (
+                <div className="border border-red-200 bg-red-50 p-4 mb-6">
+                  <p className="text-sm text-red-700">{postsError}</p>
+                </div>
+              )}
+
+              {postsLoading ? (
+                <div className="space-y-3">
+                  {[1,2,3].map(i => (
+                    <div key={i} className="border border-gray-100 p-5 animate-pulse">
+                      <div className="h-4 bg-gray-100 rounded w-2/3 mb-2" />
+                      <div className="h-3 bg-gray-100 rounded w-1/3" />
+                    </div>
+                  ))}
+                </div>
+              ) : allPosts.length === 0 ? (
+                <div className="border border-dashed border-gray-200 p-12 text-center">
+                  <p className="text-sm text-gray-400">No posts yet.</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {allPosts.map(post => (
+                    <div key={post.id} className="border border-gray-200 p-5 flex items-start gap-4">
+                      {/* Status dot */}
+                      <div className="mt-1 shrink-0">
+                        <span className={`inline-block w-2 h-2 rounded-full ${post.published ? 'bg-green-500' : 'bg-gray-300'}`} title={post.published ? 'Published' : 'Draft'} />
+                      </div>
+
+                      {/* Post info */}
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium truncate">{post.title}</p>
+                        <div className="flex items-center gap-3 mt-1">
+                          <span className={`text-xs px-1.5 py-0.5 ${post.published ? 'bg-green-50 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+                            {post.published ? 'Published' : 'Draft'}
+                          </span>
+                          <span className="text-xs text-gray-400">
+                            {new Date(post.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                          </span>
+                          {post.tags?.length > 0 && (
+                            <span className="text-xs text-gray-400 truncate">{post.tags.join(', ')}</span>
+                          )}
+                        </div>
+                        {post.excerpt && (
+                          <p className="text-xs text-gray-400 mt-1.5 line-clamp-2">{post.excerpt}</p>
+                        )}
+                      </div>
+
+                      {/* Actions */}
+                      <div className="flex items-center gap-2 shrink-0">
+                        {post.published && (
+                          <a
+                            href={`/blog/${post.slug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs text-gray-400 hover:text-black transition-colors underline underline-offset-2"
+                          >
+                            View
+                          </a>
+                        )}
+                        <button
+                          onClick={() => togglePublished(post)}
+                          disabled={togglingId === post.id}
+                          className={`text-xs tracking-[0.1em] uppercase px-3 py-1.5 border transition-colors ${post.published ? 'border-gray-300 text-gray-600 hover:border-red-300 hover:text-red-600' : 'border-black text-black hover:bg-black hover:text-white'} disabled:opacity-40`}
+                        >
+                          {togglingId === post.id ? '...' : post.published ? 'Unpublish' : 'Publish'}
+                        </button>
+                        <button
+                          onClick={() => deletePost(post)}
+                          disabled={deletingId === post.id}
+                          className="text-xs text-gray-300 hover:text-red-500 transition-colors disabled:opacity-40 px-1"
+                          title="Delete post"
+                        >
+                          {deletingId === post.id ? '...' : '✕'}
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <p className="text-xs text-gray-400 mt-6">
+                {allPosts.length} post{allPosts.length !== 1 ? 's' : ''} total &mdash; {allPosts.filter(p => p.published).length} published, {allPosts.filter(p => !p.published).length} draft{allPosts.filter(p => !p.published).length !== 1 ? 's' : ''}
+              </p>
+            </div>
+          )}
+
+          {/* ── NEW POST TAB ── */}
+          {activeTab === 'new' && (<>
           <h1 className="text-3xl font-light mb-12 tracking-tight">New Post</h1>
 
           {/* Success banner */}
@@ -626,6 +812,7 @@ export default function AdminPage() {
               </button>
             </div>
           </form>
+          </>)}
         </div>
       )}
     </div>
