@@ -85,20 +85,6 @@ export default function EisenbalmShop() {
     }
   }, [verifyPayment]);
 
-  // Preload video
-  useEffect(() => {
-    const videoPreload = document.createElement('link');
-    videoPreload.rel = 'preload';
-    videoPreload.as = 'video';
-    videoPreload.href = 'https://cdn.jsdelivr.net/gh/camilleyeyou/jesse-eisenbalm@main/public/videos/hero-background.mp4';
-    document.head.appendChild(videoPreload);
-
-    return () => {
-      if (document.head.contains(videoPreload)) {
-        document.head.removeChild(videoPreload);
-      }
-    };
-  }, []);
 
   useEffect(() => {
     const html = document.documentElement;
