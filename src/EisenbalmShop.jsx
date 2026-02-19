@@ -21,6 +21,8 @@ export default function EisenbalmShop() {
     const urlParams = new URLSearchParams(window.location.search);
     return !urlParams.get('session_id');
   });
+  const [latestPosts, setLatestPosts] = useState([]);
+  const [postsLoading, setPostsLoading] = useState(true);
 
   const parseExcerpt = (text) => {
     if (!text) return text;
@@ -166,6 +168,15 @@ export default function EisenbalmShop() {
       window.removeEventListener('resize', onScrollOrResize);
       clearTimeout(safety);
     };
+  }, []);
+
+  useEffect(() => {
+    const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'https://jesse-eisenbalm-server.vercel.app';
+    fetch(`${SERVER_URL}/api/posts`)
+      .then(r => r.json())
+      .then(data => setLatestPosts((data.posts || []).slice(0, 3)))
+      .catch(() => {})
+      .finally(() => setPostsLoading(false));
   }, []);
 
   const products = [
@@ -813,58 +824,95 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
-      {/* Journal/Principles Section */}
+      {/* From the Journal Section */}
       <section id="journal" className="py-24 px-6 bg-white scroll-snap-section scroll-reveal">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-end mb-16">
             <div>
-              <p className="text-xs tracking-[0.2em] text-gray-500 mb-4"></p>
-              <h2 className="text-4xl md:text-5xl font-light tracking-tight">PRINCIPLES</h2>
+              <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">FROM THE JOURNAL</p>
+              <h2 className="text-4xl md:text-5xl font-light tracking-tight">Latest Reads</h2>
               <p className="text-lg text-gray-600 mt-4 max-w-xl">Thoughts on staying human in an increasingly automated world</p>
             </div>
+            <Link
+              to="/blog"
+              className="hidden md:inline-flex items-center text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-colors gap-1.5"
+            >
+              ALL POSTS <ChevronRight size={14} />
+            </Link>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-12">
-            {[
-              {
-                image: "/images/grid/image-1.png",
-                category: "PHILOSOPHY",
-                title: "Why Rituals Matter in a Digital Age",
-                excerpt: "In an era of automation and AI-generated everything, small acts of self-care become revolutionary. We explore why intentional, human-only rituals are more important than ever for maintaining our sense of self in a world that's increasingly asking us to behave like machines."
-              },
-              {
-                image: "/images/grid/image-20.png",
-                category: "INGREDIENTS OF LIFE",
-                title: "Time to die",
-                excerpt: "Let's face it, you're going to die some day. Lip Balm is the modern memento mori that walks you back home with smooth, moisturized lips."
-              },
-              {
-                image: "https://images.unsplash.com/photo-1487260211189-670c54da558d?w=800&h=600&fit=crop",
-                category: "CULTURE",
-                title: "Time to Buy.",             
-                excerpt: "You've read enough quippy AI copy. Let's get to the buying already. Push that button. Or this one [buy now]."
-              }
-            ].map((post, idx) => (
-              <article
-                key={idx}
-                className="group cursor-pointer clip-reveal scroll-reveal"
-                style={{ transitionDelay: `${idx * 0.15}s` }}
-              >
-                <div className="relative aspect-[4/3] mb-6 overflow-hidden bg-gray-100 image-reveal scroll-reveal">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+          {postsLoading ? (
+            /* Skeleton */
+            <div className="grid md:grid-cols-3 gap-12">
+              {[0,1,2].map(i => (
+                <div key={i} className="animate-pulse">
+                  <div className="aspect-[4/3] bg-gray-100 mb-6" />
+                  <div className="h-3 bg-gray-100 rounded w-1/3 mb-3" />
+                  <div className="h-5 bg-gray-100 rounded w-3/4 mb-3" />
+                  <div className="h-3 bg-gray-100 rounded w-full mb-2" />
+                  <div className="h-3 bg-gray-100 rounded w-4/5" />
                 </div>
-                <p className="text-xs tracking-[0.2em] text-gray-500 mb-3">{post.category}</p>
-                <h3 className="text-xl font-light mb-3 group-hover:text-gray-600 transition-colors leading-tight">{post.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                  {parseExcerpt(post.excerpt)}
-                </p>
-                <p className="text-xs tracking-wide text-gray-400">{post.date}</p>
-              </article>
-            ))}
+              ))}
+            </div>
+          ) : latestPosts.length > 0 ? (
+            <div className="grid md:grid-cols-3 gap-12">
+              {latestPosts.map((post, idx) => (
+                <Link
+                  key={post.id}
+                  to={`/blog/${post.slug}`}
+                  className="group clip-reveal scroll-reveal"
+                  style={{ transitionDelay: `${idx * 0.15}s` }}
+                >
+                  <div className="relative aspect-[4/3] mb-6 overflow-hidden bg-gray-100 image-reveal scroll-reveal">
+                    {post.cover_image ? (
+                      <img
+                        src={post.cover_image}
+                        alt={post.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                        <span className="text-xs tracking-[0.2em] text-gray-400 uppercase">Journal</span>
+                      </div>
+                    )}
+                  </div>
+                  {post.tags?.length > 0 && (
+                    <p className="text-xs tracking-[0.2em] text-gray-500 mb-3 uppercase">{post.tags[0]}</p>
+                  )}
+                  <h3 className="text-xl font-light mb-3 group-hover:text-gray-600 transition-colors leading-tight">{post.title}</h3>
+                  {post.excerpt && (
+                    <p className="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-3">{post.excerpt}</p>
+                  )}
+                  <p className="text-xs tracking-wide text-gray-400">
+                    {new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            /* No posts yet — keep visible placeholder */
+            <div className="grid md:grid-cols-3 gap-12">
+              {[
+                { image: "/images/grid/image-1.png", category: "PHILOSOPHY", title: "Why Rituals Matter in a Digital Age", excerpt: "In an era of automation and AI-generated everything, small acts of self-care become revolutionary." },
+                { image: "/images/grid/image-20.png", category: "INGREDIENTS OF LIFE", title: "The Modern Memento Mori", excerpt: "Let's face it, you're going to die some day. Lip balm is the small ritual that walks you back home." },
+                { image: "https://images.unsplash.com/photo-1487260211189-670c54da558d?w=800&h=600&fit=crop", category: "CULTURE", title: "Stop. Breathe. Balm.", excerpt: "Three words. One ritual. A daily reminder that being human is enough." }
+              ].map((post, idx) => (
+                <article key={idx} className="group clip-reveal scroll-reveal" style={{ transitionDelay: `${idx * 0.15}s` }}>
+                  <div className="relative aspect-[4/3] mb-6 overflow-hidden bg-gray-100 image-reveal scroll-reveal">
+                    <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  </div>
+                  <p className="text-xs tracking-[0.2em] text-gray-500 mb-3">{post.category}</p>
+                  <h3 className="text-xl font-light mb-3 group-hover:text-gray-600 transition-colors leading-tight">{post.title}</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4">{post.excerpt}</p>
+                </article>
+              ))}
+            </div>
+          )}
+
+          <div className="text-center mt-12 md:hidden">
+            <Link to="/blog" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-colors">
+              VIEW ALL POSTS →
+            </Link>
           </div>
         </div>
       </section>
