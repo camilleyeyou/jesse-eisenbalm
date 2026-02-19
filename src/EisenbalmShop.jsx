@@ -828,7 +828,7 @@ export default function EisenbalmShop() {
                   className="group clip-reveal scroll-reveal"
                   style={{ transitionDelay: `${idx * 0.15}s` }}
                 >
-                  <div className="relative aspect-[4/3] mb-6 overflow-hidden bg-gray-100 image-reveal scroll-reveal">
+                  <div className="relative aspect-[4/3] mb-6 overflow-hidden bg-gray-100">
                     {post.cover_image ? (
                       <img
                         src={post.cover_image}
@@ -863,7 +863,7 @@ export default function EisenbalmShop() {
                 { image: "https://images.unsplash.com/photo-1487260211189-670c54da558d?w=800&h=600&fit=crop", category: "CULTURE", title: "Stop. Breathe. Balm.", excerpt: "Three words. One ritual. A daily reminder that being human is enough." }
               ].map((post, idx) => (
                 <article key={idx} className="group clip-reveal scroll-reveal" style={{ transitionDelay: `${idx * 0.15}s` }}>
-                  <div className="relative aspect-[4/3] mb-6 overflow-hidden bg-gray-100 image-reveal scroll-reveal">
+                  <div className="relative aspect-[4/3] mb-6 overflow-hidden bg-gray-100">
                     <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   </div>
                   <p className="text-xs tracking-[0.2em] text-gray-500 mb-3">{post.category}</p>
