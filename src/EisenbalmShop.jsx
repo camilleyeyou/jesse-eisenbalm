@@ -24,27 +24,6 @@ export default function EisenbalmShop() {
   const [latestPosts, setLatestPosts] = useState([]);
   const [postsLoading, setPostsLoading] = useState(true);
 
-  const parseExcerpt = (text) => {
-    if (!text) return text;
-    
-    const parts = text.split(/(\[[^\]]+\])/g);
-    
-    return parts.map((part, index) => {
-      const match = part.match(/\[([^\]]+)\]/);
-      if (match) {
-        return (
-          <a 
-            key={index}
-            href="#product" 
-            className="text-sm tracking-[0.15em] text-black font-medium hover:underline transition-all duration-300 luxury-focus relative group"
-          >
-            {match[1].toUpperCase()}
-          </a>
-        );
-      }
-      return <span key={index}>{part}</span>;
-    });
-  };
 
   const verifyPayment = useCallback(async (sessionId) => {
     setIsVerifying(true);
