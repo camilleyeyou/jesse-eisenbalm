@@ -1,14 +1,13 @@
 {
   "trailingSlash": false,
-  "routes": [
-    { "handle": "filesystem" },
+  "rewrites": [
     {
-      "src": "/sitemap.xml",
-      "dest": "https://jesse-eisenbalm-server.vercel.app/api/sitemap"
+      "source": "/sitemap.xml",
+      "destination": "https://jesse-eisenbalm-server.vercel.app/api/sitemap"
     },
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [
