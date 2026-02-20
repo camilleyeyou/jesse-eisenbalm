@@ -1,9 +1,25 @@
 {
   "trailingSlash": false,
+  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/sitemap.xml",
       "destination": "https://jesse-eisenbalm-server.vercel.app/api/sitemap"
+    },
+    {
+      "source": "/((?!static|images|favicon|manifest|robots|llms|.*\\.(?:css|js|png|jpg|jpeg|gif|svg|ico|json|txt|xml|webmanifest)).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
+        }
+      ]
     }
   ]
 }
