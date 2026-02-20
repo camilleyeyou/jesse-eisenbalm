@@ -1,14 +1,14 @@
 {
   "trailingSlash": false,
-  "cleanUrls": true,
-  "rewrites": [
+  "routes": [
+    { "handle": "filesystem" },
     {
-      "source": "/sitemap.xml",
-      "destination": "https://jesse-eisenbalm-server.vercel.app/api/sitemap"
+      "src": "/sitemap.xml",
+      "dest": "https://jesse-eisenbalm-server.vercel.app/api/sitemap"
     },
     {
-      "source": "/((?!static|images|favicon|manifest|robots|llms|.*\\.(?:css|js|png|jpg|jpeg|gif|svg|ico|json|txt|xml|webmanifest)).*)",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ],
   "headers": [
