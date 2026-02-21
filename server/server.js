@@ -43,17 +43,28 @@ function generateSlug(title) {
 const app = express();
 
 // CORS configuration
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://jesseaeisenbalm.com',
+  'https://www.jesseaeisenbalm.com',
+  /\.vercel\.app$/
+];
+
 app.use(cors({
   origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, etc)
     if (!origin) return callback(null, true);
-    
-    // Allow localhost, vercel.app, and your custom domain
-    if (origin.includes('localhost') || 
-        origin.includes('vercel.app') || 
-        origin.includes('jesseaeisenbalm.com')) {
+
+    // Check if origin is allowed
+    const isAllowed = allowedOrigins.some(allowed => {
+      if (allowed instanceof RegExp) return allowed.test(origin);
+      return origin === allowed || origin.startsWith(allowed);
+    });
+
+    if (isAllowed) {
       return callback(null, true);
     }
-    
+
     callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
