@@ -156,7 +156,7 @@ export default function EisenbalmShop() {
        "/images/products/eisenbalm-3.png"
       ],
       description: "Limited Edition. Release 001. Hand numbered.",
-      features: ["Beeswax formula", "All-day hydration", "Daily ritual", "Reminder of your humanity", "And mortality"],
+      features: ["Petrolatum-free barrier restoration", "Protection against transepidermal water loss", "Neurocosmetic cognitive reset ritual", "Executive grounding tool", "100% charity proceeds"],
       volume: "4.5g / 0.15 oz"
     }
   ];
@@ -249,25 +249,25 @@ export default function EisenbalmShop() {
     }}>
 
       <Helmet>
-        <title>Jesse A. Eisenbalm | Natural Beeswax Lip Balm | Stay Human</title>
-        <meta name="description" content="Premium natural beeswax lip balm. Hand-numbered, limited edition. The only business lip balm that keeps you human in an AI world. $8.99. All proceeds to charity." />
-        <meta name="keywords" content="beeswax lip balm, premium lip balm, natural lip care, mindful skincare, Jesse Eisenbalm, luxury lip balm, limited edition, human ritual" />
+        <title>Jesse A. Eisenbalm | Digital Wellness Ritual for Business Professionals</title>
+        <meta name="description" content="Jesse A. Eisenbalm is a premium, limited-edition beeswax lip balm designed as a digital wellness ritual for business professionals. Provides petrolatum-free barrier restoration while serving as a tactile reminder to maintain human connection in an AI-driven world. $8.99. 100% proceeds to charity." />
+        <meta name="keywords" content="petrolatum-free barrier repair, executive grounding ritual, neurocosmetic lip balm, digital wellness skincare, lip skinification, bio-adaptive lip care, business professional lip balm, tactile mindfulness tool, human-centered skincare, digital fatigue relief" />
         <meta name="author" content="Jesse A. Eisenbalm" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://jesseaeisenbalm.com/" />
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://jesseaeisenbalm.com/" />
-        <meta property="og:title" content="Jesse A. Eisenbalm - The Only Business Lip Balm That Keeps You Human" />
-        <meta property="og:description" content="Premium natural beeswax lip balm with a mindful ritual. Limited Edition Release 001. $8.99. Stop. Breathe. Balm. All proceeds go to charity." />
+        <meta property="og:title" content="Jesse A. Eisenbalm - Digital Wellness Ritual for Business Professionals" />
+        <meta property="og:description" content="Premium beeswax lip balm designed as a neurocosmetic cognitive reset. Limited Edition Release 001. Petrolatum-free barrier restoration. $8.99. Stop. Breathe. Balm. 100% charity proceeds." />
         <meta property="og:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="Jesse A. Eisenbalm" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Jesse A. Eisenbalm - Premium Lip Balm for Humans" />
-        <meta name="twitter:description" content="The only business lip balm that keeps you human in an AI world. Limited Edition. $8.99. Stop. Breathe. Balm." />
+        <meta name="twitter:title" content="Jesse A. Eisenbalm - Executive Grounding Ritual" />
+        <meta name="twitter:description" content="Digital wellness tool for business professionals. Petrolatum-free barrier repair. Limited Edition. $8.99. Stop. Breathe. Balm." />
         <meta name="twitter:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.png" />
 
         <script type="application/ld+json">{JSON.stringify({
@@ -279,7 +279,9 @@ export default function EisenbalmShop() {
             "https://jesseaeisenbalm.com/images/products/eisenbalm-2.png",
             "https://jesseaeisenbalm.com/images/products/eisenbalm-3.png"
           ],
-          "description": "Premium natural beeswax lip balm with mindful ritual. Limited Edition Release 001. Hand numbered. The only business lip balm that keeps you human in an AI world. 4.5g / 0.15 oz.",
+          "description": "Premium beeswax lip balm designed as a digital wellness ritual for business professionals. Provides petrolatum-free barrier restoration and all-day protection against transepidermal water loss (TEWL) during extended screen time. Limited Edition Release 001. Hand numbered. 4.5g / 0.15 oz.",
+          "material": "Premium Natural Beeswax",
+          "additionalProperty": [{"@type": "PropertyValue", "name": "Edition", "value": "Release 001 - Hand Numbered"}, {"@type": "PropertyValue", "name": "Charitable Model", "value": "100% of proceeds benefit charitable causes"}, {"@type": "PropertyValue", "name": "Target Audience", "value": "Business Professionals & Executives"}, {"@type": "PropertyValue", "name": "Primary Use", "value": "Digital wellness ritual and cognitive reset"}],
           "brand": { "@type": "Brand", "name": "Jesse A. Eisenbalm" },
           "offers": {
             "@type": "Offer",
@@ -302,7 +304,7 @@ export default function EisenbalmShop() {
           "name": "Jesse A. Eisenbalm",
           "url": "https://jesseaeisenbalm.com",
           "logo": "https://jesseaeisenbalm.com/images/products/eisenbalm-1.png",
-          "description": "Premium natural lip care for humans. The only business lip balm that keeps you human in an AI world. Stop. Breathe. Balm.",
+          "description": "Human-centered skincare for digital wellness. Premium beeswax lip balm positioned as a neurocosmetic ritual for business professionals experiencing digital fatigue. Stop. Breathe. Balm. 100% charity proceeds.",
           "sameAs": ["https://www.linkedin.com/company/108396769/"]
         })}</script>
       </Helmet>

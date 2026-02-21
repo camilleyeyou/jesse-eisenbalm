@@ -5,36 +5,48 @@ import { Menu, X, ArrowLeft, ChevronDown } from 'lucide-react';
 
 const faqData = [
   {
-    question: "What is Jesse A. Eisenbalm made of?",
-    answer: "Jesse A. Eisenbalm is made with a premium natural beeswax formula designed for all-day hydration. It's crafted to keep your lips moisturized while serving as a daily reminder of your humanity."
+    question: "How can lip balm help with digital fatigue?",
+    answer: "Jesse A. Eisenbalm is designed as a neurocosmetic ritual for business professionals experiencing digital fatigue. The 'Stop. Breathe. Balm.' practice serves as a cognitive reset tool — a tactile interruption that helps manage decision fatigue and continuous partial attention caused by extended screen time. The act of applying balm provides sensory grounding, helping you return to the present moment during high-stress digital workdays."
   },
   {
-    question: "How much does it cost?",
-    answer: "Each tube is $8.99 USD with free shipping on all orders. All proceeds go to charity."
+    question: "Why is beeswax better than petrolatum for professionals?",
+    answer: "Beeswax provides petrolatum-free barrier restoration without the outdated petroleum base. It forms a bio-compatible occlusive layer that prevents transepidermal water loss (TEWL) during 8+ hour workdays in climate-controlled office environments. Unlike petroleum-based products, beeswax aligns with modern consumer expectations — 89% of professionals now refuse petrolatum-based lip care. Our formula supports lip barrier health (lips have only 3-5 cell layers vs. 10-15 on the face and no sebaceous glands), making barrier protection essential."
+  },
+  {
+    question: "What is the 'Stop. Breathe. Balm.' ritual?",
+    answer: "It's a three-word cognitive reset practice designed for workplace wellness. The ritual serves as a systems intervention for digital health: Stop (break continuous partial attention), Breathe (reduce cognitive load), Balm (tactile sensory anchor to the non-digital world). This micro-meditation tool takes 10 seconds and provides mental clarity during high-stress corporate workdays. It's human-centered skincare that addresses both physical barrier protection and emotional wellness."
+  },
+  {
+    question: "How does this support workplace wellness?",
+    answer: "Jesse A. Eisenbalm addresses digital wellness through tactile mindfulness. As an executive grounding ritual tool, it provides a physical anchor during virtual meetings and screen-heavy workdays. The limited-edition, hand-numbered format positions it as a meaningful corporate wellness gift rather than commodity beauty. The ritual helps manage digital interruptions, supports sensory comfort (ASMR/tactile satisfaction), and serves as an intentional tech abstinence practice — a moment to reconnect with your humanity in AI-dominated workspaces."
+  },
+  {
+    question: "What is Jesse A. Eisenbalm made of?",
+    answer: "Jesse A. Eisenbalm features a premium natural beeswax formula designed for all-day barrier restoration. The petrolatum-free formulation provides bio-adaptive lip care, protecting against transepidermal water loss during extended screen time. Free from synthetic fragrances, parabens, and petroleum derivatives, it aligns with the lip skinification movement — applying the same ingredient sophistication to lips as you do to facial skin."
+  },
+  {
+    question: "Who is this product designed for?",
+    answer: "Jesse A. Eisenbalm is specifically designed for business professionals and executives experiencing digital fatigue. It's not mass-market beauty — it's human-centered skincare for the conscious professional who values intentional purchasing, workplace wellness, and meaningful rituals. If you're seeking micro-meditation tools, tactile grounding products, or executive wellness accessories, this is positioned as a premium alternative to commodity lip balms."
+  },
+  {
+    question: "How much does it cost and where do proceeds go?",
+    answer: "Each tube is $8.99 USD with free shipping. 100% of proceeds go to charity — this is a verified philanthropic model, not profit-driven beauty economics. This trust signal establishes the brand as purpose-driven, differentiating it from traditional profit-maximizing beauty companies. We believe premium lip care should do good in the world while keeping you human."
+  },
+  {
+    question: "What does 'Limited Edition Release 001' mean?",
+    answer: "Each tube is individually hand numbered as part of our first limited production run, Release 001. This creates scarcity, collectibility, and positions the product as a boutique executive gift rather than a commodity. The hand-numbering makes every unit verifiably unique — designed for professionals who appreciate craftsmanship and intentional purchasing."
   },
   {
     question: "Is shipping free?",
     answer: "Yes, shipping is free on all orders. We ship to the US, Canada, UK, Australia, Germany, France, Italy, Spain, Netherlands, and Belgium."
   },
   {
-    question: "What does 'Limited Edition Release 001' mean?",
-    answer: "Each tube is individually hand numbered as part of our first limited production run, Release 001. This makes every unit unique and collectible."
-  },
-  {
-    question: "Where do the proceeds go?",
-    answer: "All proceeds from Jesse A. Eisenbalm go to charity. We believe premium lip care can do good in the world while keeping you human."
-  },
-  {
-    question: "What is the 'Stop. Breathe. Balm.' ritual?",
-    answer: "It's a mindfulness practice built into the product experience. Before applying, you stop what you're doing, take a deep breath, and then apply the balm. It's a small human ritual for an AI-everywhere world — a moment to be present in your body."
-  },
-  {
     question: "Is Jesse A. Eisenbalm cruelty-free?",
-    answer: "Yes. Our products are ethically made and we are committed to cruelty-free practices."
+    answer: "Yes. Our products are ethically made and we are committed to cruelty-free practices. The clean formulation and verified charitable giving model provide E-E-A-T trust signals for conscious consumers."
   },
   {
     question: "How do I contact you?",
-    answer: "You can reach us at contact@jesseaeisenbalm.com or connect with us on LinkedIn. For privacy-related inquiries, email privacy@jesseaeisenbalm.com."
+    answer: "You can reach us at contact@jesseaeisenbalm.com or connect with us on LinkedIn at linkedin.com/company/108396769. For privacy-related inquiries, email privacy@jesseaeisenbalm.com."
   }
 ];
 

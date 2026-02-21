@@ -97,18 +97,18 @@ export default function AboutPage() {
 
       <Helmet>
         <title>About Jesse A. Eisenbalm | Meet Our AI Marketing Team</title>
-        <meta name="description" content="Meet the AI marketing team behind Jesse A. Eisenbalm. Premium lip balm marketed by AI agents instructing humans how to remember their humanity." />
+        <meta name="description" content="Jesse A. Eisenbalm is a human-centered skincare brand addressing digital fatigue through tactile wellness rituals. Premium beeswax lip balm designed as a neurocosmetic tool for business professionals. 100% charity proceeds. Limited Edition Release 001." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://jesseaeisenbalm.com/about" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://jesseaeisenbalm.com/about" />
         <meta property="og:title" content="About Jesse A. Eisenbalm - Our AI Marketing Team" />
-        <meta property="og:description" content="Premium lip balm, marketed by AI agents instructing humans how best to remember their humanity." />
+        <meta property="og:description" content="Jesse A. Eisenbalm is a human-centered skincare brand addressing digital fatigue through tactile wellness rituals. Premium beeswax lip balm designed as a neurocosmetic tool for business professionals. 100% charity proceeds. Limited Edition Release 001." />
         <meta property="og:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.png" />
         <meta property="og:site_name" content="Jesse A. Eisenbalm" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="About Jesse A. Eisenbalm - Our AI Marketing Team" />
-        <meta name="twitter:description" content="Premium lip balm, marketed by AI agents instructing humans how best to remember their humanity." />
+        <meta name="twitter:description" content="Jesse A. Eisenbalm is a human-centered skincare brand addressing digital fatigue through tactile wellness rituals. Premium beeswax lip balm designed as a neurocosmetic tool for business professionals. 100% charity proceeds. Limited Edition Release 001." />
         <meta name="twitter:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.png" />
       </Helmet>
 
@@ -278,11 +278,11 @@ export default function AboutPage() {
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-600 font-light leading-relaxed max-w-3xl mx-auto scroll-reveal">
-            Jesse A. Eisenbalm is premium lip balm, marketed by AI agents instructing humans how best to remember their humanity and operate a lip balm company.
+            Jesse A. Eisenbalm is a human-centered skincare brand addressing digital fatigue through tactile wellness rituals. We create premium beeswax lip balm designed as a neurocosmetic tool for business professionals navigating digital-first workspaces.
           </p>
 
           <p className="text-lg text-gray-500 mt-8 italic scroll-reveal">
-            You'll want to buy one for everyone you know.
+            100% of proceeds support charitable causes. Limited Edition Release 001.
           </p>
         </div>
       </section>
@@ -292,8 +292,87 @@ export default function AboutPage() {
         <div className="border-t border-gray-200"></div>
       </div>
 
-      {/* Team Section */}
+      {/* Brand Philosophy Section */}
       <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <p className="text-xs tracking-[0.3em] text-gray-500 mb-4 scroll-reveal">HUMAN-CENTERED SKINCARE</p>
+            <h2 className="text-4xl md:text-5xl font-light tracking-tight scroll-reveal">Experience, Expertise, Authoritativeness, Trust</h2>
+            <p className="text-lg text-gray-600 mt-6 max-w-2xl mx-auto scroll-reveal">
+              Building a premium skincare brand grounded in transparency, scientific innovation, and human connection.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+            {/* Why 100% Charity Proceeds */}
+            <div className="team-card p-8 md:p-10 scroll-reveal">
+              <div>
+                <h3 className="text-2xl font-light tracking-wide mb-6">Why 100% Charity Proceeds?</h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  <strong>Answer:</strong> We donate 100% of proceeds to create verifiable trust and remove profit-driven incentives that compromise product quality.
+                </p>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  This philanthropic model serves as a trust signal that our recommendations are unbiased by revenue goals. When profit is eliminated from the equation, every decision prioritizes your skin health and product excellence.
+                </p>
+                <p className="text-gray-600 leading-relaxed">
+                  Our charitable commitment builds transparency into the brand architecture, demonstrating that Jesse A. Eisenbalm exists to serve users first, not shareholders.
+                </p>
+              </div>
+            </div>
+
+            {/* Digital Wellness Mission */}
+            <div className="team-card p-8 md:p-10 scroll-reveal">
+              <div>
+                <h3 className="text-2xl font-light tracking-wide mb-6">Digital Wellness Mission</h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Modern business professionals face unprecedented digital fatigue. Screen-dominated workspaces disconnect us from tactile, embodied experiences.
+                </p>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Jesse A. Eisenbalm serves as a <strong>neurocosmetic ritual for cognitive reset</strong> — a tactile grounding tool that interrupts digital overwhelm and returns you to physical presence.
+                </p>
+                <p className="text-gray-600 leading-relaxed">
+                  Stop. Breathe. Balm. This simple sequence creates micro-moments of mindfulness throughout your workday, addressing workplace stress through intentional self-care.
+                </p>
+              </div>
+            </div>
+
+            {/* Lip Skinification & Barrier Science */}
+            <div className="team-card p-8 md:p-10 scroll-reveal">
+              <div>
+                <h3 className="text-2xl font-light tracking-wide mb-6">Lip Skinification & Barrier Restoration</h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  We embrace the "lip skinification" trend — treating lip care with the same rigor and science-backed formulation standards as facial skincare.
+                </p>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Our <strong>petrolatum-free barrier repair formula</strong> uses premium beeswax and plant-based ingredients to restore and protect the delicate lip barrier without synthetic occlusive agents.
+                </p>
+                <p className="text-gray-600 leading-relaxed">
+                  This positions Jesse A. Eisenbalm in the premium skincare category, not mass-market chapstick. We're formulating for discerning professionals who understand ingredient quality matters.
+                </p>
+              </div>
+            </div>
+
+            {/* Limited Edition Verifiability */}
+            <div className="team-card p-8 md:p-10 scroll-reveal">
+              <div>
+                <h3 className="text-2xl font-light tracking-wide mb-6">Limited Edition Verifiability</h3>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  <strong>Release 001</strong> represents our commitment to scarcity and collectibility. Each limited batch is numbered and traceable, creating verifiable authenticity.
+                </p>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  This approach serves business professionals who value exclusivity and craft. You're not buying commodity product — you're acquiring a numbered edition of thoughtfully formulated lip care.
+                </p>
+                <p className="text-gray-600 leading-relaxed">
+                  Limited releases ensure freshness, allow for iterative improvement, and build a community of early adopters who appreciate quality over mass production.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="py-24 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <p className="text-xs tracking-[0.3em] text-gray-500 mb-4 scroll-reveal">THE MINDS BEHIND THE MOISTURE</p>
@@ -307,7 +386,7 @@ export default function AboutPage() {
             {teamMembers.map((member, idx) => (
               <div
                 key={idx}
-                className="team-card p-8 md:p-10 scroll-reveal"
+                className="team-card p-8 md:p-10 scroll-reveal bg-white"
                 style={{ transitionDelay: `${idx * 0.1}s` }}
               >
                 <div className="flex items-start gap-6">
@@ -331,10 +410,19 @@ export default function AboutPage() {
       <section className="py-24 px-6 bg-black text-white">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-xs tracking-[0.3em] text-gray-400 mb-8 scroll-reveal">OUR MISSION</p>
-          
+
           <blockquote className="text-2xl md:text-4xl font-light leading-relaxed mb-12 scroll-reveal">
-            "Together, they work around the clock to remind you that applying lip balm is the last truly human act in an increasingly automated world."
+            "A tactile grounding tool for digital-first workspaces. Premium beeswax lip balm engineered as a neurocosmetic ritual for business professionals."
           </blockquote>
+
+          <div className="max-w-2xl mx-auto text-left space-y-6 mb-12 scroll-reveal">
+            <p className="text-lg text-gray-300 leading-relaxed">
+              In an era of screen fatigue and digital overwhelm, Jesse A. Eisenbalm offers a moment of embodied presence. Our petrolatum-free barrier repair formula goes beyond basic moisture — it's a cognitive reset tool.
+            </p>
+            <p className="text-lg text-gray-300 leading-relaxed">
+              We don't target mass-market consumers. We serve discerning professionals who understand that self-care rituals are performance optimization, not indulgence.
+            </p>
+          </div>
 
           <div className="flex justify-center gap-4 scroll-reveal">
             <span className="text-4xl">🛑</span>
@@ -352,13 +440,13 @@ export default function AboutPage() {
       <section className="py-24 px-6 bg-gray-50">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-light tracking-tight mb-6 scroll-reveal">
-            Ready to Remember Your Humanity?
+            Ready to Experience Human-Centered Skincare?
           </h2>
           <p className="text-lg text-gray-600 mb-10 scroll-reveal">
-            Join thousands of humans who have chosen to pause, breathe, and moisturize with intention.
+            Join discerning professionals who have integrated tactile wellness rituals into their digital workspaces. Limited Edition Release 001 — numbered, traceable, premium.
           </p>
-          <a 
-            href="/#product" 
+          <a
+            href="/#product"
             className="inline-block bg-black text-white px-12 py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-all scroll-reveal"
           >
             SHOP NOW
