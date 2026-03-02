@@ -11,6 +11,18 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
+// Trigger a Vercel rebuild so new posts get pre-rendered
+async function triggerDeploy(reason) {
+  const hookUrl = process.env.VERCEL_DEPLOY_HOOK_URL;
+  if (!hookUrl) return; // no hook configured — skip silently
+  try {
+    await fetch(hookUrl, { method: 'POST' });
+    console.log(`🚀 Vercel deploy triggered: ${reason}`);
+  } catch (err) {
+    console.warn('⚠️  Could not trigger deploy hook:', err.message);
+  }
+}
+
 // API key auth middleware for automation routes
 function requireApiKey(req, res, next) {
   const key = req.headers['x-api-key'];
@@ -233,6 +245,7 @@ app.post('/api/posts', requireApiKey, async (req, res) => {
 
     if (error) throw error;
     console.log('✅ Blog post created:', data.slug);
+    if (data.published) triggerDeploy(`new post published: ${data.slug}`);
     res.status(201).json({ post: data });
   } catch (error) {
     console.error('❌ Error creating post:', error);
@@ -326,6 +339,7 @@ app.post('/api/admin/posts', requireAdminPassword, async (req, res) => {
 
     if (error) throw error;
     console.log('✅ Blog post created via admin UI:', data.slug);
+    if (data.published) triggerDeploy(`new post published via admin: ${data.slug}`);
     res.status(201).json({ post: data });
   } catch (error) {
     console.error('❌ Error creating post (admin):', error);
@@ -369,6 +383,7 @@ app.patch('/api/admin/posts/:id', requireAdminPassword, async (req, res) => {
       throw error;
     }
     console.log(`✅ Post ${data.slug} → published: ${data.published}`);
+    if (data.published) triggerDeploy(`post published: ${data.slug}`);
     res.json({ post: data });
   } catch (error) {
     console.error('❌ Error updating post:', error);
