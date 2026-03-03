@@ -290,11 +290,6 @@ export default function EisenbalmShop() {
             "price": "8.99",
             "availability": "https://schema.org/InStock",
             "itemCondition": "https://schema.org/NewCondition"
-          },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5",
-            "reviewCount": "247"
           }
         })}</script>
 
@@ -623,21 +618,22 @@ export default function EisenbalmShop() {
             <div className="flex items-center space-x-6">
               <button
                 onClick={() => setIsCartOpen(!isCartOpen)}
-                className="relative text-gray-600 hover:text-black transition-all duration-300 luxury-focus"
+                className="relative p-3 -mr-3 text-gray-600 hover:text-black transition-all duration-300 luxury-focus"
                 aria-label="Shopping cart"
               >
                 <ShoppingCart size={20} strokeWidth={1.5} />
                 {cartItemCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-light">
+                  <span className="absolute top-1 right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-light">
                     {cartItemCount}
                   </span>
                 )}
               </button>
 
               <button
-                className="md:hidden luxury-focus"
+                className="md:hidden p-3 -mr-3 luxury-focus"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle mobile menu"
+                aria-expanded={isMobileMenuOpen}
               >
                 {isMobileMenuOpen ? <X size={20} strokeWidth={1.5} /> : <Menu size={20} strokeWidth={1.5} />}
               </button>
@@ -749,7 +745,7 @@ export default function EisenbalmShop() {
                   <div className="order-1 md:order-2">
                     <div className="mb-8">
                       <p className="text-xs tracking-widest text-gray-500 mb-2">LIP CARE</p>
-                      <h3 className="text-4xl font-light mb-2 tracking-tight" itemProp="name">{product.name}</h3>
+                      <h2 className="text-4xl font-light mb-2 tracking-tight" itemProp="name">{product.name}</h2>
                       <p className="text-xl text-gray-600 font-light mb-6">{product.subtitle}</p>
                       <p className="text-sm text-gray-500 mb-2">{product.volume}</p>
                       <p className="text-3xl font-light mb-8" itemProp="offers" itemScope itemType="https://schema.org/Offer">
@@ -1031,7 +1027,7 @@ export default function EisenbalmShop() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">WHY CHOOSE US</p>
-            <h3 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Crafted for the Human Experience.</h3>
+            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Crafted for the Human Experience.</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">Every detail matters when you're creating moments of presence in an automated world</p>
           </div>
 

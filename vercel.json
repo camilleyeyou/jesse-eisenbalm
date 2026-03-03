@@ -2,17 +2,26 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!static/|images/|videos/|favicon\\.png|eisenbalm-2\\.png|manifest\\.json|robots\\.txt|sitemap\\.xml|llms\\.txt|logo192\\.png|logo512\\.png).*)",
       "destination": "/200.html"
     }
   ],
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/static/(.*)",
       "headers": [
         {
-          "key": "X-Robots-Tag",
-          "value": "index, follow"
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     },
@@ -22,6 +31,31 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=3600, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.html|[^.]*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
         }
       ]
     }

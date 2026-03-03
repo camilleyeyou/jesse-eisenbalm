@@ -384,7 +384,7 @@ OPENAI_API_KEY=
 GEMINI_API_KEY=
 
 # Jesse A. Eisenbalm Blog API (automation, creates published posts)
-BLOG_API_KEY=adb66a122a92b46278069f15d1d5b376103d80ea54745e0a29317896261cced8
+BLOG_API_KEY=[REDACTED — rotate this key in the Vercel dashboard and your .env file]
 BLOG_API_URL=https://jesse-eisenbalm-server.vercel.app
 
 # Admin password (for image uploads via /api/admin/upload)

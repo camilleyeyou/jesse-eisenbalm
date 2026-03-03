@@ -133,18 +133,6 @@ export default function FaqPage() {
         <meta name="twitter:title" content="FAQ - Jesse A. Eisenbalm" />
         <meta name="twitter:description" content="Answers to common questions about our premium beeswax lip balm." />
 
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": faqData.map(item => ({
-            "@type": "Question",
-            "name": item.question,
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": item.answer
-            }
-          }))
-        })}</script>
       </Helmet>
 
       <div id="scroll-progress" className="scroll-progress"></div>
