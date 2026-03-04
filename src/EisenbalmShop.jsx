@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ShoppingCart, Menu, X, ChevronRight, CheckCircle } from 'lucide-react';
@@ -9,7 +9,7 @@ export default function EisenbalmShop() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [selectedImage, setSelectedImage] = useState({});
-  const [scrollY, setScrollY] = useState(0);
+  const scrollYRef = useRef(0);
   const [email, setEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState('');
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -72,12 +72,32 @@ export default function EisenbalmShop() {
   }, []);
 
   useEffect(() => {
+    const scaleEl = document.querySelector('.scale-on-scroll');
+    const parallaxEl = document.querySelector('.parallax-slow');
+    const parallaxImg = parallaxEl?.querySelector('img');
+
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      const y = window.scrollY;
+      scrollYRef.current = y;
+
+      // Progress bar
       const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = windowHeight > 0 ? (window.scrollY / windowHeight) * 100 : 0;
+      const scrolled = windowHeight > 0 ? (y / windowHeight) * 100 : 0;
       const progressBar = document.getElementById('scroll-progress');
       if (progressBar) progressBar.style.width = `${scrolled}%`;
+
+      // Scale-on-scroll (product image)
+      if (scaleEl) {
+        scaleEl.style.transform = `scale(${0.95 + Math.min(y * 0.0001, 0.05)})`;
+      }
+
+      // Parallax (philosophy section)
+      if (parallaxEl) {
+        parallaxEl.style.transform = `translateY(${y * 0.2}px)`;
+      }
+      if (parallaxImg) {
+        parallaxImg.style.transform = `scale(${1.1 + Math.min(y * 0.00005, 0.1)})`;
+      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
@@ -151,9 +171,9 @@ export default function EisenbalmShop() {
       subtitle: "The Original",
       price: 8.99,
       images: [
-       "/images/products/eisenbalm-1.png",
-       "/images/products/eisenbalm-2.png",
-       "/images/products/eisenbalm-3.png"
+       "/images/products/eisenbalm-1.webp",
+       "/images/products/eisenbalm-2.webp",
+       "/images/products/eisenbalm-3.webp"
       ],
       description: "Limited Edition. Release 001. Hand numbered.",
       features: ["Petrolatum-free barrier restoration", "Protection against transepidermal water loss", "Neurocosmetic cognitive reset ritual", "Executive grounding tool", "100% charity proceeds"],
@@ -250,7 +270,7 @@ export default function EisenbalmShop() {
 
       <Helmet>
         <title>Jesse A. Eisenbalm | Digital Wellness Ritual for Business Professionals</title>
-        <meta name="description" content="Jesse A. Eisenbalm is a premium, limited-edition beeswax lip balm designed as a digital wellness ritual for business professionals. Provides petrolatum-free barrier restoration while serving as a tactile reminder to maintain human connection in an AI-driven world. $8.99. 100% proceeds to charity." />
+        <meta name="description" content="Premium beeswax lip balm. Petrolatum-free barrier restoration for business professionals. Limited Edition Release 001. $8.99. 100% proceeds to charity." />
         <meta name="keywords" content="petrolatum-free barrier repair, executive grounding ritual, neurocosmetic lip balm, digital wellness skincare, lip skinification, bio-adaptive lip care, business professional lip balm, tactile mindfulness tool, human-centered skincare, digital fatigue relief" />
         <meta name="author" content="Jesse A. Eisenbalm" />
         <meta name="robots" content="index, follow" />
@@ -260,7 +280,7 @@ export default function EisenbalmShop() {
         <meta property="og:url" content="https://jesseaeisenbalm.com/" />
         <meta property="og:title" content="Jesse A. Eisenbalm - Digital Wellness Ritual for Business Professionals" />
         <meta property="og:description" content="Premium beeswax lip balm designed as a neurocosmetic cognitive reset. Limited Edition Release 001. Petrolatum-free barrier restoration. $8.99. Stop. Breathe. Balm. 100% charity proceeds." />
-        <meta property="og:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.png" />
+        <meta property="og:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.webp" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="Jesse A. Eisenbalm" />
@@ -268,16 +288,16 @@ export default function EisenbalmShop() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Jesse A. Eisenbalm - Executive Grounding Ritual" />
         <meta name="twitter:description" content="Digital wellness tool for business professionals. Petrolatum-free barrier repair. Limited Edition. $8.99. Stop. Breathe. Balm." />
-        <meta name="twitter:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.png" />
+        <meta name="twitter:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.webp" />
 
         <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org/",
+          "@context": "https://schema.org",
           "@type": "Product",
           "name": "Jesse A. Eisenbalm - The Original",
           "image": [
-            "https://jesseaeisenbalm.com/images/products/eisenbalm-1.png",
-            "https://jesseaeisenbalm.com/images/products/eisenbalm-2.png",
-            "https://jesseaeisenbalm.com/images/products/eisenbalm-3.png"
+            "https://jesseaeisenbalm.com/images/products/eisenbalm-1.webp",
+            "https://jesseaeisenbalm.com/images/products/eisenbalm-2.webp",
+            "https://jesseaeisenbalm.com/images/products/eisenbalm-3.webp"
           ],
           "description": "Premium beeswax lip balm designed as a digital wellness ritual for business professionals. Provides petrolatum-free barrier restoration and all-day protection against transepidermal water loss (TEWL) during extended screen time. Limited Edition Release 001. Hand numbered. 4.5g / 0.15 oz.",
           "material": "Premium Natural Beeswax",
@@ -298,9 +318,16 @@ export default function EisenbalmShop() {
           "@type": "Organization",
           "name": "Jesse A. Eisenbalm",
           "url": "https://jesseaeisenbalm.com",
-          "logo": "https://jesseaeisenbalm.com/images/products/eisenbalm-1.png",
+          "logo": { "@type": "ImageObject", "url": "https://jesseaeisenbalm.com/logo192.png", "width": 192, "height": 192 },
           "description": "Human-centered skincare for digital wellness. Premium beeswax lip balm positioned as a neurocosmetic ritual for business professionals experiencing digital fatigue. Stop. Breathe. Balm. 100% charity proceeds.",
           "sameAs": ["https://www.linkedin.com/company/108396769/"]
+        })}</script>
+
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Jesse A. Eisenbalm",
+          "url": "https://jesseaeisenbalm.com"
         })}</script>
       </Helmet>
 
@@ -665,7 +692,7 @@ export default function EisenbalmShop() {
             loop
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
             className={`absolute w-full h-full object-cover hero-video ${videoLoaded ? 'loaded' : ''}`}
             onLoadedData={() => setVideoLoaded(true)}
             onCanPlayThrough={() => {
@@ -706,22 +733,21 @@ export default function EisenbalmShop() {
       </section>
 
       {/* Product Section */}
-      <section id="product" className="py-24 px-6 bg-white scroll-reveal scroll-snap-section" itemScope itemType="https://schema.org/Product">
+      <section id="product" className="py-24 px-6 bg-white scroll-reveal scroll-snap-section">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {products.map((product) => {
               const currentImage = selectedImage[product.id] || product.images[0];
               return (
                 <React.Fragment key={product.id}>
-                  <div className="order-2 md:order-1 scale-on-scroll" style={{
-                    transform: `scale(${0.95 + Math.min(scrollY * 0.0001, 0.05)})`
-                  }}>
+                  <div className="order-2 md:order-1 scale-on-scroll">
                     <div className="relative aspect-square bg-gray-50 mb-4 overflow-hidden image-reveal scroll-reveal">
                       <img
                         src={currentImage}
                         alt="Jesse A. Eisenbalm premium beeswax lip balm tube - Limited Edition Release 001"
+                        width={1024}
+                        height={1536}
                         className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                        itemProp="image"
                       />
                     </div>
 
@@ -736,7 +762,7 @@ export default function EisenbalmShop() {
                           style={{ transitionDelay: `${idx * 0.1}s` }}
                           aria-label={`View product image ${idx + 1}`}
                         >
-                          <img src={img} alt={`Jesse A. Eisenbalm lip balm - angle ${idx + 1} of 3`} className="w-full h-full object-cover" />
+                          <img src={img} alt={`Jesse A. Eisenbalm lip balm - angle ${idx + 1} of 3`} width={80} height={80} loading="lazy" className="w-full h-full object-cover" />
                         </button>
                       ))}
                     </div>
@@ -745,18 +771,16 @@ export default function EisenbalmShop() {
                   <div className="order-1 md:order-2">
                     <div className="mb-8">
                       <p className="text-xs tracking-widest text-gray-500 mb-2">LIP CARE</p>
-                      <h2 className="text-4xl font-light mb-2 tracking-tight" itemProp="name">{product.name}</h2>
+                      <h2 className="text-4xl font-light mb-2 tracking-tight">{product.name}</h2>
                       <p className="text-xl text-gray-600 font-light mb-6">{product.subtitle}</p>
                       <p className="text-sm text-gray-500 mb-2">{product.volume}</p>
-                      <p className="text-3xl font-light mb-8" itemProp="offers" itemScope itemType="https://schema.org/Offer">
-                        <span itemProp="price" content={product.price}>$</span>
-                        <span itemProp="priceCurrency" content="USD">{product.price}</span>
-                        <meta itemProp="availability" content="https://schema.org/InStock" />
+                      <p className="text-3xl font-light mb-8">
+                        ${product.price}
                       </p>
                     </div>
 
                     <div className="mb-8">
-                      <p className="text-base leading-relaxed text-gray-700 mb-6" itemProp="description">
+                      <p className="text-base leading-relaxed text-gray-700 mb-6">
                         {product.description}
                       </p>
                       <div className="space-y-2 mb-8">
@@ -856,8 +880,8 @@ export default function EisenbalmShop() {
             /* No posts yet — keep visible placeholder */
             <div className="grid md:grid-cols-3 gap-12">
               {[
-                { image: "/images/grid/image-1.png", category: "PHILOSOPHY", title: "Why Rituals Matter in a Digital Age", excerpt: "In an era of automation and AI-generated everything, small acts of self-care become revolutionary." },
-                { image: "/images/grid/image-20.png", category: "INGREDIENTS OF LIFE", title: "The Modern Memento Mori", excerpt: "Let's face it, you're going to die some day. Lip balm is the small ritual that walks you back home." },
+                { image: "/images/grid/image-1.webp", category: "PHILOSOPHY", title: "Why Rituals Matter in a Digital Age", excerpt: "In an era of automation and AI-generated everything, small acts of self-care become revolutionary." },
+                { image: "/images/grid/image-20.webp", category: "INGREDIENTS OF LIFE", title: "The Modern Memento Mori", excerpt: "Let's face it, you're going to die some day. Lip balm is the small ritual that walks you back home." },
                 { image: "https://images.unsplash.com/photo-1487260211189-670c54da558d?w=800&h=600&fit=crop", category: "CULTURE", title: "Stop. Breathe. Balm.", excerpt: "Three words. One ritual. A daily reminder that being human is enough." }
               ].map((post, idx) => (
                 <article key={idx} className="group clip-reveal scroll-reveal" style={{ transitionDelay: `${idx * 0.15}s` }}>
@@ -986,14 +1010,14 @@ export default function EisenbalmShop() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { src: "/images/grid/image-1.png", alt: "Jesse A. Eisenbalm lip balm in minimalist setting" },
-              { src: "/images/grid/image-2.png", alt: "Premium beeswax lip balm close-up texture" },
-              { src: "/images/grid/image-3.png", alt: "Applying Jesse A. Eisenbalm as daily ritual" },
-              { src: "/images/grid/image-4.png", alt: "Limited edition lip balm packaging detail" },
-              { src: "/images/grid/image-5.png", alt: "Natural beeswax lip balm product shot" },
-              { src: "/images/grid/image-6.png", alt: "Jesse A. Eisenbalm lifestyle product photo" },
-              { src: "/images/grid/image-7.png", alt: "Hand-numbered lip balm tube detail" },
-              { src: "/images/grid/image-8.png", alt: "Stop Breathe Balm mindfulness moment" }
+              { src: "/images/grid/image-1.webp", alt: "Jesse A. Eisenbalm lip balm in minimalist setting", w: 1024, h: 1024 },
+              { src: "/images/grid/image-2.webp", alt: "Premium beeswax lip balm close-up texture", w: 1536, h: 1024 },
+              { src: "/images/grid/image-3.webp", alt: "Applying Jesse A. Eisenbalm as daily ritual", w: 1024, h: 1536 },
+              { src: "/images/grid/image-4.webp", alt: "Limited edition lip balm packaging detail", w: 1024, h: 1024 },
+              { src: "/images/grid/image-5.webp", alt: "Natural beeswax lip balm product shot", w: 1024, h: 1536 },
+              { src: "/images/grid/image-6.webp", alt: "Jesse A. Eisenbalm lifestyle product photo", w: 1024, h: 1024 },
+              { src: "/images/grid/image-7.webp", alt: "Hand-numbered lip balm tube detail", w: 1024, h: 1024 },
+              { src: "/images/grid/image-8.webp", alt: "Stop Breathe Balm mindfulness moment", w: 1536, h: 1024 }
             ].map((img, idx) => (
               <div
                 key={idx}
@@ -1003,6 +1027,9 @@ export default function EisenbalmShop() {
                 <img
                   src={img.src}
                   alt={img.alt}
+                  width={img.w}
+                  height={img.h}
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
@@ -1057,16 +1084,14 @@ export default function EisenbalmShop() {
         <div className="absolute inset-0 z-0">
           <div
             className="absolute inset-0 parallax-slow"
-            style={{ transform: `translateY(${scrollY * 0.2}px)`, willChange: 'transform' }}
+            style={{ willChange: 'transform' }}
           >
             <img
               src="/images/backgrounds/about-bg.jpg"
               alt="Jesse A. Eisenbalm philosophy - Stay human in an AI world"
               className="w-full h-full object-cover"
-              style={{
-                transform: `scale(${1.1 + Math.min(scrollY * 0.00005, 0.1)})`,
-                transformOrigin: 'center center'
-              }}
+              loading="lazy"
+              style={{ transformOrigin: 'center center' }}
             />
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>

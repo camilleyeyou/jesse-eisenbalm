@@ -14,7 +14,9 @@ const path = require('path');
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'https://jesse-eisenbalm-server.vercel.app';
 const SITE_URL = 'https://jesseaeisenbalm.com';
-const SHELL_PATH = path.join(__dirname, '../build/200.html');
+const SHELL_200 = path.join(__dirname, '../build/200.html');
+const SHELL_INDEX = path.join(__dirname, '../build/index.html');
+const SHELL_PATH = fs.existsSync(SHELL_200) ? SHELL_200 : SHELL_INDEX;
 const BLOG_DIR = path.join(__dirname, '../build/blog');
 
 function escapeHtml(str) {
@@ -98,8 +100,9 @@ function buildHtml(shell, post) {
     <script type="application/ld+json">${articleSchema}</script>
     <script type="application/ld+json">${breadcrumbSchema}</script>`;
 
-  // Inject before </head>
-  return shell.replace('</head>', `${metaTags}\n  </head>`);
+  // Replace existing <title> to avoid duplicates, then inject before </head>
+  let html = shell.replace(/<title>[^<]*<\/title>/, '');
+  return html.replace('</head>', `${metaTags}\n  </head>`);
 }
 
 async function fetchPosts() {
@@ -113,7 +116,7 @@ async function main() {
   console.log('📝 Generating blog post pre-renders...');
 
   if (!fs.existsSync(SHELL_PATH)) {
-    console.warn('⚠️  build/200.html not found — run `npm run build` first');
+    console.warn('⚠️  build/200.html and build/index.html not found — run `npm run build` first');
     process.exit(0);
   }
 
@@ -146,6 +149,92 @@ async function main() {
   }
 
   console.log(`✅ Pre-rendered ${written} blog posts to build/blog/[slug]/index.html`);
+
+  // --- Homepage pre-rendering ---
+  prerenderHomepage(shell);
+}
+
+function prerenderHomepage(shell) {
+  console.log('🏠 Pre-rendering homepage with SEO metadata...');
+
+  const title = 'Jesse A. Eisenbalm | Premium Beeswax Lip Balm — $8.99 | 100% Charity';
+  const description = 'Premium beeswax lip balm. Petrolatum-free barrier restoration for business professionals. Limited Edition Release 001. $8.99. 100% proceeds to charity.';
+  const canonical = `${SITE_URL}/`;
+  const image = `${SITE_URL}/images/products/eisenbalm-1.webp`;
+
+  const productSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    'name': 'Jesse A. Eisenbalm - The Original',
+    'image': [
+      `${SITE_URL}/images/products/eisenbalm-1.webp`,
+      `${SITE_URL}/images/products/eisenbalm-2.webp`,
+      `${SITE_URL}/images/products/eisenbalm-3.webp`
+    ],
+    'description': 'Premium beeswax lip balm designed as a digital wellness ritual for business professionals. Petrolatum-free barrier restoration. Limited Edition Release 001. Hand numbered. 4.5g / 0.15 oz.',
+    'material': 'Premium Natural Beeswax',
+    'brand': { '@type': 'Brand', 'name': 'Jesse A. Eisenbalm' },
+    'offers': {
+      '@type': 'Offer',
+      'url': `${SITE_URL}/`,
+      'priceCurrency': 'USD',
+      'price': '8.99',
+      'availability': 'https://schema.org/InStock',
+      'itemCondition': 'https://schema.org/NewCondition'
+    }
+  });
+
+  const orgSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    'name': 'Jesse A. Eisenbalm',
+    'url': SITE_URL,
+    'logo': {
+      '@type': 'ImageObject',
+      'url': `${SITE_URL}/logo192.png`,
+      'width': 192,
+      'height': 192
+    },
+    'description': 'Human-centered skincare for digital wellness. Premium beeswax lip balm for business professionals. 100% charity proceeds.',
+    'sameAs': ['https://www.linkedin.com/company/108396769/']
+  });
+
+  const websiteSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    'name': 'Jesse A. Eisenbalm',
+    'url': SITE_URL
+  });
+
+  const homeTags = `
+    <title>${escapeHtml(title)}</title>
+    <link rel="canonical" href="${canonical}" />
+    <meta name="description" content="${escapeHtml(description)}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="${canonical}" />
+    <meta property="og:title" content="${escapeHtml(title)}" />
+    <meta property="og:description" content="${escapeHtml(description)}" />
+    <meta property="og:image" content="${escapeHtml(image)}" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="1536" />
+    <meta property="og:site_name" content="Jesse A. Eisenbalm" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${escapeHtml(title)}" />
+    <meta name="twitter:description" content="${escapeHtml(description)}" />
+    <meta name="twitter:image" content="${escapeHtml(image)}" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <script type="application/ld+json">${productSchema}</script>
+    <script type="application/ld+json">${orgSchema}</script>
+    <script type="application/ld+json">${websiteSchema}</script>`;
+
+  // Replace existing <title> and inject
+  let html = shell.replace(/<title>[^<]*<\/title>/, '');
+  html = html.replace('</head>', `${homeTags}\n  </head>`);
+
+  // Write to both index.html and 200.html
+  const indexPath = path.join(__dirname, '../build/index.html');
+  fs.writeFileSync(indexPath, html, 'utf-8');
+  console.log('✅ Homepage pre-rendered with SEO metadata (build/index.html)');
 }
 
 main().catch(err => {

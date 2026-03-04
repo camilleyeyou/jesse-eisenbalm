@@ -1,0 +1,288 @@
+{
+  "mobile": {
+    "viewportWidth": 375,
+    "viewportHeight": 812,
+    "hasHorizontalScroll": false,
+    "h1Text": "ARE THESE\nMY REAL LIPS?",
+    "h1Visible": true,
+    "smallTargets": [
+      {
+        "tag": "A",
+        "text": "VIEW ALL POSTS \u2192",
+        "width": 163,
+        "height": 17,
+        "top": 3947
+      },
+      {
+        "tag": "A",
+        "text": "LinkedIn",
+        "width": 327,
+        "height": 20,
+        "top": 10423
+      },
+      {
+        "tag": "A",
+        "text": "Email Us",
+        "width": 327,
+        "height": 20,
+        "top": 10451
+      },
+      {
+        "tag": "A",
+        "text": "ABOUT",
+        "width": 48,
+        "height": 16,
+        "top": 10737
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "width": 27,
+        "height": 16,
+        "top": 10737
+      },
+      {
+        "tag": "A",
+        "text": "PRIVACY POLICY",
+        "width": 113,
+        "height": 16,
+        "top": 10737
+      }
+    ],
+    "fontSizes": {
+      "24px": 2,
+      "14px": 44,
+      "72px": 1,
+      "20px": 23,
+      "16px": 9,
+      "12px": 22,
+      "36px": 6,
+      "30px": 3,
+      "18px": 11,
+      "48px": 1
+    },
+    "aboveFoldCTAs": [
+      {
+        "text": "BUY NOW",
+        "tag": "A",
+        "top": 731
+      }
+    ],
+    "hasNav": true,
+    "hasHamburger": true,
+    "metaViewport": "width=device-width,initial-scale=1",
+    "aboveFoldElements": [
+      {
+        "tag": "A",
+        "text": "JESSE A. EISENBALM",
+        "top": 8,
+        "classes": "text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "top": 18,
+        "classes": "relative p-3 -mr-3 text-gray-600 hover:text-black transition-all duration-300 luxury-focus"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "top": 18,
+        "classes": "md:hidden p-3 -mr-3 luxury-focus"
+      },
+      {
+        "tag": "H1",
+        "text": "ARE THESE\nMY REAL LIPS?",
+        "top": 189,
+        "classes": "text-7xl md:text-9xl font-light text-white mb-8 tracking-tight leading-none"
+      },
+      {
+        "tag": "P",
+        "text": "STOP. BREATHE. BALM.",
+        "top": 509,
+        "classes": "text-xl md:text-2xl text-white/90 mb-4 font-light tracking-widest"
+      },
+      {
+        "tag": "P",
+        "text": "A human-only ritual for an AI-everywhere world.\nLimited Edition.\nRelease 001.\nAl",
+        "top": 553,
+        "classes": "text-base md:text-lg text-white/80 mb-12 max-w-xl mx-auto font-light leading-relaxed"
+      },
+      {
+        "tag": "A",
+        "text": "BUY NOW",
+        "top": 731,
+        "classes": "luxury-button bg-white text-black px-12 py-4 text-sm tracking-[0.2em] hover:bg-gray-50 transition-al"
+      }
+    ],
+    "pageTitle": "Jesse A. Eisenbalm | Digital Wellness Ritual for Business Professionals",
+    "bodyScrollWidth": 375,
+    "htmlScrollWidth": 375
+  },
+  "desktop": {
+    "viewportWidth": 1440,
+    "viewportHeight": 900,
+    "h1Text": "ARE THESE\nMY REAL LIPS?",
+    "h1Visible": true,
+    "aboveFoldElements": [
+      {
+        "tag": "A",
+        "text": "JESSE A. EISENBALM",
+        "top": 24,
+        "left": 128,
+        "width": 308,
+        "height": 32
+      },
+      {
+        "tag": "A",
+        "text": "PRODUCT",
+        "top": 30,
+        "left": 484,
+        "width": 82,
+        "height": 20
+      },
+      {
+        "tag": "A",
+        "text": "ABOUT",
+        "top": 30,
+        "left": 597,
+        "width": 58,
+        "height": 20
+      },
+      {
+        "tag": "A",
+        "text": "PHILOSOPHY",
+        "top": 30,
+        "left": 688,
+        "width": 109,
+        "height": 20
+      },
+      {
+        "tag": "A",
+        "text": "JOURNAL",
+        "top": 30,
+        "left": 829,
+        "width": 79,
+        "height": 20
+      },
+      {
+        "tag": "A",
+        "text": "CONTACT",
+        "top": 30,
+        "left": 940,
+        "width": 80,
+        "height": 20
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "top": 30,
+        "left": 1052,
+        "width": 33,
+        "height": 20
+      },
+      {
+        "tag": "A",
+        "text": "PRIVACY",
+        "top": 30,
+        "left": 1117,
+        "width": 72,
+        "height": 20
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "top": 18,
+        "left": 1280,
+        "width": 44,
+        "height": 44
+      },
+      {
+        "tag": "H1",
+        "text": "ARE THESE\nMY REAL LIPS?",
+        "top": 256,
+        "left": 329,
+        "width": 781,
+        "height": 256
+      },
+      {
+        "tag": "P",
+        "text": "STOP. BREATHE. BALM.",
+        "top": 544,
+        "left": 329,
+        "width": 781,
+        "height": 32
+      },
+      {
+        "tag": "P",
+        "text": "A human-only ritual for an AI-everywhere world.\nLimited Edition.\nRelease 001.\nAl",
+        "top": 592,
+        "left": 432,
+        "width": 576,
+        "height": 112
+      },
+      {
+        "tag": "A",
+        "text": "BUY NOW",
+        "top": 752,
+        "left": 616,
+        "width": 208,
+        "height": 54
+      }
+    ],
+    "aboveFoldCTAs": [
+      {
+        "text": "BUY NOW",
+        "tag": "A",
+        "top": 752,
+        "width": 208,
+        "height": 54
+      }
+    ],
+    "aboveFoldImages": [],
+    "fontSizes": {
+      "24px": 3,
+      "14px": 41,
+      "18px": 8,
+      "12px": 22,
+      "20px": 16,
+      "30px": 3,
+      "16px": 8
+    },
+    "navLinks": [
+      {
+        "text": "JESSE A. EISENBALM",
+        "href": "/"
+      },
+      {
+        "text": "PRODUCT",
+        "href": "#product"
+      },
+      {
+        "text": "ABOUT",
+        "href": "/about"
+      },
+      {
+        "text": "PHILOSOPHY",
+        "href": "#philosophy"
+      },
+      {
+        "text": "JOURNAL",
+        "href": "/blog"
+      },
+      {
+        "text": "CONTACT",
+        "href": "#contact"
+      },
+      {
+        "text": "FAQ",
+        "href": "/faq"
+      },
+      {
+        "text": "PRIVACY",
+        "href": "/privacy-policy"
+      }
+    ],
+    "pageTitle": "Jesse A. Eisenbalm | Digital Wellness Ritual for Business Professionals"
+  }
+}
