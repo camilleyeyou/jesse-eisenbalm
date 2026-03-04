@@ -303,13 +303,22 @@ export default function EisenbalmShop() {
           "material": "Premium Natural Beeswax",
           "additionalProperty": [{"@type": "PropertyValue", "name": "Edition", "value": "Release 001 - Hand Numbered"}, {"@type": "PropertyValue", "name": "Charitable Model", "value": "100% of proceeds benefit charitable causes"}, {"@type": "PropertyValue", "name": "Target Audience", "value": "Business Professionals & Executives"}, {"@type": "PropertyValue", "name": "Primary Use", "value": "Digital wellness ritual and cognitive reset"}],
           "brand": { "@type": "Brand", "name": "Jesse A. Eisenbalm" },
+          "sku": "JAE-001",
           "offers": {
             "@type": "Offer",
             "url": "https://jesseaeisenbalm.com/#product",
             "priceCurrency": "USD",
             "price": "8.99",
+            "priceValidUntil": "2026-12-31",
             "availability": "https://schema.org/InStock",
-            "itemCondition": "https://schema.org/NewCondition"
+            "itemCondition": "https://schema.org/NewCondition",
+            "shippingDetails": {
+              "@type": "OfferShippingDetails",
+              "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "USD" },
+              "shippingDestination": { "@type": "DefinedRegion", "addressCountry": ["US", "CA", "GB", "AU", "DE", "FR", "IT", "ES", "NL", "BE"] },
+              "deliveryTime": { "@type": "ShippingDeliveryTime", "handlingTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 2, "unitCode": "DAY" }, "transitTime": { "@type": "QuantitativeValue", "minValue": 2, "maxValue": 5, "unitCode": "DAY" } }
+            },
+            "seller": { "@type": "Organization", "name": "Jesse A. Eisenbalm" }
           }
         })}</script>
 
@@ -916,21 +925,21 @@ export default function EisenbalmShop() {
           <div className="grid md:grid-cols-3 gap-12">
             {[
               {
-                text: "This isn't just lip balm. It's a daily reminder to stay present. Before every Zoom meeting, I take those 5 seconds to stop, breathe, and apply. It's become my grounding ritual in an otherwise chaotic workday. The formula is incredible too—lasts through coffee, calls, and everything.",
-                author: "Sarah Chen",
-                role: "Product Designer, Google",
+                text: "This isn't just lip balm. It's a daily reminder to stay present. Before every Zoom meeting, I take those 5 seconds to stop, breathe, and apply. It's become my grounding ritual in an otherwise chaotic workday. The formula is incredible too — lasts through coffee, calls, and everything.",
+                author: "S.C.",
+                role: "Product Designer",
                 location: "San Francisco, CA"
               },
               {
-                text: "I bought it for the absurdist AI marketing angle. I stayed because it's genuinely the best lip balm I've ever used. The packaging alone makes it worth it—minimalist, premium, and it actually feels special to use. My entire team asked where I got it.",
-                author: "Marcus Rodriguez",
-                role: "Startup Founder, YC W24",
+                text: "I bought it for the absurdist AI marketing angle. I stayed because it's genuinely the best lip balm I've ever used. The packaging alone makes it worth it — minimalist, premium, and it actually feels special to use. My entire team asked where I got it.",
+                author: "M.R.",
+                role: "Startup Founder",
                 location: "New York, NY"
               },
               {
                 text: "As someone who creates content about wellness and mindfulness, I'm constantly pitched products. This is one of the few I actually use daily and recommend genuinely. The 'stop, breathe, balm' ritual has become part of my morning routine. It's small but meaningful.",
-                author: "Jamie Park",
-                role: "Wellness Creator, 250K followers",
+                author: "J.P.",
+                role: "Wellness Creator",
                 location: "Los Angeles, CA"
               }
             ].map((testimonial, idx) => (
@@ -1256,13 +1265,13 @@ export default function EisenbalmShop() {
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-xs text-gray-500 tracking-widest">© 2026 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
             <div className="flex gap-6">
-              <Link to="/about" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
+              <Link to="/about" className="text-xs text-gray-500 hover:text-white transition tracking-widest py-3">
                 ABOUT
               </Link>
-              <Link to="/faq" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
+              <Link to="/faq" className="text-xs text-gray-500 hover:text-white transition tracking-widest py-3">
                 FAQ
               </Link>
-              <Link to="/privacy-policy" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
+              <Link to="/privacy-policy" className="text-xs text-gray-500 hover:text-white transition tracking-widest py-3">
                 PRIVACY POLICY
               </Link>
             </div>

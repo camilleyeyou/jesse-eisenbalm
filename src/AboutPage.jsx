@@ -96,20 +96,44 @@ export default function AboutPage() {
     }}>
 
       <Helmet>
-        <title>About Jesse A. Eisenbalm | Meet Our AI Marketing Team</title>
-        <meta name="description" content="Jesse A. Eisenbalm is a human-centered skincare brand addressing digital fatigue through tactile wellness rituals. Premium beeswax lip balm designed as a neurocosmetic tool for business professionals. 100% charity proceeds. Limited Edition Release 001." />
+        <title>About Jesse A. Eisenbalm | Our Story & Mission</title>
+        <meta name="description" content="Jesse A. Eisenbalm is a human-centered skincare brand addressing digital fatigue through tactile wellness rituals. Premium beeswax lip balm for business professionals. 100% charity proceeds." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://jesseaeisenbalm.com/about" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://jesseaeisenbalm.com/about" />
-        <meta property="og:title" content="About Jesse A. Eisenbalm - Our AI Marketing Team" />
-        <meta property="og:description" content="Jesse A. Eisenbalm is a human-centered skincare brand addressing digital fatigue through tactile wellness rituals. Premium beeswax lip balm designed as a neurocosmetic tool for business professionals. 100% charity proceeds. Limited Edition Release 001." />
-        <meta property="og:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.png" />
+        <meta property="og:title" content="About Jesse A. Eisenbalm | Our Story & Mission" />
+        <meta property="og:description" content="Human-centered skincare brand addressing digital fatigue through tactile wellness rituals. Premium beeswax lip balm. 100% charity proceeds." />
+        <meta property="og:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.webp" />
         <meta property="og:site_name" content="Jesse A. Eisenbalm" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="About Jesse A. Eisenbalm - Our AI Marketing Team" />
-        <meta name="twitter:description" content="Jesse A. Eisenbalm is a human-centered skincare brand addressing digital fatigue through tactile wellness rituals. Premium beeswax lip balm designed as a neurocosmetic tool for business professionals. 100% charity proceeds. Limited Edition Release 001." />
-        <meta name="twitter:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.png" />
+        <meta name="twitter:title" content="About Jesse A. Eisenbalm | Our Story & Mission" />
+        <meta name="twitter:description" content="Human-centered skincare brand addressing digital fatigue. Premium beeswax lip balm. 100% charity proceeds." />
+        <meta name="twitter:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.webp" />
+
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "name": "About Jesse A. Eisenbalm",
+          "url": "https://jesseaeisenbalm.com/about",
+          "mainEntity": {
+            "@type": "Organization",
+            "name": "Jesse A. Eisenbalm",
+            "url": "https://jesseaeisenbalm.com",
+            "logo": { "@type": "ImageObject", "url": "https://jesseaeisenbalm.com/logo192.png", "width": 192, "height": 192 },
+            "description": "Human-centered skincare brand addressing digital fatigue through tactile wellness rituals. 100% charity proceeds.",
+            "sameAs": ["https://www.linkedin.com/company/108396769/"]
+          }
+        })}</script>
+
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jesseaeisenbalm.com/" },
+            { "@type": "ListItem", "position": 2, "name": "About", "item": "https://jesseaeisenbalm.com/about" }
+          ]
+        })}</script>
       </Helmet>
 
       <div id="scroll-progress" className="scroll-progress"></div>
@@ -297,7 +321,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <p className="text-xs tracking-[0.3em] text-gray-500 mb-4 scroll-reveal">HUMAN-CENTERED SKINCARE</p>
-            <h2 className="text-4xl md:text-5xl font-light tracking-tight scroll-reveal">Experience, Expertise, Authoritativeness, Trust</h2>
+            <h2 className="text-4xl md:text-5xl font-light tracking-tight scroll-reveal">What We Stand For</h2>
             <p className="text-lg text-gray-600 mt-6 max-w-2xl mx-auto scroll-reveal">
               Building a premium skincare brand grounded in transparency, scientific innovation, and human connection.
             </p>

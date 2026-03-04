@@ -10,7 +10,7 @@ const faqData = [
   },
   {
     question: "Why is beeswax better than petrolatum for professionals?",
-    answer: "Beeswax provides petrolatum-free barrier restoration without the outdated petroleum base. It forms a bio-compatible occlusive layer that prevents transepidermal water loss (TEWL) during 8+ hour workdays in climate-controlled office environments. Unlike petroleum-based products, beeswax aligns with modern consumer expectations — 89% of professionals now refuse petrolatum-based lip care. Our formula supports lip barrier health (lips have only 3-5 cell layers vs. 10-15 on the face and no sebaceous glands), making barrier protection essential."
+    answer: "Beeswax provides petrolatum-free barrier restoration without the outdated petroleum base. It forms a bio-compatible occlusive layer that prevents transepidermal water loss (TEWL) during 8+ hour workdays in climate-controlled office environments. Unlike petroleum-based products, beeswax aligns with modern consumer expectations for cleaner ingredients. Our formula supports lip barrier health (lips have only 3-5 cell layers vs. 10-15 on the face and no sebaceous glands), making barrier protection essential."
   },
   {
     question: "What is the 'Stop. Breathe. Balm.' ritual?",
