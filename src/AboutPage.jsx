@@ -221,7 +221,7 @@ export default function AboutPage() {
               <a href="/" className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
                 JESSE A. EISENBALM
               </a>
-              <div className="hidden md:flex space-x-8">
+              <div className="hidden lg:flex space-x-8">
                 <a href="/#product" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 relative group">
                   PRODUCT
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
@@ -250,7 +250,7 @@ export default function AboutPage() {
             </div>
 
             <button
-              className="md:hidden luxury-focus"
+              className="lg:hidden luxury-focus"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle mobile menu"
             >
@@ -260,7 +260,7 @@ export default function AboutPage() {
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100 fade-in">
+          <div className="lg:hidden bg-white border-t border-gray-100 fade-in">
             <div className="px-6 py-6 space-y-6">
               <a href="/#product" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">PRODUCT</a>
               <a href="/about" className="block text-sm tracking-[0.15em] text-black">ABOUT</a>
@@ -506,12 +506,12 @@ export default function AboutPage() {
           </div>
 
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-gray-500 tracking-widest">© 2026 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
-            <div className="flex gap-6">
-              <a href="/faq" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
+            <p className="text-sm text-gray-400 tracking-widest">&copy; 2026 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
+            <div className="flex gap-4">
+              <a href="/faq" className="text-sm text-gray-400 hover:text-white transition tracking-widest px-2 py-3">
                 FAQ
               </a>
-              <a href="/privacy-policy" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
+              <a href="/privacy-policy" className="text-sm text-gray-400 hover:text-white transition tracking-widest px-2 py-3">
                 PRIVACY POLICY
               </a>
             </div>

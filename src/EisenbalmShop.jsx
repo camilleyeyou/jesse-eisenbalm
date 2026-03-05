@@ -619,7 +619,7 @@ export default function EisenbalmShop() {
               <Link to="/" className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
                 JESSE A. EISENBALM
               </Link>
-              <div className="hidden md:flex space-x-8">
+              <div className="hidden lg:flex space-x-8">
                 <a href="#product" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 luxury-focus relative group">
                   PRODUCT
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
@@ -666,7 +666,7 @@ export default function EisenbalmShop() {
               </button>
 
               <button
-                className="md:hidden p-3 -mr-3 luxury-focus"
+                className="lg:hidden p-3 -mr-3 luxury-focus"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle mobile menu"
                 aria-expanded={isMobileMenuOpen}
@@ -679,7 +679,7 @@ export default function EisenbalmShop() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100 fade-in">
+          <div className="lg:hidden bg-white border-t border-gray-100 fade-in">
             <div className="px-6 py-6 space-y-6">
               <a href="#product" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>PRODUCT</a>
               <Link to="/about" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>ABOUT</Link>
@@ -694,7 +694,7 @@ export default function EisenbalmShop() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative h-screen overflow-hidden flex items-center justify-center" role="banner">
+      <section className="relative h-screen overflow-hidden flex items-center justify-center bg-black" role="banner">
         <div className="absolute inset-0 w-full h-full">
           <video
             autoPlay
@@ -905,7 +905,7 @@ export default function EisenbalmShop() {
             </div>
           )}
 
-          <div className="text-center mt-12 md:hidden">
+          <div className="text-center mt-12 lg:hidden">
             <Link to="/blog" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-colors">
               VIEW ALL POSTS →
             </Link>
@@ -1249,8 +1249,8 @@ export default function EisenbalmShop() {
             <div>
               <h3 className="text-sm tracking-widest mb-6">FOLLOW OR TALK TO US</h3>
               <div className="space-y-2">
-                <a href="https://www.linkedin.com/company/108396769/" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-400 hover:text-white transition">LinkedIn</a>
-                <a href="mailto:contact@jesseaeisenbalm.com?subject=Inquiry&body=Hello, I would like to..." className="block text-sm text-gray-400 hover:text-white transition">Email Us</a>
+                <a href="https://www.linkedin.com/company/108396769/" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-300 hover:text-white transition py-1">LinkedIn</a>
+                <a href="mailto:contact@jesseaeisenbalm.com?subject=Inquiry&body=Hello, I would like to..." className="block text-sm text-gray-300 hover:text-white transition py-1">Email Us</a>
               </div>
             </div>
 
@@ -1263,15 +1263,15 @@ export default function EisenbalmShop() {
           </div>
 
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-gray-500 tracking-widest">© 2026 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
-            <div className="flex gap-6">
-              <Link to="/about" className="text-xs text-gray-500 hover:text-white transition tracking-widest py-3">
+            <p className="text-sm text-gray-400 tracking-widest">&copy; 2026 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
+            <div className="flex gap-4">
+              <Link to="/about" className="text-sm text-gray-400 hover:text-white transition tracking-widest px-2 py-3">
                 ABOUT
               </Link>
-              <Link to="/faq" className="text-xs text-gray-500 hover:text-white transition tracking-widest py-3">
+              <Link to="/faq" className="text-sm text-gray-400 hover:text-white transition tracking-widest px-2 py-3">
                 FAQ
               </Link>
-              <Link to="/privacy-policy" className="text-xs text-gray-500 hover:text-white transition tracking-widest py-3">
+              <Link to="/privacy-policy" className="text-sm text-gray-400 hover:text-white transition tracking-widest px-2 py-3">
                 PRIVACY POLICY
               </Link>
             </div>

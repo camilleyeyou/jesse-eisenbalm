@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, Eye, EyeOff, Upload, X, CheckCircle, AlertCircle, XCircle } from 'lucide-react';
+// Note: Admin page is excluded from indexing via noindex meta tag below
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'https://jesse-eisenbalm-server.vercel.app';
 

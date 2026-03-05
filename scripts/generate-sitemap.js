@@ -12,7 +12,13 @@ async function generateSitemap() {
       throw new Error(`Server returned ${response.status}: ${response.statusText}`);
     }
 
-    const sitemapXML = await response.text();
+    let sitemapXML = await response.text();
+
+    // Remove deprecated changefreq and priority tags (ignored by Google since 2023)
+    sitemapXML = sitemapXML
+      .replace(/\s*<changefreq>[^<]*<\/changefreq>/g, '')
+      .replace(/\s*<priority>[^<]*<\/priority>/g, '');
+
     const outputPath = path.join(__dirname, '../public/sitemap.xml');
 
     fs.writeFileSync(outputPath, sitemapXML, 'utf-8');

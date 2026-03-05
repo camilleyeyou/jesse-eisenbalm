@@ -317,7 +317,7 @@ export default function PrivacyPolicy() {
               <Link to="/" className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
                 JESSE A. EISENBALM
               </Link>
-              <div className="hidden md:flex space-x-8">
+              <div className="hidden lg:flex space-x-8">
                 <Link to="/#product" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 relative group">
                   PRODUCT
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
@@ -350,7 +350,7 @@ export default function PrivacyPolicy() {
             </div>
 
             <button
-              className="md:hidden luxury-focus"
+              className="lg:hidden luxury-focus"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle mobile menu"
             >
@@ -360,7 +360,7 @@ export default function PrivacyPolicy() {
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100 fade-in">
+          <div className="lg:hidden bg-white border-t border-gray-100 fade-in">
             <div className="px-6 py-6 space-y-6">
               <Link to="/#product" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">PRODUCT</Link>
               <Link to="/about" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">ABOUT</Link>
@@ -429,7 +429,7 @@ export default function PrivacyPolicy() {
               >
                 <span className="section-number hidden md:block">{section.number}</span>
                 <h2 className="text-2xl md:text-3xl font-light mb-6 tracking-tight flex items-center gap-3">
-                  <span className="text-2xl font-light text-gray-300 md:hidden">{section.number}.</span>
+                  <span className="text-2xl font-light text-gray-300 lg:hidden">{section.number}.</span>
                   {section.title}
                 </h2>
                 {section.content}
@@ -486,15 +486,15 @@ export default function PrivacyPolicy() {
           </div>
 
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-gray-500 tracking-widest">© 2026 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
-            <div className="flex gap-6">
-              <Link to="/" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
+            <p className="text-sm text-gray-400 tracking-widest">&copy; 2026 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
+            <div className="flex gap-4">
+              <Link to="/" className="text-sm text-gray-400 hover:text-white transition tracking-widest px-2 py-3">
                 HOME
               </Link>
-              <Link to="/about" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
+              <Link to="/about" className="text-sm text-gray-400 hover:text-white transition tracking-widest px-2 py-3">
                 ABOUT
               </Link>
-              <Link to="/faq" className="text-xs text-gray-500 hover:text-white transition tracking-widest">
+              <Link to="/faq" className="text-sm text-gray-400 hover:text-white transition tracking-widest px-2 py-3">
                 FAQ
               </Link>
             </div>

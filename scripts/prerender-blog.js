@@ -152,6 +152,9 @@ async function main() {
 
   // --- Homepage pre-rendering ---
   prerenderHomepage(shell);
+
+  // --- Secondary pages pre-rendering ---
+  prerenderSecondaryPages(shell);
 }
 
 function prerenderHomepage(shell) {
@@ -196,6 +199,13 @@ function prerenderHomepage(shell) {
       'height': 192
     },
     'description': 'Human-centered skincare for digital wellness. Premium beeswax lip balm for business professionals. 100% charity proceeds.',
+    'email': 'contact@jesseaeisenbalm.com',
+    'contactPoint': {
+      '@type': 'ContactPoint',
+      'email': 'contact@jesseaeisenbalm.com',
+      'contactType': 'customer service',
+      'availableLanguage': 'English'
+    },
     'sameAs': ['https://www.linkedin.com/company/108396769/']
   });
 
@@ -223,6 +233,8 @@ function prerenderHomepage(shell) {
     <meta name="twitter:description" content="${escapeHtml(description)}" />
     <meta name="twitter:image" content="${escapeHtml(image)}" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://jesse-eisenbalm-server.vercel.app" crossorigin />
+    <link rel="preload" as="image" href="${SITE_URL}/images/products/eisenbalm-1.webp" fetchpriority="high" />
     <script type="application/ld+json">${productSchema}</script>
     <script type="application/ld+json">${orgSchema}</script>
     <script type="application/ld+json">${websiteSchema}</script>`;
@@ -235,6 +247,136 @@ function prerenderHomepage(shell) {
   const indexPath = path.join(__dirname, '../build/index.html');
   fs.writeFileSync(indexPath, html, 'utf-8');
   console.log('✅ Homepage pre-rendered with SEO metadata (build/index.html)');
+}
+
+function prerenderSecondaryPages(shell) {
+  console.log('📄 Pre-rendering secondary pages...');
+
+  const pages = [
+    {
+      path: 'about',
+      title: 'About Jesse A. Eisenbalm | Our Story & Mission',
+      description: 'Jesse A. Eisenbalm is a human-centered skincare brand. Premium beeswax lip balm for business professionals. 100% proceeds to charity.',
+      schemas: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'AboutPage',
+          'name': 'About Jesse A. Eisenbalm',
+          'url': `${SITE_URL}/about`,
+          'mainEntity': {
+            '@type': 'Organization',
+            'name': 'Jesse A. Eisenbalm',
+            'url': SITE_URL,
+            'logo': { '@type': 'ImageObject', 'url': `${SITE_URL}/logo192.png`, 'width': 192, 'height': 192 },
+            'description': 'Human-centered skincare brand. 100% charity proceeds.',
+            'sameAs': ['https://www.linkedin.com/company/108396769/']
+          }
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          'itemListElement': [
+            { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': `${SITE_URL}/` },
+            { '@type': 'ListItem', 'position': 2, 'name': 'About', 'item': `${SITE_URL}/about` }
+          ]
+        }
+      ]
+    },
+    {
+      path: 'blog',
+      title: 'Journal | Jesse A. Eisenbalm',
+      description: 'Thoughts on staying human in an increasingly automated world. Digital wellness, mindful skincare, and the philosophy behind Jesse A. Eisenbalm.',
+      ogType: 'blog',
+      schemas: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'Blog',
+          'name': 'Jesse A. Eisenbalm Journal',
+          'url': `${SITE_URL}/blog`,
+          'description': 'Thoughts on staying human in an increasingly automated world.',
+          'publisher': {
+            '@type': 'Organization',
+            'name': 'Jesse A. Eisenbalm',
+            'url': SITE_URL,
+            'logo': { '@type': 'ImageObject', 'url': `${SITE_URL}/logo192.png`, 'width': 192, 'height': 192 }
+          }
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          'itemListElement': [
+            { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': `${SITE_URL}/` },
+            { '@type': 'ListItem', 'position': 2, 'name': 'Journal', 'item': `${SITE_URL}/blog` }
+          ]
+        }
+      ]
+    },
+    {
+      path: 'faq',
+      title: 'FAQ - Jesse A. Eisenbalm | Frequently Asked Questions',
+      description: 'Frequently asked questions about Jesse A. Eisenbalm premium beeswax lip balm. Learn about ingredients, shipping, pricing, and our charity mission.',
+      schemas: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          'itemListElement': [
+            { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': `${SITE_URL}/` },
+            { '@type': 'ListItem', 'position': 2, 'name': 'FAQ', 'item': `${SITE_URL}/faq` }
+          ]
+        }
+      ]
+    },
+    {
+      path: 'privacy-policy',
+      title: 'Privacy Policy | Jesse A. Eisenbalm',
+      description: 'Privacy policy for Jesse A. Eisenbalm. Learn how we collect, use, and protect your personal information.',
+      schemas: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          'itemListElement': [
+            { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': `${SITE_URL}/` },
+            { '@type': 'ListItem', 'position': 2, 'name': 'Privacy Policy', 'item': `${SITE_URL}/privacy-policy` }
+          ]
+        }
+      ]
+    }
+  ];
+
+  for (const page of pages) {
+    const canonical = `${SITE_URL}/${page.path}`;
+    const image = `${SITE_URL}/images/products/eisenbalm-1.webp`;
+    const ogType = page.ogType || 'website';
+
+    const schemaBlocks = page.schemas
+      .map(s => `<script type="application/ld+json">${JSON.stringify(s)}</script>`)
+      .join('\n    ');
+
+    const metaTags = `
+    <title>${escapeHtml(page.title)}</title>
+    <link rel="canonical" href="${canonical}" />
+    <meta name="description" content="${escapeHtml(page.description)}" />
+    <meta property="og:type" content="${ogType}" />
+    <meta property="og:url" content="${canonical}" />
+    <meta property="og:title" content="${escapeHtml(page.title)}" />
+    <meta property="og:description" content="${escapeHtml(page.description)}" />
+    <meta property="og:image" content="${escapeHtml(image)}" />
+    <meta property="og:site_name" content="Jesse A. Eisenbalm" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${escapeHtml(page.title)}" />
+    <meta name="twitter:description" content="${escapeHtml(page.description)}" />
+    <meta name="twitter:image" content="${escapeHtml(image)}" />
+    ${schemaBlocks}`;
+
+    let html = shell.replace(/<title>[^<]*<\/title>/, '');
+    html = html.replace('</head>', `${metaTags}\n  </head>`);
+
+    const dir = path.join(__dirname, `../build/${page.path}`);
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf-8');
+  }
+
+  console.log(`✅ Pre-rendered ${pages.length} secondary pages (about, blog, faq, privacy-policy)`);
 }
 
 main().catch(err => {

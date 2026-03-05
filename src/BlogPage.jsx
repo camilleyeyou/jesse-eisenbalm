@@ -174,7 +174,7 @@ export default function BlogPage() {
               <Link to="/" className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
                 JESSE A. EISENBALM
               </Link>
-              <div className="hidden md:flex space-x-8">
+              <div className="hidden lg:flex space-x-8">
                 <Link to="/" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 relative group">
                   PRODUCT
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
@@ -194,7 +194,7 @@ export default function BlogPage() {
               </div>
             </div>
             <button
-              className="md:hidden luxury-focus"
+              className="lg:hidden luxury-focus"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle mobile menu"
             >
@@ -203,7 +203,7 @@ export default function BlogPage() {
           </div>
         </div>
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100 fade-in">
+          <div className="lg:hidden bg-white border-t border-gray-100 fade-in">
             <div className="px-6 py-6 space-y-6">
               <Link to="/" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">PRODUCT</Link>
               <Link to="/about" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">ABOUT</Link>
@@ -344,11 +344,11 @@ export default function BlogPage() {
             </div>
           </div>
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-gray-500 tracking-widest">&copy; 2026 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
-            <div className="flex gap-6">
-              <Link to="/about" className="text-xs text-gray-500 hover:text-white transition tracking-widest">ABOUT</Link>
-              <Link to="/faq" className="text-xs text-gray-500 hover:text-white transition tracking-widest">FAQ</Link>
-              <Link to="/privacy-policy" className="text-xs text-gray-500 hover:text-white transition tracking-widest">PRIVACY POLICY</Link>
+            <p className="text-sm text-gray-400 tracking-widest">&copy; 2026 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
+            <div className="flex gap-4">
+              <Link to="/about" className="text-sm text-gray-400 hover:text-white transition tracking-widest px-2 py-3">ABOUT</Link>
+              <Link to="/faq" className="text-sm text-gray-400 hover:text-white transition tracking-widest px-2 py-3">FAQ</Link>
+              <Link to="/privacy-policy" className="text-sm text-gray-400 hover:text-white transition tracking-widest px-2 py-3">PRIVACY POLICY</Link>
             </div>
           </div>
         </div>
