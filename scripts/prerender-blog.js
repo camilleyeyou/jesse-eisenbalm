@@ -100,16 +100,56 @@ function buildHtml(shell, post) {
     <script type="application/ld+json">${articleSchema}</script>
     <script type="application/ld+json">${breadcrumbSchema}</script>`;
 
+  // Build static article body for Googlebot (replaced by React on hydration)
+  const publishedDate = new Date(datePublished).toLocaleDateString('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  });
+  const articleBody = `<main>
+      <article>
+        <nav aria-label="breadcrumb" style="padding:1rem 0;font-size:0.875rem;color:#6b7280">
+          <a href="/" style="color:#6b7280">Home</a> &rsaquo;
+          <a href="/blog" style="color:#6b7280">Journal</a> &rsaquo;
+          <span>${escapeHtml(post.title)}</span>
+        </nav>
+        ${post.cover_image ? `<img src="${escapeHtml(post.cover_image)}" alt="${escapeHtml(post.title)}" style="max-width:100%;height:auto" />` : ''}
+        <h1>${escapeHtml(post.title)}</h1>
+        ${post.excerpt ? `<p><em>${escapeHtml(post.excerpt)}</em></p>` : ''}
+        <p style="color:#6b7280;font-size:0.875rem">${escapeHtml(post.author || 'Jesse A. Eisenbalm')} &middot; ${publishedDate}</p>
+        <hr />
+        <div>${post.content || ''}</div>
+      </article>
+      <p><a href="/blog">&larr; Back to Journal</a></p>
+    </main>`;
+
   // Replace existing <title> to avoid duplicates, then inject before </head>
   let html = shell.replace(/<title>[^<]*<\/title>/, '');
-  return html.replace('</head>', `${metaTags}\n  </head>`);
+  html = html.replace('</head>', `${metaTags}\n  </head>`);
+  // Inject article body inside <div id="root"> for Googlebot
+  html = html.replace('<div id="root"></div>', `<div id="root">${articleBody}</div>`);
+  return html;
 }
 
 async function fetchPosts() {
   const response = await fetch(`${SERVER_URL}/api/posts`);
   if (!response.ok) throw new Error(`API returned ${response.status}`);
   const data = await response.json();
-  return data.posts || [];
+  const posts = data.posts || [];
+
+  // Fetch full content for each post (list endpoint omits content)
+  const fullPosts = await Promise.all(
+    posts.map(async (post) => {
+      try {
+        const res = await fetch(`${SERVER_URL}/api/posts/${post.slug}`);
+        if (!res.ok) return post;
+        const detail = await res.json();
+        return detail.post || post;
+      } catch {
+        return post; // Fall back to summary if individual fetch fails
+      }
+    })
+  );
+
+  return fullPosts;
 }
 
 async function main() {
@@ -154,7 +194,7 @@ async function main() {
   prerenderHomepage(shell);
 
   // --- Secondary pages pre-rendering ---
-  prerenderSecondaryPages(shell);
+  prerenderSecondaryPages(shell, posts);
 }
 
 function prerenderHomepage(shell) {
@@ -249,14 +289,31 @@ function prerenderHomepage(shell) {
   console.log('✅ Homepage pre-rendered with SEO metadata (build/index.html)');
 }
 
-function prerenderSecondaryPages(shell) {
+function prerenderSecondaryPages(shell, posts) {
   console.log('📄 Pre-rendering secondary pages...');
+
+  // Build blog listing body from fetched posts
+  const blogListItems = (posts || []).slice(0, 20).map(p => {
+    const date = new Date(p.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    return `<li><a href="/blog/${p.slug}">${escapeHtml(p.title)}</a> — <span>${date}</span>${p.excerpt ? `<br/><span>${escapeHtml(truncate(p.excerpt, 120))}</span>` : ''}</li>`;
+  }).join('\n        ');
 
   const pages = [
     {
       path: 'about',
       title: 'About Jesse A. Eisenbalm | Our Story & Mission',
       description: 'Jesse A. Eisenbalm is a human-centered skincare brand. Premium beeswax lip balm for business professionals. 100% proceeds to charity.',
+      bodyContent: `<main>
+      <h1>About Jesse A. Eisenbalm</h1>
+      <p>Jesse A. Eisenbalm is a human-centered skincare brand offering premium beeswax lip balm for business professionals. 100% of proceeds go to charity.</p>
+      <h2>Our Mission</h2>
+      <p>We believe in staying human in an increasingly automated world. Our lip balm is designed as a mindful ritual — a tactile pause in the digital workday.</p>
+      <h2>The Product</h2>
+      <p>Premium natural beeswax formula. Petrolatum-free barrier restoration. Limited Edition Release 001. Hand numbered. $8.99 with free shipping.</p>
+      <h2>Stop. Breathe. Balm.</h2>
+      <p>A three-word cognitive reset for the modern professional. Break continuous partial attention, reduce cognitive load, and reconnect with the non-digital world.</p>
+      <p><a href="/">Shop Now</a> | <a href="/blog">Read Our Journal</a> | <a href="/faq">FAQ</a></p>
+    </main>`,
       schemas: [
         {
           '@context': 'https://schema.org',
@@ -286,6 +343,12 @@ function prerenderSecondaryPages(shell) {
       path: 'blog',
       title: 'Journal | Jesse A. Eisenbalm',
       description: 'Thoughts on staying human in an increasingly automated world. Digital wellness, mindful skincare, and the philosophy behind Jesse A. Eisenbalm.',
+      bodyContent: `<main>
+      <h1>Journal — Jesse A. Eisenbalm</h1>
+      <p>Thoughts on staying human in an increasingly automated world. Digital wellness, mindful skincare, and the philosophy behind Jesse A. Eisenbalm.</p>
+      <ul>${blogListItems}</ul>
+      <p><a href="/">Back to Home</a></p>
+    </main>`,
       ogType: 'blog',
       schemas: [
         {
@@ -315,6 +378,26 @@ function prerenderSecondaryPages(shell) {
       path: 'faq',
       title: 'FAQ - Jesse A. Eisenbalm | Frequently Asked Questions',
       description: 'Frequently asked questions about Jesse A. Eisenbalm premium beeswax lip balm. Learn about ingredients, shipping, pricing, and our charity mission.',
+      bodyContent: `<main>
+      <h1>Frequently Asked Questions</h1>
+      <h2>How can lip balm help with digital fatigue?</h2>
+      <p>Jesse A. Eisenbalm is designed as a neurocosmetic ritual for business professionals experiencing digital fatigue. The 'Stop. Breathe. Balm.' practice serves as a cognitive reset tool — a tactile interruption that helps manage decision fatigue caused by extended screen time.</p>
+      <h2>Why is beeswax better than petrolatum for professionals?</h2>
+      <p>Beeswax provides petrolatum-free barrier restoration without the outdated petroleum base. It forms a bio-compatible occlusive layer that prevents transepidermal water loss (TEWL) during 8+ hour workdays in climate-controlled office environments.</p>
+      <h2>What is the 'Stop. Breathe. Balm.' ritual?</h2>
+      <p>It's a three-word cognitive reset practice designed for workplace wellness: Stop (break continuous partial attention), Breathe (reduce cognitive load), Balm (tactile sensory anchor to the non-digital world).</p>
+      <h2>What is Jesse A. Eisenbalm made of?</h2>
+      <p>Premium natural beeswax formula designed for all-day barrier restoration. Petrolatum-free, free from synthetic fragrances, parabens, and petroleum derivatives.</p>
+      <h2>How much does it cost and where do proceeds go?</h2>
+      <p>Each tube is $8.99 USD with free shipping. 100% of proceeds go to charity.</p>
+      <h2>Is shipping free?</h2>
+      <p>Yes, shipping is free on all orders. We ship to the US, Canada, UK, Australia, Germany, France, Italy, Spain, Netherlands, and Belgium.</p>
+      <h2>Is Jesse A. Eisenbalm cruelty-free?</h2>
+      <p>Yes. Our products are ethically made and we are committed to cruelty-free practices.</p>
+      <h2>How do I contact you?</h2>
+      <p>Email us at contact@jesseaeisenbalm.com or connect on <a href="https://www.linkedin.com/company/108396769/">LinkedIn</a>.</p>
+      <p><a href="/">Back to Home</a></p>
+    </main>`,
       schemas: [
         {
           '@context': 'https://schema.org',
@@ -330,6 +413,17 @@ function prerenderSecondaryPages(shell) {
       path: 'privacy-policy',
       title: 'Privacy Policy | Jesse A. Eisenbalm',
       description: 'Privacy policy for Jesse A. Eisenbalm. Learn how we collect, use, and protect your personal information.',
+      bodyContent: `<main>
+      <h1>Privacy Policy — Jesse A. Eisenbalm</h1>
+      <p>Last updated: 2026. This Privacy Policy describes how Jesse A. Eisenbalm collects, uses, and protects your personal information when you visit our website or make a purchase.</p>
+      <h2>Information We Collect</h2>
+      <p>We collect information you provide directly, such as your name, email address, and shipping address when you make a purchase. We also collect usage data through cookies and analytics.</p>
+      <h2>How We Use Your Information</h2>
+      <p>We use your information to process orders, improve our website, and communicate with you about your purchases.</p>
+      <h2>Contact</h2>
+      <p>For privacy-related inquiries, email privacy@jesseaeisenbalm.com.</p>
+      <p><a href="/">Back to Home</a></p>
+    </main>`,
       schemas: [
         {
           '@context': 'https://schema.org',
@@ -370,6 +464,10 @@ function prerenderSecondaryPages(shell) {
 
     let html = shell.replace(/<title>[^<]*<\/title>/, '');
     html = html.replace('</head>', `${metaTags}\n  </head>`);
+    // Inject body content inside <div id="root"> for Googlebot
+    if (page.bodyContent) {
+      html = html.replace('<div id="root"></div>', `<div id="root">${page.bodyContent}</div>`);
+    }
 
     const dir = path.join(__dirname, `../build/${page.path}`);
     fs.mkdirSync(dir, { recursive: true });
