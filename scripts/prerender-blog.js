@@ -97,6 +97,7 @@ function buildHtml(shell, post) {
     <meta name="twitter:title" content="${escapeHtml(post.title)}" />
     <meta name="twitter:description" content="${description}" />
     <meta name="twitter:image" content="${escapeHtml(image)}" />
+    ${post.cover_image ? `<link rel="preload" as="image" href="${escapeHtml(post.cover_image)}" fetchpriority="high" />` : ''}
     <script type="application/ld+json">${articleSchema}</script>
     <script type="application/ld+json">${breadcrumbSchema}</script>`;
 
@@ -111,7 +112,7 @@ function buildHtml(shell, post) {
           <a href="/blog" style="color:#6b7280">Journal</a> &rsaquo;
           <span>${escapeHtml(post.title)}</span>
         </nav>
-        ${post.cover_image ? `<img src="${escapeHtml(post.cover_image)}" alt="${escapeHtml(post.title)}" style="max-width:100%;height:auto" />` : ''}
+        ${post.cover_image ? `<img src="${escapeHtml(post.cover_image)}" alt="${escapeHtml(post.title)}" width="1200" height="630" style="max-width:100%;height:auto" />` : ''}
         <h1>${escapeHtml(post.title)}</h1>
         ${post.excerpt ? `<p><em>${escapeHtml(post.excerpt)}</em></p>` : ''}
         <p style="color:#6b7280;font-size:0.875rem">${escapeHtml(post.author || 'Jesse A. Eisenbalm')} &middot; ${publishedDate}</p>
@@ -272,7 +273,6 @@ function prerenderHomepage(shell) {
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta name="twitter:description" content="${escapeHtml(description)}" />
     <meta name="twitter:image" content="${escapeHtml(image)}" />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="preconnect" href="https://jesse-eisenbalm-server.vercel.app" crossorigin />
     <link rel="preload" as="image" href="${SITE_URL}/images/products/eisenbalm-1.webp" fetchpriority="high" />
     <script type="application/ld+json">${productSchema}</script>
@@ -283,10 +283,26 @@ function prerenderHomepage(shell) {
   let html = shell.replace(/<title>[^<]*<\/title>/, '');
   html = html.replace('</head>', `${homeTags}\n  </head>`);
 
+  // Inject body content into <div id="root"> for crawlers
+  const homeBody = `<main>
+      <h1>Premium Beeswax Lip Balm | Jesse A. Eisenbalm</h1>
+      <p>Petrolatum-free barrier restoration for business professionals. Limited Edition Release 001. Hand numbered.</p>
+      <p>$8.99 | 100% proceeds to charity</p>
+      <h2>What Sets Us Apart</h2>
+      <ul>
+        <li><strong>Premium Beeswax Formula</strong> — Natural beeswax forms a bio-compatible barrier that prevents transepidermal water loss (TEWL). No synthetic fragrances, parabens, or petroleum derivatives.</li>
+        <li><strong>100% Charity Proceeds</strong> — Every dollar goes directly to charitable causes.</li>
+        <li><strong>Limited Edition, Hand Numbered</strong> — Release 001 is individually numbered for verifiable authenticity.</li>
+      </ul>
+      <p>Stop. Breathe. Balm. A human-only ritual for an AI-everywhere world.</p>
+      <p><a href="/about">About Us</a> | <a href="/blog">Journal</a> | <a href="/faq">FAQ</a></p>
+    </main>`;
+  html = html.replace('<div id="root"></div>', `<div id="root">${homeBody}</div>`);
+
   // Write to both index.html and 200.html
   const indexPath = path.join(__dirname, '../build/index.html');
   fs.writeFileSync(indexPath, html, 'utf-8');
-  console.log('✅ Homepage pre-rendered with SEO metadata (build/index.html)');
+  console.log('✅ Homepage pre-rendered with SEO metadata + body content (build/index.html)');
 }
 
 function prerenderSecondaryPages(shell, posts) {

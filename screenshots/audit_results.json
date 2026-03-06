@@ -1,0 +1,1355 @@
+{
+  "homepage_mobile": {
+    "h1_count": 1,
+    "h1_texts": [
+      "ARE THESE\nMY REAL LIPS?"
+    ],
+    "h1_above_fold": true,
+    "h1_position_y": 189,
+    "ctas": [
+      {
+        "text": "Email Us",
+        "above_fold": false,
+        "y": 10152
+      }
+    ],
+    "images": [
+      {
+        "src": "/images/products/eisenbalm-1.webp",
+        "has_alt": true,
+        "alt": "Jesse A. Eisenbalm premium beeswax lip balm tube - Limited Edition Release 001"
+      },
+      {
+        "src": "/images/products/eisenbalm-1.webp",
+        "has_alt": true,
+        "alt": "Jesse A. Eisenbalm lip balm - angle 1 of 3"
+      },
+      {
+        "src": "/images/products/eisenbalm-2.webp",
+        "has_alt": true,
+        "alt": "Jesse A. Eisenbalm lip balm - angle 2 of 3"
+      },
+      {
+        "src": "/images/products/eisenbalm-3.webp",
+        "has_alt": true,
+        "alt": "Jesse A. Eisenbalm lip balm - angle 3 of 3"
+      },
+      {
+        "src": "/images/grid/image-1.webp",
+        "has_alt": true,
+        "alt": "Jesse A. Eisenbalm lip balm in minimalist setting"
+      },
+      {
+        "src": "/images/grid/image-2.webp",
+        "has_alt": true,
+        "alt": "Premium beeswax lip balm close-up texture"
+      },
+      {
+        "src": "/images/grid/image-3.webp",
+        "has_alt": true,
+        "alt": "Applying Jesse A. Eisenbalm as daily ritual"
+      },
+      {
+        "src": "/images/grid/image-4.webp",
+        "has_alt": true,
+        "alt": "Limited edition lip balm packaging detail"
+      },
+      {
+        "src": "/images/grid/image-5.webp",
+        "has_alt": true,
+        "alt": "Natural beeswax lip balm product shot"
+      },
+      {
+        "src": "/images/grid/image-6.webp",
+        "has_alt": true,
+        "alt": "Jesse A. Eisenbalm lifestyle product photo"
+      },
+      {
+        "src": "/images/grid/image-7.webp",
+        "has_alt": true,
+        "alt": "Hand-numbered lip balm tube detail"
+      },
+      {
+        "src": "/images/grid/image-8.webp",
+        "has_alt": true,
+        "alt": "Stop Breathe Balm mindfulness moment"
+      },
+      {
+        "src": "/images/backgrounds/about-bg.jpg",
+        "has_alt": true,
+        "alt": "Jesse A. Eisenbalm philosophy - Stay human in an AI world"
+      }
+    ],
+    "images_missing_alt": [],
+    "has_nav": true,
+    "nav_visible": true,
+    "nav_link_count": 8,
+    "nav_links": [
+      "JESSE A. EISENBALM",
+      "PRODUCT",
+      "ABOUT",
+      "PHILOSOPHY",
+      "JOURNAL",
+      "CONTACT",
+      "FAQ",
+      "PRIVACY"
+    ],
+    "hamburger_found": true,
+    "body_font_size": "16px",
+    "has_horizontal_overflow": false,
+    "meta_description": "Premium beeswax lip balm. Petrolatum-free barrier restoration for business professionals. Limited Edition Release 001. $8.99. 100% proceeds to charity.",
+    "page_title": "Jesse A. Eisenbalm | Digital Wellness Ritual for Business Professionals",
+    "structured_data_count": 6,
+    "contrast_samples": [
+      {
+        "tag": "A",
+        "text": "JESSE A. EISENBALM",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "24px"
+      },
+      {
+        "tag": "A",
+        "text": "PRODUCT",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "ABOUT",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "PHILOSOPHY",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "JOURNAL",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "CONTACT",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "PRIVACY",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "color": "rgb(75, 85, 99)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "16px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "16px"
+      },
+      {
+        "tag": "H1",
+        "text": "ARE THESEMY REAL LIPS?",
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "72px"
+      },
+      {
+        "tag": "P",
+        "text": "STOP. BREATHE. BALM.",
+        "color": "rgba(255, 255, 255, 0.9)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "20px"
+      },
+      {
+        "tag": "P",
+        "text": "A human-only ritual for an AI-everywhere world. Li",
+        "color": "rgba(255, 255, 255, 0.8)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "16px"
+      },
+      {
+        "tag": "A",
+        "text": "BUY NOW",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgb(255, 255, 255)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgb(249, 250, 251)",
+        "fontSize": "16px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgb(249, 250, 251)",
+        "fontSize": "16px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgb(249, 250, 251)",
+        "fontSize": "16px"
+      },
+      {
+        "tag": "P",
+        "text": "LIP CARE",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px"
+      },
+      {
+        "tag": "H2",
+        "text": "JESSE A. EISENBALM",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "36px"
+      },
+      {
+        "tag": "P",
+        "text": "The Original",
+        "color": "rgb(75, 85, 99)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "20px"
+      }
+    ]
+  },
+  "blog_mobile": {
+    "h1_count": 1,
+    "h1_texts": [
+      "The Journal"
+    ],
+    "h1_above_fold": true,
+    "h1_position_y": 217,
+    "ctas": [
+      {
+        "text": "Email Us",
+        "above_fold": false,
+        "y": 28766
+      }
+    ],
+    "images": [
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772762451928-7wvtu2w1",
+        "has_alt": true,
+        "alt": "The Science of TEWL Lip Care: Beeswax's Hydrating Power"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772740841632-tj2a4emn",
+        "has_alt": true,
+        "alt": "Slow Beauty Rituals: Balance Through Lip Care"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772719239468-ia4n0wwt",
+        "has_alt": true,
+        "alt": "Mindful Skincare Routine: Intentional Lip Care Philosophy"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772676047117-7i4044df",
+        "has_alt": true,
+        "alt": "Lip Barrier Restoration with Jesse A. Eisenbalm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772654446053-xlss7eh9",
+        "has_alt": true,
+        "alt": "Knowledge Worker Wellness: Mindful Skincare with Jesse A. Eisenbalm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772632844027-pychcv1i",
+        "has_alt": true,
+        "alt": "Embracing Philanthropy in Beauty: Jesse A. Eisenbalm's Approach"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772589644208-vsot5laa",
+        "has_alt": true,
+        "alt": "Beeswax Properties: Enhancing the Skin Barrier for Lip Care"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772568052563-q2v2srn4",
+        "has_alt": true,
+        "alt": "Analog Rituals in the Digital Age: Finding Peace"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772546446664-35v36j89",
+        "has_alt": true,
+        "alt": "Active Ingredients in Lip Balm: A Professional's Guide"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772503243786-o3cwdr32",
+        "has_alt": true,
+        "alt": "Specialized Lip Care for Climate-Controlled Offices"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772481645284-yjehzpik",
+        "has_alt": true,
+        "alt": "Neurocosmetic Lip Balm: Grounding Ritual for Digital Wellness"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772460047800-a0xctq4t",
+        "has_alt": true,
+        "alt": "Ceramide Lip Balm Benefits for Digital Wellness"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772416830100-aj0z2hcr",
+        "has_alt": true,
+        "alt": "Executive Grounding Ritual with Jesse A. Eisenbalm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772395233015-0q2b76c2",
+        "has_alt": true,
+        "alt": "Beeswax vs Petroleum: Better Choice for Lip Health"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772373644132-6kf2tuco",
+        "has_alt": true,
+        "alt": "Handmade Artisan Lip Balm: A Mindful Digital Wellness Ritual"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772330429794-w1rnf4jo",
+        "has_alt": true,
+        "alt": "Non-Toxic Lip Balm Ingredients for Mindful Lip Care"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772308832811-jeine243",
+        "has_alt": true,
+        "alt": "Lip Care as an Executive Grounding Ritual"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772287235639-wpik166r",
+        "has_alt": true,
+        "alt": "Skincare as Meditation: A Mindful Ritual with Beeswax Lip Balm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772244053924-uvpuo5iw",
+        "has_alt": true,
+        "alt": "TEWL Lip Care: How Beeswax Protects and Nourishes"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772222445858-4pqiengu",
+        "has_alt": true,
+        "alt": "Charity Lip Balm: Jesse A. Eisenbalm's Philanthropic Mission"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772200849421-wvu42snm",
+        "has_alt": true,
+        "alt": "Crafting an Intentional Daily Ritual for Digital Professionals"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772157648193-ai3tpdwl",
+        "has_alt": true,
+        "alt": "The Lip Skinification Trend: Elevate Your Lip Care"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772136067285-84rjiooq",
+        "has_alt": true,
+        "alt": "Limited Edition Lip Balm: A Mindful Gift for Executives"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772114446232-pqzq7eik",
+        "has_alt": true,
+        "alt": "Bio-Compatible Lip Occlusion with Jesse A. Eisenbalm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772071246338-88o9ej1g",
+        "has_alt": true,
+        "alt": "Lip Care for Office Workers: A Mindful Approach"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772049645154-60r6yxnx",
+        "has_alt": true,
+        "alt": "Analog Ritual in the Digital Age: Lip Balm Application"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772028053144-fqh4jw6s",
+        "has_alt": true,
+        "alt": "Why Lips Dry Out Faster and How to Protect Them"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771984845223-ovsfl3y2",
+        "has_alt": true,
+        "alt": "Digital Fatigue Recovery Ritual with Jesse A. Eisenbalm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771963234810-n4zd42tz",
+        "has_alt": true,
+        "alt": "Beeswax Barrier Repair: A Natural Solution for Lips"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771941650434-4yo6koqy",
+        "has_alt": true,
+        "alt": "Mindfulness Morning Routine with Lip Care Rituals"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771898455119-nz8vr8pa",
+        "has_alt": true,
+        "alt": "Keeping Humans Human in an AI World with Jesse A. Eisenbalm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771876837805-a18xiw32",
+        "has_alt": true,
+        "alt": "Analog Rituals in the Digital Age: A Path to Mindfulness"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771855246113-ah8e1caf",
+        "has_alt": true,
+        "alt": "Quality Over Quantity Skincare: Intentional Choices for Mindful Living"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771812027556-equ73wse",
+        "has_alt": true,
+        "alt": "Transparency in Clean Beauty Ingredients: Natural Lip Care"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771768833190-8sqlmkkt",
+        "has_alt": true,
+        "alt": "Ingredient Purity in Natural Chapstick Alternatives"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771725623598-zf60kj1q",
+        "has_alt": true,
+        "alt": "Sourcing Pure Beeswax: A Commitment to Ingredient Transparency"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771704036640-p84h1on4",
+        "has_alt": true,
+        "alt": "Beeswax Moisturiser Benefits for Digital Wellness"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771694904759-lfciavaa",
+        "has_alt": true,
+        "alt": "The Artisanship Behind Handmade Beauty Products"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771682435154-vurpjik4",
+        "has_alt": true,
+        "alt": "Exploring Beeswax Properties for Skin Benefits"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771639228482-43up797s",
+        "has_alt": true,
+        "alt": "The Timeless Allure of Artisan Beauty Products"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771617646002-f0twbclj",
+        "has_alt": true,
+        "alt": "Beeswax vs Petroleum Jelly: The Best Lip Care Choice"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771604136174-5qyypxsy",
+        "has_alt": true,
+        "alt": "Embrace Intentional Purchasing Through Skincare Choices"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771603899971-mqzzt4be",
+        "has_alt": true,
+        "alt": "The Art of Slow Beauty Rituals: Mindful Lip Care"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771603347167-n23fj476",
+        "has_alt": true,
+        "alt": "The Art of Slow Beauty Rituals: Embrace Mindful Lip Care"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771522153418-8cufp3fu",
+        "has_alt": true,
+        "alt": "Discover Jesse A. Eisenbalm's Limited Edition Skincare"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771497152583-8qlxbds2",
+        "has_alt": true,
+        "alt": "Embrace Simplicity with Luxury Lip Balm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771487483357-opa1s5yk",
+        "has_alt": true,
+        "alt": "Discover Premium Lip Balm for Sale"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771465656014-vrp3co25",
+        "has_alt": true,
+        "alt": "Discover the Best Lip Balm for Mindful Living"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771465496920-rdcoleaw",
+        "has_alt": true,
+        "alt": "Exploring Wellness Trends in Lip Care"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771464422709-qgvfr9g9",
+        "has_alt": true,
+        "alt": "Soothe Chapped Lips with Beeswax Balm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771463780916-8dzyh8ei",
+        "has_alt": true,
+        "alt": "Discover Serenity with Premium Lip Balm"
+      }
+    ],
+    "images_missing_alt": [],
+    "has_nav": true,
+    "nav_visible": true,
+    "nav_link_count": 4,
+    "nav_links": [
+      "JESSE A. EISENBALM",
+      "PRODUCT",
+      "ABOUT",
+      "FAQ"
+    ],
+    "hamburger_found": true,
+    "body_font_size": "16px",
+    "has_horizontal_overflow": false,
+    "meta_description": "Thoughts on staying human in an increasingly automated world. Digital wellness, mindful skincare, and the philosophy behind Jesse A. Eisenbalm.",
+    "page_title": "Journal | Jesse A. Eisenbalm",
+    "structured_data_count": 3,
+    "contrast_samples": [
+      {
+        "tag": "A",
+        "text": "JESSE A. EISENBALM",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "24px"
+      },
+      {
+        "tag": "A",
+        "text": "PRODUCT",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "ABOUT",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "16px"
+      },
+      {
+        "tag": "P",
+        "text": "THOUGHTS & MEDITATIONS",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px"
+      },
+      {
+        "tag": "H1",
+        "text": "The Journal",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "48px"
+      },
+      {
+        "tag": "P",
+        "text": "Dispatches from the intersection of humanity and a",
+        "color": "rgb(75, 85, 99)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "20px"
+      },
+      {
+        "tag": "H2",
+        "text": "The Science of TEWL Lip Care: Beeswax's Hydrating ",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "20px"
+      },
+      {
+        "tag": "P",
+        "text": "Explore how Jesse A. Eisenbalm's beeswax lip balm ",
+        "color": "rgb(75, 85, 99)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "READ MORE",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px"
+      },
+      {
+        "tag": "H2",
+        "text": "Slow Beauty Rituals: Balance Through Lip Care",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "20px"
+      },
+      {
+        "tag": "P",
+        "text": "Discover slow beauty rituals with Jesse A. Eisenba",
+        "color": "rgb(75, 85, 99)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "READ MORE",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px"
+      },
+      {
+        "tag": "H2",
+        "text": "Mindful Skincare Routine: Intentional Lip Care Phi",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "20px"
+      },
+      {
+        "tag": "P",
+        "text": "Explore a mindful skincare routine with Jesse A. E",
+        "color": "rgb(75, 85, 99)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "READ MORE",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px"
+      },
+      {
+        "tag": "H2",
+        "text": "Lip Barrier Restoration with Jesse A. Eisenbalm",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "20px"
+      },
+      {
+        "tag": "P",
+        "text": "Discover how Jesse A. Eisenbalm's beeswax lip balm",
+        "color": "rgb(75, 85, 99)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "READ MORE",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px"
+      }
+    ]
+  },
+  "homepage_desktop": {
+    "h1_count": 1,
+    "h1_texts": [
+      "ARE THESE\nMY REAL LIPS?"
+    ],
+    "h1_above_fold": true,
+    "h1_position_y": 346,
+    "ctas": [
+      {
+        "text": "CONTACT",
+        "above_fold": true,
+        "y": 30
+      },
+      {
+        "text": "Email Us",
+        "above_fold": false,
+        "y": 7132
+      }
+    ],
+    "images": [
+      {
+        "src": "/images/products/eisenbalm-1.webp",
+        "has_alt": true,
+        "alt": "Jesse A. Eisenbalm premium beeswax lip balm tube - Limited Edition Release 001"
+      },
+      {
+        "src": "/images/products/eisenbalm-1.webp",
+        "has_alt": true,
+        "alt": "Jesse A. Eisenbalm lip balm - angle 1 of 3"
+      },
+      {
+        "src": "/images/products/eisenbalm-2.webp",
+        "has_alt": true,
+        "alt": "Jesse A. Eisenbalm lip balm - angle 2 of 3"
+      },
+      {
+        "src": "/images/products/eisenbalm-3.webp",
+        "has_alt": true,
+        "alt": "Jesse A. Eisenbalm lip balm - angle 3 of 3"
+      },
+      {
+        "src": "/images/grid/image-1.webp",
+        "has_alt": true,
+        "alt": "Jesse A. Eisenbalm lip balm in minimalist setting"
+      },
+      {
+        "src": "/images/grid/image-2.webp",
+        "has_alt": true,
+        "alt": "Premium beeswax lip balm close-up texture"
+      },
+      {
+        "src": "/images/grid/image-3.webp",
+        "has_alt": true,
+        "alt": "Applying Jesse A. Eisenbalm as daily ritual"
+      },
+      {
+        "src": "/images/grid/image-4.webp",
+        "has_alt": true,
+        "alt": "Limited edition lip balm packaging detail"
+      },
+      {
+        "src": "/images/grid/image-5.webp",
+        "has_alt": true,
+        "alt": "Natural beeswax lip balm product shot"
+      },
+      {
+        "src": "/images/grid/image-6.webp",
+        "has_alt": true,
+        "alt": "Jesse A. Eisenbalm lifestyle product photo"
+      },
+      {
+        "src": "/images/grid/image-7.webp",
+        "has_alt": true,
+        "alt": "Hand-numbered lip balm tube detail"
+      },
+      {
+        "src": "/images/grid/image-8.webp",
+        "has_alt": true,
+        "alt": "Stop Breathe Balm mindfulness moment"
+      },
+      {
+        "src": "/images/backgrounds/about-bg.jpg",
+        "has_alt": true,
+        "alt": "Jesse A. Eisenbalm philosophy - Stay human in an AI world"
+      }
+    ],
+    "images_missing_alt": [],
+    "has_nav": true,
+    "nav_visible": true,
+    "nav_link_count": 8,
+    "nav_links": [
+      "JESSE A. EISENBALM",
+      "PRODUCT",
+      "ABOUT",
+      "PHILOSOPHY",
+      "JOURNAL",
+      "CONTACT",
+      "FAQ",
+      "PRIVACY"
+    ],
+    "hamburger_found": true,
+    "body_font_size": "16px",
+    "has_horizontal_overflow": false,
+    "meta_description": "Premium beeswax lip balm. Petrolatum-free barrier restoration for business professionals. Limited Edition Release 001. $8.99. 100% proceeds to charity.",
+    "page_title": "Jesse A. Eisenbalm | Digital Wellness Ritual for Business Professionals",
+    "structured_data_count": 6,
+    "contrast_samples": [
+      {
+        "tag": "A",
+        "text": "JESSE A. EISENBALM",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "24px"
+      },
+      {
+        "tag": "A",
+        "text": "PRODUCT",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "ABOUT",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "PHILOSOPHY",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "JOURNAL",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "CONTACT",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "PRIVACY",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "color": "rgb(75, 85, 99)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "16px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "16px"
+      },
+      {
+        "tag": "H1",
+        "text": "ARE THESEMY REAL LIPS?",
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "128px"
+      },
+      {
+        "tag": "P",
+        "text": "STOP. BREATHE. BALM.",
+        "color": "rgba(255, 255, 255, 0.9)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "24px"
+      },
+      {
+        "tag": "P",
+        "text": "A human-only ritual for an AI-everywhere world. Li",
+        "color": "rgba(255, 255, 255, 0.8)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "18px"
+      },
+      {
+        "tag": "A",
+        "text": "BUY NOW",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgb(255, 255, 255)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgb(249, 250, 251)",
+        "fontSize": "16px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgb(249, 250, 251)",
+        "fontSize": "16px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgb(249, 250, 251)",
+        "fontSize": "16px"
+      },
+      {
+        "tag": "P",
+        "text": "LIP CARE",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px"
+      },
+      {
+        "tag": "H2",
+        "text": "JESSE A. EISENBALM",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "36px"
+      },
+      {
+        "tag": "P",
+        "text": "The Original",
+        "color": "rgb(75, 85, 99)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "20px"
+      }
+    ]
+  },
+  "blog_desktop": {
+    "h1_count": 1,
+    "h1_texts": [
+      "The Journal"
+    ],
+    "h1_above_fold": true,
+    "h1_position_y": 249,
+    "ctas": [
+      {
+        "text": "Email Us",
+        "above_fold": false,
+        "y": 10568
+      }
+    ],
+    "images": [
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772762451928-7wvtu2w1",
+        "has_alt": true,
+        "alt": "The Science of TEWL Lip Care: Beeswax's Hydrating Power"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772740841632-tj2a4emn",
+        "has_alt": true,
+        "alt": "Slow Beauty Rituals: Balance Through Lip Care"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772719239468-ia4n0wwt",
+        "has_alt": true,
+        "alt": "Mindful Skincare Routine: Intentional Lip Care Philosophy"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772676047117-7i4044df",
+        "has_alt": true,
+        "alt": "Lip Barrier Restoration with Jesse A. Eisenbalm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772654446053-xlss7eh9",
+        "has_alt": true,
+        "alt": "Knowledge Worker Wellness: Mindful Skincare with Jesse A. Eisenbalm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772632844027-pychcv1i",
+        "has_alt": true,
+        "alt": "Embracing Philanthropy in Beauty: Jesse A. Eisenbalm's Approach"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772589644208-vsot5laa",
+        "has_alt": true,
+        "alt": "Beeswax Properties: Enhancing the Skin Barrier for Lip Care"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772568052563-q2v2srn4",
+        "has_alt": true,
+        "alt": "Analog Rituals in the Digital Age: Finding Peace"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772546446664-35v36j89",
+        "has_alt": true,
+        "alt": "Active Ingredients in Lip Balm: A Professional's Guide"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772503243786-o3cwdr32",
+        "has_alt": true,
+        "alt": "Specialized Lip Care for Climate-Controlled Offices"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772481645284-yjehzpik",
+        "has_alt": true,
+        "alt": "Neurocosmetic Lip Balm: Grounding Ritual for Digital Wellness"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772460047800-a0xctq4t",
+        "has_alt": true,
+        "alt": "Ceramide Lip Balm Benefits for Digital Wellness"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772416830100-aj0z2hcr",
+        "has_alt": true,
+        "alt": "Executive Grounding Ritual with Jesse A. Eisenbalm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772395233015-0q2b76c2",
+        "has_alt": true,
+        "alt": "Beeswax vs Petroleum: Better Choice for Lip Health"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772373644132-6kf2tuco",
+        "has_alt": true,
+        "alt": "Handmade Artisan Lip Balm: A Mindful Digital Wellness Ritual"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772330429794-w1rnf4jo",
+        "has_alt": true,
+        "alt": "Non-Toxic Lip Balm Ingredients for Mindful Lip Care"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772308832811-jeine243",
+        "has_alt": true,
+        "alt": "Lip Care as an Executive Grounding Ritual"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772287235639-wpik166r",
+        "has_alt": true,
+        "alt": "Skincare as Meditation: A Mindful Ritual with Beeswax Lip Balm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772244053924-uvpuo5iw",
+        "has_alt": true,
+        "alt": "TEWL Lip Care: How Beeswax Protects and Nourishes"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772222445858-4pqiengu",
+        "has_alt": true,
+        "alt": "Charity Lip Balm: Jesse A. Eisenbalm's Philanthropic Mission"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772200849421-wvu42snm",
+        "has_alt": true,
+        "alt": "Crafting an Intentional Daily Ritual for Digital Professionals"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772157648193-ai3tpdwl",
+        "has_alt": true,
+        "alt": "The Lip Skinification Trend: Elevate Your Lip Care"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772136067285-84rjiooq",
+        "has_alt": true,
+        "alt": "Limited Edition Lip Balm: A Mindful Gift for Executives"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772114446232-pqzq7eik",
+        "has_alt": true,
+        "alt": "Bio-Compatible Lip Occlusion with Jesse A. Eisenbalm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772071246338-88o9ej1g",
+        "has_alt": true,
+        "alt": "Lip Care for Office Workers: A Mindful Approach"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772049645154-60r6yxnx",
+        "has_alt": true,
+        "alt": "Analog Ritual in the Digital Age: Lip Balm Application"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772028053144-fqh4jw6s",
+        "has_alt": true,
+        "alt": "Why Lips Dry Out Faster and How to Protect Them"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771984845223-ovsfl3y2",
+        "has_alt": true,
+        "alt": "Digital Fatigue Recovery Ritual with Jesse A. Eisenbalm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771963234810-n4zd42tz",
+        "has_alt": true,
+        "alt": "Beeswax Barrier Repair: A Natural Solution for Lips"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771941650434-4yo6koqy",
+        "has_alt": true,
+        "alt": "Mindfulness Morning Routine with Lip Care Rituals"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771898455119-nz8vr8pa",
+        "has_alt": true,
+        "alt": "Keeping Humans Human in an AI World with Jesse A. Eisenbalm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771876837805-a18xiw32",
+        "has_alt": true,
+        "alt": "Analog Rituals in the Digital Age: A Path to Mindfulness"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771855246113-ah8e1caf",
+        "has_alt": true,
+        "alt": "Quality Over Quantity Skincare: Intentional Choices for Mindful Living"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771812027556-equ73wse",
+        "has_alt": true,
+        "alt": "Transparency in Clean Beauty Ingredients: Natural Lip Care"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771768833190-8sqlmkkt",
+        "has_alt": true,
+        "alt": "Ingredient Purity in Natural Chapstick Alternatives"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771725623598-zf60kj1q",
+        "has_alt": true,
+        "alt": "Sourcing Pure Beeswax: A Commitment to Ingredient Transparency"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771704036640-p84h1on4",
+        "has_alt": true,
+        "alt": "Beeswax Moisturiser Benefits for Digital Wellness"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771694904759-lfciavaa",
+        "has_alt": true,
+        "alt": "The Artisanship Behind Handmade Beauty Products"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771682435154-vurpjik4",
+        "has_alt": true,
+        "alt": "Exploring Beeswax Properties for Skin Benefits"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771639228482-43up797s",
+        "has_alt": true,
+        "alt": "The Timeless Allure of Artisan Beauty Products"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771617646002-f0twbclj",
+        "has_alt": true,
+        "alt": "Beeswax vs Petroleum Jelly: The Best Lip Care Choice"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771604136174-5qyypxsy",
+        "has_alt": true,
+        "alt": "Embrace Intentional Purchasing Through Skincare Choices"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771603899971-mqzzt4be",
+        "has_alt": true,
+        "alt": "The Art of Slow Beauty Rituals: Mindful Lip Care"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771603347167-n23fj476",
+        "has_alt": true,
+        "alt": "The Art of Slow Beauty Rituals: Embrace Mindful Lip Care"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771522153418-8cufp3fu",
+        "has_alt": true,
+        "alt": "Discover Jesse A. Eisenbalm's Limited Edition Skincare"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771497152583-8qlxbds2",
+        "has_alt": true,
+        "alt": "Embrace Simplicity with Luxury Lip Balm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771487483357-opa1s5yk",
+        "has_alt": true,
+        "alt": "Discover Premium Lip Balm for Sale"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771465656014-vrp3co25",
+        "has_alt": true,
+        "alt": "Discover the Best Lip Balm for Mindful Living"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771465496920-rdcoleaw",
+        "has_alt": true,
+        "alt": "Exploring Wellness Trends in Lip Care"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771464422709-qgvfr9g9",
+        "has_alt": true,
+        "alt": "Soothe Chapped Lips with Beeswax Balm"
+      },
+      {
+        "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1771463780916-8dzyh8ei",
+        "has_alt": true,
+        "alt": "Discover Serenity with Premium Lip Balm"
+      }
+    ],
+    "images_missing_alt": [],
+    "has_nav": true,
+    "nav_visible": true,
+    "nav_link_count": 4,
+    "nav_links": [
+      "JESSE A. EISENBALM",
+      "PRODUCT",
+      "ABOUT",
+      "FAQ"
+    ],
+    "hamburger_found": true,
+    "body_font_size": "16px",
+    "has_horizontal_overflow": false,
+    "meta_description": "Thoughts on staying human in an increasingly automated world. Digital wellness, mindful skincare, and the philosophy behind Jesse A. Eisenbalm.",
+    "page_title": "Journal | Jesse A. Eisenbalm",
+    "structured_data_count": 3,
+    "contrast_samples": [
+      {
+        "tag": "A",
+        "text": "JESSE A. EISENBALM",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "24px"
+      },
+      {
+        "tag": "A",
+        "text": "PRODUCT",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "ABOUT",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "FAQ",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "16px"
+      },
+      {
+        "tag": "P",
+        "text": "THOUGHTS & MEDITATIONS",
+        "color": "rgb(107, 114, 128)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px"
+      },
+      {
+        "tag": "H1",
+        "text": "The Journal",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "72px"
+      },
+      {
+        "tag": "P",
+        "text": "Dispatches from the intersection of humanity and a",
+        "color": "rgb(75, 85, 99)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "24px"
+      },
+      {
+        "tag": "H2",
+        "text": "The Science of TEWL Lip Care: Beeswax's Hydrating ",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "20px"
+      },
+      {
+        "tag": "P",
+        "text": "Explore how Jesse A. Eisenbalm's beeswax lip balm ",
+        "color": "rgb(75, 85, 99)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "READ MORE",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px"
+      },
+      {
+        "tag": "H2",
+        "text": "Slow Beauty Rituals: Balance Through Lip Care",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "20px"
+      },
+      {
+        "tag": "P",
+        "text": "Discover slow beauty rituals with Jesse A. Eisenba",
+        "color": "rgb(75, 85, 99)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "READ MORE",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px"
+      },
+      {
+        "tag": "H2",
+        "text": "Mindful Skincare Routine: Intentional Lip Care Phi",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "20px"
+      },
+      {
+        "tag": "P",
+        "text": "Explore a mindful skincare routine with Jesse A. E",
+        "color": "rgb(75, 85, 99)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "READ MORE",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px"
+      },
+      {
+        "tag": "H2",
+        "text": "Lip Barrier Restoration with Jesse A. Eisenbalm",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "20px"
+      },
+      {
+        "tag": "P",
+        "text": "Discover how Jesse A. Eisenbalm's beeswax lip balm",
+        "color": "rgb(75, 85, 99)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "14px"
+      },
+      {
+        "tag": "A",
+        "text": "READ MORE",
+        "color": "rgb(0, 0, 0)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px"
+      }
+    ]
+  }
+}

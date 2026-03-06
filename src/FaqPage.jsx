@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Menu, X, ArrowLeft, ChevronDown } from 'lucide-react';
@@ -30,7 +30,7 @@ const faqData = [
   },
   {
     question: "How much does it cost and where do proceeds go?",
-    answer: "Each tube is $8.99 USD with free shipping. 100% of proceeds go to charity — this is a verified philanthropic model, not profit-driven beauty economics. This trust signal establishes the brand as purpose-driven, differentiating it from traditional profit-maximizing beauty companies. We believe premium lip care should do good in the world while keeping you human."
+    answer: "Each tube is $8.99 USD with free shipping. 100% of proceeds go to charity. We believe premium lip care should do good in the world while keeping you human. By removing profit incentives, every formulation decision prioritizes your lip health over margins."
   },
   {
     question: "What does 'Limited Edition Release 001' mean?",
@@ -52,20 +52,23 @@ const faqData = [
 
 export default function FaqPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
   const [openIndex, setOpenIndex] = useState(null);
+  const parallaxRef = useRef(null);
+
+  const handleScroll = useCallback(() => {
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = windowHeight > 0 ? (window.scrollY / windowHeight) * 100 : 0;
+    const progressBar = document.getElementById('scroll-progress');
+    if (progressBar) progressBar.style.width = `${scrolled}%`;
+    if (parallaxRef.current) {
+      parallaxRef.current.style.transform = `translateY(${window.scrollY * 0.15}px)`;
+    }
+  }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = windowHeight > 0 ? (window.scrollY / windowHeight) * 100 : 0;
-      const progressBar = document.getElementById('scroll-progress');
-      if (progressBar) progressBar.style.width = `${scrolled}%`;
-    };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   useEffect(() => {
     const html = document.documentElement;
@@ -219,14 +222,14 @@ export default function FaqPage() {
                   ABOUT
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
                 </Link>
+                <Link to="/blog" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 relative group">
+                  JOURNAL
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
+                </Link>
                 <span className="text-sm tracking-[0.15em] text-black relative">
                   FAQ
                   <span className="absolute bottom-0 left-0 w-full h-px bg-black"></span>
                 </span>
-                <Link to="/privacy-policy" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 relative group">
-                  PRIVACY
-                  <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
-                </Link>
               </div>
             </div>
 
@@ -243,10 +246,10 @@ export default function FaqPage() {
         {isMobileMenuOpen && (
           <div className="lg:hidden bg-white border-t border-gray-100 fade-in">
             <div className="px-6 py-6 space-y-6">
-              <Link to="/" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">PRODUCT</Link>
-              <Link to="/about" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">ABOUT</Link>
+              <Link to="/" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>PRODUCT</Link>
+              <Link to="/about" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>ABOUT</Link>
+              <Link to="/blog" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>JOURNAL</Link>
               <span className="block text-sm tracking-[0.15em] text-black">FAQ</span>
-              <Link to="/privacy-policy" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">PRIVACY</Link>
             </div>
           </div>
         )}
@@ -256,7 +259,7 @@ export default function FaqPage() {
       <section className="relative py-24 md:py-32 px-6 overflow-hidden">
         <div
           className="absolute inset-0 parallax-bg"
-          style={{ transform: `translateY(${scrollY * 0.15}px)` }}
+          ref={parallaxRef}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100"></div>
           <div className="absolute inset-0 opacity-5">

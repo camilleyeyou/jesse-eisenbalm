@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Menu, X } from 'lucide-react';
@@ -28,10 +28,10 @@ function SkeletonCard() {
 
 export default function BlogPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const parallaxRef = useRef(null);
 
   useEffect(() => {
     fetch(`${SERVER_URL}/api/posts`)
@@ -40,17 +40,20 @@ export default function BlogPage() {
       .catch(() => { setError('Could not load posts. Please try again later.'); setLoading(false); });
   }, []);
 
+  const handleScroll = useCallback(() => {
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = windowHeight > 0 ? (window.scrollY / windowHeight) * 100 : 0;
+    const progressBar = document.getElementById('scroll-progress');
+    if (progressBar) progressBar.style.width = `${scrolled}%`;
+    if (parallaxRef.current) {
+      parallaxRef.current.style.transform = `translateY(${window.scrollY * 0.15}px)`;
+    }
+  }, []);
+
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = windowHeight > 0 ? (window.scrollY / windowHeight) * 100 : 0;
-      const progressBar = document.getElementById('scroll-progress');
-      if (progressBar) progressBar.style.width = `${scrolled}%`;
-    };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   useEffect(() => {
     const html = document.documentElement;
@@ -92,25 +95,25 @@ export default function BlogPage() {
 
       <Helmet>
         <title>Journal | Jesse A. Eisenbalm</title>
-        <meta name="description" content="Thoughts on staying human in an increasingly automated world. Philosophy, culture, and meditations on humanity from Jesse A. Eisenbalm." />
+        <meta name="description" content="Expert lip care tips, beeswax science, and mindful skincare rituals from Jesse A. Eisenbalm. Premium beeswax lip balm journal." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://jesseaeisenbalm.com/blog" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://jesseaeisenbalm.com/blog" />
         <meta property="og:title" content="Journal | Jesse A. Eisenbalm" />
-        <meta property="og:description" content="Thoughts on staying human in an increasingly automated world." />
+        <meta property="og:description" content="Expert lip care tips, beeswax science, and mindful skincare rituals." />
         <meta property="og:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.png" />
         <meta property="og:site_name" content="Jesse A. Eisenbalm" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Journal | Jesse A. Eisenbalm" />
-        <meta name="twitter:description" content="Thoughts on staying human in an increasingly automated world." />
+        <meta name="twitter:description" content="Expert lip care tips, beeswax science, and mindful skincare rituals." />
         <meta name="twitter:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.png" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Blog",
           "name": "Jesse A. Eisenbalm Journal",
           "url": "https://jesseaeisenbalm.com/blog",
-          "description": "Thoughts on staying human in an increasingly automated world.",
+          "description": "Expert lip care tips, beeswax science, and mindful skincare rituals.",
           "publisher": {
             "@type": "Organization",
             "name": "Jesse A. Eisenbalm",
@@ -216,7 +219,7 @@ export default function BlogPage() {
 
       {/* Hero */}
       <section className="relative py-24 md:py-32 px-6 overflow-hidden">
-        <div className="absolute inset-0 parallax-bg" style={{ transform: `translateY(${scrollY * 0.15}px)` }}>
+        <div className="absolute inset-0 parallax-bg" ref={parallaxRef}>
           <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100"></div>
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-20 left-10 w-96 h-96 bg-black rounded-full blur-3xl"></div>
@@ -281,6 +284,9 @@ export default function BlogPage() {
                       <img
                         src={post.cover_image}
                         alt={post.title}
+                        width="640"
+                        height="360"
+                        loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                       />
                     </div>

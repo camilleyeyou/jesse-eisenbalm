@@ -1,23 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Menu, X, ArrowLeft } from 'lucide-react';
 
 export default function AboutPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+  const parallaxRef = useRef(null);
 
+  const handleScroll = useCallback(() => {
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = windowHeight > 0 ? (window.scrollY / windowHeight) * 100 : 0;
+    const progressBar = document.getElementById('scroll-progress');
+    if (progressBar) progressBar.style.width = `${scrolled}%`;
+    if (parallaxRef.current) {
+      parallaxRef.current.style.transform = `translateY(${window.scrollY * 0.15}px)`;
+    }
+  }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = windowHeight > 0 ? (window.scrollY / windowHeight) * 100 : 0;
-      const progressBar = document.getElementById('scroll-progress');
-      if (progressBar) progressBar.style.width = `${scrolled}%`;
-    };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   useEffect(() => {
     const html = document.documentElement;
@@ -218,34 +221,26 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-12">
-              <a href="/" className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
+              <Link to="/" className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
                 JESSE A. EISENBALM
-              </a>
+              </Link>
               <div className="hidden lg:flex space-x-8">
-                <a href="/#product" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 relative group">
+                <Link to="/" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 relative group">
                   PRODUCT
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="/about" className="text-sm tracking-[0.15em] text-black transition-all duration-300 relative group">
+                </Link>
+                <span className="text-sm tracking-[0.15em] text-black relative">
                   ABOUT
                   <span className="absolute bottom-0 left-0 w-full h-px bg-black"></span>
-                </a>
-                <a href="/#philosophy" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 relative group">
-                  PHILOSOPHY
-                  <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="/#journal" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 relative group">
+                </span>
+                <Link to="/blog" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 relative group">
                   JOURNAL
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="/#contact" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 relative group">
-                  CONTACT
-                  <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="/faq" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 relative group">
+                </Link>
+                <Link to="/faq" className="text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all duration-300 relative group">
                   FAQ
                   <span className="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -262,12 +257,10 @@ export default function AboutPage() {
         {isMobileMenuOpen && (
           <div className="lg:hidden bg-white border-t border-gray-100 fade-in">
             <div className="px-6 py-6 space-y-6">
-              <a href="/#product" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">PRODUCT</a>
-              <a href="/about" className="block text-sm tracking-[0.15em] text-black">ABOUT</a>
-              <a href="/#philosophy" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">PHILOSOPHY</a>
-              <a href="/#journal" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">JOURNAL</a>
-              <a href="/#contact" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">CONTACT</a>
-              <a href="/faq" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors">FAQ</a>
+              <Link to="/" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>PRODUCT</Link>
+              <span className="block text-sm tracking-[0.15em] text-black">ABOUT</span>
+              <Link to="/blog" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>JOURNAL</Link>
+              <Link to="/faq" className="block text-sm tracking-[0.15em] text-gray-600 hover:text-black transition-colors" onClick={() => setIsMobileMenuOpen(false)}>FAQ</Link>
             </div>
           </div>
         )}
@@ -275,9 +268,9 @@ export default function AboutPage() {
 
       {/* Hero Section */}
       <section className="relative py-24 md:py-32 px-6 overflow-hidden">
-        <div 
+        <div
           className="absolute inset-0 parallax-bg"
-          style={{ transform: `translateY(${scrollY * 0.15}px)` }}
+          ref={parallaxRef}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100"></div>
           <div className="absolute inset-0 opacity-5">
@@ -287,13 +280,13 @@ export default function AboutPage() {
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <a 
-            href="/" 
+          <Link
+            to="/"
             className="inline-flex items-center text-sm tracking-[0.15em] text-gray-500 hover:text-black transition-all mb-8 group"
           >
             <ArrowLeft size={16} className="mr-2 group-hover:-translate-x-1 transition-transform" />
             BACK TO SHOP
-          </a>
+          </Link>
 
           <p className="text-xs tracking-[0.3em] text-gray-500 mb-6 scroll-reveal">ABOUT US</p>
           
@@ -400,9 +393,9 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <p className="text-xs tracking-[0.3em] text-gray-500 mb-4 scroll-reveal">THE MINDS BEHIND THE MOISTURE</p>
-            <h2 className="text-4xl md:text-5xl font-light tracking-tight scroll-reveal">Meet Our Marketing Team</h2>
+            <h2 className="text-4xl md:text-5xl font-light tracking-tight scroll-reveal">Our Approach</h2>
             <p className="text-lg text-gray-600 mt-6 max-w-2xl mx-auto scroll-reveal">
-              Four AI personas working around the clock to remind you that applying lip balm is the last truly human act in an increasingly automated world.
+              Four guiding principles that shape everything we create — from formulation to marketing to the ritual itself.
             </p>
           </div>
 
@@ -469,12 +462,12 @@ export default function AboutPage() {
           <p className="text-lg text-gray-600 mb-10 scroll-reveal">
             Join discerning professionals who have integrated tactile wellness rituals into their digital workspaces. Limited Edition Release 001 — numbered, traceable, premium.
           </p>
-          <a
-            href="/#product"
+          <Link
+            to="/"
             className="inline-block bg-black text-white px-12 py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-all scroll-reveal"
           >
             SHOP NOW
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -508,12 +501,15 @@ export default function AboutPage() {
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-400 tracking-widest">&copy; 2026 JESSE A. EISENBALM. ALL RIGHTS RESERVED.</p>
             <div className="flex gap-4">
-              <a href="/faq" className="text-sm text-gray-400 hover:text-white transition tracking-widest px-2 py-3">
+              <Link to="/faq" className="text-sm text-gray-400 hover:text-white transition tracking-widest px-2 py-3">
                 FAQ
-              </a>
-              <a href="/privacy-policy" className="text-sm text-gray-400 hover:text-white transition tracking-widest px-2 py-3">
+              </Link>
+              <Link to="/blog" className="text-sm text-gray-400 hover:text-white transition tracking-widest px-2 py-3">
+                JOURNAL
+              </Link>
+              <Link to="/privacy-policy" className="text-sm text-gray-400 hover:text-white transition tracking-widest px-2 py-3">
                 PRIVACY POLICY
-              </a>
+              </Link>
             </div>
           </div>
         </div>

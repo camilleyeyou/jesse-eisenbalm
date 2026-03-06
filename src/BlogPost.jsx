@@ -61,7 +61,7 @@ export default function BlogPost() {
           <meta name="twitter:image" content={post.cover_image || 'https://jesseaeisenbalm.com/images/products/eisenbalm-1.png'} />
           <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Article",
+            "@type": "BlogPosting",
             "headline": post.title,
             "description": post.excerpt || '',
             "image": post.cover_image || 'https://jesseaeisenbalm.com/images/products/eisenbalm-1.png',
@@ -220,6 +220,9 @@ export default function BlogPost() {
               <img
                 src={post.cover_image}
                 alt={post.title}
+                width="1200"
+                height="630"
+                fetchpriority="high"
                 className="w-full h-full object-cover"
               />
             </div>

@@ -17,10 +17,7 @@ export default function EisenbalmShop() {
   const [orderDetails, setOrderDetails] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [isVerifying, setIsVerifying] = useState(false);
-  const [isPageReady, setIsPageReady] = useState(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    return !urlParams.get('session_id');
-  });
+  const [isPageReady, setIsPageReady] = useState(true);
   const [latestPosts, setLatestPosts] = useState([]);
   const [postsLoading, setPostsLoading] = useState(true);
 
@@ -706,20 +703,23 @@ export default function EisenbalmShop() {
             onLoadedData={() => setVideoLoaded(true)}
             onCanPlayThrough={() => {
               setVideoLoaded(true);
-              setIsPageReady(true);
             }}
-            poster="https://cdn.jsdelivr.net/gh/camilleyeyou/jesse-eisenbalm@main/public/images/hero-poster.jpg"
+            poster="/images/hero-poster.jpg"
           >
-            <source src="https://cdn.jsdelivr.net/gh/camilleyeyou/jesse-eisenbalm@main/public/videos/hero-background.mp4" type="video/mp4" />
+            <source src="/videos/hero-background.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
-          <h1 className="text-7xl md:text-9xl font-light text-white mb-8 tracking-tight leading-none">
-            ARE THESE<br />MY REAL LIPS?
+          <h1 className="text-5xl md:text-7xl font-light text-white mb-4 tracking-tight leading-none">
+            Premium Beeswax Lip Balm
           </h1>
+
+          <p className="text-3xl md:text-5xl text-white/90 mb-4 font-light tracking-tight leading-none">
+            Are These My Real Lips?
+          </p>
 
           <p className="text-xl md:text-2xl text-white/90 mb-4 font-light tracking-widest">
             STOP. BREATHE. BALM.
@@ -913,53 +913,42 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Product Benefits Section */}
       <section className="py-24 px-6 bg-black text-white scroll-snap-section scroll-reveal">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.2em] text-gray-400 mb-4">TESTIMONIALS</p>
-            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Generated Voices of Humanity</h2>
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto">Real generated reviews from personas navigating the complexity of the modern world.</p>
+            <p className="text-xs tracking-[0.2em] text-gray-400 mb-4">WHY JESSE A. EISENBALM</p>
+            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">What Sets Us Apart</h2>
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">Premium ingredients, intentional design, and a mission that matters.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-12">
             {[
               {
-                text: "This isn't just lip balm. It's a daily reminder to stay present. Before every Zoom meeting, I take those 5 seconds to stop, breathe, and apply. It's become my grounding ritual in an otherwise chaotic workday. The formula is incredible too — lasts through coffee, calls, and everything.",
-                author: "S.C.",
-                role: "Product Designer",
-                location: "San Francisco, CA"
+                title: "Premium Beeswax Formula",
+                description: "Our petrolatum-free formula uses natural beeswax to form a bio-compatible barrier that prevents transepidermal water loss (TEWL). No synthetic fragrances, parabens, or petroleum derivatives.",
+                detail: "Clean Ingredients"
               },
               {
-                text: "I bought it for the absurdist AI marketing angle. I stayed because it's genuinely the best lip balm I've ever used. The packaging alone makes it worth it — minimalist, premium, and it actually feels special to use. My entire team asked where I got it.",
-                author: "M.R.",
-                role: "Startup Founder",
-                location: "New York, NY"
+                title: "100% Charity Proceeds",
+                description: "Every dollar from every sale goes directly to charitable causes. We removed profit incentives so every formulation decision prioritizes your lip health over margins.",
+                detail: "Purpose-Driven"
               },
               {
-                text: "As someone who creates content about wellness and mindfulness, I'm constantly pitched products. This is one of the few I actually use daily and recommend genuinely. The 'stop, breathe, balm' ritual has become part of my morning routine. It's small but meaningful.",
-                author: "J.P.",
-                role: "Wellness Creator",
-                location: "Los Angeles, CA"
+                title: "Limited Edition, Hand Numbered",
+                description: "Release 001 is individually numbered for verifiable authenticity. Small-batch production ensures freshness and quality control that mass-market lip balms cannot match.",
+                detail: "Collectible Craft"
               }
-            ].map((testimonial, idx) => (
+            ].map((benefit, idx) => (
               <div
                 key={idx}
                 className="clip-reveal scroll-reveal"
                 style={{ transitionDelay: `${idx * 0.1}s` }}
               >
                 <div className="mb-6">
-                  <div className="flex text-yellow-400 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-xl">★</span>
-                    ))}
-                  </div>
-                  <p className="text-lg font-light leading-relaxed mb-6 italic">"{testimonial.text}"</p>
-                </div>
-                <div className="border-t border-gray-800 pt-4">
-                  <p className="font-light text-white">{testimonial.author}</p>
-                  <p className="text-sm text-gray-400 mt-1">{testimonial.role}</p>
-                  <p className="text-xs text-gray-500 mt-1">{testimonial.location}</p>
+                  <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">{benefit.detail}</p>
+                  <h3 className="text-xl font-light tracking-tight mb-4">{benefit.title}</h3>
+                  <p className="text-lg font-light leading-relaxed text-gray-300">{benefit.description}</p>
                 </div>
               </div>
             ))}

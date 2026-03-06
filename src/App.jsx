@@ -1,6 +1,6 @@
-import React, { Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import EisenbalmShop from './EisenbalmShop';
+const EisenbalmShop = lazy(() => import('./EisenbalmShop'));
 
 const AboutPage = lazy(() => import('./AboutPage'));
 const PrivacyPolicy = lazy(() => import('./PrivacyPolicy'));
