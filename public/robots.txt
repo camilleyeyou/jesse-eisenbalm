@@ -3,3 +3,7 @@ User-agent: *
 Disallow: /admin
 
 Sitemap: https://jesseaeisenbalm.com/sitemap.xml
+
+# Feeds
+# RSS: https://jesseaeisenbalm.com/rss.xml
+# Atom: https://jesseaeisenbalm.com/atom.xml

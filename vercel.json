@@ -2,7 +2,7 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/((?!static/|images/|videos/|favicon\\.png|eisenbalm-2\\.png|manifest\\.json|robots\\.txt|sitemap\\.xml|llms\\.txt|logo192\\.png|logo512\\.png).*)",
+      "source": "/((?!static/|images/|videos/|favicon\\.png|eisenbalm-2\\.png|manifest\\.json|robots\\.txt|sitemap\\.xml|rss\\.xml|atom\\.xml|1d8b5c4d478904c245f86fbe30b797a3\\.txt|llms\\.txt|logo192\\.png|logo512\\.png).*)",
       "destination": "/200.html"
     }
   ],
