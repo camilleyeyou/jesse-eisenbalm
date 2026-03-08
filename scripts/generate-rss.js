@@ -8,6 +8,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const REDIRECTED_SLUGS = require('./redirected-slugs');
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'https://jesse-eisenbalm-server.vercel.app';
 const SITE_URL = 'https://jesseaeisenbalm.com';
@@ -38,7 +39,7 @@ async function generateFeeds() {
     const response = await fetch(`${SERVER_URL}/api/posts`);
     if (!response.ok) throw new Error(`API returned ${response.status}`);
     const data = await response.json();
-    posts = data.posts || [];
+    posts = (data.posts || []).filter(p => !REDIRECTED_SLUGS.has(p.slug));
   } catch (err) {
     console.warn(`⚠️  Could not fetch posts: ${err.message} — skipping feed generation`);
     return;

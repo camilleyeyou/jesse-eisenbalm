@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const REDIRECTED_SLUGS = require('./redirected-slugs');
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'https://jesse-eisenbalm-server.vercel.app';
 
@@ -18,6 +19,12 @@ async function generateSitemap() {
     sitemapXML = sitemapXML
       .replace(/\s*<changefreq>[^<]*<\/changefreq>/g, '')
       .replace(/\s*<priority>[^<]*<\/priority>/g, '');
+
+    // Remove redirected blog posts from sitemap
+    for (const slug of REDIRECTED_SLUGS) {
+      const urlPattern = new RegExp(`\\s*<url>\\s*<loc>[^<]*\\/blog\\/${slug}<\\/loc>[\\s\\S]*?<\\/url>`, 'g');
+      sitemapXML = sitemapXML.replace(urlPattern, '');
+    }
 
     const outputPath = path.join(__dirname, '../public/sitemap.xml');
 

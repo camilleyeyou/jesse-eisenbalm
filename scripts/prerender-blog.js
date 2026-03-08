@@ -11,6 +11,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const REDIRECTED_SLUGS = require('./redirected-slugs');
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'https://jesse-eisenbalm-server.vercel.app';
 const SITE_URL = 'https://jesseaeisenbalm.com';
@@ -179,7 +180,7 @@ async function main() {
 
   let written = 0;
   for (const post of posts) {
-    if (!post.slug) continue;
+    if (!post.slug || REDIRECTED_SLUGS.has(post.slug)) continue;
 
     const dir = path.join(BLOG_DIR, post.slug);
     fs.mkdirSync(dir, { recursive: true });
@@ -308,8 +309,8 @@ function prerenderHomepage(shell) {
 function prerenderSecondaryPages(shell, posts) {
   console.log('📄 Pre-rendering secondary pages...');
 
-  // Build blog listing body from fetched posts
-  const blogListItems = (posts || []).slice(0, 20).map(p => {
+  // Build blog listing body from fetched posts (exclude redirected slugs)
+  const blogListItems = (posts || []).filter(p => !REDIRECTED_SLUGS.has(p.slug)).slice(0, 20).map(p => {
     const date = new Date(p.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     return `<li><a href="/blog/${p.slug}">${escapeHtml(p.title)}</a> — <span>${date}</span>${p.excerpt ? `<br/><span>${escapeHtml(truncate(p.excerpt, 120))}</span>` : ''}</li>`;
   }).join('\n        ');
