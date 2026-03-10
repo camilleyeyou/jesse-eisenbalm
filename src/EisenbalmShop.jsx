@@ -717,9 +717,9 @@ export default function EisenbalmShop() {
             Are These My Real Lips?
           </h1>
 
-          <p className="text-3xl md:text-5xl text-white/90 mb-4 font-light tracking-tight leading-none">
+          <h1 className="text-3xl md:text-5xl text-white/90 mb-4 font-light tracking-tight leading-none">
             Premium Beeswax Lip Balm
-          </p>
+          </h1>
 
           <p className="text-xl md:text-2xl text-white/90 mb-4 font-light tracking-widest">
             STOP. BREATHE. BALM.
