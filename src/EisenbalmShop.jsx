@@ -20,6 +20,7 @@ export default function EisenbalmShop() {
   const [isPageReady, setIsPageReady] = useState(true);
   const [latestPosts, setLatestPosts] = useState([]);
   const [postsLoading, setPostsLoading] = useState(true);
+  const heroVideoRef = useRef(null);
 
 
   const verifyPayment = useCallback(async (sessionId) => {
@@ -61,6 +62,15 @@ export default function EisenbalmShop() {
     }
   }, [verifyPayment]);
 
+
+  // If the video is already cached/loaded before React mounts (iOS Safari),
+  // the loadeddata/canplaythrough events won't fire. Check readyState on mount.
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (video && video.readyState >= 2) {
+      setVideoLoaded(true);
+    }
+  }, []);
 
   useEffect(() => {
     const html = document.documentElement;
@@ -694,6 +704,7 @@ export default function EisenbalmShop() {
       <section className="relative h-screen overflow-hidden flex items-center justify-center bg-black" role="banner">
         <div className="absolute inset-0 w-full h-full">
           <video
+            ref={heroVideoRef}
             autoPlay
             loop
             muted
