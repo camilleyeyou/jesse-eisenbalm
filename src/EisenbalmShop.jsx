@@ -714,11 +714,11 @@ export default function EisenbalmShop() {
 
         <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
           <h1 className="text-5xl md:text-7xl font-light text-white mb-4 tracking-tight leading-none">
-            Premium Beeswax Lip Balm
+            Are These My Real Lips?
           </h1>
 
           <p className="text-3xl md:text-5xl text-white/90 mb-4 font-light tracking-tight leading-none">
-            Are These My Real Lips?
+            Premium Beeswax Lip Balm
           </p>
 
           <p className="text-xl md:text-2xl text-white/90 mb-4 font-light tracking-widest">

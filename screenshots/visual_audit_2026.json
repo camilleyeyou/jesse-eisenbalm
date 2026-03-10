@@ -1,0 +1,1279 @@
+{
+  "homepage": {
+    "mobile_375": {
+      "viewport_meta": "width=device-width,initial-scale=1",
+      "h1_text": "Premium Beeswax Lip Balm",
+      "h1_visible_above_fold": true,
+      "cta_buttons": [
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 44,
+          "height": 44,
+          "top": 18,
+          "left": 251,
+          "visible_above_fold": true,
+          "classes": "relative p-3 -mr-3 text-gray-600 hover:text-black transition-all duration-300 luxury-focus"
+        },
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 44,
+          "height": 44,
+          "top": 18,
+          "left": 307,
+          "visible_above_fold": true,
+          "classes": "lg:hidden p-3 -mr-3 luxury-focus"
+        },
+        {
+          "text": "BUY NOW",
+          "tag": "A",
+          "width": 327,
+          "height": 54,
+          "top": 674,
+          "left": 24,
+          "visible_above_fold": true,
+          "classes": "luxury-button bg-white text-black px-12 py-4 text-sm tracking-[0.2em] hover:bg-gray-50 transition-al"
+        },
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 76,
+          "height": 76,
+          "top": 1933.425048828125,
+          "left": 32.17500305175781,
+          "visible_above_fold": false,
+          "classes": "w-20 h-20 bg-gray-50 overflow-hidden border-2 transition-all duration-300 clip-reveal scroll-reveal "
+        },
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 75.99999237060547,
+          "height": 76,
+          "top": 1933.425048828125,
+          "left": 119.57500457763672,
+          "visible_above_fold": false,
+          "classes": "w-20 h-20 bg-gray-50 overflow-hidden border-2 transition-all duration-300 clip-reveal scroll-reveal "
+        },
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 76,
+          "height": 76,
+          "top": 1933.425048828125,
+          "left": 206.97500610351562,
+          "visible_above_fold": false,
+          "classes": "w-20 h-20 bg-gray-50 overflow-hidden border-2 transition-all duration-300 clip-reveal scroll-reveal "
+        },
+        {
+          "text": "ADD TO CART",
+          "tag": "BUTTON",
+          "width": 327,
+          "height": 52,
+          "top": 1449,
+          "left": 24,
+          "visible_above_fold": false,
+          "classes": "luxury-button w-full bg-black text-white py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-"
+        },
+        {
+          "text": "SUBSCRIBE",
+          "tag": "BUTTON",
+          "width": 327,
+          "height": 52,
+          "top": 5800.25,
+          "left": 24,
+          "visible_above_fold": false,
+          "classes": "luxury-button bg-black text-white px-8 py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-al"
+        },
+        {
+          "text": "FOLLOW US",
+          "tag": "A",
+          "width": 173.28125,
+          "height": 48,
+          "top": 6945.25,
+          "left": 100.859375,
+          "visible_above_fold": false,
+          "classes": "luxury-button inline-block border-2 border-black text-black px-8 py-3 text-sm tracking-[0.2em] hover"
+        }
+      ],
+      "small_touch_targets": [
+        {
+          "tag": "A",
+          "text": "VIEW ALL POSTS \u2192",
+          "width": 163,
+          "height": 17,
+          "classes": "text-sm tracking-[0.15em] text-gray-500 hover:text-black tra"
+        },
+        {
+          "tag": "A",
+          "text": "LinkedIn",
+          "width": 327,
+          "height": 28,
+          "classes": "block text-sm text-gray-300 hover:text-white transition py-1"
+        },
+        {
+          "tag": "A",
+          "text": "Email Us",
+          "width": 327,
+          "height": 28,
+          "classes": "block text-sm text-gray-300 hover:text-white transition py-1"
+        }
+      ],
+      "small_touch_target_count": 3,
+      "images": [
+        {
+          "src": "https://jesseaeisenbalm.com/images/products/eisenbalm-1.webp",
+          "alt": "Jesse A. Eisenbalm premium beeswax lip balm tube - Limited Edition Release 001",
+          "width": 1024,
+          "height": 1536,
+          "displayed_width": 310.6500244140625,
+          "displayed_height": 310.6500244140625,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "auto"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/products/eisenbalm-1.webp",
+          "alt": "Jesse A. Eisenbalm lip balm - angle 1 of 3",
+          "width": 1024,
+          "height": 1536,
+          "displayed_width": 72.19999694824219,
+          "displayed_height": 72.2000732421875,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/products/eisenbalm-2.webp",
+          "alt": "Jesse A. Eisenbalm lip balm - angle 2 of 3",
+          "width": 1024,
+          "height": 1024,
+          "displayed_width": 72.20000457763672,
+          "displayed_height": 72.2000732421875,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/products/eisenbalm-3.webp",
+          "alt": "Jesse A. Eisenbalm lip balm - angle 3 of 3",
+          "width": 1024,
+          "height": 1536,
+          "displayed_width": 72.20001220703125,
+          "displayed_height": 72.2000732421875,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772827247221-lfxquz0e",
+          "alt": "Ceramides Lip Barrier: Enhancing Lip Health with Beeswax",
+          "width": 1024,
+          "height": 680,
+          "displayed_width": 327,
+          "displayed_height": 245.25,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "auto"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772805659487-mfdocnnu",
+          "alt": "Mindful Gift for Executives: Jesse A. Eisenbalm Lip Balm",
+          "width": 1024,
+          "height": 697,
+          "displayed_width": 327,
+          "displayed_height": 245.25,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "auto"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772762451928-7wvtu2w1",
+          "alt": "The Science of TEWL Lip Care: Beeswax's Hydrating Power",
+          "width": 1024,
+          "height": 679,
+          "displayed_width": 327,
+          "displayed_height": 245.25,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "auto"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/grid/image-1.webp",
+          "alt": "Jesse A. Eisenbalm lip balm in minimalist setting",
+          "width": 0,
+          "height": 0,
+          "displayed_width": 155.5,
+          "displayed_height": 155.5,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/grid/image-2.webp",
+          "alt": "Premium beeswax lip balm close-up texture",
+          "width": 0,
+          "height": 0,
+          "displayed_width": 155.5,
+          "displayed_height": 155.5,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/grid/image-3.webp",
+          "alt": "Applying Jesse A. Eisenbalm as daily ritual",
+          "width": 0,
+          "height": 0,
+          "displayed_width": 155.5,
+          "displayed_height": 155.5,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        }
+      ],
+      "has_nav": true,
+      "has_hamburger": true,
+      "body_font_size": "16px",
+      "has_horizontal_scroll": false,
+      "page_title": "Jesse A. Eisenbalm | Digital Wellness Ritual for Business Professionals",
+      "doc_width": 375,
+      "viewport_width": 375
+    },
+    "tablet_768": {
+      "viewport_meta": "width=device-width,initial-scale=1",
+      "h1_text": "Premium Beeswax Lip Balm",
+      "h1_visible_above_fold": true,
+      "cta_buttons": [
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 44,
+          "height": 44,
+          "top": 18,
+          "left": 644,
+          "visible_above_fold": true,
+          "classes": "relative p-3 -mr-3 text-gray-600 hover:text-black transition-all duration-300 luxury-focus"
+        },
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 44,
+          "height": 44,
+          "top": 18,
+          "left": 700,
+          "visible_above_fold": true,
+          "classes": "lg:hidden p-3 -mr-3 luxury-focus"
+        },
+        {
+          "text": "BUY NOW",
+          "tag": "A",
+          "width": 207.515625,
+          "height": 54,
+          "top": 782,
+          "left": 280.234375,
+          "visible_above_fold": true,
+          "classes": "luxury-button bg-white text-black px-12 py-4 text-sm tracking-[0.2em] hover:bg-gray-50 transition-al"
+        },
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 76,
+          "height": 76,
+          "top": 1598.4000244140625,
+          "left": 32.19999694824219,
+          "visible_above_fold": false,
+          "classes": "w-20 h-20 bg-gray-50 overflow-hidden border-2 transition-all duration-300 clip-reveal scroll-reveal "
+        },
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 75.99999237060547,
+          "height": 76,
+          "top": 1598.4000244140625,
+          "left": 119.5999984741211,
+          "visible_above_fold": false,
+          "classes": "w-20 h-20 bg-gray-50 overflow-hidden border-2 transition-all duration-300 clip-reveal scroll-reveal "
+        },
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 76,
+          "height": 76,
+          "top": 1598.4000244140625,
+          "left": 207,
+          "visible_above_fold": false,
+          "classes": "w-20 h-20 bg-gray-50 overflow-hidden border-2 transition-all duration-300 clip-reveal scroll-reveal "
+        },
+        {
+          "text": "ADD TO CART",
+          "tag": "BUTTON",
+          "width": 328,
+          "height": 52,
+          "top": 1661,
+          "left": 416,
+          "visible_above_fold": false,
+          "classes": "luxury-button w-full bg-black text-white py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-"
+        },
+        {
+          "text": "SUBSCRIBE",
+          "tag": "BUTTON",
+          "width": 165.671875,
+          "height": 54,
+          "top": 3834,
+          "left": 442.328125,
+          "visible_above_fold": false,
+          "classes": "luxury-button bg-black text-white px-8 py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-al"
+        },
+        {
+          "text": "FOLLOW US",
+          "tag": "A",
+          "width": 173.28125,
+          "height": 48,
+          "top": 4651.5,
+          "left": 297.359375,
+          "visible_above_fold": false,
+          "classes": "luxury-button inline-block border-2 border-black text-black px-8 py-3 text-sm tracking-[0.2em] hover"
+        }
+      ],
+      "small_touch_targets": [
+        {
+          "tag": "A",
+          "text": "JESSE A. EISENBALM",
+          "width": 308,
+          "height": 32,
+          "classes": "text-2xl font-light tracking-[0.2em] transition-all duration"
+        },
+        {
+          "tag": "A",
+          "text": "ALL POSTS",
+          "width": 113,
+          "height": 20,
+          "classes": "hidden md:inline-flex items-center text-sm tracking-[0.15em]"
+        },
+        {
+          "tag": "A",
+          "text": "VIEW ALL POSTS \u2192",
+          "width": 163,
+          "height": 17,
+          "classes": "text-sm tracking-[0.15em] text-gray-500 hover:text-black tra"
+        },
+        {
+          "tag": "A",
+          "text": "LinkedIn",
+          "width": 208,
+          "height": 28,
+          "classes": "block text-sm text-gray-300 hover:text-white transition py-1"
+        },
+        {
+          "tag": "A",
+          "text": "Email Us",
+          "width": 208,
+          "height": 28,
+          "classes": "block text-sm text-gray-300 hover:text-white transition py-1"
+        }
+      ],
+      "small_touch_target_count": 5,
+      "images": [
+        {
+          "src": "https://jesseaeisenbalm.com/images/products/eisenbalm-1.webp",
+          "alt": "Jesse A. Eisenbalm premium beeswax lip balm tube - Limited Edition Release 001",
+          "width": 1024,
+          "height": 1536,
+          "displayed_width": 311.5999755859375,
+          "displayed_height": 311.5999755859375,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "auto"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/products/eisenbalm-1.webp",
+          "alt": "Jesse A. Eisenbalm lip balm - angle 1 of 3",
+          "width": 1024,
+          "height": 1536,
+          "displayed_width": 72.19999694824219,
+          "displayed_height": 72.199951171875,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/products/eisenbalm-2.webp",
+          "alt": "Jesse A. Eisenbalm lip balm - angle 2 of 3",
+          "width": 1024,
+          "height": 1024,
+          "displayed_width": 72.20000457763672,
+          "displayed_height": 72.199951171875,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/products/eisenbalm-3.webp",
+          "alt": "Jesse A. Eisenbalm lip balm - angle 3 of 3",
+          "width": 1024,
+          "height": 1536,
+          "displayed_width": 72.19998168945312,
+          "displayed_height": 72.199951171875,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772827247221-lfxquz0e",
+          "alt": "Ceramides Lip Barrier: Enhancing Lip Health with Beeswax",
+          "width": 1024,
+          "height": 680,
+          "displayed_width": 208,
+          "displayed_height": 156,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "auto"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772805659487-mfdocnnu",
+          "alt": "Mindful Gift for Executives: Jesse A. Eisenbalm Lip Balm",
+          "width": 1024,
+          "height": 697,
+          "displayed_width": 208,
+          "displayed_height": 156,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "auto"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772762451928-7wvtu2w1",
+          "alt": "The Science of TEWL Lip Care: Beeswax's Hydrating Power",
+          "width": 1024,
+          "height": 679,
+          "displayed_width": 208,
+          "displayed_height": 156,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "auto"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/grid/image-1.webp",
+          "alt": "Jesse A. Eisenbalm lip balm in minimalist setting",
+          "width": 0,
+          "height": 0,
+          "displayed_width": 168,
+          "displayed_height": 168,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/grid/image-2.webp",
+          "alt": "Premium beeswax lip balm close-up texture",
+          "width": 0,
+          "height": 0,
+          "displayed_width": 168,
+          "displayed_height": 168,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/grid/image-3.webp",
+          "alt": "Applying Jesse A. Eisenbalm as daily ritual",
+          "width": 0,
+          "height": 0,
+          "displayed_width": 168,
+          "displayed_height": 168,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        }
+      ],
+      "has_nav": true,
+      "has_hamburger": true,
+      "body_font_size": "16px",
+      "has_horizontal_scroll": false,
+      "page_title": "Jesse A. Eisenbalm | Digital Wellness Ritual for Business Professionals",
+      "doc_width": 768,
+      "viewport_width": 768
+    },
+    "desktop_1920": {
+      "viewport_meta": "width=device-width,initial-scale=1",
+      "h1_text": "Premium Beeswax Lip Balm",
+      "h1_visible_above_fold": true,
+      "cta_buttons": [
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 44,
+          "height": 44,
+          "top": 18,
+          "left": 1520,
+          "visible_above_fold": true,
+          "classes": "relative p-3 -mr-3 text-gray-600 hover:text-black transition-all duration-300 luxury-focus"
+        },
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "left": 0,
+          "visible_above_fold": false,
+          "classes": "lg:hidden p-3 -mr-3 luxury-focus"
+        },
+        {
+          "text": "BUY NOW",
+          "tag": "A",
+          "width": 207.515625,
+          "height": 54,
+          "top": 774,
+          "left": 856.234375,
+          "visible_above_fold": true,
+          "classes": "luxury-button bg-white text-black px-12 py-4 text-sm tracking-[0.2em] hover:bg-gray-50 transition-al"
+        },
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 76,
+          "height": 76,
+          "top": 1867.4000244140625,
+          "left": 335.20001220703125,
+          "visible_above_fold": false,
+          "classes": "w-20 h-20 bg-gray-50 overflow-hidden border-2 transition-all duration-300 clip-reveal scroll-reveal "
+        },
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 76,
+          "height": 76,
+          "top": 1867.4000244140625,
+          "left": 422.6000061035156,
+          "visible_above_fold": false,
+          "classes": "w-20 h-20 bg-gray-50 overflow-hidden border-2 transition-all duration-300 clip-reveal scroll-reveal "
+        },
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 76,
+          "height": 76,
+          "top": 1867.4000244140625,
+          "left": 510,
+          "visible_above_fold": false,
+          "classes": "w-20 h-20 bg-gray-50 overflow-hidden border-2 transition-all duration-300 clip-reveal scroll-reveal "
+        },
+        {
+          "text": "ADD TO CART",
+          "tag": "BUTTON",
+          "width": 608,
+          "height": 52,
+          "top": 1784,
+          "left": 992,
+          "visible_above_fold": false,
+          "classes": "luxury-button w-full bg-black text-white py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-"
+        },
+        {
+          "text": "SUBSCRIBE",
+          "tag": "BUTTON",
+          "width": 165.671875,
+          "height": 54,
+          "top": 3925.25,
+          "left": 1018.328125,
+          "visible_above_fold": false,
+          "classes": "luxury-button bg-black text-white px-8 py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-al"
+        },
+        {
+          "text": "FOLLOW US",
+          "tag": "A",
+          "width": 173.28125,
+          "height": 48,
+          "top": 5022.75,
+          "left": 873.359375,
+          "visible_above_fold": false,
+          "classes": "luxury-button inline-block border-2 border-black text-black px-8 py-3 text-sm tracking-[0.2em] hover"
+        }
+      ],
+      "small_touch_targets": [
+        {
+          "tag": "A",
+          "text": "JESSE A. EISENBALM",
+          "width": 308,
+          "height": 32,
+          "classes": "text-2xl font-light tracking-[0.2em] transition-all duration"
+        },
+        {
+          "tag": "A",
+          "text": "PRODUCT",
+          "width": 82,
+          "height": 20,
+          "classes": "text-sm tracking-[0.15em] text-gray-500 hover:text-black tra"
+        },
+        {
+          "tag": "A",
+          "text": "ABOUT",
+          "width": 58,
+          "height": 20,
+          "classes": "text-sm tracking-[0.15em] text-gray-500 hover:text-black tra"
+        },
+        {
+          "tag": "A",
+          "text": "PHILOSOPHY",
+          "width": 109,
+          "height": 20,
+          "classes": "text-sm tracking-[0.15em] text-gray-500 hover:text-black tra"
+        },
+        {
+          "tag": "A",
+          "text": "JOURNAL",
+          "width": 79,
+          "height": 20,
+          "classes": "text-sm tracking-[0.15em] text-gray-500 hover:text-black tra"
+        },
+        {
+          "tag": "A",
+          "text": "CONTACT",
+          "width": 80,
+          "height": 20,
+          "classes": "text-sm tracking-[0.15em] text-gray-500 hover:text-black tra"
+        },
+        {
+          "tag": "A",
+          "text": "FAQ",
+          "width": 33,
+          "height": 20,
+          "classes": "text-sm tracking-[0.15em] text-gray-500 hover:text-black tra"
+        },
+        {
+          "tag": "A",
+          "text": "PRIVACY",
+          "width": 72,
+          "height": 20,
+          "classes": "text-sm tracking-[0.15em] text-gray-500 hover:text-black tra"
+        },
+        {
+          "tag": "A",
+          "text": "ALL POSTS",
+          "width": 113,
+          "height": 20,
+          "classes": "hidden md:inline-flex items-center text-sm tracking-[0.15em]"
+        },
+        {
+          "tag": "A",
+          "text": "LinkedIn",
+          "width": 395,
+          "height": 28,
+          "classes": "block text-sm text-gray-300 hover:text-white transition py-1"
+        },
+        {
+          "tag": "A",
+          "text": "Email Us",
+          "width": 395,
+          "height": 28,
+          "classes": "block text-sm text-gray-300 hover:text-white transition py-1"
+        }
+      ],
+      "small_touch_target_count": 11,
+      "images": [
+        {
+          "src": "https://jesseaeisenbalm.com/images/products/eisenbalm-1.webp",
+          "alt": "Jesse A. Eisenbalm premium beeswax lip balm tube - Limited Edition Release 001",
+          "width": 1024,
+          "height": 1536,
+          "displayed_width": 577.5999755859375,
+          "displayed_height": 577.5999755859375,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "auto"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/products/eisenbalm-1.webp",
+          "alt": "Jesse A. Eisenbalm lip balm - angle 1 of 3",
+          "width": 1024,
+          "height": 1536,
+          "displayed_width": 72.20001220703125,
+          "displayed_height": 72.199951171875,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/products/eisenbalm-2.webp",
+          "alt": "Jesse A. Eisenbalm lip balm - angle 2 of 3",
+          "width": 1024,
+          "height": 1024,
+          "displayed_width": 72.20001220703125,
+          "displayed_height": 72.199951171875,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/products/eisenbalm-3.webp",
+          "alt": "Jesse A. Eisenbalm lip balm - angle 3 of 3",
+          "width": 1024,
+          "height": 1536,
+          "displayed_width": 72.199951171875,
+          "displayed_height": 72.199951171875,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772827247221-lfxquz0e",
+          "alt": "Ceramides Lip Barrier: Enhancing Lip Health with Beeswax",
+          "width": 1024,
+          "height": 680,
+          "displayed_width": 394.65625,
+          "displayed_height": 295.984375,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "auto"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772805659487-mfdocnnu",
+          "alt": "Mindful Gift for Executives: Jesse A. Eisenbalm Lip Balm",
+          "width": 1024,
+          "height": 697,
+          "displayed_width": 394.671875,
+          "displayed_height": 296,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "auto"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772762451928-7wvtu2w1",
+          "alt": "The Science of TEWL Lip Care: Beeswax's Hydrating Power",
+          "width": 1024,
+          "height": 679,
+          "displayed_width": 394.65625,
+          "displayed_height": 295.984375,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "auto"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/grid/image-1.webp",
+          "alt": "Jesse A. Eisenbalm lip balm in minimalist setting",
+          "width": 0,
+          "height": 0,
+          "displayed_width": 308,
+          "displayed_height": 308,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/grid/image-2.webp",
+          "alt": "Premium beeswax lip balm close-up texture",
+          "width": 0,
+          "height": 0,
+          "displayed_width": 308,
+          "displayed_height": 308,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://jesseaeisenbalm.com/images/grid/image-3.webp",
+          "alt": "Applying Jesse A. Eisenbalm as daily ritual",
+          "width": 0,
+          "height": 0,
+          "displayed_width": 308,
+          "displayed_height": 308,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        }
+      ],
+      "has_nav": true,
+      "has_hamburger": true,
+      "body_font_size": "16px",
+      "has_horizontal_scroll": false,
+      "page_title": "Jesse A. Eisenbalm | Digital Wellness Ritual for Business Professionals",
+      "doc_width": 1920,
+      "viewport_width": 1920
+    }
+  },
+  "blog": {
+    "mobile_375": {
+      "viewport_meta": "width=device-width,initial-scale=1",
+      "h1_text": "The Journal",
+      "h1_visible_above_fold": true,
+      "cta_buttons": [
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 20,
+          "height": 20,
+          "top": 30,
+          "left": 331,
+          "visible_above_fold": true,
+          "classes": "lg:hidden luxury-focus"
+        }
+      ],
+      "small_touch_targets": [
+        {
+          "tag": "BUTTON",
+          "text": "",
+          "width": 20,
+          "height": 20,
+          "classes": "lg:hidden luxury-focus"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        },
+        {
+          "tag": "A",
+          "text": "READ MORE",
+          "width": 86,
+          "height": 19,
+          "classes": "text-xs tracking-[0.15em] text-black border-b border-black p"
+        }
+      ],
+      "small_touch_target_count": 56,
+      "images": [
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772827247221-lfxquz0e",
+          "alt": "Ceramides Lip Barrier: Enhancing Lip Health with Beeswax",
+          "width": 1024,
+          "height": 680,
+          "displayed_width": 325,
+          "displayed_height": 182.8125,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772805659487-mfdocnnu",
+          "alt": "Mindful Gift for Executives: Jesse A. Eisenbalm Lip Balm",
+          "width": 1024,
+          "height": 697,
+          "displayed_width": 325,
+          "displayed_height": 182.8125,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772762451928-7wvtu2w1",
+          "alt": "The Science of TEWL Lip Care: Beeswax's Hydrating Power",
+          "width": 1024,
+          "height": 679,
+          "displayed_width": 325,
+          "displayed_height": 182.8125,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772740841632-tj2a4emn",
+          "alt": "Slow Beauty Rituals: Balance Through Lip Care",
+          "width": 1024,
+          "height": 680,
+          "displayed_width": 325,
+          "displayed_height": 182.8125,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772719239468-ia4n0wwt",
+          "alt": "Mindful Skincare Routine: Intentional Lip Care Philosophy",
+          "width": 1024,
+          "height": 573,
+          "displayed_width": 325,
+          "displayed_height": 182.8125,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772676047117-7i4044df",
+          "alt": "Lip Barrier Restoration with Jesse A. Eisenbalm",
+          "width": 1024,
+          "height": 564,
+          "displayed_width": 325,
+          "displayed_height": 182.8125,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772654446053-xlss7eh9",
+          "alt": "Knowledge Worker Wellness: Mindful Skincare with Jesse A. Eisenbalm",
+          "width": 0,
+          "height": 0,
+          "displayed_width": 325,
+          "displayed_height": 182.8125,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772632844027-pychcv1i",
+          "alt": "Embracing Philanthropy in Beauty: Jesse A. Eisenbalm's Approach",
+          "width": 0,
+          "height": 0,
+          "displayed_width": 325,
+          "displayed_height": 182.8125,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772589644208-vsot5laa",
+          "alt": "Beeswax Properties: Enhancing the Skin Barrier for Lip Care",
+          "width": 0,
+          "height": 0,
+          "displayed_width": 325,
+          "displayed_height": 182.8125,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        },
+        {
+          "src": "https://kqyiauyahlmruyblxezp.supabase.co/storage/v1/object/public/post-images/1772568052563-q2v2srn4",
+          "alt": "Analog Rituals in the Digital Age: Finding Peace",
+          "width": 0,
+          "height": 0,
+          "displayed_width": 325,
+          "displayed_height": 182.8125,
+          "has_srcset": false,
+          "has_sizes": false,
+          "loading": "lazy"
+        }
+      ],
+      "has_nav": true,
+      "has_hamburger": true,
+      "body_font_size": "16px",
+      "has_horizontal_scroll": false,
+      "page_title": "Journal | Jesse A. Eisenbalm",
+      "doc_width": 375,
+      "viewport_width": 375
+    },
+    "tablet_768": {
+      "error": "Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://jesseaeisenbalm.com/blog\", waiting until \"networkidle\"\n"
+    },
+    "desktop_1920": {
+      "error": "Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://jesseaeisenbalm.com/blog\", waiting until \"networkidle\"\n"
+    }
+  },
+  "about": {
+    "mobile_375": {
+      "viewport_meta": "width=device-width,initial-scale=1",
+      "h1_text": "WHO WE ARE",
+      "h1_visible_above_fold": true,
+      "cta_buttons": [
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 20,
+          "height": 20,
+          "top": 30,
+          "left": 331,
+          "visible_above_fold": true,
+          "classes": "lg:hidden luxury-focus"
+        }
+      ],
+      "small_touch_targets": [
+        {
+          "tag": "BUTTON",
+          "text": "",
+          "width": 20,
+          "height": 20,
+          "classes": "lg:hidden luxury-focus"
+        },
+        {
+          "tag": "A",
+          "text": "BACK TO SHOP",
+          "width": 151,
+          "height": 20,
+          "classes": "inline-flex items-center text-sm tracking-[0.15em] text-gray"
+        },
+        {
+          "tag": "A",
+          "text": "LinkedIn",
+          "width": 327,
+          "height": 20,
+          "classes": "block text-sm text-gray-400 hover:text-white transition"
+        },
+        {
+          "tag": "A",
+          "text": "Email Us",
+          "width": 327,
+          "height": 20,
+          "classes": "block text-sm text-gray-400 hover:text-white transition"
+        }
+      ],
+      "small_touch_target_count": 4,
+      "images": [],
+      "has_nav": true,
+      "has_hamburger": true,
+      "body_font_size": "16px",
+      "has_horizontal_scroll": false,
+      "page_title": "About Jesse A. Eisenbalm | Our Story & Mission",
+      "doc_width": 375,
+      "viewport_width": 375
+    },
+    "tablet_768": {
+      "viewport_meta": "width=device-width,initial-scale=1",
+      "h1_text": "WHO WE ARE",
+      "h1_visible_above_fold": true,
+      "cta_buttons": [
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 20,
+          "height": 20,
+          "top": 30,
+          "left": 724,
+          "visible_above_fold": true,
+          "classes": "lg:hidden luxury-focus"
+        }
+      ],
+      "small_touch_targets": [
+        {
+          "tag": "A",
+          "text": "JESSE A. EISENBALM",
+          "width": 308,
+          "height": 32,
+          "classes": "text-2xl font-light tracking-[0.2em] transition-all duration"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "",
+          "width": 20,
+          "height": 20,
+          "classes": "lg:hidden luxury-focus"
+        },
+        {
+          "tag": "A",
+          "text": "BACK TO SHOP",
+          "width": 151,
+          "height": 20,
+          "classes": "inline-flex items-center text-sm tracking-[0.15em] text-gray"
+        },
+        {
+          "tag": "A",
+          "text": "LinkedIn",
+          "width": 208,
+          "height": 20,
+          "classes": "block text-sm text-gray-400 hover:text-white transition"
+        },
+        {
+          "tag": "A",
+          "text": "Email Us",
+          "width": 208,
+          "height": 20,
+          "classes": "block text-sm text-gray-400 hover:text-white transition"
+        }
+      ],
+      "small_touch_target_count": 5,
+      "images": [],
+      "has_nav": true,
+      "has_hamburger": true,
+      "body_font_size": "16px",
+      "has_horizontal_scroll": false,
+      "page_title": "About Jesse A. Eisenbalm | Our Story & Mission",
+      "doc_width": 768,
+      "viewport_width": 768
+    },
+    "desktop_1920": {
+      "viewport_meta": "width=device-width,initial-scale=1",
+      "h1_text": "WHO WE ARE",
+      "h1_visible_above_fold": true,
+      "cta_buttons": [
+        {
+          "text": "",
+          "tag": "BUTTON",
+          "width": 0,
+          "height": 0,
+          "top": 0,
+          "left": 0,
+          "visible_above_fold": false,
+          "classes": "lg:hidden luxury-focus"
+        }
+      ],
+      "small_touch_targets": [
+        {
+          "tag": "A",
+          "text": "JESSE A. EISENBALM",
+          "width": 308,
+          "height": 32,
+          "classes": "text-2xl font-light tracking-[0.2em] transition-all duration"
+        },
+        {
+          "tag": "A",
+          "text": "PRODUCT",
+          "width": 82,
+          "height": 20,
+          "classes": "text-sm tracking-[0.15em] text-gray-500 hover:text-black tra"
+        },
+        {
+          "tag": "A",
+          "text": "JOURNAL",
+          "width": 79,
+          "height": 20,
+          "classes": "text-sm tracking-[0.15em] text-gray-500 hover:text-black tra"
+        },
+        {
+          "tag": "A",
+          "text": "FAQ",
+          "width": 33,
+          "height": 20,
+          "classes": "text-sm tracking-[0.15em] text-gray-500 hover:text-black tra"
+        },
+        {
+          "tag": "A",
+          "text": "BACK TO SHOP",
+          "width": 151,
+          "height": 20,
+          "classes": "inline-flex items-center text-sm tracking-[0.15em] text-gray"
+        },
+        {
+          "tag": "A",
+          "text": "LinkedIn",
+          "width": 395,
+          "height": 20,
+          "classes": "block text-sm text-gray-400 hover:text-white transition"
+        },
+        {
+          "tag": "A",
+          "text": "Email Us",
+          "width": 395,
+          "height": 20,
+          "classes": "block text-sm text-gray-400 hover:text-white transition"
+        }
+      ],
+      "small_touch_target_count": 7,
+      "images": [],
+      "has_nav": true,
+      "has_hamburger": true,
+      "body_font_size": "16px",
+      "has_horizontal_scroll": false,
+      "page_title": "About Jesse A. Eisenbalm | Our Story & Mission",
+      "doc_width": 1920,
+      "viewport_width": 1920
+    }
+  }
+}
