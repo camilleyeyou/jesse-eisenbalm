@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# Jesse A. Eisenbalm
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Premium beeswax lip balm e-commerce site. Limited edition, hand-numbered. All proceeds go to charity.
 
-## Available Scripts
+**Live:** [jesseaeisenbalm.com](https://jesseaeisenbalm.com)
 
-In the project directory, you can run:
+## Tech Stack
 
-### `npm start`
+- **Frontend:** React 19, React Router, Tailwind CSS
+- **Backend:** Express 5, Stripe (payments), Supabase (data/images)
+- **Hosting:** Vercel (frontend + serverless backend)
+- **Analytics:** Google Analytics 4 with Core Web Vitals reporting
+- **SEO:** Pre-rendered pages, XML sitemap, RSS/Atom feeds, JSON-LD schema
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Project Structure
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+├── src/                    # React frontend
+│   ├── EisenbalmShop.jsx   # Homepage / shop (hero, product, checkout)
+│   ├── BlogPage.jsx        # Blog listing
+│   ├── BlogPost.jsx        # Individual blog post
+│   ├── AboutPage.jsx       # About page
+│   ├── AdminPage.jsx       # Admin panel
+│   ├── FaqPage.jsx         # FAQ
+│   └── PrivacyPolicy.jsx   # Privacy policy
+├── server/                 # Express API (deployed separately on Vercel)
+│   └── server.js           # Stripe checkout, Supabase blog CRUD
+├── scripts/                # Build-time scripts
+│   ├── generate-sitemap.js # XML sitemap generator
+│   ├── generate-rss.js     # RSS + Atom feed generator
+│   ├── prerender.js        # Static page pre-rendering
+│   ├── prerender-blog.js   # Blog post pre-rendering
+│   ├── redirected-slugs.js # Consolidated blog post redirect list
+│   └── ping-search-engines.js
+├── public/                 # Static assets
+└── vercel.json             # Redirects, rewrites, headers, CSP
+```
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+- Node.js 18+
+- npm
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Frontend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm install
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Runs on [http://localhost:3000](http://localhost:3000).
 
-### `npm run eject`
+### Backend
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+cd server
+npm install
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Requires a `.env` file in `server/` with:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+STRIPE_SECRET_KEY=
+SUPABASE_URL=
+SUPABASE_SERVICE_ROLE_KEY=
+FRONTEND_URL=http://localhost:3000
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Build & Deploy
 
-## Learn More
+```bash
+npm run build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This runs the full pipeline:
+1. **prebuild** — generates sitemap.xml, rss.xml, atom.xml
+2. **build** — CRA production build
+3. **postbuild** — pre-renders static HTML pages, pre-renders blog posts, pings search engines
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Deployed automatically via Vercel on push to `main`.
 
-### Code Splitting
+## Blog System
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Blog posts are stored in Supabase and managed via the admin panel (`/admin`). An automated content generation system is documented in `BLOG_CONTENT_PROMPT.md`.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Consolidated posts (39 redirected to 19 canonical posts) are managed via 301 redirects in `vercel.json` and filtered from sitemap/feeds by `scripts/redirected-slugs.js`.
