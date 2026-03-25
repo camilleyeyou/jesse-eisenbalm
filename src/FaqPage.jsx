@@ -136,6 +136,29 @@ export default function FaqPage() {
         <meta name="twitter:title" content="FAQ - Jesse A. Eisenbalm" />
         <meta name="twitter:description" content="Answers to common questions about our premium beeswax lip balm." />
 
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "@id": "https://jesseaeisenbalm.com/faq#faqpage",
+          "mainEntity": faqData.map(item => ({
+            "@type": "Question",
+            "name": item.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": item.answer
+            }
+          }))
+        })}</script>
+
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jesseaeisenbalm.com/" },
+            { "@type": "ListItem", "position": 2, "name": "FAQ", "item": "https://jesseaeisenbalm.com/faq" }
+          ]
+        })}</script>
+
       </Helmet>
 
       <div id="scroll-progress" className="scroll-progress"></div>

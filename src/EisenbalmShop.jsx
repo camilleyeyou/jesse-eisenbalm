@@ -276,16 +276,15 @@ export default function EisenbalmShop() {
     }}>
 
       <Helmet>
-        <title>Jesse A. Eisenbalm | Digital Wellness Ritual for Business Professionals</title>
+        <title>Jesse A. Eisenbalm | Premium Natural Beeswax Lip Balm</title>
         <meta name="description" content="Premium beeswax lip balm. Petrolatum-free barrier restoration for business professionals. Limited Edition Release 001. $8.99. 100% proceeds to charity." />
-        <meta name="keywords" content="petrolatum-free barrier repair, executive grounding ritual, neurocosmetic lip balm, digital wellness skincare, lip skinification, bio-adaptive lip care, business professional lip balm, tactile mindfulness tool, human-centered skincare, digital fatigue relief" />
         <meta name="author" content="Jesse A. Eisenbalm" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://jesseaeisenbalm.com/" />
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://jesseaeisenbalm.com/" />
-        <meta property="og:title" content="Jesse A. Eisenbalm - Digital Wellness Ritual for Business Professionals" />
+        <meta property="og:title" content="Jesse A. Eisenbalm - Premium Natural Beeswax Lip Balm" />
         <meta property="og:description" content="Premium beeswax lip balm designed as a neurocosmetic cognitive reset. Limited Edition Release 001. Petrolatum-free barrier restoration. $8.99. Stop. Breathe. Balm. 100% charity proceeds." />
         <meta property="og:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.webp" />
         <meta property="og:image:width" content="1200" />
@@ -293,13 +292,14 @@ export default function EisenbalmShop() {
         <meta property="og:site_name" content="Jesse A. Eisenbalm" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Jesse A. Eisenbalm - Executive Grounding Ritual" />
+        <meta name="twitter:title" content="Jesse A. Eisenbalm - Premium Natural Beeswax Lip Balm" />
         <meta name="twitter:description" content="Digital wellness tool for business professionals. Petrolatum-free barrier repair. Limited Edition. $8.99. Stop. Breathe. Balm." />
         <meta name="twitter:image" content="https://jesseaeisenbalm.com/images/products/eisenbalm-1.webp" />
 
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Product",
+          "@id": "https://jesseaeisenbalm.com/#product",
           "name": "Jesse A. Eisenbalm - The Original",
           "image": [
             "https://jesseaeisenbalm.com/images/products/eisenbalm-1.webp",
@@ -325,25 +325,44 @@ export default function EisenbalmShop() {
               "shippingDestination": { "@type": "DefinedRegion", "addressCountry": ["US", "CA", "GB", "AU", "DE", "FR", "IT", "ES", "NL", "BE"] },
               "deliveryTime": { "@type": "ShippingDeliveryTime", "handlingTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 2, "unitCode": "DAY" }, "transitTime": { "@type": "QuantitativeValue", "minValue": 2, "maxValue": 5, "unitCode": "DAY" } }
             },
-            "seller": { "@type": "Organization", "name": "Jesse A. Eisenbalm" }
+            "seller": { "@type": "Organization", "@id": "https://jesseaeisenbalm.com/#organization" }
           }
         })}</script>
 
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
+          "@id": "https://jesseaeisenbalm.com/#organization",
           "name": "Jesse A. Eisenbalm",
           "url": "https://jesseaeisenbalm.com",
           "logo": { "@type": "ImageObject", "url": "https://jesseaeisenbalm.com/logo192.png", "width": 192, "height": 192 },
-          "description": "Human-centered skincare for digital wellness. Premium beeswax lip balm positioned as a neurocosmetic ritual for business professionals experiencing digital fatigue. Stop. Breathe. Balm. 100% charity proceeds.",
-          "sameAs": ["https://www.linkedin.com/company/108396769/"]
+          "description": "Premium natural beeswax lip balm. Limited edition, hand-numbered. All proceeds go to charity. Stop. Breathe. Balm.",
+          "email": "contact@jesseaeisenbalm.com",
+          "sameAs": ["https://www.linkedin.com/company/108396769/"],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "email": "contact@jesseaeisenbalm.com",
+            "availableLanguage": "English"
+          }
         })}</script>
 
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
+          "@id": "https://jesseaeisenbalm.com/#website",
           "name": "Jesse A. Eisenbalm",
-          "url": "https://jesseaeisenbalm.com"
+          "url": "https://jesseaeisenbalm.com",
+          "publisher": { "@type": "Organization", "@id": "https://jesseaeisenbalm.com/#organization" },
+          "inLanguage": "en-US"
+        })}</script>
+
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jesseaeisenbalm.com/" }
+          ]
         })}</script>
       </Helmet>
 
@@ -728,9 +747,9 @@ export default function EisenbalmShop() {
             Are These My Real Lips?
           </h1>
 
-          <h1 className="text-3xl md:text-5xl text-white/90 mb-4 font-light tracking-tight leading-none">
+          <h2 className="text-3xl md:text-5xl text-white/90 mb-4 font-light tracking-tight leading-none">
             Premium Beeswax Lip Balm
-          </h1>
+          </h2>
 
           <p className="text-xl md:text-2xl text-white/90 mb-4 font-light tracking-widest">
             STOP. BREATHE. BALM.
@@ -1179,7 +1198,7 @@ export default function EisenbalmShop() {
                         <div className="flex items-center space-x-3">
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="w-8 h-8 border border-gray-300 hover:border-black transition text-sm"
+                            className="w-12 h-12 border border-gray-300 hover:border-black transition text-sm"
                             aria-label="Decrease quantity"
                           >
                             -
@@ -1187,7 +1206,7 @@ export default function EisenbalmShop() {
                           <span className="text-sm w-8 text-center">{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="w-8 h-8 border border-gray-300 hover:border-black transition text-sm"
+                            className="w-12 h-12 border border-gray-300 hover:border-black transition text-sm"
                             aria-label="Increase quantity"
                           >
                             +
