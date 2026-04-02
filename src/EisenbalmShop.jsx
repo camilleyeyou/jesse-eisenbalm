@@ -805,13 +805,9 @@ export default function EisenbalmShop() {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center px-6">
-          <p className="text-xs md:text-sm tracking-[0.3em] text-brand-cyan font-semibold mb-6 uppercase">
-            Official Sponsor of Your Lips
-          </p>
-
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-white mb-6 tracking-tight leading-[0.9]">
             Are These<br />
-            <span className="text-brand-cyan">My Real</span> Lips?
+            My Real Lips?
           </h1>
 
           <h2 className="text-2xl md:text-3xl text-white/90 mb-6 font-bold tracking-tight leading-tight">
@@ -1112,18 +1108,14 @@ export default function EisenbalmShop() {
 
           <div className="hex-grid scroll-reveal">
             {[
-              { src: "/images/campaign/glowasis-hero.jpg", alt: "Jesse Eisenbalm at the Glowasis booth - Coachella activation" },
-              { src: "/images/campaign/festival.jpg", alt: "Jesse Eisenbalm Official Sponsor of the Desert - festival aerial" },
-              { src: "/images/campaign/thirst-trapp.jpg", alt: "The Thirst Trapp app - AI-powered dryness diagnosis" },
-              { src: "/images/campaign/glowasis-entrance.jpg", alt: "The Glowasis - sanctuary of anti-vibe at Coachella" },
-              { src: "/images/campaign/dry-moist.jpg", alt: "Dry heat Moist lips - Jesse A. Eisenbalm brand concept" },
-              { src: "/images/campaign/anti-oasis.jpg", alt: "The Anti-Oasis - AI-designed shade structure" },
-              { src: "/images/campaign/dryness.jpg", alt: "Capitalizing on Jesse signature dryness" },
-              { src: "/images/campaign/cover.jpg", alt: "Jesse A. Eisenbalm event activation campaign cover" },
-              { src: "/images/campaign/scan-result-1.jpg", alt: "Thirst Trapp scan result - Hyper-Arid Social Desiccation diagnosis" },
-              { src: "/images/campaign/intervention.jpg", alt: "The Intervention - social expansion from 12 to 120000 units" },
-              { src: "/images/campaign/coachella.jpg", alt: "Coachella festival goer - we are not selling chapstick we are selling relief" },
-              { src: "/images/campaign/scan-result-2.jpg", alt: "Thirst Trapp scan - High-Noon Balcony Dehydration classification" },
+              { src: "/images/grid/image-1.webp", alt: "Business professional applying Jesse A. Eisenbalm during a conference call" },
+              { src: "/images/grid/image-2.webp", alt: "Startup team pausing for a Stop Breathe Balm moment - AI Pitch v9.0" },
+              { src: "/images/grid/image-3.webp", alt: "Executive applying lip balm as a mindful ritual at his desk" },
+              { src: "/images/grid/image-4.webp", alt: "Professional woman using Jesse A. Eisenbalm in the office" },
+              { src: "/images/grid/image-5.webp", alt: "Woman applying Jesse A. Eisenbalm - elevate your presence" },
+              { src: "/images/grid/image-6.webp", alt: "Late night performance review - Stop Breathe Balm ritual" },
+              { src: "/images/grid/image-7.webp", alt: "Smiling professional with Jesse A. Eisenbalm - elevate your presence" },
+              { src: "/images/grid/image-8.webp", alt: "Stop Breathe Apply - Your humanity is your greatest asset - Elevate your presence" },
             ].map((img, idx) => (
               <div
                 key={idx}
@@ -1134,8 +1126,8 @@ export default function EisenbalmShop() {
                   <img
                     src={img.src}
                     alt={img.alt}
-                    width={960}
-                    height={540}
+                    width={800}
+                    height={800}
                     loading="lazy"
                     className="hex-img transition-transform duration-500 group-hover:scale-110"
                   />

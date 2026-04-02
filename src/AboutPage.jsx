@@ -454,56 +454,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Featured Activation */}
-      <section className="py-24 px-6 bg-brand-beige/30">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.3em] text-brand-cyan font-bold mb-4 scroll-reveal">FEATURED ACTIVATION</p>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 scroll-reveal">The Glowasis</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto scroll-reveal">
-              A sanctuary of Anti-Vibe. It's not just air conditioning — it's a biological reset button. The lighting is medical-grade soothing. The sound isn't music; it's a frequency designed to stop your headache.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div className="overflow-hidden scroll-reveal group">
-              <img
-                src="/images/campaign/glowasis-hero.jpg"
-                alt="Jesse Eisenbalm at the Glowasis booth - Coachella activation"
-                width={960}
-                height={540}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-            <div className="overflow-hidden scroll-reveal group" style={{ transitionDelay: '0.1s' }}>
-              <img
-                src="/images/campaign/glowasis-entrance.jpg"
-                alt="The Glowasis entrance at Coachella with festivalgoers"
-                width={960}
-                height={540}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center scroll-reveal">
-              <p className="text-4xl font-black text-brand-cyan mb-2">120K</p>
-              <p className="text-sm text-gray-600 font-semibold tracking-wide">Units Distributed</p>
-            </div>
-            <div className="text-center scroll-reveal" style={{ transitionDelay: '0.1s' }}>
-              <p className="text-4xl font-black text-brand-cyan mb-2">98%</p>
-              <p className="text-sm text-gray-600 font-semibold tracking-wide">Gen Z Humor Correlation</p>
-            </div>
-            <div className="text-center scroll-reveal" style={{ transitionDelay: '0.2s' }}>
-              <p className="text-4xl font-black text-brand-cyan mb-2">2M</p>
-              <p className="text-sm text-gray-600 font-semibold tracking-wide">AI Tokens Processed</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-24 px-6 bg-white">
