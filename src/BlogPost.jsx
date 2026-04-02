@@ -140,7 +140,7 @@ export default function BlogPost() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-12">
-              <Link to="/" className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
+              <Link to="/" className="text-2xl font-bold tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
                 JESSE A. EISENBALM
               </Link>
               <div className="hidden lg:flex space-x-8">
@@ -202,7 +202,7 @@ export default function BlogPost() {
       {notFound && !loading && (
         <div className="max-w-3xl mx-auto px-6 py-32 text-center">
           <p className="text-xs tracking-[0.3em] text-gray-400 mb-6">404</p>
-          <h1 className="text-4xl font-light mb-6">Post not found.</h1>
+          <h1 className="text-4xl font-bold mb-6">Post not found.</h1>
           <p className="text-gray-500 mb-12">This post doesn't exist or has been unpublished.</p>
           <Link to="/blog" className="inline-flex items-center text-sm tracking-[0.15em] text-black hover:opacity-70 transition-opacity">
             <ArrowLeft size={16} className="mr-2" />
@@ -248,12 +248,12 @@ export default function BlogPost() {
               </div>
             )}
 
-            <h1 className="text-4xl md:text-5xl font-light tracking-tight mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-tight">
               {post.title}
             </h1>
 
             {post.excerpt && (
-              <p className="text-xl text-gray-500 font-light leading-relaxed mb-8">
+              <p className="text-xl text-gray-500 font-normal leading-relaxed mb-8">
                 {post.excerpt}
               </p>
             )}

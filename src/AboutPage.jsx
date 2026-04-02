@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Menu, X, ArrowLeft } from 'lucide-react';
+import LipBalmIcon from './LipBalmIcon';
 
 export default function AboutPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -172,7 +173,7 @@ export default function AboutPage() {
 
         .scroll-progress {
           position: fixed; top: 0; left: 0; height: 2px;
-          background: linear-gradient(90deg, #000 0%, #666 100%);
+          background: linear-gradient(90deg, #00BCD4 0%, #1EA87A 100%);
           z-index: 9999; transform-origin: left;
           transition: width 0.1s linear;
         }
@@ -195,7 +196,7 @@ export default function AboutPage() {
           left: 0;
           right: 0;
           height: 3px;
-          background: #000;
+          background: linear-gradient(90deg, #00BCD4, #1EA87A);
           transform: scaleX(0);
           transform-origin: left;
           transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -221,7 +222,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-12">
-              <Link to="/" className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
+              <Link to="/" className="text-2xl font-bold tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
                 JESSE A. EISENBALM
               </Link>
               <div className="hidden lg:flex space-x-8">
@@ -272,7 +273,7 @@ export default function AboutPage() {
           className="absolute inset-0 parallax-bg"
           ref={parallaxRef}
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-beige/30 via-white to-brand-beige/20"></div>
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-20 left-10 w-96 h-96 bg-black rounded-full blur-3xl"></div>
             <div className="absolute bottom-20 right-10 w-64 h-64 bg-black rounded-full blur-3xl"></div>
@@ -288,18 +289,18 @@ export default function AboutPage() {
             BACK TO SHOP
           </Link>
 
-          <p className="text-xs tracking-[0.3em] text-gray-500 mb-6 scroll-reveal">ABOUT US</p>
+          <p className="text-xs tracking-[0.3em] text-brand-cyan font-bold mb-6 scroll-reveal">ABOUT US</p>
           
-          <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-8 scroll-reveal">
+          <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8 scroll-reveal">
             WHO WE ARE
           </h1>
-          
-          <p className="text-xl md:text-2xl text-gray-600 font-light leading-relaxed max-w-3xl mx-auto scroll-reveal">
-            Jesse A. Eisenbalm is a human-centered skincare brand addressing digital fatigue through tactile wellness rituals. We create premium beeswax lip balm designed as a neurocosmetic tool for business professionals navigating digital-first workspaces.
+
+          <p className="text-xl md:text-2xl text-gray-600 font-normal leading-relaxed max-w-3xl mx-auto scroll-reveal">
+            Jesse A. Eisenbalm is lip balm for people who take lip balm too seriously. Premium beeswax formula. Hand numbered. Clinically formulated for a condition we may have invented.
           </p>
 
           <p className="text-lg text-gray-500 mt-8 italic scroll-reveal">
-            100% of proceeds support charitable causes. Limited Edition Release 001.
+            100% of proceeds go to charity. Because we removed profit from the equation and honestly it feels great.
           </p>
         </div>
       </section>
@@ -313,8 +314,8 @@ export default function AboutPage() {
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
-            <p className="text-xs tracking-[0.3em] text-gray-500 mb-4 scroll-reveal">HUMAN-CENTERED SKINCARE</p>
-            <h2 className="text-4xl md:text-5xl font-light tracking-tight scroll-reveal">What We Stand For</h2>
+            <p className="text-xs tracking-[0.3em] text-brand-cyan font-bold mb-4 scroll-reveal">HUMAN-CENTERED SKINCARE</p>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight scroll-reveal">What We Stand For</h2>
             <p className="text-lg text-gray-600 mt-6 max-w-2xl mx-auto scroll-reveal">
               Building a premium skincare brand grounded in transparency, scientific innovation, and human connection.
             </p>
@@ -324,7 +325,7 @@ export default function AboutPage() {
             {/* Why 100% Charity Proceeds */}
             <div className="team-card p-8 md:p-10 scroll-reveal">
               <div>
-                <h3 className="text-2xl font-light tracking-wide mb-6">Why 100% Charity Proceeds?</h3>
+                <h3 className="text-2xl font-bold tracking-wide mb-6">Why 100% Charity Proceeds?</h3>
                 <p className="text-gray-600 leading-relaxed mb-4">
                   <strong>Answer:</strong> We donate 100% of proceeds to create verifiable trust and remove profit-driven incentives that compromise product quality.
                 </p>
@@ -340,7 +341,7 @@ export default function AboutPage() {
             {/* Digital Wellness Mission */}
             <div className="team-card p-8 md:p-10 scroll-reveal">
               <div>
-                <h3 className="text-2xl font-light tracking-wide mb-6">Digital Wellness Mission</h3>
+                <h3 className="text-2xl font-bold tracking-wide mb-6">Digital Wellness Mission</h3>
                 <p className="text-gray-600 leading-relaxed mb-4">
                   Modern business professionals face unprecedented digital fatigue. Screen-dominated workspaces disconnect us from tactile, embodied experiences.
                 </p>
@@ -356,7 +357,7 @@ export default function AboutPage() {
             {/* Lip Skinification & Barrier Science */}
             <div className="team-card p-8 md:p-10 scroll-reveal">
               <div>
-                <h3 className="text-2xl font-light tracking-wide mb-6">Lip Skinification & Barrier Restoration</h3>
+                <h3 className="text-2xl font-bold tracking-wide mb-6">Lip Skinification & Barrier Restoration</h3>
                 <p className="text-gray-600 leading-relaxed mb-4">
                   We embrace the "lip skinification" trend — treating lip care with the same rigor and science-backed formulation standards as facial skincare.
                 </p>
@@ -372,7 +373,7 @@ export default function AboutPage() {
             {/* Limited Edition Verifiability */}
             <div className="team-card p-8 md:p-10 scroll-reveal">
               <div>
-                <h3 className="text-2xl font-light tracking-wide mb-6">Limited Edition Verifiability</h3>
+                <h3 className="text-2xl font-bold tracking-wide mb-6">Limited Edition Verifiability</h3>
                 <p className="text-gray-600 leading-relaxed mb-4">
                   <strong>Release 001</strong> represents our commitment to scarcity and collectibility. Each limited batch is numbered and traceable, creating verifiable authenticity.
                 </p>
@@ -389,11 +390,11 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-24 px-6 bg-gray-50">
+      <section className="py-24 px-6 bg-brand-beige/30">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
-            <p className="text-xs tracking-[0.3em] text-gray-500 mb-4 scroll-reveal">THE MINDS BEHIND THE MOISTURE</p>
-            <h2 className="text-4xl md:text-5xl font-light tracking-tight scroll-reveal">Our Approach</h2>
+            <p className="text-xs tracking-[0.3em] text-brand-cyan font-bold mb-4 scroll-reveal">THE MINDS BEHIND THE MOISTURE</p>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight scroll-reveal">Our Approach</h2>
             <p className="text-lg text-gray-600 mt-6 max-w-2xl mx-auto scroll-reveal">
               Four guiding principles that shape everything we create — from formulation to marketing to the ritual itself.
             </p>
@@ -409,7 +410,7 @@ export default function AboutPage() {
                 <div className="flex items-start gap-6">
                   <div className="text-5xl flex-shrink-0">{member.emoji}</div>
                   <div>
-                    <h3 className="text-xl font-light tracking-wide mb-1">{member.title}</h3>
+                    <h3 className="text-xl font-semibold tracking-wide mb-1">{member.title}</h3>
                     {member.subtitle && (
                       <p className="text-sm text-gray-500 tracking-wide mb-4">{member.subtitle}</p>
                     )}
@@ -426,25 +427,25 @@ export default function AboutPage() {
       {/* Mission Statement */}
       <section className="py-24 px-6 bg-black text-white">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-xs tracking-[0.3em] text-gray-400 mb-8 scroll-reveal">OUR MISSION</p>
+          <p className="text-xs tracking-[0.3em] text-brand-cyan font-bold mb-8 scroll-reveal">OUR MISSION</p>
 
-          <blockquote className="text-2xl md:text-4xl font-light leading-relaxed mb-12 scroll-reveal">
-            "A tactile grounding tool for digital-first workspaces. Premium beeswax lip balm engineered as a neurocosmetic ritual for business professionals."
+          <blockquote className="text-2xl md:text-4xl font-normal leading-relaxed mb-12 scroll-reveal font-display">
+            "Your ad wasn't bad — it was misplaced. The awkward silence had a 98% correlation with Gen Z Dry Humor trends, but a 0% correlation with high-energy Super Bowl vibes."
           </blockquote>
 
           <div className="max-w-2xl mx-auto text-left space-y-6 mb-12 scroll-reveal">
             <p className="text-lg text-gray-300 leading-relaxed">
-              In an era of screen fatigue and digital overwhelm, Jesse A. Eisenbalm offers a moment of embodied presence. Our petrolatum-free barrier repair formula goes beyond basic moisture — it's a cognitive reset tool.
+              So we took the driest brand on earth to the thirstiest place on earth. An AI-designed shade structure optimized for biology, not vibes. A selfie scanner that diagnoses your Dryness Score. A sanctuary of Anti-Vibe called The Glowasis.
             </p>
             <p className="text-lg text-gray-300 leading-relaxed">
-              We don't target mass-market consumers. We serve discerning professionals who understand that self-care rituals are performance optimization, not indulgence.
+              We aren't selling chapstick. We're selling relief. And the lips? They've never been more moist.
             </p>
           </div>
 
-          <div className="flex justify-center gap-4 scroll-reveal">
+          <div className="flex justify-center items-center gap-6 scroll-reveal">
             <span className="text-4xl">🛑</span>
             <span className="text-4xl">🫁</span>
-            <span className="text-4xl">💄</span>
+            <LipBalmIcon size={56} color="white" />
           </div>
 
           <p className="text-xl tracking-[0.2em] text-gray-400 mt-8 scroll-reveal">
@@ -453,10 +454,61 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Featured Activation */}
+      <section className="py-24 px-6 bg-brand-beige/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-xs tracking-[0.3em] text-brand-cyan font-bold mb-4 scroll-reveal">FEATURED ACTIVATION</p>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 scroll-reveal">The Glowasis</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto scroll-reveal">
+              A sanctuary of Anti-Vibe. It's not just air conditioning — it's a biological reset button. The lighting is medical-grade soothing. The sound isn't music; it's a frequency designed to stop your headache.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div className="overflow-hidden scroll-reveal group">
+              <img
+                src="/images/campaign/glowasis-hero.jpg"
+                alt="Jesse Eisenbalm at the Glowasis booth - Coachella activation"
+                width={960}
+                height={540}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="overflow-hidden scroll-reveal group" style={{ transitionDelay: '0.1s' }}>
+              <img
+                src="/images/campaign/glowasis-entrance.jpg"
+                alt="The Glowasis entrance at Coachella with festivalgoers"
+                width={960}
+                height={540}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center scroll-reveal">
+              <p className="text-4xl font-black text-brand-cyan mb-2">120K</p>
+              <p className="text-sm text-gray-600 font-semibold tracking-wide">Units Distributed</p>
+            </div>
+            <div className="text-center scroll-reveal" style={{ transitionDelay: '0.1s' }}>
+              <p className="text-4xl font-black text-brand-cyan mb-2">98%</p>
+              <p className="text-sm text-gray-600 font-semibold tracking-wide">Gen Z Humor Correlation</p>
+            </div>
+            <div className="text-center scroll-reveal" style={{ transitionDelay: '0.2s' }}>
+              <p className="text-4xl font-black text-brand-cyan mb-2">2M</p>
+              <p className="text-sm text-gray-600 font-semibold tracking-wide">AI Tokens Processed</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="py-24 px-6 bg-gray-50">
+      <section className="py-24 px-6 bg-white">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-light tracking-tight mb-6 scroll-reveal">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6 scroll-reveal">
             Ready to Experience Human-Centered Skincare?
           </h2>
           <p className="text-lg text-gray-600 mb-10 scroll-reveal">

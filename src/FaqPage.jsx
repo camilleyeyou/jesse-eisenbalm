@@ -194,7 +194,7 @@ export default function FaqPage() {
 
         .scroll-progress {
           position: fixed; top: 0; left: 0; height: 2px;
-          background: linear-gradient(90deg, #000 0%, #666 100%);
+          background: linear-gradient(90deg, #00BCD4 0%, #1EA87A 100%);
           z-index: 9999; transform-origin: left;
           transition: width 0.1s linear;
         }
@@ -233,7 +233,7 @@ export default function FaqPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-12">
-              <Link to="/" className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
+              <Link to="/" className="text-2xl font-bold tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
                 JESSE A. EISENBALM
               </Link>
               <div className="hidden lg:flex space-x-8">
@@ -284,7 +284,7 @@ export default function FaqPage() {
           className="absolute inset-0 parallax-bg"
           ref={parallaxRef}
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-beige/30 via-white to-brand-beige/20"></div>
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-20 left-10 w-96 h-96 bg-black rounded-full blur-3xl"></div>
             <div className="absolute bottom-20 right-10 w-64 h-64 bg-black rounded-full blur-3xl"></div>
@@ -300,13 +300,13 @@ export default function FaqPage() {
             BACK TO SHOP
           </Link>
 
-          <p className="text-xs tracking-[0.3em] text-gray-500 mb-6 scroll-reveal">HELP</p>
+          <p className="text-xs tracking-[0.3em] text-brand-cyan font-bold mb-6 scroll-reveal">HELP</p>
 
-          <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-8 scroll-reveal">
+          <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8 scroll-reveal">
             Frequently Asked Questions
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-600 font-light leading-relaxed max-w-3xl mx-auto scroll-reveal">
+          <p className="text-xl md:text-2xl text-gray-600 font-normal leading-relaxed max-w-3xl mx-auto scroll-reveal">
             Everything you need to know about Jesse A. Eisenbalm, our products, and our mission.
           </p>
         </div>
@@ -332,7 +332,7 @@ export default function FaqPage() {
                   onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
                   aria-expanded={openIndex === idx}
                 >
-                  <h2 className="text-lg md:text-xl font-light tracking-tight pr-8 group-hover:text-gray-600 transition-colors">
+                  <h2 className="text-lg md:text-xl font-semibold tracking-tight pr-8 group-hover:text-gray-600 transition-colors">
                     {item.question}
                   </h2>
                   <ChevronDown
@@ -356,7 +356,7 @@ export default function FaqPage() {
       <section className="py-24 px-6 bg-black text-white">
         <div className="max-w-3xl mx-auto text-center">
           <div className="text-5xl mb-8 scroll-reveal">💬</div>
-          <h2 className="text-3xl md:text-4xl font-light tracking-tight mb-6 scroll-reveal">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6 scroll-reveal">
             Still Have Questions?
           </h2>
           <p className="text-lg text-gray-400 mb-10 scroll-reveal">

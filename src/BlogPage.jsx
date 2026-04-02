@@ -143,7 +143,7 @@ export default function BlogPage() {
         .js-reveal .reveal-target.visible { opacity: 1 !important; transform: translateY(0) !important; }
         .scroll-progress {
           position: fixed; top: 0; left: 0; height: 2px;
-          background: linear-gradient(90deg, #000 0%, #666 100%);
+          background: linear-gradient(90deg, #00BCD4 0%, #1EA87A 100%);
           z-index: 9999; transform-origin: left; transition: width 0.1s linear;
         }
         .blog-card {
@@ -174,7 +174,7 @@ export default function BlogPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-12">
-              <Link to="/" className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
+              <Link to="/" className="text-2xl font-bold tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
                 JESSE A. EISENBALM
               </Link>
               <div className="hidden lg:flex space-x-8">
@@ -220,18 +220,18 @@ export default function BlogPage() {
       {/* Hero */}
       <section className="relative py-24 md:py-32 px-6 overflow-hidden">
         <div className="absolute inset-0 parallax-bg" ref={parallaxRef}>
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-beige/30 via-white to-brand-beige/20"></div>
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-20 left-10 w-96 h-96 bg-black rounded-full blur-3xl"></div>
             <div className="absolute bottom-20 right-10 w-64 h-64 bg-black rounded-full blur-3xl"></div>
           </div>
         </div>
         <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <p className="text-xs tracking-[0.3em] text-gray-500 mb-6 scroll-reveal">THOUGHTS & MEDITATIONS</p>
-          <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-8 scroll-reveal">
+          <p className="text-xs tracking-[0.3em] text-brand-cyan font-bold mb-6 scroll-reveal">THOUGHTS & MEDITATIONS</p>
+          <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8 scroll-reveal">
             The Journal
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 font-light leading-relaxed max-w-3xl mx-auto scroll-reveal">
+          <p className="text-xl md:text-2xl text-gray-600 font-normal leading-relaxed max-w-3xl mx-auto scroll-reveal">
             Dispatches from the intersection of humanity and automation. Stop. Breathe. Read.
           </p>
         </div>

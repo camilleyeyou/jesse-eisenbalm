@@ -267,7 +267,7 @@ export default function PrivacyPolicy() {
 
         .scroll-progress {
           position: fixed; top: 0; left: 0; height: 2px;
-          background: linear-gradient(90deg, #000 0%, #666 100%);
+          background: linear-gradient(90deg, #00BCD4 0%, #1EA87A 100%);
           z-index: 9999; transform-origin: left;
           transition: width 0.1s linear;
         }
@@ -314,7 +314,7 @@ export default function PrivacyPolicy() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-12">
-              <Link to="/" className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
+              <Link to="/" className="text-2xl font-bold tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
                 JESSE A. EISENBALM
               </Link>
               <div className="hidden lg:flex space-x-8">
@@ -398,11 +398,11 @@ export default function PrivacyPolicy() {
 
           <p className="text-xs tracking-[0.3em] text-gray-500 mb-6 scroll-reveal">LEGAL</p>
           
-          <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-8 scroll-reveal">
+          <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8 scroll-reveal">
             Privacy Policy
           </h1>
-          
-          <p className="text-xl md:text-2xl text-gray-600 font-light leading-relaxed max-w-3xl mx-auto scroll-reveal">
+
+          <p className="text-xl md:text-2xl text-gray-600 font-normal leading-relaxed max-w-3xl mx-auto scroll-reveal">
             Your privacy matters — and we'll always be transparent about what we collect and how we use it.
           </p>
 
@@ -428,8 +428,8 @@ export default function PrivacyPolicy() {
                 style={{ transitionDelay: `${idx * 0.05}s` }}
               >
                 <span className="section-number hidden md:block">{section.number}</span>
-                <h2 className="text-2xl md:text-3xl font-light mb-6 tracking-tight flex items-center gap-3">
-                  <span className="text-2xl font-light text-gray-300 lg:hidden">{section.number}.</span>
+                <h2 className="text-2xl md:text-3xl font-bold mb-6 tracking-tight flex items-center gap-3">
+                  <span className="text-2xl font-normal text-gray-300 lg:hidden">{section.number}.</span>
                   {section.title}
                 </h2>
                 {section.content}
@@ -443,7 +443,7 @@ export default function PrivacyPolicy() {
       <section className="py-24 px-6 bg-black text-white">
         <div className="max-w-3xl mx-auto text-center">
           <div className="text-5xl mb-8 scroll-reveal">🔒</div>
-          <h2 className="text-3xl md:text-4xl font-light tracking-tight mb-6 scroll-reveal">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6 scroll-reveal">
             Questions About Your Privacy?
           </h2>
           <p className="text-lg text-gray-400 mb-10 scroll-reveal">

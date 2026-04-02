@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ShoppingCart, Menu, X, ChevronRight, CheckCircle } from 'lucide-react';
+import LipBalmIcon from './LipBalmIcon';
 
 export default function EisenbalmShop() {
   const [cart, setCart] = useState([]);
@@ -182,8 +183,8 @@ export default function EisenbalmShop() {
        "/images/products/eisenbalm-2.webp",
        "/images/products/eisenbalm-3.webp"
       ],
-      description: "Limited Edition. Release 001. Hand numbered.",
-      features: ["Petrolatum-free barrier restoration", "Protection against transepidermal water loss", "Neurocosmetic cognitive reset ritual", "Executive grounding tool", "100% charity proceeds"],
+      description: "Limited Edition. Release 001. Hand numbered. Clinically formulated for Hyper-Arid Social Desiccation.",
+      features: ["Petrolatum-free epidermal lipid repair", "Clinically dry humor, clinically moist lips", "Prescribed by no doctors whatsoever", "May cause involuntary self-awareness", "100% of proceeds go to charity"],
       volume: "4.5g / 0.15 oz"
     }
   ];
@@ -369,11 +370,11 @@ export default function EisenbalmShop() {
       {!isPageReady && (
         <div className="fixed inset-0 bg-black z-[10000] flex items-center justify-center">
           <div className="text-center">
-            <div className="text-white text-2xl font-light tracking-[0.3em] mb-6">
+            <div className="text-white text-2xl font-bold tracking-[0.3em] mb-6">
               JESSE A. EISENBALM
             </div>
             <div className="w-64 h-0.5 bg-gray-800 rounded-full overflow-hidden mx-auto">
-              <div className="h-full bg-white transition-all duration-1000 animate-pulse" style={{ width: '60%' }}></div>
+              <div className="h-full bg-brand-cyan transition-all duration-1000 animate-pulse" style={{ width: '60%' }}></div>
             </div>
             <p className="text-gray-500 text-xs tracking-widest mt-6">LOADING EXPERIENCE</p>
           </div>
@@ -485,9 +486,70 @@ export default function EisenbalmShop() {
 
         .magnetic { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
 
+        /* Hexagonal Grid */
+        .hex-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 12px;
+          max-width: 1000px;
+          margin: 0 auto;
+        }
+        .hex-item {
+          opacity: 0;
+          animation: hexFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        @keyframes hexFadeIn {
+          from { opacity: 0; transform: scale(0.85); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        .hex-shape {
+          width: 100%;
+          aspect-ratio: 1;
+          clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+          -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+          overflow: hidden;
+          background: #f3f4f6;
+        }
+        .hex-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        .hex-grid .hex-item:nth-child(4n+3),
+        .hex-grid .hex-item:nth-child(4n+4) {
+          transform: translateY(50%);
+        }
+        @media (max-width: 768px) {
+          .hex-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+          }
+          .hex-grid .hex-item:nth-child(4n+3),
+          .hex-grid .hex-item:nth-child(4n+4) {
+            transform: none;
+          }
+          .hex-grid .hex-item:nth-child(3n+2),
+          .hex-grid .hex-item:nth-child(3n+3) {
+            transform: translateY(50%);
+          }
+        }
+        @media (max-width: 480px) {
+          .hex-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+          }
+          .hex-grid .hex-item:nth-child(3n+2),
+          .hex-grid .hex-item:nth-child(3n+3) {
+            transform: none;
+          }
+          .hex-grid .hex-item:nth-child(2n+2) {
+            transform: translateY(50%);
+          }
+        }
+
         .scroll-progress {
           position: fixed; top: 0; left: 0; height: 2px;
-          background: linear-gradient(90deg, #000 0%, #666 100%);
+          background: linear-gradient(90deg, #00BCD4 0%, #1EA87A 100%);
           z-index: 9999; transform-origin: left; -webkit-transform-origin: left;
           transition: width 0.1s linear;
         }
@@ -588,7 +650,7 @@ export default function EisenbalmShop() {
                 <CheckCircle size={48} className="text-white" strokeWidth={2} />
               </div>
               
-              <h2 className="text-3xl font-light mb-4 tracking-tight">Payment Successful!</h2>
+              <h2 className="text-3xl font-bold mb-4 tracking-tight">Payment Successful!</h2>
               
               <p className="text-lg text-gray-600 mb-2">
                 Thank you for your order{orderDetails?.customerName ? `, ${orderDetails.customerName}` : ''}.
@@ -642,7 +704,7 @@ export default function EisenbalmShop() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-12">
-              <Link to="/" className="text-2xl font-light tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
+              <Link to="/" className="text-2xl font-bold tracking-[0.2em] transition-all duration-300 hover:tracking-[0.25em]">
                 JESSE A. EISENBALM
               </Link>
               <div className="hidden lg:flex space-x-8">
@@ -742,30 +804,41 @@ export default function EisenbalmShop() {
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-6">
-          <h1 className="text-5xl md:text-7xl font-light text-white mb-4 tracking-tight leading-none">
-            Are These My Real Lips?
-          </h1>
-
-          <h2 className="text-3xl md:text-5xl text-white/90 mb-4 font-light tracking-tight leading-none">
-            Premium Beeswax Lip Balm
-          </h2>
-
-          <p className="text-xl md:text-2xl text-white/90 mb-4 font-light tracking-widest">
-            STOP. BREATHE. BALM.
+        <div className="relative z-10 max-w-5xl mx-auto text-center px-6">
+          <p className="text-xs md:text-sm tracking-[0.3em] text-brand-cyan font-semibold mb-6 uppercase">
+            Official Sponsor of Your Lips
           </p>
 
-          <p className="text-base md:text-lg text-white/80 mb-12 max-w-xl mx-auto font-light leading-relaxed">
-            A human-only ritual for an AI-everywhere world. <br />
-            Limited Edition.<br /> 
-            Release 001. <br /> 
-            All proceeds go to charity. 
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-white mb-6 tracking-tight leading-[0.9]">
+            Are These<br />
+            <span className="text-brand-cyan">My Real</span> Lips?
+          </h1>
+
+          <h2 className="text-2xl md:text-3xl text-white/90 mb-6 font-bold tracking-tight leading-tight">
+            Premium Beeswax Lip Balm — Release 001
+          </h2>
+
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <span className="h-px w-12 bg-white/40"></span>
+            <p className="text-lg md:text-xl text-white font-bold tracking-[0.25em]">
+              STOP. BREATHE. BALM.
+            </p>
+            <span className="h-px w-12 bg-white/40"></span>
+          </div>
+
+          <p className="text-base md:text-lg text-white/70 mb-12 max-w-lg mx-auto font-normal leading-relaxed">
+            We aren't selling chapstick. We're selling relief.
+            <br />
+            <span className="text-white/50">Limited Edition. Hand Numbered. 100% of proceeds go to charity.</span>
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 fade-in">
-            <a href="#product" className="luxury-button bg-white text-black px-12 py-4 text-sm tracking-[0.2em] hover:bg-gray-50 transition-all inline-flex items-center justify-center group border border-white/20">
+            <a href="#product" className="luxury-button bg-white text-black px-14 py-4 text-sm font-bold tracking-[0.2em] hover:bg-brand-cyan hover:text-white transition-all inline-flex items-center justify-center group">
               BUY NOW
-              <ChevronRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" strokeWidth={1.5} />
+              <ChevronRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
+            </a>
+            <a href="#philosophy" className="px-14 py-4 text-sm font-semibold tracking-[0.2em] text-white/80 hover:text-white border border-white/30 hover:border-white/60 transition-all inline-flex items-center justify-center">
+              THE RITUAL
             </a>
           </div>
         </div>
@@ -809,11 +882,11 @@ export default function EisenbalmShop() {
 
                   <div className="order-1 md:order-2">
                     <div className="mb-8">
-                      <p className="text-xs tracking-widest text-gray-500 mb-2">LIP CARE</p>
-                      <h2 className="text-4xl font-light mb-2 tracking-tight">{product.name}</h2>
-                      <p className="text-xl text-gray-600 font-light mb-6">{product.subtitle}</p>
+                      <p className="text-xs tracking-widest text-brand-cyan font-bold mb-2">LIP CARE</p>
+                      <h2 className="text-4xl font-bold mb-2 tracking-tight">{product.name}</h2>
+                      <p className="text-xl text-gray-600 font-normal mb-6">{product.subtitle}</p>
                       <p className="text-sm text-gray-500 mb-2">{product.volume}</p>
-                      <p className="text-3xl font-light mb-8">
+                      <p className="text-3xl font-semibold mb-8">
                         ${product.price}
                       </p>
                     </div>
@@ -834,13 +907,13 @@ export default function EisenbalmShop() {
 
                     <button
                       onClick={() => addToCart(product)}
-                      className="luxury-button w-full bg-black text-white py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-all luxury-focus"
+                      className="luxury-button w-full bg-black text-white py-4 text-sm font-bold tracking-[0.2em] hover:bg-brand-cyan transition-all luxury-focus"
                     >
                       ADD TO CART
                     </button>
 
                     <p className="text-xs text-center text-gray-400 mt-4 italic tracking-wide">
-                      "Are these my real lips?"
+                      Prescription: Your lips are currently as parched as a concrete balcony in July.
                     </p>
                   </div>
                 </React.Fragment>
@@ -855,8 +928,8 @@ export default function EisenbalmShop() {
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-end mb-16">
             <div>
-              <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">FROM THE JOURNAL</p>
-              <h2 className="text-4xl md:text-5xl font-light tracking-tight">Latest Reads</h2>
+              <p className="text-xs tracking-[0.2em] text-brand-cyan font-bold mb-4">FROM THE JOURNAL</p>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Latest Reads</h2>
               <p className="text-lg text-gray-600 mt-4 max-w-xl">Thoughts on staying human in an increasingly automated world</p>
             </div>
             <Link
@@ -905,7 +978,7 @@ export default function EisenbalmShop() {
                   {post.tags?.length > 0 && (
                     <p className="text-xs tracking-[0.2em] text-gray-500 mb-3 uppercase">{post.tags[0]}</p>
                   )}
-                  <h3 className="text-xl font-light mb-3 group-hover:text-gray-600 transition-colors leading-tight">{post.title}</h3>
+                  <h3 className="text-xl font-semibold mb-3 group-hover:text-gray-600 transition-colors leading-tight">{post.title}</h3>
                   {post.excerpt && (
                     <p className="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-3">{post.excerpt}</p>
                   )}
@@ -928,7 +1001,7 @@ export default function EisenbalmShop() {
                     <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   </div>
                   <p className="text-xs tracking-[0.2em] text-gray-500 mb-3">{post.category}</p>
-                  <h3 className="text-xl font-light mb-3 group-hover:text-gray-600 transition-colors leading-tight">{post.title}</h3>
+                  <h3 className="text-xl font-semibold mb-3 group-hover:text-gray-600 transition-colors leading-tight">{post.title}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed mb-4">{post.excerpt}</p>
                 </article>
               ))}
@@ -947,27 +1020,27 @@ export default function EisenbalmShop() {
       <section className="py-24 px-6 bg-black text-white scroll-snap-section scroll-reveal">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.2em] text-gray-400 mb-4">WHY JESSE A. EISENBALM</p>
-            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">What Sets Us Apart</h2>
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto">Premium ingredients, intentional design, and a mission that matters.</p>
+            <p className="text-xs tracking-[0.2em] text-brand-cyan font-bold mb-4">WHY JESSE A. EISENBALM</p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">What Sets Us Apart</h2>
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">Dry heat. Moist lips. We solved the equation so you don't have to.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-12">
             {[
               {
-                title: "Premium Beeswax Formula",
-                description: "Our petrolatum-free formula uses natural beeswax to form a bio-compatible barrier that prevents transepidermal water loss (TEWL). No synthetic fragrances, parabens, or petroleum derivatives.",
-                detail: "Clean Ingredients"
+                title: "Epidermal Lipid Repair",
+                description: "Petrolatum-free. Paraben-free. Petroleum-free. Existential-dread-free. Our beeswax formula forms a bio-compatible barrier against transepidermal water loss — and the cold, dry air of corporate indifference.",
+                detail: "The Science"
               },
               {
                 title: "100% Charity Proceeds",
-                description: "Every dollar from every sale goes directly to charitable causes. We removed profit incentives so every formulation decision prioritizes your lip health over margins.",
-                detail: "Purpose-Driven"
+                description: "We removed profit incentives entirely. Every dollar goes to charity. This means every formulation decision prioritizes your lip health over shareholder anxiety. You're welcome.",
+                detail: "The Mission"
               },
               {
-                title: "Limited Edition, Hand Numbered",
-                description: "Release 001 is individually numbered for verifiable authenticity. Small-batch production ensures freshness and quality control that mass-market lip balms cannot match.",
-                detail: "Collectible Craft"
+                title: "Hand Numbered. Collectible.",
+                description: "Release 001 is individually numbered for verifiable authenticity. You're not buying commodity product — you're acquiring a numbered edition of thoughtfully over-engineered lip care.",
+                detail: "The Flex"
               }
             ].map((benefit, idx) => (
               <div
@@ -977,8 +1050,8 @@ export default function EisenbalmShop() {
               >
                 <div className="mb-6">
                   <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">{benefit.detail}</p>
-                  <h3 className="text-xl font-light tracking-tight mb-4">{benefit.title}</h3>
-                  <p className="text-lg font-light leading-relaxed text-gray-300">{benefit.description}</p>
+                  <h3 className="text-xl font-semibold tracking-tight mb-4">{benefit.title}</h3>
+                  <p className="text-lg font-normal leading-relaxed text-gray-300">{benefit.description}</p>
                 </div>
               </div>
             ))}
@@ -987,16 +1060,16 @@ export default function EisenbalmShop() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-24 px-6 bg-gradient-to-br from-gray-50 to-white scroll-snap-section scroll-reveal">
+      <section className="py-24 px-6 bg-gradient-to-br from-brand-beige/40 to-white scroll-snap-section scroll-reveal">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8">
-            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">STAY HUMAN</p>
-            <h2 className="text-4xl md:text-6xl font-light mb-6 tracking-tight">Join the Movement</h2>
+            <p className="text-xs tracking-[0.2em] text-brand-cyan font-bold mb-4">STAY HUMAN</p>
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Get Diagnosed</h2>
             <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto mb-4">
-               Get exclusive access to new products, human-first philosophy essays, and the occasional absurdist thought experiment.
+               Subscribe for early access to new releases, unsolicited lip care advice, and the occasional existential dispatch from the desert.
             </p>
             <p className="text-base text-gray-500">
-              But if you want to be anonymous, that's cool too. The lip balm is transparent; no one will know you've got it on. But you'll know.
+              Your lips are currently as parched as your last attempt at small talk. We can help with one of those.
             </p>
           </div>
 
@@ -1028,48 +1101,55 @@ export default function EisenbalmShop() {
         </div>
       </section>
 
-      {/* Instagram Grid Section */}
-      <section className="py-24 px-6 bg-white scroll-snap-section scroll-reveal">
+      {/* Hexagonal Campaign Grid */}
+      <section className="py-24 px-6 bg-white scroll-snap-section scroll-reveal overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4"></p>
-            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Follow the Ritual</h2>
+            <p className="text-xs tracking-[0.2em] text-brand-cyan font-bold mb-4">THE CAMPAIGN</p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Official Sponsor of the Desert.</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">We took the driest brand on earth to the thirstiest place on earth. From 12 units to 120,000.</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="hex-grid scroll-reveal">
             {[
-              { src: "/images/grid/image-1.webp", alt: "Jesse A. Eisenbalm lip balm in minimalist setting", w: 1024, h: 1024 },
-              { src: "/images/grid/image-2.webp", alt: "Premium beeswax lip balm close-up texture", w: 1536, h: 1024 },
-              { src: "/images/grid/image-3.webp", alt: "Applying Jesse A. Eisenbalm as daily ritual", w: 1024, h: 1536 },
-              { src: "/images/grid/image-4.webp", alt: "Limited edition lip balm packaging detail", w: 1024, h: 1024 },
-              { src: "/images/grid/image-5.webp", alt: "Natural beeswax lip balm product shot", w: 1024, h: 1536 },
-              { src: "/images/grid/image-6.webp", alt: "Jesse A. Eisenbalm lifestyle product photo", w: 1024, h: 1024 },
-              { src: "/images/grid/image-7.webp", alt: "Hand-numbered lip balm tube detail", w: 1024, h: 1024 },
-              { src: "/images/grid/image-8.webp", alt: "Stop Breathe Balm mindfulness moment", w: 1536, h: 1024 }
+              { src: "/images/campaign/glowasis-hero.jpg", alt: "Jesse Eisenbalm at the Glowasis booth - Coachella activation" },
+              { src: "/images/campaign/festival.jpg", alt: "Jesse Eisenbalm Official Sponsor of the Desert - festival aerial" },
+              { src: "/images/campaign/thirst-trapp.jpg", alt: "The Thirst Trapp app - AI-powered dryness diagnosis" },
+              { src: "/images/campaign/glowasis-entrance.jpg", alt: "The Glowasis - sanctuary of anti-vibe at Coachella" },
+              { src: "/images/campaign/dry-moist.jpg", alt: "Dry heat Moist lips - Jesse A. Eisenbalm brand concept" },
+              { src: "/images/campaign/anti-oasis.jpg", alt: "The Anti-Oasis - AI-designed shade structure" },
+              { src: "/images/campaign/dryness.jpg", alt: "Capitalizing on Jesse signature dryness" },
+              { src: "/images/campaign/cover.jpg", alt: "Jesse A. Eisenbalm event activation campaign cover" },
+              { src: "/images/campaign/scan-result-1.jpg", alt: "Thirst Trapp scan result - Hyper-Arid Social Desiccation diagnosis" },
+              { src: "/images/campaign/intervention.jpg", alt: "The Intervention - social expansion from 12 to 120000 units" },
+              { src: "/images/campaign/coachella.jpg", alt: "Coachella festival goer - we are not selling chapstick we are selling relief" },
+              { src: "/images/campaign/scan-result-2.jpg", alt: "Thirst Trapp scan - High-Noon Balcony Dehydration classification" },
             ].map((img, idx) => (
               <div
                 key={idx}
-                className="aspect-square overflow-hidden bg-gray-100 group cursor-pointer image-reveal scroll-reveal"
-                style={{ transitionDelay: `${idx * 0.05}s` }}
+                className="hex-item group"
+                style={{ animationDelay: `${idx * 0.08}s` }}
               >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  width={img.w}
-                  height={img.h}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
+                <div className="hex-shape">
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    width={960}
+                    height={540}
+                    loading="lazy"
+                    className="hex-img transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-16">
             <a
               href="https://www.linkedin.com/company/108396769/"
               target="_blank"
               rel="noopener noreferrer"
-              className="luxury-button inline-block border-2 border-black text-black px-8 py-3 text-sm tracking-[0.2em] hover:bg-black hover:text-white transition-all luxury-focus"
+              className="luxury-button inline-block border-2 border-black text-black px-8 py-3 text-sm font-bold tracking-[0.2em] hover:bg-brand-cyan hover:text-white hover:border-brand-cyan transition-all luxury-focus"
             >
               FOLLOW US
             </a>
@@ -1078,20 +1158,23 @@ export default function EisenbalmShop() {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 px-6 bg-gray-50 scroll-snap-section scroll-reveal">
+      <section className="py-24 px-6 bg-brand-beige/30 scroll-snap-section scroll-reveal">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.2em] text-gray-500 mb-4">WHY CHOOSE US</p>
-            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Crafted for the Human Experience.</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Every detail matters when you're creating moments of presence in an automated world</p>
+            <div className="flex justify-center mb-6">
+              <LipBalmIcon size={64} className="opacity-80" />
+            </div>
+            <p className="text-xs tracking-[0.2em] text-brand-cyan font-bold mb-4">WHY CHOOSE US</p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Engineered for Biology.</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Humans design for vibes. We designed for your actual lips.</p>
           </div>
 
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              { icon: "🌿", title: "Pure Beeswax", desc: "Good stuff to soothe your lips and moisturize your mind." },
-              { icon: "⏰", title: "Time Tested", desc: "The only balm to keep moisture in and slop out." },
-              { icon: "📍", title: "Ethically Made", desc: "No art was plagiarized to make this product. (Except the marketing materials, those have a little plagiarism in them.)" },
-              { icon: "✨", title: "Limited Edition", desc: "Individually numbered exclusively online offer." }
+              { icon: "🌿", title: "Pure Beeswax", desc: "No petroleum. No parabens. No synthetic fragrances. Just beeswax and the faint scent of moral superiority." },
+              { icon: "🏜️", title: "Desert Tested", desc: "Formulated for xeric environments. Also works in offices with aggressive air conditioning." },
+              { icon: "📍", title: "Ethically Made", desc: "100% cruelty-free. No animals were harmed. Several marketing interns were mildly inconvenienced." },
+              { icon: "✨", title: "Hand Numbered", desc: "Each tube is individually numbered. Because your lips deserve a serial number, apparently." }
             ].map((feature, idx) => (
               <div
                 key={idx}
@@ -1099,7 +1182,7 @@ export default function EisenbalmShop() {
                 style={{ transitionDelay: `${idx * 0.1}s` }}
               >
                 <div className="text-5xl mb-4">{feature.icon}</div>
-                <h3 className="text-lg font-light mb-3 tracking-wide">{feature.title}</h3>
+                <h3 className="text-lg font-semibold mb-3 tracking-wide">{feature.title}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{feature.desc}</p>
               </div>
             ))}
@@ -1127,41 +1210,47 @@ export default function EisenbalmShop() {
 
         <div className="relative z-10 max-w-5xl mx-auto text-white">
           <div className="text-center mb-16">
-            <p className="text-xs tracking-widest text-white/70 mb-4">PHILOSOPHY</p>
-            <h2 className="text-5xl md:text-6xl font-light mb-8 tracking-tight">The Human Ritual</h2>
+            <p className="text-xs tracking-widest text-brand-cyan font-bold mb-4">PHILOSOPHY</p>
+            <h2 className="text-5xl md:text-6xl font-black mb-8 tracking-tight">The Human Ritual</h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-12 mb-16">
             <div className="text-center">
               <div className="text-6xl mb-4">🛑</div>
-              <h3 className="text-xl font-light mb-3 tracking-wide">STOP</h3>
+              <h3 className="text-xl font-bold mb-3 tracking-wide">STOP</h3>
               <p className="text-sm text-white/70 leading-relaxed">
-                Pause your scroll. Close the tab. Step away from the screen. This moment is yours.
+                Close the tab. Put down the phone. Your Slack messages will survive without you for ten seconds. Probably.
               </p>
             </div>
 
             <div className="text-center">
               <div className="text-6xl mb-4">🫁</div>
-              <h3 className="text-xl font-light mb-3 tracking-wide">BREATHE</h3>
+              <h3 className="text-xl font-bold mb-3 tracking-wide">BREATHE</h3>
               <p className="text-sm text-white/70 leading-relaxed">
-                Take a real breath. Deep and slow. Feel your chest rise. Be present in your body.
+                Inhale. Exhale. Feel your heart rate drop from "quarterly review" to "merely overwhelmed." Progress.
               </p>
             </div>
 
             <div className="text-center">
-              <div className="text-6xl mb-4">💄</div>
-              <h3 className="text-xl font-light mb-3 tracking-wide">BALM</h3>
+              <div className="flex justify-center mb-4">
+                <LipBalmIcon size={72} color="white" />
+              </div>
+              <h3 className="text-xl font-bold mb-3 tracking-wide">BALM</h3>
               <p className="text-sm text-white/70 leading-relaxed">
-                Apply mindfully. Feel the texture. Notice the scent. No algorithm can do this for you.
+                Apply with the gravitas of a scientific procedure. This isn't a filter. It's a diagnosis. And also lip balm.
               </p>
             </div>
           </div>
 
           <div className="max-w-3xl mx-auto text-center">
             <div className="border-t border-white/20 pt-8">
-              <p className="text-2xl font-light italic text-white/90 leading-relaxed">
-                "The only business lip balm that keeps you human in an AI world."
+              <div className="flex justify-center mb-6">
+                <LipBalmIcon size={48} color="white" className="opacity-60" />
+              </div>
+              <p className="text-2xl font-normal italic text-white/90 leading-relaxed font-display">
+                "We aren't selling chapstick. We're selling relief."
               </p>
+              <p className="text-sm text-white/40 mt-4 tracking-wide">(An AI wrote this line. We kept it because it was right.)</p>
             </div>
           </div>
         </div>
@@ -1174,7 +1263,7 @@ export default function EisenbalmShop() {
           <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-gray-200 p-6 z-10">
               <div className="flex justify-between items-center">
-                <h2 className="text-xl font-light tracking-wide">SHOPPING CART</h2>
+                <h2 className="text-xl font-bold tracking-wide">SHOPPING CART</h2>
                 <button onClick={() => setIsCartOpen(false)} className="hover:text-gray-600 transition" aria-label="Close cart">
                   <X size={20} strokeWidth={1.5} />
                 </button>
@@ -1193,7 +1282,7 @@ export default function EisenbalmShop() {
                     <div key={item.id} className="flex space-x-4 pb-6 border-b border-gray-200">
                       <img src={item.image} alt={item.name} className="w-24 h-24 object-cover bg-gray-50" />
                       <div className="flex-1">
-                        <h3 className="font-light text-sm mb-1">{item.name}</h3>
+                        <h3 className="font-medium text-sm mb-1">{item.name}</h3>
                         <p className="text-sm text-gray-600 mb-3">${item.price}</p>
                         <div className="flex items-center space-x-3">
                           <button
@@ -1234,7 +1323,7 @@ export default function EisenbalmShop() {
                       <span className="text-gray-600">Shipping</span>
                       <span className="text-green-600">Free</span>
                     </div>
-                    <div className="border-t pt-3 flex justify-between font-light text-lg">
+                    <div className="border-t pt-3 flex justify-between font-semibold text-lg">
                       <span>Total</span>
                       <span>${cartTotal.toFixed(2)}</span>
                     </div>
