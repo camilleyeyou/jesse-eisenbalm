@@ -152,13 +152,49 @@ app.post('/create-checkout-session', async (req, res) => {
 app.get('/verify-session/:sessionId', async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.retrieve(req.params.sessionId);
-    
+
+    const shipping = session.shipping_details;
+
+    // Write shipping address into PaymentIntent metadata so it's visible in Stripe Dashboard
+    if (session.payment_intent && shipping?.address) {
+      const addr = shipping.address;
+      try {
+        await stripe.paymentIntents.update(session.payment_intent, {
+          metadata: {
+            shipping_name: shipping.name || '',
+            shipping_line1: addr.line1 || '',
+            shipping_line2: addr.line2 || '',
+            shipping_city: addr.city || '',
+            shipping_state: addr.state || '',
+            shipping_postal_code: addr.postal_code || '',
+            shipping_country: addr.country || '',
+          },
+          shipping: {
+            name: shipping.name || '',
+            address: {
+              line1: addr.line1 || '',
+              line2: addr.line2 || '',
+              city: addr.city || '',
+              state: addr.state || '',
+              postal_code: addr.postal_code || '',
+              country: addr.country || '',
+            },
+          },
+        });
+      } catch (err) {
+        console.warn('⚠️  Could not update PaymentIntent with shipping:', err.message);
+      }
+    }
+
     res.json({
       status: session.payment_status,
       customerEmail: session.customer_details?.email,
       customerName: session.customer_details?.name,
+      customerPhone: session.customer_details?.phone,
       amountTotal: session.amount_total / 100,
       currency: session.currency,
+      shippingName: shipping?.name,
+      shippingAddress: shipping?.address,
     });
   } catch (error) {
     console.error('❌ Error verifying session:', error);
