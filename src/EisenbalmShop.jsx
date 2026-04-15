@@ -370,13 +370,13 @@ export default function EisenbalmShop() {
       {!isPageReady && (
         <div className="fixed inset-0 bg-black z-[10000] flex items-center justify-center">
           <div className="text-center">
-            <div className="text-white text-2xl font-bold tracking-[0.3em] mb-6">
+            <div className="flex justify-center mb-6 loader-icon">
+              <LipBalmIcon size={96} color="white" />
+            </div>
+            <div className="text-white text-xl font-bold tracking-[0.3em] mb-2">
               JESSE A. EISENBALM
             </div>
-            <div className="w-64 h-0.5 bg-gray-800 rounded-full overflow-hidden mx-auto">
-              <div className="h-full bg-brand-cyan transition-all duration-1000 animate-pulse" style={{ width: '60%' }}></div>
-            </div>
-            <p className="text-gray-500 text-xs tracking-widest mt-6">LOADING EXPERIENCE</p>
+            <p className="text-gray-500 text-xs tracking-widest">STOP. BREATHE. BALM.</p>
           </div>
         </div>
       )}
@@ -554,6 +554,23 @@ export default function EisenbalmShop() {
           transition: width 0.1s linear;
         }
 
+        .loader-icon {
+          animation: loaderFloat 2s ease-in-out infinite;
+        }
+        @keyframes loaderFloat {
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-8px) scale(1.05); }
+        }
+
+        .cart-bounce {
+          animation: cartBounce 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes cartBounce {
+          0%, 100% { transform: scale(1); }
+          40% { transform: scale(1.25); }
+          60% { transform: scale(0.95); }
+        }
+
         .hero-video {
           opacity: 0;
           transition: opacity 0.5s ease-in;
@@ -650,24 +667,36 @@ export default function EisenbalmShop() {
                 <CheckCircle size={48} className="text-white" strokeWidth={2} />
               </div>
               
-              <h2 className="text-3xl font-bold mb-4 tracking-tight">Payment Successful!</h2>
-              
-              <p className="text-lg text-gray-600 mb-2">
-                Thank you for your order{orderDetails?.customerName ? `, ${orderDetails.customerName}` : ''}.
+              <h2 className="text-3xl font-black mb-3 tracking-tight">Relief is on the way.</h2>
+
+              <p className="text-base text-gray-600 mb-2">
+                Thanks{orderDetails?.customerName ? `, ${orderDetails.customerName.split(' ')[0]}` : ''}. Your lips will thank you shortly.
               </p>
-              
+
               {orderDetails && (
-                <div className="mt-6 p-6 bg-gray-50 text-left">
+                <div className="mt-6 p-6 bg-brand-beige/40 text-left">
                   <div className="space-y-3 text-sm">
                     {orderDetails.customerEmail && (
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Email:</span>
-                        <span className="font-light">{orderDetails.customerEmail}</span>
+                      <div className="flex justify-between items-start gap-4">
+                        <span className="text-gray-500 tracking-wide">EMAIL</span>
+                        <span className="font-medium text-right">{orderDetails.customerEmail}</span>
                       </div>
                     )}
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Total:</span>
-                      <span className="font-light text-lg">
+                    {orderDetails.shippingAddress && (
+                      <div className="flex justify-between items-start gap-4">
+                        <span className="text-gray-500 tracking-wide">SHIPPING TO</span>
+                        <span className="font-medium text-right">
+                          {orderDetails.shippingName && <>{orderDetails.shippingName}<br/></>}
+                          {orderDetails.shippingAddress.line1}
+                          {orderDetails.shippingAddress.line2 && <>, {orderDetails.shippingAddress.line2}</>}
+                          <br/>
+                          {orderDetails.shippingAddress.city}, {orderDetails.shippingAddress.state} {orderDetails.shippingAddress.postal_code}
+                        </span>
+                      </div>
+                    )}
+                    <div className="flex justify-between items-center pt-2 border-t border-black/10">
+                      <span className="text-gray-500 tracking-wide">TOTAL</span>
+                      <span className="font-black text-lg">
                         ${orderDetails.amountTotal?.toFixed(2)} {orderDetails.currency?.toUpperCase()}
                       </span>
                     </div>
@@ -676,24 +705,15 @@ export default function EisenbalmShop() {
               )}
 
               <p className="text-sm text-gray-500 mt-6 mb-8 leading-relaxed">
-                A confirmation email has been sent to your inbox.<br/>
-                Your order will be shipped within 2-3 business days.
+                A confirmation email is already in your inbox. Ships in 2–3 business days.
               </p>
 
-              <div className="flex flex-col gap-3">
-                <button
-                  onClick={() => setShowSuccessModal(false)}
-                  className="luxury-button w-full bg-black text-white py-4 text-sm tracking-[0.2em] hover:bg-gray-900 transition-all"
-                >
-                  CONTINUE SHOPPING
-                </button>
-                <button
-                  onClick={() => window.location.href = '#contact'}
-                  className="w-full py-4 text-sm tracking-[0.2em] text-gray-600 hover:text-black transition-all"
-                >
-                  CONTACT US
-                </button>
-              </div>
+              <button
+                onClick={() => setShowSuccessModal(false)}
+                className="luxury-button w-full bg-black text-white py-4 text-sm font-bold tracking-[0.2em] hover:bg-brand-cyan transition-all"
+              >
+                BACK TO THE SITE
+              </button>
             </div>
           </div>
         </div>
@@ -829,10 +849,13 @@ export default function EisenbalmShop() {
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 fade-in">
-            <a href="#product" className="luxury-button bg-white text-black px-14 py-4 text-sm font-bold tracking-[0.2em] hover:bg-brand-cyan hover:text-white transition-all inline-flex items-center justify-center group">
-              BUY NOW
+            <button
+              onClick={() => addToCart(products[0])}
+              className="luxury-button bg-white text-black px-14 py-4 text-sm font-bold tracking-[0.2em] hover:bg-brand-cyan hover:text-white transition-all inline-flex items-center justify-center group"
+            >
+              BUY NOW — $8.99
               <ChevronRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
-            </a>
+            </button>
             <a href="#philosophy" className="px-14 py-4 text-sm font-semibold tracking-[0.2em] text-white/80 hover:text-white border border-white/30 hover:border-white/60 transition-all inline-flex items-center justify-center">
               THE RITUAL
             </a>
