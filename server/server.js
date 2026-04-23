@@ -4,12 +4,117 @@ const cors = require('cors');
 const multer = require('multer');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { createClient } = require('@supabase/supabase-js');
+const { Resend } = require('resend');
 
 // Supabase client (server-side, uses service role key)
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
+
+// Resend client for email notifications
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+// Send order confirmation email (idempotent via PaymentIntent metadata flag)
+async function sendOrderConfirmationEmail(session) {
+  if (session.payment_status !== 'paid' || !session.customer_details?.email) {
+    return;
+  }
+
+  // Idempotency check: has email already been sent for this PaymentIntent?
+  let existingMetadata = {};
+  if (session.payment_intent) {
+    try {
+      const pi = await stripe.paymentIntents.retrieve(session.payment_intent);
+      existingMetadata = pi.metadata || {};
+      if (existingMetadata.email_sent === 'true') {
+        console.log('✉️  Email already sent for session:', session.id);
+        return;
+      }
+    } catch (err) {
+      console.warn('⚠️  Could not check email idempotency flag:', err.message);
+    }
+  }
+
+  const customerEmail = session.customer_details.email;
+  const customerName = session.customer_details.name || 'Customer';
+  const shipping = session.shipping_details;
+  const addr = shipping?.address;
+
+  const shippingAddressHtml = addr ? `
+    <div style="margin-top: 20px; padding: 15px; background-color: #f5f5f5; border-radius: 8px;">
+      <h3 style="margin-top: 0; color: #333;">Shipping Address</h3>
+      <p style="margin: 5px 0; color: #555;">
+        ${shipping.name || customerName}<br>
+        ${addr.line1 || ''}<br>
+        ${addr.line2 ? addr.line2 + '<br>' : ''}
+        ${addr.city || ''}, ${addr.state || ''} ${addr.postal_code || ''}<br>
+        ${addr.country || ''}
+      </p>
+    </div>
+  ` : '';
+
+  const orderItemsHtml = session.metadata?.orderDetails ? JSON.parse(session.metadata.orderDetails).map(item => `
+    <tr style="border-bottom: 1px solid #eee;">
+      <td style="padding: 10px; text-align: left;">${item.name}</td>
+      <td style="padding: 10px; text-align: center;">${item.quantity}</td>
+      <td style="padding: 10px; text-align: right;">$${(item.price).toFixed(2)}</td>
+    </tr>
+  `).join('') : '';
+
+  const emailHtml = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+      <h2 style="color: #333;">Order Confirmation</h2>
+      <p style="color: #666;">Hi ${customerName},</p>
+      <p style="color: #666;">Thank you for your order! We've received your payment and will be shipping your items soon.</p>
+
+      <div style="margin: 20px 0;">
+        <h3 style="color: #333;">Order Details</h3>
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background-color: #f5f5f5;">
+              <th style="padding: 10px; text-align: left; color: #333;">Item</th>
+              <th style="padding: 10px; text-align: center; color: #333;">Qty</th>
+              <th style="padding: 10px; text-align: right; color: #333;">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${orderItemsHtml}
+          </tbody>
+        </table>
+        <div style="margin-top: 15px; text-align: right;">
+          <h3 style="color: #333; margin: 10px 0;">Total: $${(session.amount_total / 100).toFixed(2)}</h3>
+        </div>
+      </div>
+
+      ${shippingAddressHtml}
+
+      <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; color: #999; font-size: 12px;">
+        <p>Order ID: ${session.id}</p>
+        <p>We'll send you a tracking number as soon as your order ships!</p>
+      </div>
+    </div>
+  `;
+
+  await resend.emails.send({
+    from: process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev',
+    to: customerEmail,
+    subject: '✨ Order Confirmation - Jesse A. Eisenbalm',
+    html: emailHtml,
+  });
+  console.log('✉️  Order confirmation email sent to:', customerEmail);
+
+  // Mark as sent to prevent duplicates
+  if (session.payment_intent) {
+    try {
+      await stripe.paymentIntents.update(session.payment_intent, {
+        metadata: { ...existingMetadata, email_sent: 'true' },
+      });
+    } catch (err) {
+      console.warn('⚠️  Could not set email_sent flag:', err.message);
+    }
+  }
+}
 
 // Trigger a Vercel rebuild so new posts get pre-rendered
 async function triggerDeploy(reason) {
@@ -84,6 +189,36 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'x-api-key', 'x-admin-password']
 }));
 
+// Stripe webhook — must be defined BEFORE express.json() to preserve raw body for signature verification
+app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  const sig = req.headers['stripe-signature'];
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+  if (!webhookSecret) {
+    console.warn('⚠️  STRIPE_WEBHOOK_SECRET not configured — webhook received but not verified');
+    return res.status(500).send('Webhook secret not configured');
+  }
+
+  let event;
+  try {
+    event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
+  } catch (err) {
+    console.warn('⚠️  Webhook signature verification failed:', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  if (event.type === 'checkout.session.completed') {
+    try {
+      const session = await stripe.checkout.sessions.retrieve(event.data.object.id);
+      await sendOrderConfirmationEmail(session);
+    } catch (err) {
+      console.warn('⚠️  Webhook email send failed:', err.message);
+    }
+  }
+
+  res.json({ received: true });
+});
+
 app.use(express.json());
 
 // Test route
@@ -126,7 +261,7 @@ app.post('/create-checkout-session', async (req, res) => {
       shipping_address_collection: {
         allowed_countries: ['US', 'CA', 'GB', 'AU', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE'],
       },
-      billing_address_collection: 'required',
+      billing_address_collection: 'auto',
       phone_number_collection: {
         enabled: true,
       },
@@ -185,6 +320,11 @@ app.get('/verify-session/:sessionId', async (req, res) => {
         console.warn('⚠️  Could not update PaymentIntent with shipping:', err.message);
       }
     }
+
+    // Send order confirmation email (fire-and-forget; webhook is primary, this is fallback)
+    sendOrderConfirmationEmail(session).catch(err => {
+      console.warn('⚠️  Could not send order confirmation email:', err.message);
+    });
 
     res.json({
       status: session.payment_status,

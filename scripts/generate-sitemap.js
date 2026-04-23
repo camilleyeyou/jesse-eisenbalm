@@ -51,10 +51,14 @@ async function generateSitemap() {
     const urlCount = (sitemapXML.match(/<loc>/g) || []).length;
     console.log(`🔗 Total URLs: ${urlCount}`);
 
-    // Post-generation validation
+    // Post-generation validation — use endsWith on extracted <loc> values
+    // (substring match over raw XML produces false positives when a non-redirected
+    // slug contains a redirected slug as its prefix, e.g. foo vs foo-1)
+    const finalLocs = [...sitemapXML.matchAll(/<loc>([^<]*)<\/loc>/g)]
+      .map(m => m[1].replace(/\/$/, ''));
     let leaked = 0;
     for (const slug of REDIRECTED_SLUGS) {
-      if (sitemapXML.includes(`/blog/${slug}`)) {
+      if (finalLocs.some(loc => loc.endsWith(`/blog/${slug}`))) {
         console.error(`❌ LEAKED: /blog/${slug} still in sitemap!`);
         leaked++;
       }
