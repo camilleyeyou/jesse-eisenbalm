@@ -12,11 +12,15 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-// Resend client for email notifications
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Resend client for email notifications (null if not configured)
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+if (!resend) {
+  console.warn('⚠️  RESEND_API_KEY not set — order confirmation emails will be skipped');
+}
 
 // Send order confirmation email (idempotent via PaymentIntent metadata flag)
 async function sendOrderConfirmationEmail(session) {
+  if (!resend) return;
   if (session.payment_status !== 'paid' || !session.customer_details?.email) {
     return;
   }
